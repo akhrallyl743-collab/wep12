@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#060b1a"/>
+      <stop offset="60%" style="stop-color:#0d1340"/>
+      <stop offset="100%" style="stop-color:#10082e"/>
+    </linearGradient>
+    <radialGradient id="orb1" cx="75%" cy="35%" r="45%">
+      <stop offset="0%" style="stop-color:#4f35e8;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#4f35e8;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="orb2" cx="15%" cy="80%" r="35%">
+      <stop offset="0%" style="stop-color:#7c6dff;stop-opacity:0.25"/>
+      <stop offset="100%" style="stop-color:#7c6dff;stop-opacity:0"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4f35e8"/>
+      <stop offset="100%" style="stop-color:#7c6dff"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#orb1)"/>
+  <rect width="800" height="500" fill="url(#orb2)"/>
+
+  <!-- Grid -->
+  <g opacity="0.05" stroke="#7c6dff" stroke-width="1">
+    <line x1="0" y1="50" x2="800" y2="50"/><line x1="0" y1="100" x2="800" y2="100"/><line x1="0" y1="150" x2="800" y2="150"/><line x1="0" y1="200" x2="800" y2="200"/><line x1="0" y1="250" x2="800" y2="250"/><line x1="0" y1="300" x2="800" y2="300"/><line x1="0" y1="350" x2="800" y2="350"/><line x1="0" y1="400" x2="800" y2="400"/><line x1="0" y1="450" x2="800" y2="450"/>
+    <line x1="80" y1="0" x2="80" y2="500"/><line x1="160" y1="0" x2="160" y2="500"/><line x1="240" y1="0" x2="240" y2="500"/><line x1="320" y1="0" x2="320" y2="500"/><line x1="400" y1="0" x2="400" y2="500"/><line x1="480" y1="0" x2="480" y2="500"/><line x1="560" y1="0" x2="560" y2="500"/><line x1="640" y1="0" x2="640" y2="500"/><line x1="720" y1="0" x2="720" y2="500"/>
+  </g>
+
+  <!-- Circuit traces -->
+  <g opacity="0.2" stroke="#4f35e8" stroke-width="1.5" fill="none">
+    <polyline points="50,180 130,180 130,120 210,120 210,80 340,80"/>
+    <circle cx="130" cy="180" r="4" fill="#4f35e8"/>
+    <circle cx="210" cy="120" r="4" fill="#7c6dff"/>
+    <polyline points="50,300 90,300 90,350 170,350"/>
+    <circle cx="90" cy="300" r="3" fill="#7c6dff"/>
+    <polyline points="640,60 640,140 700,140 700,220"/>
+    <circle cx="640" cy="140" r="4" fill="#4f35e8"/>
+    <polyline points="750,300 710,300 710,380 660,380 660,450"/>
+    <circle cx="710" cy="300" r="3" fill="#7c6dff"/>
+  </g>
+
+  <!-- Code editor window -->
+  <rect x="55" y="65" width="430" height="330" rx="14" fill="rgba(8,12,35,0.9)" stroke="rgba(79,53,232,0.45)" stroke-width="1.5"/>
+  <!-- Titlebar -->
+  <rect x="55" y="65" width="430" height="36" rx="14" fill="rgba(79,53,232,0.18)"/>
+  <rect x="55" y="84" width="430" height="17" fill="rgba(79,53,232,0.1)"/>
+  <circle cx="83" cy="83" r="5.5" fill="#ff5f57" opacity="0.95"/>
+  <circle cx="101" cy="83" r="5.5" fill="#febc2e" opacity="0.95"/>
+  <circle cx="119" cy="83" r="5.5" fill="#28c840" opacity="0.95"/>
+  <rect x="144" y="73" width="88" height="18" rx="5" fill="rgba(79,53,232,0.28)"/>
+  <text x="188" y="86" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.65)" text-anchor="middle">main.js</text>
+  <rect x="238" y="73" width="78" height="18" rx="5" fill="rgba(255,255,255,0.05)"/>
+  <text x="277" y="86" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.3)" text-anchor="middle">api.py</text>
+
+  <!-- Code content -->
+  <g font-family="'Courier New', monospace" font-size="12.5">
+    <text x="80" y="126" fill="#7c6dff" opacity="0.95">const</text>
+    <text x="118" y="126" fill="#e2e2ff" opacity="0.8"> career </text>
+    <text x="180" y="126" fill="#4f35e8" opacity="0.9">=</text>
+    <text x="192" y="126" fill="#ffd93d" opacity="0.85"> async</text>
+    <text x="235" y="126" fill="#e2e2ff" opacity="0.6"> (skill) =></text>
+
+    <text x="80" y="150" fill="#e2e2ff" opacity="0.45">  &#123;</text>
+
+    <text x="100" y="174" fill="#7c6dff" opacity="0.85">  const</text>
+    <text x="139" y="174" fill="#38bdf8" opacity="0.9"> mastery </text>
+    <text x="201" y="174" fill="#555" opacity="0.9">=</text>
+    <text x="212" y="174" fill="#ffd93d" opacity="0.75"> await</text>
+    <text x="251" y="174" fill="#e2e2ff" opacity="0.55"> practice(</text>
+
+    <text x="120" y="198" fill="#1fbb85" opacity="0.9">    skill,</text>
+    <text x="120" y="220" fill="#1fbb85" opacity="0.75">    "daily",</text>
+    <text x="120" y="242" fill="#ffd93d" opacity="0.65">    1000 </text>
+    <text x="172" y="242" fill="#e2e2ff" opacity="0.3">// hours</text>
+    <text x="120" y="264" fill="#e2e2ff" opacity="0.45">  );</text>
+
+    <text x="100" y="288" fill="#7c6dff" opacity="0.75">  return</text>
+    <text x="143" y="288" fill="#38bdf8" opacity="0.8"> mastery.</text>
+    <text x="206" y="288" fill="#e2e2ff" opacity="0.55">ship();</text>
+
+    <text x="80" y="312" fill="#e2e2ff" opacity="0.45">  &#125;</text>
+
+    <text x="80" y="338" fill="#555" opacity="0.7">// 🚀 Build. Scale. Ship.</text>
+
+    <rect x="80" y="352" width="7" height="14" fill="#7c6dff" opacity="0.9">
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="1s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- Line numbers -->
+  <g font-family="monospace" font-size="11" fill="rgba(100,100,180,0.3)">
+    <text x="64" y="126">1</text><text x="64" y="150">2</text><text x="64" y="174">3</text>
+    <text x="64" y="198">4</text><text x="64" y="220">5</text><text x="64" y="242">6</text>
+    <text x="64" y="264">7</text><text x="64" y="288">8</text><text x="64" y="312">9</text>
+    <text x="61" y="338">10</text>
+  </g>
+
+  <!-- Tech badges - right side -->
+  <g filter="url(#glow)">
+    <rect x="520" y="75" width="100" height="33" rx="16" fill="rgba(56,189,248,0.15)" stroke="rgba(56,189,248,0.55)" stroke-width="1.5"/>
+    <text x="570" y="96" font-family="sans-serif" font-size="12" font-weight="700" fill="#38bdf8" text-anchor="middle">⚛ React</text>
+
+    <rect x="530" y="124" width="84" height="33" rx="16" fill="rgba(255,217,61,0.13)" stroke="rgba(255,217,61,0.5)" stroke-width="1.5"/>
+    <text x="572" y="145" font-family="sans-serif" font-size="12" font-weight="700" fill="#ffd93d" text-anchor="middle">🐍 Python</text>
+
+    <rect x="515" y="173" width="105" height="33" rx="16" fill="rgba(40,200,64,0.12)" stroke="rgba(40,200,64,0.45)" stroke-width="1.5"/>
+    <text x="567" y="194" font-family="sans-serif" font-size="12" font-weight="700" fill="#28c840" text-anchor="middle">⬡ Node.js</text>
+
+    <rect x="522" y="222" width="96" height="33" rx="16" fill="rgba(79,53,232,0.2)" stroke="rgba(124,109,255,0.55)" stroke-width="1.5"/>
+    <text x="570" y="243" font-family="sans-serif" font-size="12" font-weight="700" fill="#7c6dff" text-anchor="middle">🐳 Docker</text>
+
+    <rect x="528" y="271" width="88" height="33" rx="16" fill="rgba(232,80,42,0.15)" stroke="rgba(232,80,42,0.5)" stroke-width="1.5"/>
+    <text x="572" y="292" font-family="sans-serif" font-size="12" font-weight="700" fill="#e8502a" text-anchor="middle">🤖 AI/ML</text>
+
+    <rect x="520" y="320" width="100" height="33" rx="16" fill="rgba(56,189,248,0.1)" stroke="rgba(56,189,248,0.35)" stroke-width="1.5"/>
+    <text x="570" y="341" font-family="sans-serif" font-size="12" font-weight="700" fill="#38bdf8" text-anchor="middle">☁ Cloud</text>
+  </g>
+
+  <!-- Glowing ring accent -->
+  <circle cx="680" cy="400" r="140" fill="none" stroke="rgba(79,53,232,0.1)" stroke-width="50"/>
+  <circle cx="680" cy="400" r="75" fill="none" stroke="rgba(124,109,255,0.15)" stroke-width="25"/>
+  <circle cx="680" cy="400" r="32" fill="rgba(79,53,232,0.28)"/>
+  <circle cx="680" cy="400" r="16" fill="rgba(124,109,255,0.7)">
+    <animate attributeName="r" values="16;22;16" dur="3s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Floating particles -->
+  <g fill="#7c6dff">
+    <circle cx="505" cy="410" r="2.5" opacity="0.5"/><circle cx="525" cy="430" r="1.8" opacity="0.4"/>
+    <circle cx="490" cy="445" r="2" opacity="0.35"/><circle cx="550" cy="420" r="1.5" opacity="0.45"/>
+    <circle cx="465" cy="460" r="2.5" opacity="0.3"/>
+  </g>
+
+  <!-- Bottom bar -->
+  <rect x="55" y="418" width="430" height="3" rx="1.5" fill="url(#accent)" opacity="0.65"/>
+</svg>

@@ -1,0 +1,3027 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>START LINE — خط البداية | اكتشف مسارك المهني</title>
+<meta name="description" content="START LINE (خط البداية) — منصة التوجيه المهني الأولى للشباب العربي. اكتشف مسارك، احصل على خارطة طريق مخصصة، ومدربين خبراء — مجاناً.">
+<link rel="canonical" href="https://start-line.vercel.app/">
+<!-- Open Graph -->
+<meta property="og:title" content="START LINE — خط البداية | اكتشف مسارك المهني">
+<meta property="og:description" content="اكتشف المهنة التي تناسب شخصيتك. خارطة طريق مخصصة، دعم نفسي، ومدربون خبراء — مجاناً تماماً.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://start-line.vercel.app/">
+<!-- ⚠️ OG IMAGE: المسار يشير إلى og.png لكن الملف الموجود هو assets/og.svg
+     تحويل يدوي مطلوب: افتح assets/og.svg في Figma/Inkscape وصدّره كـ PNG 1200×630px
+     ثم ضعه في root directory باسم og.png (وليس داخل assets/) -->
+<meta property="og:image" content="https://start-line.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="START LINE — منصة التوجيه المهني للشباب العربي">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:site_name" content="START LINE — خط البداية">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="START LINE — خط البداية">
+<meta name="twitter:description" content="منصة التوجيه المهني الأولى للشباب العربي — مجاناً">
+<!-- ⚠️ نفس ملاحظة og:image — يحتاج og.png في root directory -->
+<meta name="twitter:image" content="https://start-line.vercel.app/og.png">
+<!-- Additional SEO -->
+<meta name="keywords" content="توجيه مهني، مسار وظيفي، شباب عربي، اختبار مهني، مهارات، تطوير ذاتي، start line، خط البداية">
+<meta name="author" content="START LINE">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#4f35e8" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f6f1" media="(prefers-color-scheme: light)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="START LINE">
+<link rel="manifest" href="manifest.json">
+<link rel="preload" href="assets/logo.png" as="image">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/platform.css">
+<link rel="stylesheet" href="css/mobile.css">
+<link rel="stylesheet" href="css/effects.css">
+<link rel="stylesheet" href="css/homepage.css">
+<link rel="stylesheet" href="css/color-patch.css">
+<link rel="stylesheet" href="css/redesign.css">
+<link rel="stylesheet" href="css/onboarding.css">
+<link rel="stylesheet" href="css/polish.css">
+<link rel="stylesheet" href="css/upgrade.css">
+<link rel="stylesheet" href="css/lightmode.css">
+<link rel="stylesheet" href="css/roadmap.css">
+
+<!-- ============================================================
+     Google Analytics 4
+     استبدل YOUR_GA4_ID بـ Measurement ID الحقيقي من:
+     Google Analytics → Admin → Data Streams → Measurement ID
+     مثال: G-ABCDE12345
+     ============================================================ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA4_ID"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'YOUR_GA4_ID');
+</script>
+
+<!-- ⚡ Early Theme Injection — يمنع وميض الوضع الفاتح قبل تحميل JS -->
+<script>
+  (function(){
+    var t = localStorage.getItem('noor_theme') || 'dark';
+    if (t === 'dark') document.documentElement.setAttribute('data-theme','dark');
+  })();
+</script>
+
+<!-- JSON-LD Structured Data لتحسين SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "START LINE — خط البداية",
+  "url": "https://start-line.vercel.app/",
+  "description": "منصة التوجيه المهني الأولى للشباب العربي. اكتشف مسارك، احصل على خارطة طريق مخصصة، ومدربين خبراء — مجاناً.",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "inLanguage": "ar",
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "الشباب العربي"
+  }
+}
+</script>
+
+<!-- Supabase + Services (must load before app scripts) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/services.js"></script>
+</head>
+<body>
+
+<!-- ============ Splash / Loading Screen ============ -->
+<div class="sl-splash" id="sl-splash">
+  <div class="sl-splash-logo-wrap">
+    <img src="assets/logo.png" alt="START LINE" class="sl-splash-logo" loading="eager" fetchpriority="high"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="sl-splash-logo-fallback" style="display:none">SL</div>
+    <div class="sl-splash-ring"></div>
+    <div class="sl-splash-ring-2"></div>
+  </div>
+  <div class="sl-splash-brand">START LINE</div>
+  <div class="sl-splash-tagline" data-en="START LINE · Career Guidance Platform">خط البداية · منصة التوجيه المهني</div>
+  <div class="sl-splash-dots">
+    <div class="sl-splash-dot"></div>
+    <div class="sl-splash-dot"></div>
+    <div class="sl-splash-dot"></div>
+  </div>
+</div>
+
+<!-- ============ Navbar ============ -->
+<nav role="navigation" aria-label="التنقل الرئيسي">
+  <div class="nav-logo" data-action="showPage" data-page="home" role="link" aria-label="START LINE — الصفحة الرئيسية">
+    <img src="assets/logo.png" class="nav-logo-img" alt="START LINE Logo" aria-hidden="true" loading="eager"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="nav-logo-mark" aria-hidden="true" style="display:none">SL</div>
+    <div class="nav-logo-text">
+      <span class="nav-logo-en" aria-label="START LINE">
+        <span class="brand-start">START</span><span class="brand-sep">·</span><span class="brand-line">LINE</span>
+      </span>
+      <span class="nav-logo-ar" data-en="START LINE">خط البداية</span>
+    </div>
+  </div>
+
+  <div class="nav-links" role="menubar">
+    <button class="nav-link active" data-action="showPage" data-page="home" data-en="Home" role="menuitem">الرئيسية</button>
+    <button class="nav-link" data-action="showPage" data-page="quiz" data-en="Quiz" role="menuitem">اعرف نفسك</button>
+    <button class="nav-link" data-action="showPage" data-page="categories" data-en="Careers" role="menuitem">المسارات</button>
+    <button class="nav-link" data-action="showPage" data-page="psychology" data-en="Support" role="menuitem">الدعم النفسي</button>
+    <button class="nav-link" data-action="showPage" data-page="community" data-en="Community" role="menuitem">المجتمع</button>
+    <button class="nav-link" data-action="showPage" data-page="mentors" data-en="Mentors" role="menuitem">المدربون</button>
+    <button class="nav-link" data-action="showPage" data-page="plan" data-en="My Plan" role="menuitem">خطتي</button>
+    <button class="nav-link" data-action="showPage" data-page="dashboard" data-en="Dashboard" role="menuitem">لوحتي</button>
+  </div>
+
+  <div class="nav-right">
+    <button class="icon-btn" data-action="toggleTheme" id="theme-btn" aria-label="تبديل المظهر">🌙</button>
+    <button class="icon-btn" data-action="toggleLang" id="lang-btn" aria-label="تغيير اللغة">EN</button>
+    <div id="nav-auth-area">
+      <button class="nav-cta" data-action="openModal" data-tab="login" data-en="Sign In">دخول</button>
+    </div>
+    <button class="menu-btn" id="menu-btn" data-action="toggleMobileMenu" aria-label="فتح القائمة" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<nav class="mobile-nav" id="mobile-nav" aria-label="القائمة المحمولة" role="navigation">
+  <button class="mobile-nav-link active" data-action="showPage" data-page="home" data-en="🏠 Home">🏠 الرئيسية</button>
+  <button class="mobile-nav-link" data-action="showPage" data-page="quiz" data-en="🧠 Know Yourself">🧠 اعرف نفسك</button>
+  <button class="mobile-nav-link" data-action="showPage" data-page="categories" data-en="🗂️ Categories">🗂️ الفئات</button>
+  <button class="mobile-nav-link" data-action="showPage" data-page="psychology" data-en="💙 Mental Support">💙 الدعم النفسي</button>
+  <div class="mobile-nav-divider" role="separator"></div>
+  <button class="mobile-nav-link" data-action="showPage" data-page="plan" data-en="📅 My Plan">📅 خطتي</button>
+  <button class="mobile-nav-link" data-action="showPage" data-page="community" data-en="🌍 Community">🌍 المجتمع</button>
+  <button class="mobile-nav-link" data-action="showPage" data-page="mentors" data-en="🤝 Mentors">🤝 المدربون</button>
+  <button class="mobile-nav-link" data-action="showPage" data-page="dashboard" data-en="📊 Dashboard">📊 لوحتي</button>
+  <div class="mobile-nav-divider" role="separator"></div>
+  <div style="padding:10px 8px;display:flex;gap:10px;">
+    <button class="icon-btn" style="flex:1;justify-content:center;" data-action="toggleLang">EN / AR</button>
+    <button class="icon-btn" style="flex:1;justify-content:center;" data-action="toggleTheme" id="theme-btn-mob">🌙</button>
+  </div>
+</nav>
+
+
+<main>
+<!-- ============ الصفحة الرئيسية — START LINE v3 ============ -->
+<div id="page-home" class="page active" role="main">
+
+  <!-- ===== QUICK-START BAR — أول 5 ثواني ===== -->
+  <div class="qs-bar" id="qs-bar" role="banner" aria-label="شريط البداية السريعة" data-en="Quick Start Bar">
+    <div class="qs-bar-inner">
+      <div class="qs-step" data-action="showPage" data-page="quiz" tabindex="0" role="button">
+        <span class="qs-icon">🧭</span>
+        <div class="qs-text">
+          <strong data-en="Know Yourself">اعرف نفسك</strong>
+          <span data-en="Discover your ideal path">اكتشف مسارك المناسب</span>
+        </div>
+        <span class="qs-arrow">←</span>
+      </div>
+      <div class="qs-divider" aria-hidden="true"></div>
+      <div class="qs-step" data-action="showPage" data-page="categories" tabindex="0" role="button">
+        <span class="qs-icon">🗺️</span>
+        <div class="qs-text">
+          <strong data-en="Browse Careers">استعرض المسارات</strong>
+          <span data-en="All available career paths">كل المهن المتاحة</span>
+        </div>
+        <span class="qs-arrow">←</span>
+      </div>
+      <div class="qs-divider" aria-hidden="true"></div>
+      <div class="qs-step qs-step-highlight" data-action="continueLearning" tabindex="0" role="button">
+        <span class="qs-icon">▶️</span>
+        <div class="qs-text">
+          <strong data-en="Continue Learning">كمّل من حيث توقفت</strong>
+          <span data-en="Resume your progress now">استأنف تعلّمك الآن</span>
+        </div>
+        <span class="qs-arrow">←</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" aria-label="قسم الترحيب">
+    <div class="hero-noise" aria-hidden="true"></div>
+    <div class="hero-beams" aria-hidden="true">
+      <div class="beam beam-1"></div>
+      <div class="beam beam-2"></div>
+      <div class="beam beam-3"></div>
+    </div>
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-pulse" aria-hidden="true"></div>
+        <span data-en="The #1 Career Platform for Arab Youth">منصة المسارات المهنية الأولى للشباب العربي</span>
+      </div>
+      <h1 class="hero-h1">
+        <span class="hero-brand-block">
+          <span class="brand-start">START</span><span class="brand-dot">·</span><span class="brand-line-word">LINE</span>
+        </span>
+        <span class="hero-ar-headline">
+          مش عارف تبدأ منين؟<br>
+          <em class="hero-em" data-en="Start Here.">ابدأ من هنا.</em>
+        </span>
+      </h1>
+      <p class="hero-sub" data-en="Discover the career that truly fits YOU. Get a personalized roadmap and clear daily steps — completely free.">
+        اكتشف المهنة اللي تناسب شخصيتك الحقيقية. احصل على خارطة طريق مخصصة وخطوات يومية واضحة.
+      </p>
+      <div class="hero-problem-pills" aria-hidden="true">
+        <span class="prob-pill">😰 خايف تضيع سنين</span>
+        <span class="prob-pill">🤯 مش عارف تختار</span>
+        <span class="prob-pill">🎯 عايز اتجاه واضح</span>
+      </div>
+      <div class="hero-actions">
+        <button class="hbtn hbtn-primary" data-action="showPage" data-page="quiz" data-en="Start the Free Quiz">
+          <span class="hbtn-icon">🧠</span>
+          <span data-en="Discover Yourself">اكتشف نفسك  </span>
+          <svg class="hbtn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <button class="hbtn hbtn-ghost" data-action="showPage" data-page="library" data-en="Explore Careers">
+          <span data-en="Explore Paths">استكشف المسارات</span>
+        </button>
+      </div>
+      <p class="hero-trust-note">✅ سجل الدخول&nbsp;•&nbsp; ✅ اختار المسار المناسب &nbsp;•&nbsp; ✅ ابدأ بالتعلم </p>
+      <div class="hero-stats" role="group" aria-label="إحصائيات المنصة">
+        <div class="hstat">
+          <span class="hstat-num">60+</span>
+          <span class="hstat-lbl" data-en="Career Paths">مسار مهني</span>
+        </div>
+        <div class="hstat-div" aria-hidden="true"></div>
+        <div class="hstat">
+          <span class="hstat-num" id="stat-users">50+</span>
+          <span class="hstat-lbl" data-en="Active Users">مستخدم نشط</span>
+        </div>
+        <div class="hstat-div" aria-hidden="true"></div>
+        <div class="hstat">
+          <span class="hstat-num" id="stat-stories">7+</span>
+          <span class="hstat-lbl" data-en="Success Stories">قصة نجاح</span>
+        </div>
+        <div class="hstat-div" aria-hidden="true"></div>
+        <div class="hstat">
+          <span class="hstat-num">+10</span>
+          <span class="hstat-lbl" data-en="Expert Coaches">مدرب خبير</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+    </div>
+  </section>
+
+  <!-- ===== MARQUEE ===== -->
+  <section class="chips-section">
+    <div class="careers-cta reveal reveal-delay-2">
+        <div class="mma" data-en="Popular Skills">المهارات الشائعة</div>
+        <br>
+        <div class="career-chips" id="home-chips" aria-label="مسارات مهنية بارزة"></div>
+        <button class="hbtn hbtn-primary" style="margin-top:36px;" data-action="showPage" data-page="library" data-en="View All Careers">
+          <span data-en="Browse All Paths">عرض كل المسارات</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+  </section>
+  
+  <!-- ===== WHY START LINE ===== -->
+  <section class="why-section" aria-labelledby="why-title">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <br>
+        <span class="section-kicker" data-en="Why START LINE">ليه START LINE</span>
+        <br>
+        <h2 class="section-heading" id="why-title" data-en="Different. Built for You.">مختلفة. مبنية عشانك.</h2>
+        <p class="section-desc" data-en="Not just an info website — a platform that understands Arab youth and speaks their language.">مش مجرد موقع معلومات — دي منصة بتفهم الشباب العربي وبتتكلم بلغتهم.</p>
+      </div>
+      <div class="why-grid">
+        <!-- Featured card -->
+        <div class="why-card why-card-featured reveal">
+          <div class="why-card-glow" aria-hidden="true"></div>
+          <div class="why-icon-wrap">
+            <span style="font-size:34px">🌍</span>
+          </div>
+          <div>
+            <h3 data-en="100% Arab">عربي ١٠٠٪</h3>
+            <p data-en="Built specifically for Arab youth, understanding our circumstances, job market, and real challenges. Not a naive translation of Western content.">صُمِّمت خصيصاً للشباب العربي، بتفهم ظروفنا، سوق شغلنا، وتحدياتنا الحقيقية. مش ترجمة ساذجة لمحتوى غربي.</p>
+            <span class="why-badge" data-en="The Core Difference">الفرق الأساسي</span>
+          </div>
+        </div>
+        <!-- 5 smaller cards -->
+        <div class="why-card reveal reveal-delay-1">
+          <span class="why-icon">🎯</span>
+          <h3 data-en="Personalized Guidance">توجيه شخصي</h3>
+          <p data-en="Results tailored to you based on your actual personality, not generic advice for everyone.">نتائج مخصصة ليك بناءً على شخصيتك الفعلية، مش نصايح عامة لكل الناس.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-2">
+          <span class="why-icon">💸</span>
+          <h3 data-en="Completely Free">مجاني تماماً</h3>
+          <p data-en="All tools, paths, and plans are free. No payment needed to start your journey.">كل الأدوات، المسارات، والخطط مجانية. مش محتاج تدفع لتبدأ رحلتك.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-3">
+          <span class="why-icon">🤖</span>
+          <h3 data-en="Future Careers">مسارات المستقبل</h3>
+          <p data-en="AI, data, freelancing, content creation — digital economy paths where opportunities are.">AI، البيانات، الفريلانسينج، كونتنت كريشن — مسارات الاقتصاد الرقمي اللي فيها الفرص.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-1">
+          <span class="why-icon">📅</span>
+          <h3 data-en="Clear Daily Plan">خطة يومية واضحة</h3>
+          <p data-en="Not just "learn this" — a 7-day and 30-day plan with daily actionable tasks.">مش بس "تعلم كذا" — دي خطة ٧ أيام وخطة ٣٠ يوم بمهام يومية قابلة للتنفيذ فعلاً.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-2">
+          <span class="why-icon">💙</span>
+          <h3 data-en="Specialized Mental Support">دعم نفسي متخصص</h3>
+          <p data-en="Future anxiety, social pressure, fear of failure — we have psychological content to help you overcome them.">قلق المستقبل، الضغط الاجتماعي، الخوف من الفشل — عندنا محتوى نفسي يساعدك تتجاوزهم.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="how-section" aria-labelledby="how-title">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-kicker" data-en="How It Works">كيف يعمل</span>
+        <h2 class="section-heading" id="how-title" data-en="3 Steps to Your Clear Path">٣ خطوات لمسارك الواضح</h2>
+        <p class="section-desc" data-en="No confusion. No wasted years. A clear direction starting today.">مش محتاج تكون عارف كل شيء. ابدأ بس، والباقي هنوجهك فيه.</p>
+      </div>
+      <div class="steps-flow">
+        <div class="step-item reveal reveal-delay-1" data-action="showPage" data-page="quiz" role="button" tabindex="0">
+          <div class="step-circle step-purple">
+            <span class="step-emoji">🧠</span>
+            <span class="step-num-badge">١</span>
+          </div>
+          <div class="step-body">
+            <h3 data-en="Take the Smart Quiz">خذ الاختبار الذكي</h3>
+            <p data-en="10 questions reveal your true personality, skills, and hidden interests — in just 3 minutes.">١٠ أسئلة تكشف شخصيتك الحقيقية، مهاراتك، وميولك المخفية — في ٣ دقائق بس.</p>
+            <span class="step-tag" data-en="Free 100%">مجاني ١٠٠٪</span>
+          </div>
+        </div>
+        <div class="step-connector reveal" aria-hidden="true">←</div>
+        <div class="step-item reveal reveal-delay-2" data-action="showPage" data-page="library" role="button" tabindex="0">
+          <div class="step-circle step-teal">
+            <span class="step-emoji">🗺️</span>
+            <span class="step-num-badge">٢</span>
+          </div>
+          <div class="step-body">
+            <h3 data-en="Discover Your Perfect Path">اكتشف مسارك المثالي</h3>
+            <p data-en="From 60+ detailed career paths, find what suits your personality, circumstances, and ambitions.">من ٦٠+ مسار مهني مُفصَّل، شوف اللي يناسب شخصيتك وظروفك وطموحاتك.</p>
+            <span class="step-tag" style="background:var(--t50);color:var(--t600)" data-en="60+ Paths">٦٠+ مسار</span>
+          </div>
+        </div>
+        <div class="step-connector reveal" aria-hidden="true">←</div>
+        <div class="step-item reveal reveal-delay-3" data-action="showPage" data-page="plan" role="button" tabindex="0">
+          <div class="step-circle step-amber">
+            <span class="step-emoji">🚀</span>
+            <span class="step-num-badge">٣</span>
+          </div>
+          <div class="step-body">
+            <h3 data-en="Start Your Roadmap">ابدأ خارطة الطريق</h3>
+            <p data-en="A clear daily practical plan takes you from zero to your first real achievement in your career.">خطة عملية يومية واضحة توصلك من نقطة الصفر لأول إنجاز حقيقي في مسارك.</p>
+            <span class="step-tag" style="background:var(--a50);color:var(--a600)" data-en="7 & 30-Day Plans">خطة ٧ و٣٠ يوم</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </section>
+  <!-- ===== CAREER CATEGORIES ===== -->
+  <section class="careers-preview" aria-labelledby="careers-prev-title">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-kicker" data-en="Career Library">مكتبة المسارات</span>
+        <h2 class="section-heading" id="careers-prev-title" data-en="60+ Career Paths Await You"> مسارك مهني ينتظرك</h2>
+        <p class="section-desc" data-en="From tech to creativity to business and content — a path for every personality.">من التقنية للإبداع للأعمال والمحتوى — فيه مسار لكل شخصية.</p>
+      </div>
+      <div class="career-category-grid reveal reveal-delay-1">
+
+        <div class="career-cat-card cat-img-card" data-action="showCategoryPage" data-cat-id="tech" role="button" tabindex="0">
+          <div class="cat-img-wrap cat-bg-tech">
+            <span class="cat-label-top" data-en="Explore">تعلم</span>
+            <span class="cat-label-main" data-en="Programming & Tech">البرمجة والتقنية</span>
+            <div class="overlay"></div>
+            <img src="assets/cat-tech.svg" alt="البرمجة والتقنية" class="cat-hero-img" loading="lazy" />
+          </div>
+          <div class="cat-info-row">
+            <span class="cat-name" data-en="Programming & Tech">البرمجة والتقنية</span>
+            <span class="cat-count" data-en="12+ Paths">١٢+ مسار</span>
+          </div>
+        </div>
+
+        <div class="career-cat-card cat-img-card" data-action="showCategoryPage" data-cat-id="design" role="button" tabindex="0">
+          <div class="cat-img-wrap cat-bg-design">
+            <span class="cat-label-top" data-en="Explore">تعلم</span>
+            <span class="cat-label-main" data-en="Design & Creativity">التصميم والإبداع</span>
+            <div class="overlay"></div>
+            <img src="assets/cat-design.svg" alt="التصميم والإبداع" class="cat-hero-img" loading="lazy" />
+          </div>
+          <div class="cat-info-row">
+            <span class="cat-name" data-en="Design & Creativity">التصميم والإبداع</span>
+            <span class="cat-count" data-en="8+ Paths">٨+ مسارات</span>
+          </div>
+        </div>
+
+        <div class="career-cat-card cat-img-card" data-action="showCategoryPage" data-cat-id="business" role="button" tabindex="0">
+          <div class="cat-img-wrap cat-bg-business">
+            <span class="cat-label-top" data-en="Explore">تعلم</span>
+            <span class="cat-label-main" data-en="Business & Entrepreneurship">الأعمال والريادة</span>
+             <div class="overlay"></div>
+            <img src="assets/cat-business.svg" alt="الأعمال والريادة" class="cat-hero-img" loading="lazy" />
+          </div>
+          <div class="cat-info-row">
+            <span class="cat-name" data-en="Business & Entrepreneurship">الأعمال والريادة</span>
+            <span class="cat-count" data-en="10+ Paths">١٠+ مسارات</span>
+          </div>
+        </div>
+
+        <div class="career-cat-card cat-img-card" data-action="showCategoryPage" data-cat-id="content" role="button" tabindex="0">
+          <div class="cat-img-wrap cat-bg-content">
+            <span class="cat-label-top" data-en="Explore">تعلم</span>
+            <span class="cat-label-main" data-en="Content & Communication">المحتوى والتواصل</span>
+             <div class="overlay"></div>
+            <img src="assets/cat-content.svg" alt="المحتوى والتواصل" class="cat-hero-img" loading="lazy" />
+          </div>
+          <div class="cat-info-row">
+            <span class="cat-name" data-en="Content & Communication">المحتوى والتواصل</span>
+            <span class="cat-count" data-en="6+ Paths">٦+ مسارات</span>
+          </div>
+        </div>
+
+        <div class="career-cat-card cat-img-card" data-action="showCategoryPage" data-cat-id="practical" role="button" tabindex="0">
+          <div class="cat-img-wrap cat-bg-practical">
+            <span class="cat-label-top" data-en="Explore">تعلم</span>
+            <span class="cat-label-main" data-en="Practical Skills">المهارات العملية</span>
+             <div class="overlay"></div>
+            <img src="assets/cat-practical.svg" alt="المهارات العملية" class="cat-hero-img" loading="lazy" />
+          </div>
+          <div class="cat-info-row">
+            <span class="cat-name" data-en="Practical Skills">المهارات العملية</span>
+            <span class="cat-count" data-en="5+ Paths">٥+ مسارات</span>
+          </div>
+        </div>
+
+        <div class="career-cat-card cat-img-card" data-action="showCategoryPage" data-cat-id="academic" role="button" tabindex="0">
+          <div class="cat-img-wrap cat-bg-academic">
+            <span class="cat-label-top" data-en="Explore">تعلم</span>
+            <span class="cat-label-main" data-en="Academic & Research">الأكاديمي والبحثي</span>
+             <div class="overlay"></div>
+            <img src="assets/cat-academic.svg" alt="الأكاديمي والبحثي" class="cat-hero-img" loading="lazy" />
+          </div>
+          <div class="cat-info-row">
+            <span class="cat-name" data-en="Academic & Research">الأكاديمي والبحثي</span>
+            <span class="cat-count" data-en="4+ Paths">٤+ مسارات</span>
+          </div>
+        </div>
+
+        <!-- NEW: Languages Category -->
+        <div class="career-cat-card cat-img-card" data-action="showCategoryPage" data-cat-id="languages" role="button" tabindex="0">
+          <div class="cat-img-wrap cat-bg-languages">
+            <div class="cat-overlay"></div>
+            <span class="cat-label-top" data-en="Explore">تعلم</span>
+            <span class="cat-label-main" data-en="Languages & Translation">اللغات والترجمة</span>
+          </div>
+          <div class="cat-info-row">
+            <span class="cat-name" data-en="Languages & Translation">اللغات والترجمة</span>
+            <span class="cat-count" data-en="7+ Paths">٧+ مسارات</span>
+          </div>
+        </div>
+        <!-- NEW: Life Skills Category -->
+        <div class="career-cat-card cat-img-card" data-action="showCategoryPage" data-cat-id="lifeskills" role="button" tabindex="0">
+          <div class="cat-img-wrap cat-bg-lifeskills">
+            <div class="cat-overlay"></div>
+            <span class="cat-label-top" data-en="Explore">تعلم</span>
+            <span class="cat-label-main" data-en="Life Skills">المهارات الحياتية</span>
+          </div>
+          <div class="cat-info-row">
+            <span class="cat-name" data-en="Life Skills">المهارات الحياتية</span>
+            <span class="cat-count" data-en="6+ Paths">٦+ مسارات</span>
+          </div>
+        </div>
+        <div class="career-cat-card" data-action="showPage" data-page="categories" role="button" tabindex="0">
+          <span class="cat-icon">🗂️</span>
+          <span class="cat-name" data-en="All Categories">كل الفئات</span>
+          <span class="cat-count" data-en="8 Categories">٨ فئات</span>
+        </div>
+        <div class="career-cat-card career-cat-more" data-action="showPage" data-page="library" role="button" tabindex="0">
+          <span class="cat-icon">✨</span>
+          <span class="cat-name" data-en="View All Paths">عرض كل المسارات</span>
+          <span class="cat-count" data-en="View All →">عرض الكل ←</span>
+        </div>
+      </div>
+     
+    </div>
+  </section>
+<div class="marquee-section" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="marquee-inner">
+        <span>🎯 التصميم الجرافيكي</span><span class="msep">✦</span>
+        <span>💻 تطوير الويب</span><span class="msep">✦</span>
+        <span>📊 تحليل البيانات</span><span class="msep">✦</span>
+        <span>🎬 إنتاج المحتوى</span><span class="msep">✦</span>
+        <span>🤖 مسارات الذكاء الاصطناعي</span><span class="msep">✦</span>
+        <span>📈 التسويق الرقمي</span><span class="msep">✦</span>
+        <span>🚀 ريادة الأعمال</span><span class="msep">✦</span>
+        <span>🎨 الفنون الإبداعية</span><span class="msep">✦</span>
+        <span>⚖️ القانون والحقوق</span><span class="msep">✦</span>
+        <span>🩺 الطب والصحة</span><span class="msep">✦</span>
+        <span>🏗️ الهندسة المدنية</span><span class="msep">✦</span>
+        <span>📚 التعليم والتدريب</span><span class="msep">✦</span>
+        <!-- duplicate for seamless loop -->
+        <span>🎯 التصميم الجرافيكي</span><span class="msep">✦</span>
+        <span>💻 تطوير الويب</span><span class="msep">✦</span>
+        <span>📊 تحليل البيانات</span><span class="msep">✦</span>
+        <span>🎬 إنتاج المحتوى</span><span class="msep">✦</span>
+        <span>🤖 مسارات الذكاء الاصطناعي</span><span class="msep">✦</span>
+        <span>📈 التسويق الرقمي</span><span class="msep">✦</span>
+        <span>🚀 ريادة الأعمال</span><span class="msep">✦</span>
+        <span>🎨 الفنون الإبداعية</span><span class="msep">✦</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TRANSFORMATION TIMELINE ===== -->
+  <section class="transform-section" aria-labelledby="transform-title">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-kicker" data-en="The Journey">رحلة التحول</span>
+        <h2 class="section-heading" id="transform-title" data-en="From Confusion to Launch">من الحيرة للانطلاق</h2>
+        <p class="section-desc" data-en="Everyone started by asking 'What do I do with my life?' — and change can happen faster than you think.">كل شخص بدأ بسؤال "ماذا أفعل بحياتي؟" — والتحول ممكن أسرع مما تتوقع.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item reveal reveal-delay-1">
+          <div class="tl-dot tl-dot-grey">😕</div>
+          <div class="tl-content">
+            <h4>حائر ومش عارف تبدأ</h4>
+            <p data-en="Too many choices, can't decide. Afraid of choosing wrong and wasting time.">كتير من خيارات، مش عارف اختار. خايف تختار غلط وتضيع وقتك.</p>
+          </div>
+        </div>
+        <div class="tl-line" aria-hidden="true"></div>
+        <div class="timeline-item reveal reveal-delay-2">
+          <div class="tl-dot tl-dot-purple">🧠</div>
+          <div class="tl-content">
+            <h4>اكتشفت شخصيتك الحقيقية</h4>
+            <p data-en="The quiz revealed your real skills and interests — you understand yourself better now.">الاختبار كشف مهاراتك وميولك الحقيقية — وفهمت نفسك أكتر.</p>
+          </div>
+        </div>
+        <div class="tl-line" aria-hidden="true"></div>
+        <div class="timeline-item reveal reveal-delay-3">
+          <div class="tl-dot tl-dot-teal">🗺️</div>
+          <div class="tl-content">
+            <h4>وجدت مسارك المثالي</h4>
+            <p data-en="You chose the field that fits you and learned who works in it and how much they earn.">اخترت المجال اللي يناسبك وعرفت مين بيشتغل فيه وبيكسب كام.</p>
+          </div>
+        </div>
+        <div class="tl-line" aria-hidden="true"></div>
+        <div class="timeline-item reveal reveal-delay-4">
+          <div class="tl-dot tl-dot-amber">📚</div>
+          <div class="tl-content">
+            <h4>بنيت مهاراتك خطوة خطوة</h4>
+            <p data-en="A clear daily plan — not a forgotten course, but an organized curriculum that accumulates.">خطة يومية واضحة — مش حملت كورس ونسيته، ده منهج منظم بيتراكم.</p>
+          </div>
+        </div>
+        <div class="tl-line" aria-hidden="true"></div>
+        <div class="timeline-item reveal reveal-delay-4">
+          <div class="tl-dot tl-dot-green">🚀</div>
+          <div class="tl-content">
+            <h4>انطلقت في مسيرتك</h4>
+            <p data-en="First project, first job, first income — this is not a dream, this is the real Start Line.">أول مشروع، أول شغل، أول دخل — ده مش حلم، ده خط البداية الحقيقي.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURES BENTO GRID ===== -->
+  <section class="features-section" aria-labelledby="features-title">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-kicker" data-en="What You Get">كل اللي محتاجه</span>
+        <h2 class="section-heading" id="features-title" data-en="One Platform. One Complete Journey.">منصة واحدة. رحلة كاملة.</h2>
+      </div>
+      <div class="bento-grid">
+        <div class="bento-card bento-large reveal">
+          <div class="bento-glow bento-glow-purple" aria-hidden="true"></div>
+          <div class="bento-badge" data-en="100% Free">مجاني ١٠٠٪</div>
+          <div class="bento-icon-big">🎯</div>
+          <h3>اختبار شخصية متكامل</h3>
+          <p data-en="10 smart questions reveal your true interests and strongest skills — no signup or payment.">١٠ أسئلة ذكية تكشف ميولك الحقيقية وأقوى مهاراتك — بدون تسجيل أو دفع.</p>
+          <button class="bento-btn" data-action="showPage" data-page="quiz" data-en="Start Now →">ابدأ الآن ←</button>
+        </div>
+        <div class="bento-card bento-sm reveal reveal-delay-1">
+          <div class="bento-icon">📚</div>
+          <h3>٦٠+ مسار مهني</h3>
+          <p data-en="Detailed guide for each path: required skills, average salary, and market outlook.">دليل مفصّل لكل مسار: المهارات المطلوبة، متوسط الراتب، ومستقبل السوق.</p>
+        </div>
+        <div class="bento-card bento-sm reveal reveal-delay-2">
+          <div class="bento-icon">💙</div>
+          <h3 data-en="Specialized Mental Support">دعم نفسي متخصص</h3>
+          <p data-en="Overcome future anxiety and social pressure with psychological content made for youth.">تجاوز قلق المستقبل والضغط الاجتماعي بمحتوى نفسي مُعد خصيصاً للشباب.</p>
+        </div>
+        <div class="bento-card bento-sm reveal reveal-delay-1">
+          <div class="bento-icon">🤝</div>
+          <h3> مدربين خبراء</h3>
+          <p data-en="Connect with a specialist mentor who pushes you forward step by step.">تواصل مع مدرب متخصص في مجالك ويدفعك للأمام خطوة خطوة.</p>
+        </div>
+        <div class="bento-card bento-wide reveal reveal-delay-2">
+          <div class="bento-glow bento-glow-teal" aria-hidden="true"></div>
+          <div class="bento-icon">🌍</div>
+          <h3>مجتمع الشباب العربي</h3>
+          <p data-en="Connect with youth on the same journey. Share your experience, ask questions, and learn together.">تواصل مع شباب في نفس الرحلة. شارك تجربتك، اسأل، وتعلم معاً.</p>
+          <button class="bento-btn bento-btn-teal" data-action="showPage" data-page="community" data-en="Join Community →">انضم للمجتمع ←</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- ===== TRUST / SOCIAL PROOF ===== -->
+  <section class="trust-section" aria-labelledby="trust-title">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-kicker" data-en="Built for Ambition">مبنية للطموح</span>
+        <h2 class="section-heading" id="trust-title" data-en="For Every Arab Youth With a Dream">لكل شاب عربي عنده حلم</h2>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card reveal reveal-delay-1">
+          <span class="trust-quote-mark">"</span>
+          <p class="trust-text" data-en="Not everyone finds someone to tell them where to start. START LINE is here to fix that.">مش كل الناس بتلاقي حد يقولها فين تبدأ. START LINE هنا عشان يحل ده.</p>
+          <div class="trust-source">
+            <span class="trust-avatar">🎓</span>
+            <div>
+              <strong data-en="Platform Concept">فكرة المنصة</strong>
+              <span data-en="For students and graduates who never found real guidance">لطلاب وخريجين لم يجدوا توجيهاً حقيقياً</span>
+            </div>
+          </div>
+        </div>
+        <div class="trust-card reveal reveal-delay-2">
+          <span class="trust-quote-mark">"</span>
+          <p class="trust-text">كل واحد عنده موهبة وطاقة — المشكلة دايماً في غياب الاتجاه. هنا الاتجاه موجود.</p>
+          <div class="trust-source">
+            <span class="trust-avatar">💡</span>
+            <div>
+              <strong data-en="Platform Vision">رؤية المنصة</strong>
+              <span data-en="Youth who own the tools and build their own future">شباب يملك الأدوات ويصنع مستقبله بنفسه</span>
+            </div>
+          </div>
+        </div>
+        <div class="trust-card trust-card-highlight reveal reveal-delay-3">
+          <div class="trust-card-glow" aria-hidden="true"></div>
+          <div class="trust-stats-mini">
+            <div class="tsm-item">
+              <span class="tsm-num">٣</span>
+              <span class="tsm-lbl" data-en="Minutes to Complete">دقائق للاختبار</span>
+            </div>
+            <div class="tsm-div"></div>
+            <div class="tsm-item">
+              <span class="tsm-num">٠</span>
+              <span class="tsm-lbl" data-en="Data Required">بيانات مطلوبة</span>
+            </div>
+            <div class="tsm-div"></div>
+            <div class="tsm-item">
+              <span class="tsm-num">١٠٠٪</span>
+              <span class="tsm-lbl" data-en="Always Free">مجاني دايماً</span>
+            </div>
+          </div>
+          <p class="trust-card-cta-text" data-en="Ready to find your path?" data-en="Ready to find your path?">جاهز تعرف مسارك؟</p>
+          <button class="hbtn hbtn-white" data-action="showPage" data-page="quiz" data-en="Start the Quiz">
+            <span class="hbtn-icon">🧠</span>
+            <span data-en="Start the Quiz Now">ابدأ الاختبار الآن</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="faq-section" aria-labelledby="faq-title">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-kicker" data-en="FAQ">أسئلة شائعة</span>
+        <h2 class="section-heading" id="faq-title" data-en="Got Questions?">عندك أسئلة؟</h2>
+        <p class="section-desc" data-en="We answered the questions Arab youth ask most.">ردّينا على أكتر الأسئلة اللي بيسألها الشباب.</p>
+      </div>
+      <div class="faq-list" id="home-faq-list">
+        <div class="faq-item" data-action="toggleFaq">
+          <div class="faq-q">
+            <span data-en="How Do I Find My Right Field?">إزاي أعرف المجال المناسب ليا؟</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a"><p>ابدأ بالاختبار — هو بيحلل شخصيتك وميولك وبيقترح عليك المسارات الأنسب. مش محتاج تعرف حاجة مسبقاً، الاختبار بيوجهك هو.</p></div>
+        </div>
+        <div class="faq-item" data-action="toggleFaq">
+          <div class="faq-q">
+            <span data-en="Is the Platform Really Free?">هل المنصة مجانية فعلاً؟</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a"><p>آه، مجانية تماماً. الاختبار، المسارات، الخطط، والمجتمع — كلها مجانية بدون أي رسوم خفية أو اشتراك.</p></div>
+        </div>
+        <div class="faq-item" data-action="toggleFaq">
+          <div class="faq-q">
+            <span data-en="Do I Need Prior Experience or a Qualification?">محتاج خبرة سابقة أو مؤهل معين؟</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a"><p>لا، خالص. المنصة مصممة للمبتدئين والناس اللي بيفكروا في التغيير. سواء كنت طالب، خريج جديد، أو حتى شخص بيفكر يغير مساره — START LINE هنا عشانك.</p></div>
+        </div>
+        <div class="faq-item" data-action="toggleFaq">
+          <div class="faq-q">
+            <span data-en="How Long Until I See Real Results?">بياخد أد إيه أبدأ نتايج حقيقية؟</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a"><p>خطة الـ ٧ أيام مصممة تحس بتقدم حقيقي في أسبوع واحد. طبعاً النجاح الكامل بياخد وقت، بس الاتجاه الصح بيبدأ من أول يوم.</p></div>
+        </div>
+        <div class="faq-item" data-action="toggleFaq">
+          <div class="faq-q">
+            <span data-en="Are the Paths for Youth in All Arab Countries?">هل المسارات للشباب في كل الدول العربية؟</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a"><p>آه، المحتوى مناسب للشباب في مصر، السعودية، الإمارات، الأردن، المغرب وكل الدول العربية. بنراعي الفروق في سوق الشغل وفرص العمل في كل منطقة.</p></div>
+        </div>
+        <div class="faq-item" data-action="toggleFaq">
+          <div class="faq-q">
+            <span data-en="Can I Change My Path After Choosing?">ممكن أغير مساري بعد ما اختار؟</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a"><p>أكيد! المنصة مش بتحبسك في مسار واحد. ممكن تستكشف أكتر من مسار، تعمل الاختبار أكتر من مرة، وتغير اختيارك في أي وقت.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FINAL CTA BANNER ===== -->
+  <section class="cta-banner" aria-label="دعوة للبدء">
+    <div class="cta-orb-1" aria-hidden="true"></div>
+    <div class="cta-orb-2" aria-hidden="true"></div>
+    <div class="cta-inner">
+      <div class="cta-glow" aria-hidden="true"></div>
+      <span class="section-kicker cta-kicker" data-en="Start Today">ابدأ النهارده</span>
+      <h2 class="cta-heading" data-en="Your Future Starts With One Step">مستقبلك بيبدأ<br>بخطوة واحدة</h2>
+      <p class="cta-sub" data-en="Don't wait for the perfect moment. The perfect moment is now. This isn't just a platform — it's a real beginning.">متستناش اللحظة المثالية. اللحظة المثالية هي دلوقتي.<br>دي مش مجرد منصة — دي بداية حقيقية.</p>
+      <div class="cta-actions">
+        <button class="hbtn hbtn-white" data-action="showPage" data-page="quiz" data-en="🧠 Start the Free Quiz">
+          <span class="hbtn-icon">🧠</span>
+          <span data-en="Start the Quiz for Free">ابدأ الاختبار مجاناً</span>
+          <svg class="hbtn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <button class="hbtn hbtn-ghost-white" data-action="showPage" data-page="library" data-en="Explore Careers">
+          <span data-en="Explore Paths">استكشف المسارات</span>
+        </button>
+      </div>
+      <p class="cta-note" data-en="No registration required • Free forever • 3 minutes only">لا يتطلب تسجيل &nbsp;•&nbsp; مجاني للأبد &nbsp;•&nbsp; ٣ دقائق بس</p>
+    </div>
+  </section>
+
+  <!-- ===== STATISTICS PREMIUM ===== -->
+  <section class="stats-section-premium" aria-label="إحصائيات المنصة">
+    <div class="stats-premium-grid">
+      <div class="stat-premium-item reveal">
+        <span class="stat-premium-num">+10,000</span>
+        <span class="stat-premium-lbl" data-en="Active User">مستخدم نشط</span>
+      </div>
+      <div class="stat-premium-item reveal reveal-delay-1">
+        <span class="stat-premium-num">+150</span>
+        <span class="stat-premium-lbl" data-en="Career Path">مسار مهني</span>
+      </div>
+      <div class="stat-premium-item reveal reveal-delay-2">
+        <span class="stat-premium-num">+500</span>
+        <span class="stat-premium-lbl" data-en="Learning Resource">مورد تعليمي</span>
+      </div>
+      <div class="stat-premium-item reveal reveal-delay-3">
+        <span class="stat-premium-num">95%</span>
+        <span class="stat-premium-lbl" data-en="User Satisfaction">رضا المستخدمين</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonials-section" aria-labelledby="testimonials-title">
+    <div style="max-width:var(--max-w);margin:0 auto;">
+      <div class="section-header reveal" style="text-align:center;margin-bottom:0;">
+        <span class="section-kicker" data-en="User Reviews">آراء المستخدمين</span>
+        <h2 class="section-heading" id="testimonials-title">بيقولوا إيه عن START LINE</h2>
+        <p class="section-desc" data-en="Over 10,000 Arab youth changed their career path with us">أكتر من ١٠,٠٠٠ شاب عربي غيّروا مسارهم المهني معنا</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"كنت تايه تماماً بين التخصصات، الاختبار الذكي وضّحلي كل حاجة في ٣ دقائق. دلوقتي بشتغل UI/UX Designer وسعيد جداً."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">👨‍💻</div>
+            <div>
+              <div class="testimonial-name" data-en="Mohamed Ahmed">محمد أحمد</div>
+              <div class="testimonial-role" data-en="UI/UX Designer · Cairo">UI/UX Designer · القاهرة</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"خطة الـ ٣٠ يوم غيّرت حياتي. من طالبة مش عارفة تتخصص لـ Frontend Developer بتشتغل على مشاريع حقيقية."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">👩‍💻</div>
+            <div>
+              <div class="testimonial-name" data-en="Sara Al-Mansour">سارة المنصور</div>
+              <div class="testimonial-role" data-en="Frontend Developer · Riyadh">Frontend Developer · الرياض</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-3">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"المجتمع والمدربون فرقوا معايا كتير. لقيت ناس بتفهمني وتشجعني، وأخدت أول فرصة شغل في مجال الـ Data Science."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">👨‍🔬</div>
+            <div>
+              <div class="testimonial-name" data-en="Khaled Al-Otaibi">خالد العتيبي</div>
+              <div class="testimonial-role" data-en="Data Analyst · Dubai">Data Analyst · دبي</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TRUSTED BY ===== -->
+  <div class="trusted-section">
+    <p class="trusted-label" data-en="Trusted by Youth in">موثوق به من الشباب في</p>
+    <div class="trusted-logos">
+      <span class="trusted-logo"><span class="tl-icon">🇸🇦</span> السعودية</span>
+      <span class="trusted-logo"><span class="tl-icon">🇪🇬</span> مصر</span>
+      <span class="trusted-logo"><span class="tl-icon">🇦🇪</span> الإمارات</span>
+      <span class="trusted-logo"><span class="tl-icon">🇯🇴</span> الأردن</span>
+      <span class="trusted-logo"><span class="tl-icon">🇲🇦</span> المغرب</span>
+      <span class="trusted-logo"><span class="tl-icon">🇰🇼</span> الكويت</span>
+      <span class="trusted-logo"><span class="tl-icon">🇹🇳</span> تونس</span>
+    </div>
+  </div>
+
+  <!-- ===== NEWSLETTER ===== -->
+  <section class="newsletter-section" aria-label="الاشتراك في النشرة البريدية">
+    <div class="newsletter-inner">
+      <div class="newsletter-icon reveal-scale">📬</div>
+      <h2 class="newsletter-title reveal">ابقَ على اطلاع بكل جديد</h2>
+      <p class="newsletter-sub reveal reveal-delay-1">نصائح مهنية أسبوعية، مسارات جديدة، وفرص عمل — مباشرة في بريدك. بدون سبام.</p>
+      <div class="newsletter-form reveal reveal-delay-2">
+        <input type="email" class="newsletter-input" placeholder="بريدك الإلكتروني" id="newsletter-email" aria-label="البريد الإلكتروني" dir="ltr">
+        <button class="newsletter-btn" id="newsletter-btn" onclick="handleNewsletterSubmit()" data-en="Subscribe Now">اشترك الآن</button>
+      </div>
+      <p class="newsletter-note" data-en="+5,000 youth already subscribed · Unsubscribe anytime">+٥,٠٠٠ شاب مشترك بالفعل · إلغاء الاشتراك في أي وقت</p>
+    </div>
+  </section>
+
+</div>
+
+
+
+<!-- ============ الاختبار ============ -->
+<div id="page-quiz" class="page" role="main">
+  <div class="quiz-wrap">
+    <button class="back-btn" data-action="showPage" data-page="home">← <span data-en="Back">رجوع</span></button>
+    <div class="quiz-progress" role="progressbar" aria-label="تقدم الاختبار">
+      <div class="progress-label">
+        <span id="q-counter" data-en="Question 1 of 10">السؤال 1 من 10</span>
+        <span id="q-pct">10%</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="quiz-bar" style="width:10%"></div></div>
+    </div>
+    <div class="quiz-card">
+      <div class="quiz-category" id="q-cat" aria-label="فئة السؤال" data-en="Interests">الاهتمامات</div>
+      <p class="quiz-q" id="q-text" aria-live="polite"></p>
+      <div class="quiz-options" id="q-options" role="radiogroup" aria-label="خيارات الإجابة"></div>
+      <div id="quiz-feedback" aria-live="polite" style="text-align:center;font-size:13px;color:var(--p600);font-weight:700;height:20px;opacity:0;transition:opacity 0.3s;margin-top:8px;"></div>
+      <div class="quiz-nav" id="quiz-nav" style="display:none;">
+        <button class="btn btn-outline btn-sm" data-action="prevQuestion" id="prev-btn" style="display:none;" data-en="← Previous">← السابق</button>
+        <button class="btn btn-primary" data-action="nextQuestion" id="next-btn" data-en="Next →">التالي ←</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============ النتائج ============ -->
+<div id="page-results" class="page" role="main">
+  <div class="results-wrap">
+    <button class="back-btn" data-action="restartQuiz" data-en="→ Restart Quiz">← إعادة الاختبار</button>
+    <div class="results-hero">
+      <div style="font-size:52px;margin-bottom:14px;">🎯</div>
+      <h2>نتيجتك جاهزة!</h2>
+      <p data-en="Based on your answers, we found the best paths for your personality.">بناءً على إجاباتك، وجدنا أفضل المسارات المناسبة لشخصيتك</p>
+    </div>
+    <div class="radar-wrap">
+      <div style="font-size:16px;font-weight:800;margin-bottom:20px;">📊 تحليل شخصيتك</div>
+      <div class="trait-bars" id="trait-bars"></div>
+    </div>
+    <div id="career-matches"></div>
+    <div class="results-actions" style="margin-top:20px;">
+      <button class="btn btn-outline" data-action="copyResultsCard">📤 شارك نتيجتك</button>
+      <button class="btn btn-primary" data-action="showPage" data-page="library">🗺️ استكشف المسارات</button>
+    </div>
+    <div id="ai-analysis-box" style="margin-top:20px;"></div>
+  </div>
+</div>
+
+
+<!-- ============ المكتبة ============ -->
+<!-- ============ صفحة الفئات الرئيسية ============ -->
+<div id="page-categories" class="page" role="main">
+  <div class="library-wrap" id="categories-page-inner"></div>
+</div>
+
+<!-- ============ صفحة فئة مفردة ============ -->
+<div id="page-single-category" class="page" role="main">
+  <div class="library-wrap" id="single-category-inner"></div>
+</div>
+
+<!-- ============ منصة التعلم (مسار → كورس → درس) ============ -->
+<div id="page-platform" class="page" role="main">
+  <div id="platform-page-inner"></div>
+</div>
+
+<div id="page-library" class="page" role="main">
+  <div class="library-wrap">
+    <nav class="breadcrumb" aria-label="مسار التنقل">
+      <span data-action="showPage" data-page="home" role="link" tabindex="0">🏠 الرئيسية</span>
+      <span class="sep" aria-hidden="true">›</span>
+      <span aria-current="page" data-en="Career Paths">المسارات المهنية</span>
+    </nav>
+    <div class="library-header">
+      <h1 class="section-title" style="margin-bottom:6px;">📚 مكتبة المسارات</h1>
+      <p style="color:var(--muted);margin-bottom:24px;font-size:14.5px;" data-en="Discover your ideal path from 60+ career paths">اكتشف مسارك المثالي من بين 60+ مسار مهني</p>
+    </div>
+    <div class="search-bar">
+      <label for="career-search" class="hidden" data-en="Search for a path">البحث عن مسار</label>
+      <input type="search" class="search-input" placeholder="🔍 ابحث عن مسار..." id="career-search" oninput="filterCareers()" autocomplete="off">
+    </div>
+    <div class="category-pills" id="cat-pills" role="group" aria-label="تصفية بالفئة"></div>
+    <div class="careers-grid" id="careers-list" aria-live="polite"></div>
+  </div>
+</div>
+
+
+<!-- ============ دورة HTML & CSS ============ -->
+<!-- ============ دورة HTML & CSS ============ -->
+<div id="page-html-course" class="page" role="main">
+  <div class="course-wrap">
+
+    <!-- Header -->
+    <div class="course-hero">
+      <div class="course-badge">🎓 مسار تعليمي</div>
+      <h1 class="course-title">دورة HTML </h1>
+      <p class="course-subtitle" data-en="From zero to building professional websites — 13 free lessons">من الصفر إلى بناء مواقع ويب احترافية — 13 درس مجاني</p>
+      <div class="course-stats">
+        <div class="stat-chip">📹 13 درس</div>
+        <div class="stat-chip">⏱ للمبتدئين</div>
+        <div class="stat-chip">🆓 مجاني تماماً</div>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="course-progress-card">
+      <div class="progress-header">
+        <span class="progress-label" data-en="Your Course Progress">تقدمك في الدورة</span>
+        <span class="progress-count" id="progress-count">0 / 13</span>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Lessons Grid -->
+    <div class="lessons-grid" id="lessons-grid">
+
+      <div class="lesson-card" data-lesson="0">
+        <div class="lesson-num">01</div>
+        <div class="lesson-info">
+          <h3 class="lesson-title">ماذا ستتعلم في هذه الدورة؟</h3>
+          <p class="lesson-desc" data-en="Overview of your HTML & CSS learning journey">نظرة عامة على رحلتك في تعلم HTML & CSS</p>
+        </div>
+        <div class="lesson-actions">
+          <button class="btn-watch" onclick="openLesson(0)">▶ شاهد</button>
+          <button class="btn-done" onclick="markDone(0)" id="done-0">✓</button>
+        </div>
+      </div>
+
+      <div class="lesson-card" data-lesson="1">
+        <div class="lesson-num">02</div>
+        <div class="lesson-info">
+          <h3 class="lesson-title">تحميل VS Code</h3>
+          <p class="lesson-desc" data-en="Setting up the development environment and installing the editor">إعداد بيئة التطوير وتثبيت المحرر الأساسي</p>
+        </div>
+        <div class="lesson-actions">
+          <button class="btn-watch" onclick="openLesson(1)">▶ شاهد</button>
+          <button class="btn-done" onclick="markDone(1)" id="done-1">✓</button>
+        </div>
+      </div>
+
+      <div class="lesson-card" data-lesson="2">
+        <div class="lesson-num">03</div>
+        <div class="lesson-info">
+          <h3 class="lesson-title">إنشاء ملفات الموقع</h3>
+          <p class="lesson-desc" data-en="Structuring the project folder and creating the first HTML file">هيكلة مجلد المشروع وإنشاء أول ملف HTML</p>
+        </div>
+        <div class="lesson-actions">
+          <button class="btn-watch" onclick="openLesson(2)">▶ شاهد</button>
+          <button class="btn-done" onclick="markDone(2)" id="done-2">✓</button>
+        </div>
+      </div>
+
+      <div class="lesson-card" data-lesson="3">
+        <div class="lesson-num">04</div>
+        <div class="lesson-info">
+          <h3 class="lesson-title">Tags — الوسوم</h3>
+          <p class="lesson-desc" data-en="Understanding the concept of tags and how to build a web page">فهم مبدأ الوسوم وكيف تبني صفحة ويب</p>
+        </div>
+        <div class="lesson-actions">
+          <button class="btn-watch" onclick="openLesson(3)">▶ شاهد</button>
+          <button class="btn-done" onclick="markDone(3)" id="done-3">✓</button>
+        </div>
+      </div>
+
+      <div class="lesson-card" data-lesson="4">
+        <div class="lesson-num">05</div>
+        <div class="lesson-info">
+          <h3 class="lesson-title">HTML Components</h3>
+          <p class="lesson-desc" data-en="Basic elements and document structure">العناصر الأساسية وبنية المستند</p>
+        </div>
+        <div class="lesson-actions">
+          <button class="btn-watch" onclick="openLesson(4)">▶ شاهد</button>
+          <button class="btn-done" onclick="markDone(4)" id="done-4">✓</button>
+        </div>
+      </div>
+
+      <div class="lesson-card" data-lesson="5">
+        <div class="lesson-num">06</div>
+        <div class="lesson-info">
+          <h3 class="lesson-title">Head — رأس الصفحة</h3>
+          <p class="lesson-desc" data-en="The head tag and page metadata">وسم head والبيانات الوصفية للصفحة</p>
+        </div>
+        <div class="lesson-actions">
+          <button class="btn-watch" onclick="openLesson(5)">▶ شاهد</button>
+          <button class="btn-done" onclick="markDone(5)" id="done-5">✓</button>
+        </div>
+      </div>
+
+      <div class="lesson-card" data-lesson="6">
+        <div class="lesson-num">07</div>
+        <div class="lesson-info">
+          <h3 class="lesson-title">الفقرات النصية</h3>
+          <p class="lesson-desc" data-en="Text elements: p, h1-h6, span, and more">عناصر النص: p, h1-h6, span, وغيرها</p>
+        </div>
+        <div class="lesson-actions">
+          <button class="btn-watch" onclick="openLesson(6)">▶ شاهد</button>
+          <button class="btn-done" onclick="markDone(6)" id="done-6">✓</button>
+        </div>
+      </div>
+
+      <div class="lesson-card featured" data-lesson="7">
+        <div class="lesson-badge">🔥 مشروع</div>
+        <div class="lesson-num">08</div>
+        <div class="lesson-info">
+          <h3 class="lesson-title">أول مشروع</h3>
+          <p class="lesson-desc" data-en="Apply what you learned and build your first page">طبّق ما تعلمته وابنِ صفحتك الأولى</p>
+        </div>
+        <div class="lesson-actions">
+          <button class="btn-watch" onclick="openLesson(7)">▶ شاهد</button>
+          <button class="btn-done" onclick="markDone(7)" id="done-7">✓</button>
+        </div>
+      </div>
+
+      <div class="lesson-card" data-lesson="8">
+        <div class="lesson-num">09</div>
+        <div class="lesson-info">
+          <h3 class="lesson-title">التعليقات — Comments</h3>
+          <p class="lesson-desc" data-en="How to write organized comments in code">كيف تكتب تعليقات منظمة في الكود</p>
+        </div>
+        <div class="lesson-actions">
+          <button class="btn-watch" onclick="openLesson(8)">▶ شاهد</button>
+          <button class="btn-done" onclick="markDone(8)" id="done-8">✓</button>
+        </div>
+      </div>
+
+      <div class="lesson-card" data-lesson="9">
+        <div class="lesson-num">10</div>
+        <div class="lesson-info">
+          <h3 class="lesson-title">HTML Text Formatting</h3>
+          <p class="lesson-desc" data-en="Text formatting: bold, italic, underline and more">تنسيق النصوص: bold, italic, underline وأكثر</p>
+        </div>
+        <div class="lesson-actions">
+          <button class="btn-watch" onclick="openLesson(9)">▶ شاهد</button>
+          <button class="btn-done" onclick="markDone(9)" id="done-9">✓</button>
+        </div>
+      </div>
+
+      <div class="lesson-card" data-lesson="10">
+        <div class="lesson-num">11</div>
+        <div class="lesson-info">
+          <h3 class="lesson-title">الصور — img</h3>
+          <p class="lesson-desc" data-en="Adding images and adjusting their properties on the page">إضافة الصور وضبط خصائصها في الصفحة</p>
+        </div>
+        <div class="lesson-actions">
+          <button class="btn-watch" onclick="openLesson(10)">▶ شاهد</button>
+          <button class="btn-done" onclick="markDone(10)" id="done-10">✓</button>
+        </div>
+      </div>
+
+      <div class="lesson-card" data-lesson="11">
+        <div class="lesson-num">12</div>
+        <div class="lesson-info">
+          <h3 class="lesson-title">الصوتيات — audio</h3>
+          <p class="lesson-desc" data-en="Embedding audio in web pages">تضمين الصوت في صفحات الويب</p>
+        </div>
+        <div class="lesson-actions">
+          <button class="btn-watch" onclick="openLesson(11)">▶ شاهد</button>
+          <button class="btn-done" onclick="markDone(11)" id="done-11">✓</button>
+        </div>
+      </div>
+
+      <div class="lesson-card" data-lesson="12">
+        <div class="lesson-num">13</div>
+        <div class="lesson-info">
+          <h3 class="lesson-title">الفيديوهات — video</h3>
+          <p class="lesson-desc" data-en="Embedding video and controlling the media player">تضمين الفيديو والتحكم في مشغل الوسائط</p>
+        </div>
+        <div class="lesson-actions">
+          <button class="btn-watch" onclick="openLesson(12)">▶ شاهد</button>
+          <button class="btn-done" onclick="markDone(12)" id="done-12">✓</button>
+        </div>
+      </div>
+
+    </div><!-- /lessons-grid -->
+
+  </div><!-- /course-wrap -->
+
+  <!-- Video Modal -->
+  <div class="video-modal-overlay" id="video-modal" onclick="closeModal(event)">
+    <div class="video-modal-box">
+      <button class="modal-close" onclick="closeLesson()">✕</button>
+      <div class="video-modal-title" id="modal-title"></div>
+      <div class="video-container">
+        <iframe id="lesson-iframe" src="" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+      <button class="btn btn-teal modal-done-btn" id="modal-done-btn" onclick="markDoneFromModal()">
+        ✓ وضّع علامة "مكتمل" وانتقل للتالي
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<style>
+/* ===== Course Page ===== */
+.course-wrap {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 28px 20px 80px;
+}
+
+/* Hero */
+.course-hero {
+  text-align: center;
+  padding: 36px 0 24px;
+}
+.course-badge {
+  display: inline-block;
+  background: var(--p50);
+  color: var(--p600);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+  letter-spacing: .5px;
+}
+[data-theme="dark"] .course-badge {
+  background: rgba(124,109,255,.15);
+  color: #a78bfa;
+}
+.course-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 44px);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 10px;
+  line-height: 1.1;
+}
+.course-subtitle {
+  color: var(--muted);
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+.course-stats {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.stat-chip {
+  background: var(--g50);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+[data-theme="dark"] .stat-chip {
+  background: var(--g100);
+}
+
+/* Progress */
+.course-progress-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+}
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.progress-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+.progress-count {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 700;
+}
+.progress-bar-wrap {
+  background: var(--border);
+  border-radius: 99px;
+  height: 8px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--p600), var(--t400));
+  border-radius: 99px;
+  transition: width .5s cubic-bezier(.25,.46,.45,.94);
+}
+
+/* Lessons Grid */
+.lessons-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lesson-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow);
+  transition: all .2s ease;
+  position: relative;
+}
+.lesson-card:hover {
+  border-color: var(--p400);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+.lesson-card.done {
+  border-color: var(--t400);
+  background: var(--t50);
+}
+[data-theme="dark"] .lesson-card.done {
+  background: rgba(31,187,133,.07);
+  border-color: rgba(31,187,133,.35);
+}
+.lesson-card.featured {
+  border-color: var(--a400);
+  background: var(--a50);
+}
+[data-theme="dark"] .lesson-card.featured {
+  background: rgba(232,168,26,.06);
+  border-color: rgba(232,168,26,.35);
+}
+.lesson-badge {
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  background: var(--a400);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 99px;
+}
+.lesson-num {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--p400);
+  min-width: 38px;
+  text-align: center;
+  line-height: 1;
+}
+.lesson-card.done .lesson-num {
+  color: var(--t400);
+}
+.lesson-info {
+  flex: 1;
+  min-width: 0;
+}
+.lesson-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lesson-desc {
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lesson-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.btn-watch {
+  background: linear-gradient(135deg, var(--p600), #6b46ff);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all .2s ease;
+  white-space: nowrap;
+}
+.btn-watch:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(79,53,232,.45);
+}
+.btn-done {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--border-strong);
+  background: transparent;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all .2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-done.active, .lesson-card.done .btn-done {
+  background: var(--t400);
+  border-color: var(--t400);
+  color: #fff;
+}
+.btn-done:hover {
+  border-color: var(--t400);
+  color: var(--t400);
+}
+
+/* Video Modal */
+.video-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.72);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(6px);
+}
+.video-modal-overlay.open {
+  display: flex;
+}
+.video-modal-box {
+  background: var(--card);
+  border-radius: var(--rxl);
+  width: 100%;
+  max-width: 720px;
+  padding: 24px;
+  position: relative;
+  box-shadow: var(--shadow-xl);
+  animation: fadeUp .3s ease both;
+}
+.modal-close {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-strong);
+  background: transparent;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .2s;
+}
+.modal-close:hover {
+  background: var(--c50);
+  border-color: var(--c400);
+  color: var(--c400);
+}
+.video-modal-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 16px;
+  padding-left: 40px;
+  text-align: right;
+}
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--r);
+  background: #000;
+  margin-bottom: 16px;
+}
+.video-container iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+.modal-done-btn {
+  width: 100%;
+  justify-content: center;
+  font-size: 15px;
+}
+
+@media (max-width: 520px) {
+  .lesson-desc { display: none; }
+  .btn-watch { padding: 8px 12px; font-size: 12px; }
+  .lesson-title { font-size: 14px; }
+  .course-wrap { padding: 20px 14px 80px; }
+}
+</style>
+
+<script>
+(function() {
+  const lessons = [
+    { title: "ماذا ستتعلم في هذه الدورة؟",    url: "https://www.youtube.com/embed/Dv39fDYei9A?si=3HkLejsixi_8NFdW" },
+    { title: "تحميل VS Code",                   url: "https://www.youtube.com/embed/SMRzDOgtyQA?si=-SYRi2bvbK3y9sLv" },
+    { title: "إنشاء ملفات الموقع",              url: "https://www.youtube.com/embed/l2eS3Duuv54?si=e82vxfx_GTgDUA_k" },
+    { title: "Tags — الوسوم",                    url: "https://www.youtube.com/embed/qh1QE23RQmQ?si=cRv4TTnMqgo92NH2" },
+    { title: "HTML Components",                  url: "https://www.youtube.com/embed/jfOfZfbNCsk?si=p3_NcI_1pOySqSp3" },
+    { title: "Head — رأس الصفحة",               url: "https://www.youtube.com/embed/a36qFvjpjk8?si=LYsALYDU5mG4eatI" },
+    { title: "الفقرات النصية",                  url: "https://www.youtube.com/embed/Xn6v-TKSDaI?si=OClgFrEcxTrZFyTa" },
+    { title: "أول مشروع",                       url: "https://www.youtube.com/embed/lHSGcRHN8t8?si=DsvQTrJmbTlEQh06" },
+    { title: "التعليقات — Comments",             url: "https://www.youtube.com/embed/3YQ0dcuX1Sk?si=z-b1fLaFRzgpQ7Ht" },
+    { title: "HTML Text Formatting",             url: "https://www.youtube.com/embed/sEpjAolWKEM?si=H5abuh6dFlfOCSti" },
+    { title: "الصور — img",                     url: "https://www.youtube.com/embed/L33wdNQ9sFE?si=FMF_dCVhKkFSODXy" },
+    { title: "الصوتيات — audio",                url: "https://www.youtube.com/embed/77Azzc4ZrKY?si=Rwg3XHmfuWfy8n5U" },
+    { title: "الفيديوهات — video",              url: "https://www.youtube.com/embed/wQdBNQC8DJk?si=ogY9I0uQ4XR8PL6-" }
+  ];
+
+  let done = JSON.parse(localStorage.getItem('htmlCourse_done') || '[]');
+  let currentLesson = 0;
+
+  function saveDone() {
+    localStorage.setItem('htmlCourse_done', JSON.stringify(done));
+  }
+
+  function updateProgress() {
+    const count = done.length;
+    const pct = Math.round((count / 13) * 100);
+    const bar = document.getElementById('progress-bar');
+    const cnt = document.getElementById('progress-count');
+    if (bar) bar.style.width = pct + '%';
+    if (cnt) cnt.textContent = count + ' / 13';
+  }
+
+  function applyDone() {
+    done.forEach(i => {
+      const card = document.querySelector('[data-lesson="' + i + '"]');
+      const btn = document.getElementById('done-' + i);
+      if (card) card.classList.add('done');
+      if (btn) btn.classList.add('active');
+    });
+    updateProgress();
+  }
+
+  window.openLesson = function(i) {
+    currentLesson = i;
+    const lesson = lessons[i];
+    const modal = document.getElementById('video-modal');
+    const iframe = document.getElementById('lesson-iframe');
+    const title = document.getElementById('modal-title');
+    if (!modal || !iframe || !title) return;
+    title.textContent = '📺 ' + lesson.title;
+    iframe.src = lesson.url + '&autoplay=1';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeLesson = function() {
+    const modal = document.getElementById('video-modal');
+    const iframe = document.getElementById('lesson-iframe');
+    if (modal) modal.classList.remove('open');
+    if (iframe) iframe.src = '';
+    document.body.style.overflow = '';
+  };
+
+  window.closeModal = function(e) {
+    if (e.target.id === 'video-modal') window.closeLesson();
+  };
+
+  window.markDone = function(i) {
+    if (!done.includes(i)) {
+      done.push(i);
+      saveDone();
+    } else {
+      done = done.filter(x => x !== i);
+      saveDone();
+    }
+    applyDone();
+  };
+
+  window.markDoneFromModal = function() {
+    if (!done.includes(currentLesson)) {
+      done.push(currentLesson);
+      saveDone();
+      applyDone();
+    }
+    const next = currentLesson + 1;
+    if (next < 13) {
+      window.closeLesson();
+      setTimeout(() => window.openLesson(next), 300);
+    } else {
+      window.closeLesson();
+    }
+  };
+
+  // Init on page show
+  function init() {
+    applyDone();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  // Re-init when page becomes active (SPA)
+  const observer = new MutationObserver(() => {
+    const page = document.getElementById('page-html-course');
+    if (page && page.classList.contains('active')) applyDone();
+  });
+  const target = document.getElementById('page-html-course');
+  if (target) observer.observe(target, { attributes: true, attributeFilter: ['class'] });
+})();
+</script>
+
+
+
+<!-- ============ دورة CSS ============ -->
+<!-- ============ دورة CSS ============ -->
+<div id="page-css-course" class="page" role="main">
+  <div class="course-wrap">
+
+    <!-- Header -->
+    <div class="course-hero">
+      <div class="course-badge">🎨 مسار تعليمي</div>
+      <h1 class="course-title">دورة CSS</h1>
+      <p class="course-subtitle">من الصفر إلى تصميم واجهات احترافية — عبدالرحمن جمال • 52 درس</p>
+      <div class="course-stats">
+        <div class="stat-chip">📹 52 درس</div>
+        <div class="stat-chip">⏱ 11 ساعة</div>
+        <div class="stat-chip">🆓 مجاني تماماً</div>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="course-progress-card">
+      <div class="progress-header">
+        <span class="progress-label" data-en="Your Course Progress">تقدمك في الدورة</span>
+        <span class="progress-count" id="css-progress-count">0 / 52</span>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="css-progress-bar" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Lessons Grid -->
+    <div class="lessons-grid" id="css-lessons-grid"></div>
+
+  </div>
+
+  <!-- Video Modal -->
+  <div class="video-modal-overlay" id="css-video-modal" onclick="cssCloseModal(event)">
+    <div class="video-modal-box">
+      <button class="modal-close" onclick="cssCloseLesson()">✕</button>
+      <div class="video-modal-title" id="css-modal-title"></div>
+      <div class="video-container">
+        <iframe id="css-lesson-iframe" src="" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+      <button class="btn btn-teal modal-done-btn" onclick="cssMarkDoneFromModal()">
+        ✓ وضّع علامة "مكتمل" وانتقل للتالي
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var PL = 'PLknwEmKsW8Os7rKViMCL8x6irVJT7McSS';
+  function vid(id) { return 'https://www.youtube.com/embed/' + id; }
+  function pl(idx) { return 'https://www.youtube.com/embed?listType=playlist&list=' + PL + '&index=' + idx; }
+
+  var cssLessons = [
+    { title: "بداية كورس CSS — تعلم CSS بسهولة",             url: vid('_QO55W7KPmI'), dur: '05:00' },
+    { title: "#1 CSS Syntax — كيفية كتابة CSS",               url: vid('uH5loDWAwmk'), dur: '17:51' },
+    { title: "#2 Priority in CSS",                             url: pl(3),              dur: '07:20' },
+    { title: "#3 Selectors — class, id, tag",                 url: pl(4),              dur: '11:45' },
+    { title: "#4 Descendant & Direct Child Selector",          url: pl(5),              dur: '11:02' },
+    { title: "#5 Box Model — border, margin, padding",         url: pl(6),              dur: '21:20' },
+    { title: "#6 Margin Auto",                                 url: pl(7),              dur: '06:38' },
+    { title: "#7 النسبة المئوية في CSS",                       url: pl(8),              dur: '11:44' },
+    { title: "#8 fit-content / min-content / max-content",    url: pl(9),              dur: '05:20' },
+    { title: "#9 max/min width & max/min height",              url: pl(10),             dur: '12:22' },
+    { title: "#10 Border Radius",                              url: pl(11),             dur: '07:39' },
+    { title: "#11 الفرق بين Inline و Block",                  url: pl(12),             dur: '08:34' },
+    { title: "#12 Text Align",                                 url: pl(13),             dur: '06:46' },
+    { title: "#13 Direction",                                  url: pl(14),             dur: '02:25' },
+    { title: "#14 Text Transform",                             url: pl(15),             dur: '02:34' },
+    { title: "#15 Text Spacing",                               url: pl(16),             dur: '03:06' },
+    { title: "#16 Text Decoration",                            url: pl(17),             dur: '06:05' },
+    { title: "#17 Text Shadow & Box Shadow",                   url: pl(18),             dur: '12:52' },
+    { title: "#18 Wrapping & White Space",                     url: pl(19),             dur: '12:11' },
+    { title: "#19 Font Family",                                url: pl(20),             dur: '15:35' },
+    { title: "#20 Font Size",                                  url: pl(21),             dur: '09:11' },
+    { title: "#21 Font Style",                                 url: pl(22),             dur: '01:46' },
+    { title: "#22 Font Variant",                               url: pl(23),             dur: '02:38' },
+    { title: "#23 Font Weight",                                url: pl(24),             dur: '15:08' },
+    { title: "#24 Font Shorthand",                             url: pl(25),             dur: '09:29' },
+    { title: "#25 Background في CSS",                          url: pl(26),             dur: '25:15' },
+    { title: "#26 Linear Gradient",                            url: pl(27),             dur: '12:59' },
+    { title: "#27 Radial Gradient",                            url: pl(28),             dur: '06:27' },
+    { title: "#28 Float",                                      url: pl(29),             dur: '11:49' },
+    { title: "#29 Overflow",                                   url: pl(30),             dur: '05:36' },
+    { title: "#30 Position",                                   url: pl(31),             dur: '15:11' },
+    { title: "#31 Z-Index",                                    url: pl(32),             dur: '03:39' },
+    { title: "#32 List Style",                                 url: pl(33),             dur: '04:28' },
+    { title: "#33 Table Style",                                url: pl(34),             dur: '07:18' },
+    { title: "#34 CSS Units — px, em, rem, %",                url: vid('-z0lL2EUJJY'), dur: '10:14' },
+    { title: "#35 Pseudo Classes",                             url: pl(36),             dur: '14:24' },
+    { title: "#36 Pseudo Elements",                            url: pl(37),             dur: '10:48' },
+    { title: "#37 Sibling Selectors",                          url: pl(38),             dur: '07:27' },
+    { title: "#38 Attribute Selectors",                        url: pl(39),             dur: '14:03' },
+    { title: "#39 Transform",                                  url: pl(40),             dur: '15:01' },
+    { title: "#40 Translate, Scale, Rotate",                   url: pl(41),             dur: '03:50' },
+    { title: "#41 Transition",                                 url: pl(42),             dur: '14:35' },
+    { title: "#42 Animation في CSS",                           url: pl(43),             dur: '21:56' },
+    { title: "#43 Display — block, inline, inline-block",      url: pl(44),             dur: '12:43' },
+    { title: "#44 Display none, Opacity, Visibility",          url: pl(45),             dur: '04:22' },
+    { title: "#45 CSS Flexbox — شرح كامل",                    url: vid('BjWex7Pz8iY'), dur: '48:40', project: true },
+    { title: "#46 CSS Grid — شرح كامل",                       url: vid('zQyuMYFLD1s'), dur: '54:25', project: true },
+    { title: "#47 Responsive CSS — شرح كامل",                 url: pl(48),             dur: '22:26' },
+    { title: "مشروع: Responsive Form بـ HTML & CSS",          url: vid('PzT-pnTdNMc'), dur: '11:03', project: true },
+    { title: "مشروع: Responsive Glass Website",               url: vid('v2jP362A86A'), dur: '31:04', project: true },
+    { title: "مشروع: موقع افاتار بـ HTML & CSS",             url: vid('8uf6lp-TkL8'), dur: '20:26', project: true },
+    { title: "مشروع: Responsive Dashboard",                   url: vid('5HUC4UrOUCI'), dur: '37:35', project: true }
+  ];
+
+  var TOTAL = cssLessons.length;
+  var cssDone = JSON.parse(localStorage.getItem('cssCourse_done') || '[]');
+  var cssCurrentLesson = 0;
+
+  function saveCssDone() { localStorage.setItem('cssCourse_done', JSON.stringify(cssDone)); }
+
+  function updateCssProgress() {
+    var count = cssDone.length;
+    var bar = document.getElementById('css-progress-bar');
+    var cnt = document.getElementById('css-progress-count');
+    if (bar) bar.style.width = Math.round(count / TOTAL * 100) + '%';
+    if (cnt) cnt.textContent = count + ' / ' + TOTAL;
+  }
+
+  function renderLessons() {
+    var grid = document.getElementById('css-lessons-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    cssLessons.forEach(function(lesson, i) {
+      var isDone = cssDone.indexOf(i) > -1;
+      var isProj = !!lesson.project;
+      var card = document.createElement('div');
+      card.className = 'lesson-card' + (isDone ? ' done' : '') + (isProj ? ' featured' : '');
+      card.setAttribute('data-lesson', i);
+      card.innerHTML =
+        (isProj ? '<div class="lesson-badge">🔥 مشروع</div>' : '') +
+        '<div class="lesson-num">' + (i < 9 ? '0' : '') + (i + 1) + '</div>' +
+        '<div class="lesson-info">' +
+          '<h3 class="lesson-title">' + lesson.title + '</h3>' +
+          '<p class="lesson-desc">' + (isProj ? 'مشروع تطبيقي حقيقي' : lesson.dur + ' — عبدالرحمن جمال') + '</p>' +
+        '</div>' +
+        '<div class="lesson-actions">' +
+          '<button class="btn-watch" onclick="cssOpenLesson(' + i + ')">▶ شاهد</button>' +
+          '<button class="btn-done' + (isDone ? ' active' : '') + '" onclick="cssMarkDone(' + i + ')" id="css-done-' + i + '">✓</button>' +
+        '</div>';
+      grid.appendChild(card);
+    });
+    updateCssProgress();
+  }
+
+  window.cssOpenLesson = function(i) {
+    cssCurrentLesson = i;
+    var lesson = cssLessons[i];
+    var modal = document.getElementById('css-video-modal');
+    var iframe = document.getElementById('css-lesson-iframe');
+    var title = document.getElementById('css-modal-title');
+    if (!modal || !iframe || !title) return;
+    title.textContent = '📺 ' + lesson.title;
+    var sep = lesson.url.indexOf('?') > -1 ? '&' : '?';
+    iframe.src = lesson.url + sep + 'autoplay=1';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.cssCloseLesson = function() {
+    var modal = document.getElementById('css-video-modal');
+    var iframe = document.getElementById('css-lesson-iframe');
+    if (modal) modal.classList.remove('open');
+    if (iframe) iframe.src = '';
+    document.body.style.overflow = '';
+  };
+
+  window.cssCloseModal = function(e) {
+    if (e.target.id === 'css-video-modal') window.cssCloseLesson();
+  };
+
+  window.cssMarkDone = function(i) {
+    var idx = cssDone.indexOf(i);
+    if (idx === -1) cssDone.push(i);
+    else cssDone.splice(idx, 1);
+    saveCssDone();
+    renderLessons();
+  };
+
+  window.cssMarkDoneFromModal = function() {
+    if (cssDone.indexOf(cssCurrentLesson) === -1) {
+      cssDone.push(cssCurrentLesson);
+      saveCssDone();
+    }
+    var next = cssCurrentLesson + 1;
+    if (next < TOTAL) {
+      window.cssCloseLesson();
+      setTimeout(function() { window.cssOpenLesson(next); }, 300);
+    } else {
+      window.cssCloseLesson();
+    }
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderLessons);
+  } else {
+    renderLessons();
+  }
+
+  var observer = new MutationObserver(function() {
+    var page = document.getElementById('page-css-course');
+    if (page && page.classList.contains('active')) renderLessons();
+  });
+  var target = document.getElementById('page-css-course');
+  if (target) observer.observe(target, { attributes: true, attributeFilter: ['class'] });
+})();
+</script>
+
+
+<!-- ============ تفاصيل المسار ============ -->
+<div id="page-career" class="page" role="main">
+  <div class="career-detail" id="career-detail-content"></div>
+</div>
+
+
+<!-- ============ الدعم النفسي ============ -->
+<div id="page-psychology" class="page" role="main">
+  <div class="psych-wrap">
+    <button class="back-btn" data-action="showPage" data-page="home" data-en="→ Back">← رجوع</button>
+    <div class="psych-intro">
+      <div style="font-size:52px;margin-bottom:14px;">💙</div>
+      <h1>الدعم النفسي</h1>
+      <p data-en="Every psychological challenge deserves attention. Choose what you feel now and we will help you overcome it.">كل تحدٍّ نفسي يستحق اهتماماً. اختر ما تشعر به الآن ونساعدك تتجاوزه.</p>
+    </div>
+    <div class="psych-cats" id="psych-cats" aria-label="موضوعات الدعم النفسي"></div>
+    <div id="psych-detail-box" aria-live="polite"></div>
+  </div>
+</div>
+
+
+<!-- ============ المجتمع ============ -->
+<div id="page-community" class="page" role="main">
+  <div class="community-wrap">
+    <div class="community-header">
+      <span class="section-kicker" style="margin-bottom:12px;display:inline-block;" data-en="Community">المجتمع</span>
+      <h1>🌍 مجتمع خط البداية</h1>
+      <p data-en="Share your experience, ask your question, and support others' journey">شارك تجربتك، اطرح سؤالك، وادعم رحلة غيرك</p>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap;">
+        <span style="background:var(--p50);color:var(--p600);border:1px solid var(--p100);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700;">+٥,٠٠٠ عضو نشط</span>
+        <span style="background:var(--t50);color:var(--t600);border:1px solid var(--t100);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700;">٢٤/٧ مجتمع حي</span>
+        <span style="background:var(--a50);color:var(--a600);border:1px solid var(--a100);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700;">نقاشات يومية</span>
+      </div>
+    </div>
+    <div class="new-post-box">
+      <div class="post-composer">
+        <div class="avatar" id="post-avatar" style="background:var(--g100);color:var(--g600);">👤</div>
+        <textarea id="new-post-text" placeholder="شارك فكرة، سؤال، أو إنجاز...&#10;استخدم # للوسوم مثل: #تصميم #برمجة" rows="3" maxlength="1000" aria-label="محتوى المنشور"></textarea>
+      </div>
+      <div class="post-actions">
+        <div class="post-tags" role="group" aria-label="وسوم جاهزة">
+          <button class="post-tag-btn" data-action="addPostTag" data-tag="#سؤال" data-en="#Question">#سؤال</button>
+          <button class="post-tag-btn" data-action="addPostTag" data-tag="#إنجاز" data-en="#Achievement">#إنجاز</button>
+          <button class="post-tag-btn" data-action="addPostTag" data-tag="#نصيحة" data-en="#Tip">#نصيحة</button>
+          <button class="post-tag-btn" data-action="addPostTag" data-tag="#تصميم" data-en="#Design">#تصميم</button>
+          <button class="post-tag-btn" data-action="addPostTag" data-tag="#برمجة" data-en="#Coding">#برمجة</button>
+        </div>
+        <button class="post-btn" data-action="addPost" data-en="Post ✨">نشر ✨</button>
+      </div>
+    </div>
+    <div class="feed" id="community-feed" aria-live="polite" aria-label="منشورات المجتمع">
+      <div style="text-align:center;padding:40px;color:var(--muted);">
+        <div class="spinner" style="margin:0 auto 10px;"></div>
+        <p style="font-size:14px;" data-en="Loading posts...">جاري تحميل المنشورات...</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============ المدربون ============ -->
+<div id="page-mentors" class="page" role="main">
+  <div class="mentor-wrap">
+    <button class="back-btn" data-action="showPage" data-page="home" data-en="→ Back">← رجوع</button>
+    <div style="text-align:center;padding:48px 0 32px;">
+      <span class="section-kicker" style="margin-bottom:12px;display:inline-block;" data-en="Mentors">المدربون</span>
+      <h1 class="section-title" style="margin-bottom:8px;font-size:clamp(26px,3vw,40px);">🤝 المدربون الخبراء</h1>
+      <p style="color:var(--muted);font-size:15px;max-width:480px;margin:0 auto;line-height:1.7;">احجز جلستك مع مدرب متخصص يساعدك تخطو خطواتك الأولى بثقة ووضوح</p>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap;">
+        <span style="background:var(--p50);color:var(--p600);border:1px solid var(--p100);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700;">+١٠ مدرب خبير</span>
+      </div>
+    </div>
+
+    <!-- Become a Trainer CTA -->
+    <div class="mentor-pricing-banner" id="mentor-become-trainer-banner">
+      <div style="text-align:center;padding:8px 0;">
+        <div style="font-size:38px;margin-bottom:8px;">🎓</div>
+        <strong style="display:block;font-size:16px;margin-bottom:6px;" data-en="Are you an expert in your field?">أنت محترف أو خبير في مجالك؟</strong>
+        <p style="color:var(--muted);font-size:13.5px;max-width:420px;margin:0 auto 16px;line-height:1.7;" data-en="Join our trainers list and start helping learners on their first steps">انضم لقائمة المدربين عندنا وساعد المتعلمين في خطواتهم الأولى</p>
+        <button class="btn btn-primary" style="margin:0 auto;display:block;max-width:280px;" data-action="openTrainerModal">
+          🤝 سجّل كمدرّب
+        </button>
+      </div>
+    </div>
+
+    <div class="mentor-grid" id="mentor-grid" aria-label="قائمة المدربين"></div>
+
+    <!-- FAQ المدربين -->
+    <div style="max-width:700px;margin:48px auto 32px;padding:0 16px;">
+      <div style="text-align:center;margin-bottom:24px;">
+        <span class="section-kicker">❓ الأسئلة الشائعة</span>
+        <h2 style="font-size:clamp(20px,2.5vw,28px);font-weight:800;margin-top:8px;">كل اللي في بالك</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item" data-action="toggleFaq">
+          <div class="faq-q"><span data-en="How Do I Start on the Platform?">كيف أبدأ على المنصة؟</span><span class="faq-icon">+</span></div>
+          <div class="faq-a"><p>ابدأ بالاختبار المجاني — بيحلل شخصيتك وميولك ويقترح لك المسار الأنسب في ٣ دقائق بس. بعدها هتلاقي خارطة طريق كاملة وخطة يومية جاهزة ليك.</p></div>
+        </div>
+        <div class="faq-item" data-action="toggleFaq">
+          <div class="faq-q"><span data-en="Is the Platform Completely Free?">هل المنصة مجانية بالكامل؟</span><span class="faq-icon">+</span></div>
+          <div class="faq-a"><p>آه، المنصة مجانية بالكامل. الاختبار، المسارات، الخطط اليومية، والمجتمع — كلها مجانية بدون أي رسوم خفية. التواصل مع المدربين عبر طلب جلسة مجاني أيضاً.</p></div>
+        </div>
+        <div class="faq-item" data-action="toggleFaq">
+          <div class="faq-q"><span data-en="What is the Difference Between the 7-Day and 30-Day Plans?">ما الفرق بين الخطة 7 أيام و30 يوم؟</span><span class="faq-icon">+</span></div>
+          <div class="faq-a"><p>خطة الـ٧ أيام مكثفة وسريعة — مناسبة لو عايز تبدأ فوراً وتحس بتقدم حقيقي في أسبوع. خطة الـ٣٠ يوم أعمق وأشمل — بتبني أساس قوي خطوة خطوة على مدار شهر كامل.</p></div>
+        </div>
+        <div class="faq-item" data-action="toggleFaq">
+          <div class="faq-q"><span data-en="How Does the Points and Levels System Work?">كيف يعمل نظام النقاط والمستويات؟</span><span class="faq-icon">+</span></div>
+          <div class="faq-a"><p>بتكسب نقاط لما تكمّل تحديات يومية، تستكشف مسارات، تحجز جلسات مع مدربين، وتشارك في المجتمع. كل نقاط بترفعك لمستوى أعلى وتفتح لك مميزات جديدة.</p></div>
+        </div>
+        <div class="faq-item" data-action="toggleFaq">
+          <div class="faq-q"><span data-en="Can I Change My Career Path After the Quiz?">هل يمكنني تغيير مساري المهني بعد الاختبار؟</span><span class="faq-icon">+</span></div>
+          <div class="faq-a"><p>أكيد! مش محبوس في مسار واحد. تقدر تعمل الاختبار أكتر من مرة، تستكشف مسارات مختلفة، وتغير اختيارك في أي وقت. المنصة معاك في كل مرحلة.</p></div>
+        </div>
+        <div class="faq-item" data-action="toggleFaq">
+          <div class="faq-q"><span data-en="What Happens to My Data If I Clear the Cache?">ماذا يحدث لبياناتي إذا مسحت الكاش؟</span><span class="faq-icon">+</span></div>
+          <div class="faq-a"><p>لو سجّلت دخولك، بياناتك محفوظة في السحابة (Supabase) وبترجع تلقائياً على أي جهاز. لو بتستخدم المنصة بدون تسجيل، البيانات محفوظة في المتصفح — مسح الكاش ممكن يأثر عليها، فنصحك تسجّل.</p></div>
+        </div>
+        <div class="faq-item" data-action="toggleFaq">
+          <div class="faq-q"><span data-en="How Do I Get the AI Analysis?">كيف أحصل على تحليل الذكاء الاصطناعي؟</span><span class="faq-icon">+</span></div>
+          <div class="faq-a"><p>بعد ما تخلص الاختبار، المنصة بتحلل إجاباتك بالذكاء الاصطناعي وبتديك تقرير شخصي فيه نقاط قوتك، المسارات المناسبة، وأول خطوات عملية تبدأ بيها.</p></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+
+<!-- ============ خطة الأيام ============ -->
+<div id="page-plan" class="page" role="main">
+  <div class="plan-wrap">
+    <button class="back-btn" data-action="showPage" data-page="home" data-en="→ Back">← رجوع</button>
+    <div class="plan-intro">
+      <h1>📅 خطتك العملية</h1>
+      <p data-en="Clear daily tasks taking you from zero to your first real step in your career">مهام يومية واضحة تأخذك من نقطة الصفر إلى أول خطوة حقيقية في مسارك المهني</p>
+    </div>
+    <div class="plan-tabs" role="tablist" aria-label="اختر مدة الخطة">
+      <button class="plan-tab active" data-action="setPlanTab" data-tab="7" role="tab" aria-selected="true" data-en="7-Day Plan">خطة 7 أيام</button>
+      <button class="plan-tab" data-action="setPlanTab" data-tab="30" role="tab" aria-selected="false" data-en="30-Day Plan">خطة 30 يوم</button>
+    </div>
+    <div id="plan-content" aria-live="polite"></div>
+  </div>
+</div>
+
+
+<!-- ============ لوحة التحكم ============ -->
+<div id="page-dashboard" class="page" role="main">
+  <div class="dash-wrap">
+    <!-- Premium Dashboard Header -->
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:28px;">
+      <div>
+        <h1 class="dash-greeting" id="dash-greeting">أهلاً بك! 👋</h1>
+        <p class="dash-sub" data-en="Track your progress, complete your daily challenges, and earn points!">تابع تقدمك، أتمم تحدياتك اليومية، واجمع النقاط!</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn btn-outline btn-sm" data-action="showPage" data-page="library" style="border-radius:10px;font-weight:700;">
+          + إضافة مسار
+        </button>
+        <button class="btn btn-primary btn-sm" data-action="showPage" data-page="quiz" style="border-radius:10px;font-weight:700;">
+          🧠 اعرف نفسك
+        </button>
+      </div>
+    </div>
+
+    <!-- بطاقة الترحيب الذكي -->
+    <div id="smart-welcome" class="smart-welcome-card" aria-live="polite"></div>
+
+    <div class="dash-grid">
+      <!-- Left Column -->
+      <div class="dash-left">
+        <div class="level-bar" role="status" aria-label="مستواك الحالي">
+          <div class="level-num" id="level-num">1</div>
+          <div class="level-info">
+            <div class="level-title" id="level-title" data-en="Level 1 — Beginner Explorer">المستوى 1 — مستكشف مبتدئ</div>
+            <div class="level-sub" id="level-sub" data-en="0 / 200 Points">0 / 200 نقطة</div>
+            <div class="level-xp-track"><div class="level-xp-fill" id="level-xp" style="width:0%"></div></div>
+          </div>
+        </div>
+
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-val" id="total-pts">0</div>
+            <div class="metric-label" data-en="Points Earned">نقطة مكتسبة</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val" id="challenges-done">0</div>
+            <div class="metric-label" data-en="Challenge Completed">تحدي مكتمل</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val" id="confidence">10%</div>
+            <div class="metric-label" data-en="Self-Confidence">ثقة بالنفس</div>
+          </div>
+        </div>
+
+        <div class="streak-box">
+          <div class="streak-flame">🔥</div>
+          <div>
+            <div class="streak-num" id="streak-num">0</div>
+            <div class="streak-label" data-en="Day Streak">أيام متواصلة</div>
+          </div>
+        </div>
+
+        <div class="badge-section">
+          <h3>🏅 شاراتك</h3>
+          <div class="badge-grid" id="badge-list"></div>
+        </div>
+
+        <div class="card" style="margin-top:0;">
+          <h3 style="font-size:15px;font-weight:800;margin-bottom:14px;">🗺️ مساراتك المختارة</h3>
+          <div id="selected-tracks-val" style="font-size:13.5px;color:var(--muted);margin-bottom:8px;" data-en="No paths selected yet">لم تختر مسارات بعد</div>
+          <div style="font-size:12px;color:var(--p600);font-weight:700;" id="selected-tracks-count">0</div>
+          <span style="font-size:12px;color:var(--muted);"> مسار نشط</span>
+          <button class="btn btn-outline btn-sm" style="margin-top:14px;width:100%;justify-content:center;" data-action="showPage" data-page="library">+ إضافة مسار</button>
+        </div>
+
+        <!-- متابعة التعلم -->
+        <div class="card" style="margin-top:16px;">
+          <h3 style="font-size:15px;font-weight:800;margin-bottom:14px;">▶ متابعة التعلم</h3>
+          <div id="continue-learning-section"></div>
+        </div>
+
+        <!-- تقدم منصة التعلم -->
+        <div class="card" style="margin-top:16px;">
+          <h3 style="font-size:15px;font-weight:800;margin-bottom:14px;">📈 تقدمك في المنصة</h3>
+          <div id="platform-progress-section"><p style="color:var(--muted);font-size:14px;text-align:center;padding:12px 0">لم تبدأ أي مسار بعد</p></div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="dash-right">
+        <div class="challenges-section">
+          <h3>⚡ تحديات اليوم</h3>
+          <div id="daily-challenges"></div>
+        </div>
+
+        <div class="track-section">
+          <h3>📈 تقدم مساراتك</h3>
+          <div id="track-progress-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- قسم الأسئلة الشائعة -->
+    <div class="card" style="margin-top:28px;">
+      <h3 style="font-size:18px;font-weight:900;margin-bottom:18px;">❓ الأسئلة الشائعة</h3>
+      <div id="faq-list"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============ الملف الشخصي ============ -->
+<div id="page-profile" class="page" role="main">
+  <div class="profile-wrap">
+    <div class="profile-hero">
+      <div class="profile-avatar-wrap">
+        <div class="profile-avatar-big" id="profile-avatar-display" aria-hidden="true">م</div>
+        <label class="avatar-upload-btn" for="pf-avatar-input" aria-label="غيّر صورة البروفايل" title="غيّر صورة البروفايل">📷</label>
+        <input type="file" id="pf-avatar-input" accept="image/*" style="display:none" onchange="uploadProfileAvatar(this)">
+      </div>
+      <h1 id="profile-name-display" style="font-size:22px;font-weight:900;margin-bottom:4px;">اسمك</h1>
+      <p id="profile-email-display" style="opacity:.82;font-size:14px;"></p>
+    </div>
+
+    <div class="profile-form">
+      <h3>البيانات الشخصية</h3>
+      <div class="form-group">
+        <label class="form-label" for="pf-name" data-en="Full Name">الاسم الكامل</label>
+        <input class="form-input" type="text" id="pf-name" placeholder="اسمك الكامل" autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="pf-email" data-en="Email Address">البريد الإلكتروني</label>
+        <input class="form-input" type="email" id="pf-email" placeholder="example@email.com" dir="ltr" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="pf-phone" data-en="Phone Number">رقم الهاتف</label>
+        <input class="form-input" type="tel" id="pf-phone" placeholder="01xxxxxxxxx" dir="ltr" autocomplete="tel">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="pf-profession" data-en="Profession">المهنة</label>
+        <input class="form-input" type="text" id="pf-profession" placeholder="مثال: مصمم UI/UX، طالب هندسة..." autocomplete="organization-title">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="pf-age" data-en="Age">العمر</label>
+        <input class="form-input" type="number" id="pf-age" placeholder="عمرك" min="10" max="80" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="pf-bio" data-en="About You">نبذة عنك</label>
+        <textarea class="form-input form-textarea" id="pf-bio" placeholder="أخبرنا عن نفسك، طموحاتك، ومجالاتك..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="pf-skills" data-en="Your Current Skills">مهاراتك الحالية</label>
+        <input class="form-input" type="text" id="pf-skills" placeholder="مثال: Figma، تصوير، Excel..." autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="pf-interests" data-en="Your Interests">اهتماماتك</label>
+        <input class="form-input" type="text" id="pf-interests" placeholder="مثال: التكنولوجيا، ريادة الأعمال، الفن..." autocomplete="off">
+      </div>
+      <button class="save-btn" data-action="saveProfile">💾 حفظ التغييرات</button>
+    </div>
+
+    <div class="card" style="text-align:center;">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:6px;font-weight:800;">🎓 مدرّب أو محترف في مجالك؟</p>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">انضم لقائمة المدربين في START LINE وابدأ تستقبل حجوزات من الطلاب.</p>
+      <button class="btn btn-primary btn-sm" data-action="openTrainerModal">🤝 سجّل كمدرّب</button>
+    </div>
+
+    <div class="card" style="text-align:center;">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:14px;" data-en="Do you want to sign out of your account?">هل تريد تسجيل الخروج من حسابك؟</p>
+      <button class="btn btn-outline btn-sm" data-action="doLogout" data-en="Sign Out 👋">تسجيل الخروج 👋</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ سياسة الخصوصية ============ -->
+<div id="page-privacy" class="page" role="main">
+  <div class="legal-page-wrap">
+    <button class="back-btn" data-action="showPage" data-page="home" data-en="→ Back">← رجوع</button>
+    <div class="legal-header">
+      <span class="legal-icon">🔒</span>
+      <h1>سياسة الخصوصية</h1>
+      <p class="legal-meta">آخر تحديث: يونيو ٢٠٢٥ | تسري على مستخدمي منصة START LINE</p>
+    </div>
+    <div class="legal-body">
+      <section class="legal-section">
+        <h2>١. مقدمة</h2>
+        <p>منصة START LINE — خط البداية ("المنصة"، "نحن") تلتزم بحماية خصوصيتك. تشرح هذه السياسة كيف نجمع بياناتك واستخدمها وحمايتها عند استخدامك لمنصتنا المتاحة على start-line.vercel.app وتطبيقات PWA المرتبطة بها.</p>
+      </section>
+      <section class="legal-section">
+        <h2>٢. البيانات التي نجمعها</h2>
+        <ul>
+          <li><strong>بيانات التسجيل:</strong> الاسم، البريد الإلكتروني، وكلمة المرور المشفّرة عبر Supabase Auth.</li>
+          <li><strong>بيانات الاستخدام:</strong> نتائج اختبار الميول، المسارات المختارة، نقاط التقدم، الـ Streak، والشارات.</li>
+          <li><strong>بيانات المجتمع:</strong> المنشورات التي تنشرها في قسم المجتمع.</li>
+          <li><strong>بيانات تقنية:</strong> نوع المتصفح، الجهاز، ومعرّف الجلسة — لأغراض أمنية فقط.</li>
+          <li><strong>لا نجمع:</strong> بيانات الموقع الجغرافي، جهات الاتصال، أو أي معلومات حساسة.</li>
+        </ul>
+      </section>
+      <section class="legal-section">
+        <h2>٣. كيف نستخدم بياناتك</h2>
+        <ul>
+          <li>لتخصيص تجربتك التعليمية وتوصيات المسار المهني.</li>
+          <li>لحفظ تقدمك ومزامنته عبر أجهزتك المختلفة.</li>
+          <li>لتحسين المنصة وتطوير محتواها.</li>
+          <li>للتواصل معك بشأن تحديثات المنصة (يمكنك إلغاء الاشتراك في أي وقت).</li>
+          <li><strong>لا نبيع بياناتك</strong> لأي طرف ثالث.</li>
+        </ul>
+      </section>
+      <section class="legal-section">
+        <h2>٤. تخزين البيانات وأمانها</h2>
+        <p>بياناتك محفوظة على خوادم Supabase (supabase.com) الآمنة. نستخدم Row Level Security (RLS) للتأكد من أن كل مستخدم لا يصل إلا لبياناته الخاصة. كلمات المرور مشفّرة بـ bcrypt ولا يطّلع عليها أحد من فريقنا.</p>
+      </section>
+      <section class="legal-section">
+        <h2>٥. حقوقك (GDPR وما يعادله)</h2>
+        <ul>
+          <li><strong>حق الوصول:</strong> يمكنك طلب نسخة من بياناتك في أي وقت.</li>
+          <li><strong>حق التصحيح:</strong> يمكنك تحديث بياناتك من صفحة الملف الشخصي.</li>
+          <li><strong>حق الحذف:</strong> يمكنك طلب حذف حسابك وكل بياناتك عبر البريد: <!-- TODO: استبدل YOUR_EMAIL_HERE بإيميلك الحقيقي في كل مكان --><a href="mailto:YOUR_EMAIL_HERE">YOUR_EMAIL_HERE</a></li>
+          <li><strong>حق الاعتراض:</strong> يمكنك إلغاء الاشتراك في أي اتصالات تسويقية.</li>
+        </ul>
+      </section>
+      <section class="legal-section">
+        <h2>٦. ملفات تعريف الارتباط (Cookies)</h2>
+        <p>نستخدم ملفات تعريف ارتباط ضرورية فقط لحفظ جلسة تسجيل الدخول وإعدادات التطبيق (المظهر، اللغة). لا نستخدم ملفات تتبع إعلانية.</p>
+      </section>
+      <section class="legal-section">
+        <h2>٧. المستخدمون القاصرون</h2>
+        <p>المنصة موجّهة للشباب من عمر ١٣ سنة فأكثر. المستخدمون دون ١٦ سنة في المناطق الخاضعة للـ GDPR يحتاجون موافقة وليّ الأمر. إذا اكتشفنا بيانات لطفل دون ١٣ سنة نحذفها فوراً.</p>
+      </section>
+      <section class="legal-section">
+        <h2>٨. التعديلات على هذه السياسة</h2>
+        <p>قد نحدّث هذه السياسة دورياً. سنُعلمك بالتغييرات الجوهرية عبر البريد الإلكتروني أو إشعار داخل المنصة.</p>
+      </section>
+      <section class="legal-section">
+        <h2>٩. تواصل معنا</h2>
+        <p>لأي استفسارات تخص الخصوصية: <a href="mailto:YOUR_EMAIL_HERE">YOUR_EMAIL_HERE</a></p>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- ============ شروط الاستخدام ============ -->
+<div id="page-terms" class="page" role="main">
+  <div class="legal-page-wrap">
+    <button class="back-btn" data-action="showPage" data-page="home" data-en="→ Back">← رجوع</button>
+    <div class="legal-header">
+      <span class="legal-icon">📋</span>
+      <h1>شروط الاستخدام</h1>
+      <p class="legal-meta">آخر تحديث: يونيو ٢٠٢٥ | باستخدامك للمنصة فأنت توافق على هذه الشروط</p>
+    </div>
+    <div class="legal-body">
+      <section class="legal-section">
+        <h2>١. القبول بالشروط</h2>
+        <p>باستخدامك لمنصة START LINE — خط البداية ("المنصة") فأنت توافق على هذه الشروط. إذا كنت لا توافق عليها، يُرجى عدم استخدام المنصة.</p>
+      </section>
+      <section class="legal-section">
+        <h2>٢. الحساب والأهلية</h2>
+        <ul>
+          <li>يجب أن يكون عمرك ١٣ سنة أو أكثر لإنشاء حساب.</li>
+          <li>أنت مسؤول عن الحفاظ على سرية كلمة مرورك.</li>
+          <li>يُمنع إنشاء حسابات متعددة لشخص واحد.</li>
+          <li>يحق لنا تعليق أي حساب ينتهك هذه الشروط.</li>
+        </ul>
+      </section>
+      <section class="legal-section">
+        <h2>٣. استخدام المحتوى</h2>
+        <ul>
+          <li>محتوى المنصة (الدورات، المسارات، الاختبارات) مُرخَّص للاستخدام الشخصي التعليمي غير التجاري.</li>
+          <li>يُمنع نسخ المحتوى أو إعادة نشره تجارياً دون إذن كتابي مسبق.</li>
+          <li>المحتوى الذي تنشره في قسم المجتمع يظل ملكك، لكنك تمنحنا رخصة عرضه على المنصة.</li>
+        </ul>
+      </section>
+      <section class="legal-section">
+        <h2>٤. قواعد المجتمع</h2>
+        <p>يُمنع صراحةً في قسم المجتمع:</p>
+        <ul>
+          <li>نشر محتوى مسيء، عنصري، أو يحرّض على الكراهية.</li>
+          <li>الترويج للمنتجات أو الخدمات (spam).</li>
+          <li>انتهاك خصوصية الآخرين أو نشر معلوماتهم الشخصية.</li>
+          <li>نشر معلومات مضللة أو زائفة.</li>
+        </ul>
+        <p>نحتفظ بحق حذف أي محتوى ينتهك هذه القواعد دون إشعار مسبق.</p>
+      </section>
+      <section class="legal-section">
+        <h2>٥. الخدمات المدفوعة (المستقبلية)</h2>
+        <p>المنصة حالياً مجانية بالكامل. عند إطلاق خدمات مدفوعة (جلسات مع مدربين، ميزات Pro) ستُعلن الأسعار بوضوح وستحتاج لموافقة صريحة منك. سياسة الاسترداد ستُحدَّد عند إطلاق هذه الخدمات.</p>
+      </section>
+      <section class="legal-section">
+        <h2>٦. حدود المسؤولية</h2>
+        <p>المنصة تقدّم توجيهاً مهنياً تعليمياً وليس ضمانات لفرص عمل محددة. المحتوى للأغراض التعليمية فقط. لا نتحمل مسؤولية أي قرارات مهنية تبنى بشكل حصري على محتوى المنصة.</p>
+      </section>
+      <section class="legal-section">
+        <h2>٧. إنهاء الخدمة</h2>
+        <p>يمكنك حذف حسابك في أي وقت. نحتفظ بحق إنهاء أو تعليق الحسابات التي تنتهك الشروط. في حالة إغلاق المنصة ستُعلن قبل ٣٠ يوماً على الأقل.</p>
+      </section>
+      <section class="legal-section">
+        <h2>٨. القانون الواجب التطبيق</h2>
+        <p>تخضع هذه الشروط لقوانين المملكة العربية السعودية ومصر (الأسواق الرئيسية). لأي نزاعات يُفضَّل حلها وديّاً عبر: <a href="mailto:YOUR_EMAIL_HERE">YOUR_EMAIL_HERE</a></p>
+      </section>
+      <section class="legal-section">
+        <h2>٩. التعديلات</h2>
+        <p>قد نعدّل هذه الشروط. سيُعلَن عن أي تغيير جوهري قبل ١٤ يوماً من سريانه. الاستمرار في استخدام المنصة بعد التعديل يعني قبولك للشروط الجديدة.</p>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- ============ من نحن / About ============ -->
+<div id="page-about" class="page" role="main">
+  <div class="legal-page-wrap">
+    <button class="back-btn" data-action="showPage" data-page="home" data-en="→ Back">← رجوع</button>
+    <div class="legal-header">
+      <span class="legal-icon">🚀</span>
+      <h1>من نحن</h1>
+      <p class="legal-meta">START LINE — خط البداية | منصة التوجيه المهني للشباب العربي</p>
+    </div>
+    <div class="legal-body">
+      <section class="legal-section">
+        <h2>قصتنا</h2>
+        <p>بدأت فكرة START LINE من سؤال بسيط: لماذا يجد كثير من الشباب العربي صعوبةً في اختيار مسارهم المهني رغم وجود الموهبة والطموح؟ الإجابة كانت غياب التوجيه الصحيح في الوقت الصحيح. من هنا وُلدت المنصة — لتكون الدليل الذي يتمنى كل شاب أن يجده في بداية رحلته.</p>
+        <p>نؤمن أن كل شخص لديه مسار مهني يناسبه تماماً، ومهمتنا هي مساعدتك في اكتشافه وبناء خطة واضحة للوصول إليه.</p>
+      </section>
+      <section class="legal-section">
+        <h2>رؤيتنا</h2>
+        <p>أن يكون كل شاب عربي مسلحاً بمعرفة نفسه، واضحاً في هدفه، وممتلكاً للأدوات اللازمة للانطلاق — بصرف النظر عن موقعه أو إمكانياته المادية.</p>
+        <ul>
+          <li><strong>التوجيه المخصص:</strong> خارطة طريق مهنية مبنية على شخصيتك وميولك الحقيقية.</li>
+          <li><strong>المحتوى العملي:</strong> مسارات تعليمية مصممة خصيصاً لسوق العمل العربي والعالمي.</li>
+          <li><strong>المجتمع الداعم:</strong> بيئة آمنة يشجع فيها الشباب بعضهم ويتشاركون التجارب.</li>
+          <li><strong>المجانية الكاملة:</strong> التوجيه المهني الجيد حق لا امتياز — كل الميزات الأساسية مجانية دائماً.</li>
+        </ul>
+      </section>
+      <section class="legal-section">
+        <h2>تواصل معنا</h2>
+        <p>نسعد بسماع رأيك أو اقتراحاتك أو أي تعاون مثمر:</p>
+        <ul>
+          <!-- TODO: استبدل YOUR_EMAIL_HERE بالإيميل الحقيقي -->
+          <li><strong>البريد الإلكتروني:</strong> <a href="mailto:YOUR_EMAIL_HERE">YOUR_EMAIL_HERE</a></li>
+          <!-- TODO: استبدل YOUR_TWITTER_URL بـ رابط حساب تويتر/X الحقيقي -->
+          <li><strong>تويتر / X:</strong> <a href="YOUR_TWITTER_URL" target="_blank" rel="noopener">YOUR_TWITTER_URL</a></li>
+          <!-- TODO: استبدل YOUR_INSTAGRAM_URL بـ رابط انستجرام الحقيقي -->
+          <li><strong>انستجرام:</strong> <a href="YOUR_INSTAGRAM_URL" target="_blank" rel="noopener">YOUR_INSTAGRAM_URL</a></li>
+        </ul>
+        <p style="margin-top:16px;opacity:0.7;font-size:0.9em;">نردّ على جميع الرسائل خلال ٤٨ ساعة عمل.</p>
+      </section>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- ===== SITE FOOTER ===== -->
+<footer class="site-footer" role="contentinfo" aria-label="تذييل الصفحة">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <!-- Brand col -->
+      <div class="footer-brand-col">
+        <div class="footer-logo-wrap">
+          <img src="assets/logo.png" alt="START LINE" class="footer-logo-img" loading="lazy" onerror="this.style.display='none'">
+          <span class="footer-brand-name">START LINE</span>
+        </div>
+        <p class="footer-tagline" data-en="The leading career guidance platform for Arab youth. Discover your path, build your future, and launch from the Start Line.">منصة التوجيه المهني الأولى للشباب العربي. اكتشف مسارك، ابنِ مستقبلك، وانطلق من خط البداية.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/profile.php?id=61590658237683&locale=ar_AR" class="footer-social-btn" aria-label="فيسبوك" target="_blank" rel="noopener">f</a>
+          <a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2Fstart_line_2026%3Figsh%3Damp3ZWk0ODY4Zzl5%26fbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExdnNDUW1QeG5zY1h1WlV2WnNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR4nzL73kY7qpnT-inq36N7pOmvz4Jd87SJSvorHpQkSSsR7JkYecgV9yGQE6g_aem_wcPDKdxczsfdX3XchNge4w&h=AUDJnGFbK4RkXJV1A8gKaSvEgH_t3geuv4U9wCWoOE4WYZTDY3c1Db_RQNOEP4ypGjyMN-V_l5XDgnC-vd4yKAhuw_1oCMlbXPS8awI_w-53OYolxV01e1R9oHTlHFSnegfC" class="footer-social-btn" aria-label="انستجرام" target="_blank" rel="noopener">📷</a>
+          <a href="https://chat.whatsapp.com/JlTc1dppuJQIRuY8BlGvpp?s=cl&p=a&ilr=2&amv=1" class="footer-social-btn" aria-label="واتساب" target="_blank" rel="noopener">W</a>
+          <!-- TODO: استبدل YOUR_TWITTER_URL بـ رابط حساب تويتر/X مثال: https://x.com/startline_ar -->
+          <a href="YOUR_TWITTER_URL" class="footer-social-btn" aria-label="تويتر">𝕏</a>
+          <!-- TODO: استبدل YOUR_LINKEDIN_URL بـ رابط صفحة لينكدإن مثال: https://linkedin.com/company/startline-ar -->
+          <a href="YOUR_LINKEDIN_URL" class="footer-social-btn" aria-label="لينكدإن">in</a>
+          <!-- TODO: استبدل YOUR_YOUTUBE_URL بـ رابط قناة يوتيوب مثال: https://youtube.com/@startline_ar -->
+          <a href="YOUR_YOUTUBE_URL" class="footer-social-btn" aria-label="يوتيوب">▶</a>
+          <!-- TODO: استبدل YOUR_TELEGRAM_URL بـ رابط قناة تيليجرام مثال: https://t.me/startline_ar -->
+          <a href="YOUR_TELEGRAM_URL" class="footer-social-btn" aria-label="تيليجرام">✈</a>
+        </div>
+      </div>
+      <!-- Explore col -->
+      <div>
+        <h3 class="footer-col-title">استكشاف</h3>
+        <ul class="footer-links">
+          <li><button data-action="showPage" data-page="quiz" data-en="Know Yourself">اعرف نفسك</button></li>
+          <li><button data-action="showPage" data-page="categories" data-en="Career Paths">المسارات المهنية</button></li>
+          <li><button data-action="showPage" data-page="plan" data-en="Learning Plan">خطة التعلم</button></li>
+          <li><button data-action="showPage" data-page="mentors" data-en="Mentors">المدربون</button></li>
+          <li><button data-action="showPage" data-page="psychology" data-en="Mental Support">الدعم النفسي</button></li>
+        </ul>
+      </div>
+      <!-- Community col -->
+      <div>
+        <h3 class="footer-col-title">المجتمع</h3>
+        <ul class="footer-links">
+          <li><button data-action="showPage" data-page="community" data-en="Community">المجتمع</button></li>
+          <li><button data-action="showPage" data-page="dashboard" data-en="Dashboard">لوحة التحكم</button></li>
+          <li><a href="#" data-en="Success Stories">قصص نجاح</a></li>
+          <li><a href="#" data-en="Events">الفعاليات</a></li>
+          <li><a href="#" data-en="Challenges">التحديات</a></li>
+        </ul>
+      </div>
+      <!-- Support col -->
+      <div>
+        <h3 class="footer-col-title">الدعم</h3>
+        <ul class="footer-links">
+          <li><a href="#" data-en="Frequently Asked Questions">الأسئلة الشائعة</a></li>
+          <li><a href="mailto:YOUR_EMAIL_HERE" data-en="Contact Us">تواصل معنا</a></li>
+          <li><button data-action="showPage" data-page="privacy" data-en="Privacy Policy">سياسة الخصوصية</button></li>
+          <li><button data-action="showPage" data-page="terms" data-en="Terms of Use">شروط الاستخدام</button></li>
+          <li><button data-action="showPage" data-page="about" data-en="About the Platform">عن المنصة</button></li>
+        </ul>
+      </div>
+      <!-- Join col -->
+      <div>
+        <h3 class="footer-col-title">انضم إلينا</h3>
+        <ul class="footer-links">
+          <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfWjk-DFyqURriCuKvOhgPia1gZLohzeEtfCm_LA0TN0UixYw/viewform" target="_blank" rel="noopener" data-en="Registration Form">فورم التسجيل في المبادرة</a></li>
+          <li><a href="https://chat.whatsapp.com/JlTc1dppuJQIRuY8BlGvpp?s=cl&p=a&ilr=2&amv=1" target="_blank" rel="noopener" data-en="WhatsApp Community">مجتمعنا على واتساب</a></li>
+          <li><a href="tel:01003763619" data-en="Contact Number">01003763619</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© ٢٠٢٦ START LINE — خط البداية. جميع الحقوق محفوظة.</p>
+      <div class="footer-legal">
+        <a href="#" data-action="showPage" data-page="privacy" onclick="showPage('privacy');return false;" data-en="Privacy">الخصوصية</a>
+        <a href="#" data-action="showPage" data-page="terms" onclick="showPage('terms');return false;" data-en="Terms">الشروط</a>
+        <a href="#" data-en="Cookies">ملفات تعريف الارتباط</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button class="back-to-top" id="back-to-top" aria-label="العودة لأعلى الصفحة" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+
+<!-- ============ Coach Modal ============ -->
+<div class="coach-modal-overlay" id="coach-modal" role="dialog" aria-modal="true" aria-labelledby="coach-modal-title">
+  <div class="coach-modal">
+    <div id="coach-form-area">
+      <div style="text-align:center;font-size:44px;margin-bottom:12px;">🤝</div>
+      <h2 id="coach-modal-title">احجز جلستك مع المدرب</h2>
+      <p class="sub" data-en="Tell us about yourself so we can match you with the right mentor">أخبرنا عنك لنربطك بالمدرب المناسب</p>
+      <div class="form-group">
+        <label class="form-label" for="cr-name" data-en="Full Name (four parts)">الاسم الرباعي (أربعة أجزاء)</label>
+        <input class="form-input" type="text" id="cr-name" placeholder="مثال: أحمد محمد علي حسن" autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="cr-age" data-en="Age">العمر</label>
+        <input class="form-input" type="number" id="cr-age" placeholder="مثال: 22" min="10" max="70" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="cr-current-skill" data-en="Your Current Skill">مهارتك الحالية</label>
+        <input class="form-input" type="text" id="cr-current-skill" placeholder="مثال: أساسيات Figma، برمجة مبتدئ..." autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="cr-target-skill" data-en="The Skill You Want to Learn">المهارة التي تريد تعلمها</label>
+        <input class="form-input" type="text" id="cr-target-skill" placeholder="مثال: UI/UX احترافي، مطور Full Stack..." autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="cr-phone" data-en="Contact Number (WhatsApp)">رقم التواصل (واتساب)</label>
+        <input class="form-input" type="tel" id="cr-phone" placeholder="مثال: 01012345678" autocomplete="tel" dir="ltr">
+      </div>
+      <button class="btn btn-primary btn-full" data-action="submitCoachRequest" style="margin-top:8px;" data-en="Submit Request 🚀">إرسال الطلب 🚀</button>
+    </div>
+    <div class="coach-success" id="coach-success" style="display:none;">
+      <div class="big-icon">✅</div>
+      <h3>أنت الآن جاهز للانطلاق من خط البداية!</h3>
+      <p data-en="The START LINE team will contact you as soon as possible">سيتم التواصل معك في أقرب وقت من فريق START LINE</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ Trainer Application Modal ============ -->
+<div class="coach-modal-overlay" id="trainer-modal" role="dialog" aria-modal="true" aria-labelledby="trainer-modal-title">
+  <div class="coach-modal" style="position:relative;">
+    <button type="button" aria-label="إغلاق" onclick="closeTrainerModal()" style="position:absolute;top:14px;left:14px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted);">✕</button>
+    <div id="trainer-form-area">
+      <div style="text-align:center;font-size:44px;margin-bottom:12px;">🎓</div>
+      <h2 id="trainer-modal-title" data-en="Apply as a Trainer">سجّل كمدرّب في START LINE</h2>
+      <p class="sub" data-en="Tell us about your expertise so we can add you to the trainers list">أخبرنا عن خبرتك حتى نضيفك لقائمة المدربين</p>
+      <div class="form-group">
+        <label class="form-label" for="tr-name" data-en="Full Name">الاسم الكامل</label>
+        <input class="form-input" type="text" id="tr-name" placeholder="مثال: أحمد محمد علي حسن" autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="tr-age" data-en="Age">العمر</label>
+        <input class="form-input" type="number" id="tr-age" placeholder="مثال: 28" min="16" max="80" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="tr-email" data-en="Email">البريد الإلكتروني</label>
+        <input class="form-input" type="email" id="tr-email" placeholder="example@email.com" autocomplete="email" dir="ltr">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="tr-phone" data-en="Contact Number (WhatsApp)">رقم التواصل (واتساب)</label>
+        <input class="form-input" type="tel" id="tr-phone" placeholder="مثال: 01012345678" autocomplete="tel" dir="ltr">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="tr-role" data-en="Profession / Job Title">المهنة / المسمى الوظيفي</label>
+        <input class="form-input" type="text" id="tr-role" placeholder="مثال: مصمم UI/UX، مطور Full Stack..." autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="tr-experience" data-en="Years of Experience">سنوات الخبرة</label>
+        <input class="form-input" type="number" id="tr-experience" placeholder="مثال: 5" min="0" max="50" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="tr-skills" data-en="Key Skills (comma-separated)">أهم مهاراتك (مفصولة بفاصلة)</label>
+        <input class="form-input" type="text" id="tr-skills" placeholder="مثال: Figma، UI Design، User Research" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="tr-bio" data-en="Short Bio">نبذة عنك</label>
+        <textarea class="form-input form-textarea" id="tr-bio" placeholder="حدّثنا عن خبرتك، إنجازاتك، وأسلوبك في التدريب..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="tr-portfolio" data-en="LinkedIn / Portfolio Link (optional)">رابط LinkedIn أو بورتفوليو (اختياري)</label>
+        <input class="form-input" type="url" id="tr-portfolio" placeholder="https://linkedin.com/in/..." autocomplete="off" dir="ltr">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="tr-availability" data-en="Availability">مدى توفّرك للجلسات</label>
+        <input class="form-input" type="text" id="tr-availability" placeholder="مثال: مساءً أيام الأسبوع، عطلة نهاية الأسبوع..." autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="tr-why" data-en="Why do you want to join as a trainer?">لماذا تريد الانضمام كمدرّب؟</label>
+        <textarea class="form-input form-textarea" id="tr-why" placeholder="شاركنا دافعك ورؤيتك في مساعدة المتعلمين..."></textarea>
+      </div>
+      <button class="btn btn-primary btn-full" data-action="submitTrainerApplication" style="margin-top:8px;" data-en="Submit Application 🚀">إرسال الطلب 🚀</button>
+    </div>
+    <div class="coach-success" id="trainer-success" style="display:none;">
+      <div class="big-icon">✅</div>
+      <h3 data-en="Your application has been received!">تم استلام طلبك بنجاح!</h3>
+      <p data-en="Our team will review your application and contact you soon">سيقوم فريقنا بمراجعة طلبك والتواصل معك قريباً</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============ الإعداد الأولي / Onboarding ============ -->
+<div id="page-onboarding" class="page" role="main">
+  <div class="onb-outer">
+
+    <!-- Background decorations -->
+    <div class="onb-orb onb-orb-1" aria-hidden="true"></div>
+    <div class="onb-orb onb-orb-2" aria-hidden="true"></div>
+    <div class="onb-orb onb-orb-3" aria-hidden="true"></div>
+    <div class="onb-dots" aria-hidden="true"></div>
+
+    <!-- Background logo watermark -->
+    <div class="onb-bg-logo" aria-hidden="true">
+      <img src="assets/logo.png" alt="START LINE" loading="lazy" onerror="this.style.display='none'">
+    </div>
+
+    <div class="onb-container" id="onb-container">
+
+      <!-- Header -->
+      <div class="onb-header">
+        <div class="onb-logo-pill">
+          <img src="assets/logo.png" alt="START LINE" class="onb-logo-img" loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="onb-logo-fallback" style="display:none">SL</div>
+          <span class="onb-brand">START·LINE</span>
+        </div>
+        <div class="onb-step-badge" id="onb-step-badge" aria-live="polite" data-en="Step 1 of 5">الخطوة 1 من 5</div>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="onb-progress-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20" id="onb-progress-bar-wrap">
+        <div class="onb-progress-track">
+          <div class="onb-progress-fill" id="onb-progress-fill" style="width:20%"></div>
+          <div class="onb-progress-glow" id="onb-progress-glow" style="left:20%"></div>
+        </div>
+        <div class="onb-step-dots" id="onb-step-dots">
+          <span class="onb-dot active" data-step="0"></span>
+          <span class="onb-dot" data-step="1"></span>
+          <span class="onb-dot" data-step="2"></span>
+          <span class="onb-dot" data-step="3"></span>
+          <span class="onb-dot" data-step="4"></span>
+        </div>
+      </div>
+
+      <!-- Steps Container -->
+      <div class="onb-steps-viewport" id="onb-steps-viewport">
+        <div class="onb-steps-track" id="onb-steps-track">
+
+          <!-- Step 0: Account Creation -->
+          <div class="onb-step" data-step="0">
+            <div class="onb-step-icon">👤</div>
+            <h2 class="onb-step-title">إنشاء حسابك</h2>
+            <p class="onb-step-sub" data-en="Enter your details to start your career journey with START LINE.">أدخل بياناتك لبدء رحلتك المهنية مع START LINE.</p>
+
+            <div class="onb-reg-form">
+              <div class="onb-reg-row">
+                <div class="onb-reg-field">
+                  <label class="onb-reg-label" data-en="Full Name">الاسم الكامل</label>
+                  <div class="onb-reg-input-wrap">
+                    <span class="onb-reg-icon">👤</span>
+                    <input type="text" id="onb-reg-fullname" class="onb-reg-input"
+                      placeholder="اكتب اسمك الكامل" autocomplete="name"
+                      oninput="onbRegValidate()">
+                  </div>
+                </div>
+                <div class="onb-reg-field">
+                  <label class="onb-reg-label" data-en="Email or Phone Number">البريد الإلكتروني أو رقم الهاتف</label>
+                  <div class="onb-reg-input-wrap">
+                    <span class="onb-reg-icon">✉️</span>
+                    <input type="text" id="onb-reg-email" class="onb-reg-input"
+                      placeholder="example@email.com أو 05xxxxxxxx" autocomplete="email"
+                      dir="ltr" oninput="onbRegValidate()">
+                  </div>
+                </div>
+              </div>
+              <div class="onb-reg-row">
+                <div class="onb-reg-field">
+                  <label class="onb-reg-label" data-en="Password">كلمة المرور</label>
+                  <div class="onb-reg-input-wrap">
+                    <span class="onb-reg-icon">🔒</span>
+                    <input type="password" id="onb-reg-password" class="onb-reg-input"
+                      placeholder="8 أحرف على الأقل" autocomplete="new-password"
+                      dir="ltr" oninput="onbRegValidate()">
+                    <button class="onb-reg-eye" type="button" data-action="onbTogglePassword" data-target="onb-reg-password" aria-label="إظهار">👁</button>
+                  </div>
+                </div>
+                <div class="onb-reg-field">
+                  <label class="onb-reg-label" data-en="Confirm Password">تأكيد كلمة المرور</label>
+                  <div class="onb-reg-input-wrap">
+                    <span class="onb-reg-icon">🔐</span>
+                    <input type="password" id="onb-reg-confirm" class="onb-reg-input"
+                      placeholder="أعد كتابة كلمة المرور" autocomplete="new-password"
+                      dir="ltr" oninput="onbRegValidate()">
+                    <button class="onb-reg-eye" type="button" data-action="onbTogglePassword" data-target="onb-reg-confirm" aria-label="إظهار">👁</button>
+                  </div>
+                </div>
+              </div>
+              <div class="onb-reg-error" id="onb-reg-error" style="display:none"></div>
+            </div>
+          </div>
+
+          <!-- Step 1: Age Input -->
+          <div class="onb-step" data-step="1">
+            <div class="onb-step-icon">🎂</div>
+            <h2 class="onb-step-title" id="onb-age-title">كم عمرك؟</h2>
+            <p class="onb-step-sub" data-en="Your age helps us provide recommendations suitable for your current stage.">يساعدنا عمرك في تقديم توصيات مناسبة لمرحلتك الحالية.</p>
+            <div class="onb-input-wrap" style="max-width:200px; margin: 0 auto 8px;">
+              <input
+                type="number"
+                id="onb-age-input"
+                class="onb-input"
+                placeholder="مثال: 22"
+                min="13"
+                max="70"
+                style="text-align:center; font-size:2rem; font-weight:800; letter-spacing:2px;"
+                oninput="onbAgeInputChange()"
+                onkeydown="if(event.key==='Enter') onbNext()"
+              >
+              <div class="onb-input-line"></div>
+            </div>
+            <p class="onb-input-hint" id="onb-age-hint" style="display:none; text-align:center;">✅ ممتاز!</p>
+            <p style="text-align:center; font-size:13px; opacity:.6; margin-top:6px;" data-en="Enter your age in years (13 – 70)">أدخل عمرك بالسنوات (13 – 70)</p>
+          </div>
+
+          <!-- Step 2: Interest / Field Selection (single choice) -->
+          <div class="onb-step" data-step="2">
+            <div class="onb-step-icon">💡</div>
+            <h2 class="onb-step-title">ما المجال الذي يثير اهتمامك؟</h2>
+            <p class="onb-step-sub" data-en="Choose one field so we can guide you more precisely.">اختر مجالاً واحداً لنوجّهك بشكل أدق.</p>
+            <div class="onb-cards" id="onb-interest-cards" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+              <button type="button" class="onb-card-opt" data-value="frontend" data-action="onbSelectInterest">
+                <span class="onb-card-icon">💻</span>
+                <div><strong data-en="Frontend Developer">مطور Frontend</strong><small data-en="Websites and Web Apps">مواقع وتطبيقات ويب</small></div>
+              </button>
+              <button type="button" class="onb-card-opt" data-value="graphic" data-action="onbSelectInterest">
+                <span class="onb-card-icon">✏️</span>
+                <div><strong data-en="Graphic Design">جرافيك ديزاين</strong><small data-en="Visual Identities and Designs">هويات بصرية وتصاميم</small></div>
+              </button>
+              <button type="button" class="onb-card-opt" data-value="video" data-action="onbSelectInterest">
+                <span class="onb-card-icon">🎬</span>
+                <div><strong data-en="Video Editing">مونتاج فيديو</strong><small data-en="Content Editing and Production">تحرير وإنتاج محتوى</small></div>
+              </button>
+              <button type="button" class="onb-card-opt" data-value="marketing" data-action="onbSelectInterest">
+                <span class="onb-card-icon">📣</span>
+                <div><strong data-en="Digital Marketing">تسويق رقمي</strong><small data-en="Social Media and Ads">سوشيال ميديا وإعلانات</small></div>
+              </button>
+              <button type="button" class="onb-card-opt" data-value="other" data-action="onbSelectInterest" style="grid-column:1/-1;">
+                <span class="onb-card-icon">🔍</span>
+                <div><strong data-en="Other">أخرى</strong><small data-en="Specify Your Own Field">حدد مجالك الخاص</small></div>
+              </button>
+            </div>
+            <!-- Dynamic text input shown only when "Other" is selected -->
+            <div id="onb-interest-other-wrap" style="display:none; margin-top:12px;">
+              <div class="onb-reg-input-wrap">
+                <span class="onb-reg-icon">✍️</span>
+                <input type="text" id="onb-interest-other-input" class="onb-reg-input"
+                  placeholder="اكتب مجالك الذي يثير اهتمامك"
+                  maxlength="60"
+                  oninput="onbInterestOtherChange()">
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Preferred Career Selection -->
+          <div class="onb-step" data-step="3">
+            <div class="onb-step-icon">🎯</div>
+            <h2 class="onb-step-title">ما المسار المهني المفضل لك؟</h2>
+            <p class="onb-step-sub" data-en="Choose one path that matches your ambitions.">اختر مساراً واحداً يناسب طموحاتك.</p>
+            <div class="onb-cards" id="onb-career-cards" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+              <button type="button" class="onb-card-opt" data-value="programming" data-action="onbSelectCareer">
+                <span class="onb-card-icon">💻</span>
+                <div><strong data-en="Programming">البرمجة</strong><small data-en="Website and App Development">تطوير المواقع والتطبيقات</small></div>
+              </button>
+              <button type="button" class="onb-card-opt" data-value="photography" data-action="onbSelectCareer">
+                <span class="onb-card-icon">📸</span>
+                <div><strong data-en="Photography">التصوير</strong><small data-en="Photography and Creative Imaging">التصوير الفوتوغرافي والإبداعي</small></div>
+              </button>
+              <button  type="button" class="onb-card-opt" data-value="video-editing" data-action="onbSelectCareer">
+                <span class="onb-card-icon">🎬</span>
+                <div><strong data-en="Video Editing">المونتاج</strong><small data-en="Video Editing and Production">تحرير وإنتاج الفيديو</small></div>
+              </button>
+              <button type="button" class="onb-card-opt" data-value="graphic-design" data-action="onbSelectCareer">
+                <span class="onb-card-icon">🎨</span>
+                <div><strong data-en="Graphic Design">الجرافيك</strong><small data-en="Identity Design and Visual Materials">تصميم الهوية والمواد البصرية</small></div>
+              </button>
+              <button type="button" class="onb-card-opt" data-value="marketing" data-action="onbSelectCareer">
+                <span class="onb-card-icon">📣</span>
+                <div><strong data-en="Marketing">التسويق</strong><small data-en="Digital Marketing and Content">التسويق الرقمي والمحتوى</small></div>
+              </button>
+              <button type="button" class="onb-card-opt" data-value="freelancing" data-action="onbSelectCareer">
+                <span class="onb-card-icon">💼</span>
+                <div><strong data-en="Freelancing">الفريلانس</strong><small data-en="Independent Freelance Work">العمل الحر والمستقل</small></div>
+              </button>
+              <button type="button" class="onb-card-opt onb-career-other" data-value="other" data-action="onbSelectCareer" style="grid-column:1/-1;">
+                <span class="onb-card-icon">✏️</span>
+                <div><strong data-en="Other">أخرى</strong><small data-en="Specify Your Own Path">حدد مسارك الخاص</small></div>
+              </button>
+            </div>
+            <!-- Dynamic text input shown only when "Other" is selected -->
+            <div id="onb-career-other-wrap" style="display:none; margin-top:12px;">
+              <div class="onb-reg-input-wrap">
+                <span class="onb-reg-icon">✍️</span>
+                <input type="text" id="onb-career-other-input" class="onb-reg-input"
+                  placeholder="اكتب مسارك المهني المفضل"
+                  maxlength="60"
+                  oninput="onbCareerOtherChange()">
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: Start Journey (Final Step) -->
+          <div class="onb-step" data-step="4">
+            <div class="onb-step-icon onb-finish-icon" id="onb-finish-icon">🎉</div>
+            <h2 class="onb-step-title">رحلتك بدأت يا <span id="onb-finish-name" data-en="Friend">صديقي</span>!</h2>
+            <p class="onb-step-sub">استناداً إلى إجاباتك، إليك ما أعددناه لك.</p>
+
+            <!-- Summary of user inputs -->
+            <div class="onb-summary" id="onb-summary">
+              <div class="onb-summary-row" id="onb-sum-age"></div>
+              <div class="onb-summary-row" id="onb-sum-interests"></div>
+              <div class="onb-summary-row" id="onb-sum-career"></div>
+            </div>
+
+            <!-- Suggested paths based on career -->
+            <div id="onb-paths-wrap" style="margin-top:16px;"></div>
+
+            <div class="onb-finish-actions" style="margin-top:18px;">
+              <button class="btn btn-primary onb-finish-btn" id="onb-register-btn" data-action="onbRegister">
+                <span id="onb-register-label" data-en="Start My Journey Now 🚀">ابدأ رحلتي الآن 🚀</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="onb-nav" id="onb-nav">
+        <button type="button" class="onb-back-btn" id="onb-back-btn" data-action="onbBack" style="visibility:hidden">
+          ← رجوع
+        </button>
+        <button type="button" class="onb-next-btn" id="onb-next-btn" data-action="onbNext" disabled>
+          <span id="onb-next-label" data-en="Next →">التالي ←</span>
+          <div class="onb-next-arrow">←</div>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ============ Auth Modal ============ -->
+<div class="modal-overlay" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-modal-heading" data-action="modalOverlayClick">
+  <div class="modal auth-modal-box">
+
+    <button class="modal-close" data-action="closeModal" aria-label="إغلاق">✕</button>
+
+    <div class="auth-brand">
+      <div class="auth-brand-mark" aria-hidden="true">
+        <img src="assets/logo.png" alt="START LINE" loading="lazy" onerror="this.parentElement.innerHTML='SL'">
+      </div>
+      <div class="nav-logo-text">
+        <span class="auth-brand-en" aria-label="START LINE">
+          <span class="brand-start">START</span><span class="brand-sep">·</span><span class="brand-line">LINE</span>
+        </span>
+        <span class="auth-brand-ar" data-en="START LINE">خط البداية</span>
+      </div>
+    </div>
+
+    <div class="auth-tabs" id="auth-tabs" role="tablist">
+      <button class="auth-tab active" id="tab-login" data-action="authShowScreen" data-screen="login" role="tab" aria-selected="true" data-en="Sign In">دخول</button>
+      <button class="auth-tab" id="tab-register" data-action="authShowScreen" data-screen="register" role="tab" aria-selected="false">حساب جديد</button>
+    </div>
+
+    <!-- Login -->
+    <div class="auth-screen" id="auth-screen-login" role="tabpanel">
+      <h2 id="auth-modal-heading" class="hidden">تسجيل الدخول</h2>
+      <div class="form-group">
+        <label class="form-label" for="login-email" data-en="Email Address">البريد الإلكتروني</label>
+        <input class="form-input" type="email" id="login-email" placeholder="example@email.com" dir="ltr" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="login-password" data-en="Password">كلمة المرور</label>
+        <div class="pass-wrap">
+          <input class="form-input" type="password" id="login-password" placeholder="كلمة المرور" autocomplete="current-password">
+          <button class="pass-eye" data-action="togglePass" data-target="login-password" type="button" aria-label="إظهار/إخفاء كلمة المرور">👁</button>
+        </div>
+      </div>
+      <div id="login-error" class="auth-error" style="display:none;" role="alert"></div>
+      <button class="btn btn-primary btn-full auth-submit" id="login-btn" data-action="doLogin" data-en="Sign In">دخول</button>
+      <div class="auth-links">
+        <span data-action="authShowScreen" data-screen="forgot" role="button" tabindex="0" data-en="Forgot your password?">نسيت كلمة المرور؟</span>
+        <span data-action="authShowScreen" data-screen="register" role="button" tabindex="0" data-en="Don't have an account? Sign up">ليس لديك حساب؟ سجّل الآن</span>
+      </div>
+    </div>
+
+    <!-- Register -->
+    <div class="auth-screen" id="auth-screen-register" style="display:none;" role="tabpanel">
+      <div class="form-group">
+        <label class="form-label" for="reg-name" data-en="Full Name">الاسم الكامل</label>
+        <input class="form-input" type="text" id="reg-name" placeholder="اسمك الكامل" autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="reg-email" data-en="Email Address">البريد الإلكتروني</label>
+        <input class="form-input" type="email" id="reg-email" placeholder="example@email.com" dir="ltr" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="reg-password" data-en="Password">كلمة المرور</label>
+        <div class="pass-wrap">
+          <input class="form-input" type="password" id="reg-password" placeholder="٨ أحرف على الأقل" autocomplete="new-password">
+          <button class="pass-eye" data-action="togglePass" data-target="reg-password" type="button" aria-label="إظهار/إخفاء كلمة المرور">👁</button>
+        </div>
+      </div>
+      <div id="register-error" class="auth-error" style="display:none;" role="alert"></div>
+      <button class="btn btn-primary btn-full auth-submit" id="register-btn" data-action="doRegister" data-en="Create Account">إنشاء الحساب</button>
+      <div class="auth-links">
+        <span data-action="authShowScreen" data-screen="login" role="button" tabindex="0" data-en="Already have an account? Sign in">لديك حساب؟ ادخل الآن</span>
+      </div>
+    </div>
+
+    <!-- Forgot Password -->
+    <div class="auth-screen" id="auth-screen-forgot" style="display:none;" role="tabpanel">
+      <p class="auth-hint" data-en="Enter your email and we will send you a password reset link">أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة تعيين كلمة المرور</p>
+      <div class="form-group">
+        <label class="form-label" for="forgot-email" data-en="Email Address">البريد الإلكتروني</label>
+        <input class="form-input" type="email" id="forgot-email" placeholder="example@email.com" dir="ltr" autocomplete="email">
+      </div>
+      <div id="forgot-error" class="auth-error" style="display:none;" role="alert"></div>
+      <button class="btn btn-primary btn-full auth-submit" id="forgot-btn" data-action="doForgot" data-en="Send Recovery Link">إرسال رابط الاستعادة</button>
+      <div class="auth-links">
+        <span data-action="authShowScreen" data-screen="login" role="button" tabindex="0" data-en="Back to Sign In">رجوع لتسجيل الدخول</span>
+      </div>
+    </div>
+
+    <!-- Reset Password -->
+    <div class="auth-screen" id="auth-screen-reset" style="display:none;" role="tabpanel">
+      <p class="auth-hint" data-en="Enter your new password">أدخل كلمة المرور الجديدة</p>
+      <div class="form-group">
+        <label class="form-label" for="new-pass" data-en="New Password">كلمة المرور الجديدة</label>
+        <div class="pass-wrap">
+          <input class="form-input" type="password" id="new-pass" placeholder="٨ أحرف على الأقل" autocomplete="new-password">
+          <button class="pass-eye" data-action="togglePass" data-target="new-pass" type="button" aria-label="إظهار/إخفاء">👁</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="new-pass-confirm" data-en="Confirm Password">تأكيد كلمة المرور</label>
+        <input class="form-input" type="password" id="new-pass-confirm" placeholder="أعد كتابة كلمة المرور" autocomplete="new-password">
+      </div>
+      <div id="reset-error" class="auth-error" style="display:none;" role="alert"></div>
+      <button class="btn btn-primary btn-full auth-submit" id="reset-btn" data-action="doResetPassword" data-en="Save Password">حفظ كلمة المرور</button>
+    </div>
+
+    <!-- Email Confirm -->
+    <div class="auth-screen auth-success-screen" id="auth-screen-confirm" style="display:none;" role="tabpanel">
+      <div class="auth-success-icon">📬</div>
+      <h3>تحقق من بريدك الإلكتروني</h3>
+      <p>أرسلنا رابط التأكيد إلى<br><strong id="confirm-email-display"></strong></p>
+      <p class="auth-hint" data-en="Open your email and click the link — you will be signed in automatically">افتح بريدك واضغط على الرابط — ستدخل تلقائياً</p>
+      <p class="auth-hint" style="margin-top:6px;" data-en="Didn't find it? Check your Spam folder">لم تجده؟ تحقق من مجلد الـ Spam</p>
+      <button class="btn btn-outline btn-sm" data-action="authShowScreen" data-screen="login" style="margin-top:14px;" data-en="Back to Sign In">رجوع لتسجيل الدخول</button>
+    </div>
+
+    <!-- Forgot Sent -->
+    <div class="auth-screen auth-success-screen" id="auth-screen-forgot-sent" style="display:none;" role="tabpanel">
+      <div class="auth-success-icon">📩</div>
+      <h3>تم الإرسال!</h3>
+      <p>أرسلنا رابط استعادة كلمة المرور إلى<br><strong id="forgot-email-display"></strong></p>
+      <p class="auth-hint" data-en="The link is valid for one hour">الرابط صالح لمدة ساعة واحدة</p>
+      <button class="btn btn-outline btn-sm" data-action="authShowScreen" data-screen="login" style="margin-top:14px;" data-en="Back to Sign In">رجوع لتسجيل الدخول</button>
+    </div>
+
+    <!-- Loading -->
+    <div class="auth-screen auth-loading-screen" id="auth-screen-loading" style="display:none;" role="status">
+      <div class="spinner" style="width:32px;height:32px;border-width:3px;margin:0 auto 12px;"></div>
+      <p id="auth-loading-text" data-en="Loading...">جاري التحميل...</p>
+    </div>
+  </div>
+
+
+<!-- Bottom Nav (Mobile) -->
+<nav class="bottom-nav" id="bottom-nav" aria-label="التنقل السريع">
+  <button class="bottom-nav-item active" data-action="showPage" data-page="home">
+    <span class="bn-icon" aria-hidden="true">🏠</span>الرئيسية
+  </button>
+  <button class="bottom-nav-item" data-action="showPage" data-page="quiz">
+    <span class="bn-icon" aria-hidden="true">🧠</span>الاختبار
+  </button>
+  <button class="bottom-nav-item" data-action="showPage" data-page="categories">
+    <span class="bn-icon" aria-hidden="true">📚</span>المسارات
+  </button>
+  <button class="bottom-nav-item" data-action="showPage" data-page="community">
+    <span class="bn-icon" aria-hidden="true">🌍</span>المجتمع
+  </button>
+  <button class="bottom-nav-item" data-action="showPage" data-page="dashboard">
+    <span class="bn-icon" aria-hidden="true">📊</span>لوحتي
+  </button>
+</nav>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Application Scripts — order matters -->
+<script src="js/data.js" defer></script>
+<script src="js/core.js" defer></script>
+<script src="js/ui.js" defer></script>
+<script src="js/quiz.js" defer></script>
+<script src="js/careers.js" defer></script>
+<script src="js/category-router.js" defer></script>
+<script src="js/features.js" defer></script>
+<script src="js/community.js" defer></script>
+<script src="js/auth.js" defer></script>
+<script src="js/profile.js" defer></script>
+<script src="js/onboarding.js" defer></script>
+<script src="js/roadmap-mapping.js" defer></script>
+<script src="js/roadmap-service.js" defer></script>
+<script src="js/roadmap-progress-service.js" defer></script>
+<script src="js/roadmap-path-selector.js" defer></script>
+<script src="js/roadmap-lock-engine.js" defer></script>
+<script src="js/roadmap-ui.js" defer></script>
+<script src="js/platform.js" defer></script>
+<script src="js/engagement.js" defer></script>
+<script src="js/intelligence.js" defer></script>
+<script src="js/events.js" defer></script>
+<script src="js/init.js" defer></script>
+
+<script>
+  // Register Service Worker for PWA
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
+
+  // Initial footer visibility (homepage is active by default)
+  document.body.classList.add('show-global-footer');
+
+  // Sticky nav scroll shadow
+  (function() {
+    const nav = document.querySelector('nav');
+    if (!nav) return;
+    const onScroll = () => { nav.classList.toggle('scrolled', window.scrollY > 8); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+
+  // Back to Top Button
+  (function() {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    window.addEventListener('scroll', () => {
+      btn.classList.toggle('visible', window.scrollY > 500);
+    }, { passive: true });
+  })();
+
+  // Newsletter handler
+  function handleNewsletterSubmit() {
+    const input = document.getElementById('newsletter-email');
+    const btn = document.getElementById('newsletter-btn');
+    if (!input || !btn) return;
+    const val = input.value.trim();
+    if (!val || !val.includes('@')) {
+      input.style.borderColor = '#ef4444';
+      setTimeout(() => { input.style.borderColor = ''; }, 2000);
+      return;
+    }
+    btn.textContent = '✅ تم الاشتراك!';
+    btn.style.background = 'linear-gradient(135deg,#1fbb85,#16a06b)';
+    btn.disabled = true;
+    input.value = '';
+    setTimeout(() => {
+      btn.textContent = 'اشترك الآن';
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 4000);
+  }
+
+  // Page transition animation re-trigger on page show
+  document.addEventListener('pageShown', function(e) {
+    const revealEls = document.querySelectorAll('.page.active .reveal, .page.active .reveal-scale');
+    revealEls.forEach(el => { el.classList.remove('in-view'); });
+    setTimeout(() => {
+      const io2 = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('in-view'); io2.unobserve(e.target); }
+        });
+      }, { threshold: 0.1 });
+      revealEls.forEach(el => io2.observe(el));
+    }, 50);
+  });
+
+  // ============ Global Error Boundary ============
+  window.addEventListener('unhandledrejection', function(e) {
+    // Supabase network errors — fail silently, no crash
+    if (e.reason?.message?.includes('fetch') || e.reason?.message?.includes('network')) {
+      console.warn('[ErrorBoundary] Network error (silent):', e.reason?.message);
+      e.preventDefault();
+      return;
+    }
+    console.error('[ErrorBoundary] Unhandled promise rejection:', e.reason);
+    e.preventDefault(); // prevent console error in production
+  });
+
+  window.onerror = function(msg, src, line, col, err) {
+    // Don't show errors for extensions or third-party scripts
+    if (src && (src.includes('extension') || src.includes('chrome-extension'))) return false;
+    console.error('[ErrorBoundary]', msg, 'at', src, line + ':' + col);
+    // Show user-friendly message only for critical errors
+    if (typeof toast === 'function' && msg && !msg.includes('Script error')) {
+      // Don't spam toasts — only show once per error type
+      if (!window._shownErrors) window._shownErrors = new Set();
+      const key = msg.substring(0, 50);
+      if (!window._shownErrors.has(key)) {
+        window._shownErrors.add(key);
+        toast('⚠️ حدث خطأ تقني — جاري المحاولة مرة أخرى');
+      }
+    }
+    return false; // don't suppress — let browser log it
+  };
+</script>
+</body>
+</html>

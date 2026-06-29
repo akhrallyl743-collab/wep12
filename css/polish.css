@@ -1,0 +1,674 @@
+/* ============================================
+   ✨ START LINE — Premium Polish Layer
+   Version: 3.1 | All targeted fixes
+   ============================================ */
+
+/* ─────────────────────────────────────────────
+   1. NUMBER FONT — Global Premium Typography
+   ───────────────────────────────────────────── */
+
+/* Root number font token */
+:root {
+  --font-num: 'Plus Jakarta Sans', 'Syne', var(--font-display), sans-serif;
+}
+
+/* Apply to ALL numeric contexts globally */
+.hstat-num,
+.stat-num,
+.step-num-badge,
+.tsm-num,
+.quiz-progress-num,
+.counter-num,
+.score-num,
+.plan-day-num,
+.career-card-match,
+.pct-num,
+.match-pct,
+.progress-pct,
+.onb-step-num,
+[class*="stat-num"],
+[class*="count-num"],
+[class*="-pct"],
+[class*="score"],
+[class*="progress-val"] {
+  font-family: var(--font-num) !important;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* hstat numbers (hero stats) */
+.hstat-num {
+  font-family: var(--font-num) !important;
+  font-size: clamp(28px, 3.8vw, 44px) !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.03em !important;
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,.8) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Arabic numeral spans in stats */
+.tsm-num {
+  font-family: var(--font-num) !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.02em !important;
+}
+
+
+/* ─────────────────────────────────────────────
+   2. PRIMARY CTA BUTTON SYSTEM
+   Classes: .hbtn, .hbtn-primary, .hbtn-ghost,
+            .hbtn-white, .hbtn-ghost-white
+   ───────────────────────────────────────────── */
+
+/* BASE */
+.hbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 32px;
+  border-radius: 16px;
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  transition:
+    transform .22s cubic-bezier(.34,1.56,.64,1),
+    box-shadow .22s ease,
+    background .18s ease,
+    border-color .18s ease,
+    opacity .18s ease;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  letter-spacing: .15px;
+  line-height: 1;
+}
+
+/* Inner gloss overlay */
+.hbtn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.18) 0%,
+    transparent 55%
+  );
+  border-radius: inherit;
+  pointer-events: none;
+  transition: opacity .2s;
+}
+
+/* Active press state for all hbtn */
+.hbtn:active {
+  transform: translateY(1px) scale(0.98) !important;
+}
+
+/* Icon */
+.hbtn-icon {
+  font-size: 18px;
+  line-height: 1;
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+}
+.hbtn:hover .hbtn-icon {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+/* Arrow */
+.hbtn-arrow {
+  flex-shrink: 0;
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+  opacity: .85;
+}
+.hbtn:hover .hbtn-arrow {
+  transform: translateX(-5px); /* RTL: left = forward */
+  opacity: 1;
+}
+
+/* ── PRIMARY — Purple Gradient ── */
+.hbtn-primary {
+  background: linear-gradient(135deg, #5b3ef8 0%, #7c55ff 40%, #4f35e8 100%);
+  color: #fff;
+  box-shadow:
+    0 4px 20px rgba(79,53,232,.5),
+    0 1px 0 rgba(255,255,255,.18) inset,
+    0 0 0 1.5px rgba(124,109,255,.3) inset;
+  padding: 16px 36px;
+  font-size: 17px;
+  min-height: 56px;
+}
+
+.hbtn-primary:hover {
+  background: linear-gradient(135deg, #6a4bff 0%, #8a65ff 40%, #5a40f0 100%);
+  transform: translateY(-3px);
+  box-shadow:
+    0 12px 40px rgba(79,53,232,.6),
+    0 4px 16px rgba(124,109,255,.35),
+    0 0 60px rgba(124,109,255,.15),
+    0 1px 0 rgba(255,255,255,.2) inset;
+}
+
+.hbtn-primary:focus-visible {
+  outline: 3px solid rgba(124,109,255,.7);
+  outline-offset: 3px;
+}
+
+/* Animated shimmer on primary */
+.hbtn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -80%; width: 60%; height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255,255,255,.22) 50%,
+    transparent 70%
+  );
+  border-radius: inherit;
+  pointer-events: none;
+  transition: left .6s ease;
+}
+.hbtn-primary:hover::after {
+  left: 120%;
+}
+
+/* ── GHOST — On dark backgrounds ── */
+.hbtn-ghost {
+  background: rgba(255,255,255,.09);
+  color: rgba(255,255,255,.9);
+  border: 1.5px solid rgba(255,255,255,.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 15px 28px;
+  font-size: 16px;
+  min-height: 56px;
+}
+
+.hbtn-ghost:hover {
+  background: rgba(255,255,255,.16);
+  border-color: rgba(255,255,255,.38);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0,0,0,.2);
+}
+
+/* ── WHITE — Used on dark banner sections ── */
+.hbtn-white {
+  background: #fff;
+  color: #311db5;
+  box-shadow:
+    0 6px 24px rgba(0,0,0,.22),
+    0 1px 0 rgba(255,255,255,.9) inset;
+  padding: 16px 36px;
+  font-size: 17px;
+  min-height: 56px;
+}
+
+.hbtn-white:hover {
+  background: #f0ecff;
+  color: #4028d4;
+  transform: translateY(-3px);
+  box-shadow:
+    0 14px 40px rgba(0,0,0,.28),
+    0 0 40px rgba(124,109,255,.2);
+}
+
+/* ── GHOST WHITE — Secondary on dark banner ── */
+.hbtn-ghost-white {
+  background: rgba(255,255,255,.12);
+  color: rgba(255,255,255,.88);
+  border: 1.5px solid rgba(255,255,255,.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 15px 28px;
+  font-size: 16px;
+  min-height: 56px;
+}
+
+.hbtn-ghost-white:hover {
+  background: rgba(255,255,255,.2);
+  border-color: rgba(255,255,255,.4);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.2);
+}
+
+/* Hero actions layout */
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 52px;
+  animation: fadeSlideDown .8s .55s cubic-bezier(.22,1,.36,1) both;
+}
+
+
+/* ─────────────────────────────────────────────
+   3. HERO LOGO TEXT — Direction-safe START LINE
+   ───────────────────────────────────────────── */
+
+/* The hero brand block must NEVER flip */
+.hero-brand-block {
+  display: block;
+  font-family: 'Bebas Neue', 'Syne', var(--font-display), sans-serif;
+  font-size: clamp(68px, 11vw, 132px);
+  font-weight: 400;
+  letter-spacing: .05em;
+  line-height: 1;
+  margin-bottom: 8px;
+
+  /* Direction isolation — always LTR internally */
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+  text-align: center;
+}
+
+.brand-start {
+  
+  display: inline-block;
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+  background: linear-gradient(135deg, #c4b5fd 0%, #8b73ff 45%, #a5f3da 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 32px rgba(124,109,255,.55));
+  
+}
+
+.brand-dot {
+  display: inline-block;
+  direction: ltr !important;
+  color: rgba(255,255,255,.28);
+  -webkit-text-fill-color: rgba(255,255,255,.28);
+  margin: 0 6px;
+  font-size: .6em;
+  vertical-align: middle;
+  position: relative;
+  top: -4px;
+}
+
+.brand-line-word {
+ 
+
+
+font-family: 'Bebas Neue', var(--font-display), sans-serif;
+  font-size: 100px; font-weight: 400;
+  background: linear-gradient(135deg, #c4b5fd 0%, #7c6dff 50%, #a5f3da 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: .1.5em;
+  display: inline-block;
+  transition: filter .25s ease;
+  filter: drop-shadow(0 0 8px rgba(124,109,255,.4));
+}
+
+
+/* ─────────────────────────────────────────────
+   4. NAVBAR — Dark/Light Mode Background Fix
+   ───────────────────────────────────────────── */
+
+/* DARK MODE (default since dark is the primary style) */
+html[data-theme="dark"] nav{
+  background: rgba(7, 5, 18, 0.88) !important;
+  border-bottom: 1px solid rgba(255,255,255,.07) !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.05),
+    0 8px 40px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+
+[data-theme="dark"] nav.scrolled,
+[data-theme="dark"] nav.nav-scrolled {
+  background: rgba(5, 4, 15, 0.96) !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.06),
+    0 12px 52px rgba(0,0,0,.6),
+    0 0 80px rgba(79,53,232,.07) !important;
+}
+
+/* LIGHT MODE */
+html:not([data-theme="dark"]) nav {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-bottom: 1px solid rgba(0,0,0,.09) !important;
+  box-shadow:
+    0 1px 0 rgba(0,0,0,.04),
+    0 4px 24px rgba(0,0,0,.07) !important;
+  backdrop-filter: blur(24px) saturate(1.8) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.8) !important;
+}
+
+html:not([data-theme="dark"]) nav.scrolled,
+html:not([data-theme="dark"]) nav.nav-scrolled {
+  background: rgba(255, 255, 255, 0.99) !important;
+  box-shadow:
+    0 1px 0 rgba(0,0,0,.06),
+    0 8px 40px rgba(0,0,0,.11) !important;
+}
+
+/* Light mode nav after-line — subtle brand gradient */
+html:not([data-theme="dark"]) nav::after {
+  opacity: .35 !important;
+}
+
+/* Light mode nav text contrast */
+html:not([data-theme="dark"]) .nav-link {
+  color: #5e5d57 !important;
+  font-weight: 600;
+}
+html:not([data-theme="dark"]) .nav-link:hover {
+  background: rgba(79,53,232,.07) !important;
+  color: var(--p600) !important;
+}
+html:not([data-theme="dark"]) .nav-link.active {
+  background: rgba(79,53,232,.09) !important;
+  color: var(--p600) !important;
+}
+
+
+/* ─────────────────────────────────────────────
+   5. NAVBAR BRAND TEXT — RTL-safe
+   ───────────────────────────────────────────── */
+
+/* nav logo text wrapper — always LTR internally */
+.nav-logo-en {
+  display: inline-flex !important;
+  align-items: baseline;
+  gap: 0 !important;
+  font-size: 18px !important; /* re-enable, was 0px */
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+  line-height: 1;
+}
+
+/* Each brand word — direction-locked */
+.nav-logo-en .brand-start,
+.nav-logo-en .brand-line {
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+  display: inline-block !important;
+}
+
+.nav-logo-en .brand-start {
+  font-family: 'Bebas Neue', var(--font-display), sans-serif;
+  font-size: 18px !important;
+  font-weight: 400;
+  background: linear-gradient(135deg, #c4b5fd 0%, #7c6dff 50%, #a5f3da 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: .08em;
+  filter: drop-shadow(0 0 8px rgba(124,109,255,.45));
+  transition: filter .25s ease;
+}
+
+.nav-logo-en .brand-sep {
+  font-size: 11px;
+  color: rgba(255,255,255,.22) !important;
+  -webkit-text-fill-color: rgba(255,255,255,.22) !important;
+  margin: 0 3px;
+  display: inline-block !important;
+  direction: ltr !important;
+}
+
+.nav-logo-en .brand-line {
+  font-family: 'Bebas Neue', var(--font-display), sans-serif;
+  font-size: 18px !important;
+  font-weight: 400;
+  color: rgba(255,255,255,.9);
+  -webkit-text-fill-color: rgba(255,255,255,.9);
+  letter-spacing: .12em;
+  transition: color .25s ease;
+}
+
+/* Light mode nav brand text */
+html:not([data-theme="dark"]) .nav-logo-en .brand-line {
+  color: #2a1e6e !important;
+  -webkit-text-fill-color: #2a1e6e !important;
+}
+
+html:not([data-theme="dark"]) .nav-logo-en .brand-sep {
+  color: rgba(0,0,0,.2) !important;
+  -webkit-text-fill-color: rgba(0,0,0,.2) !important;
+}
+
+html:not([data-theme="dark"]) .nav-logo-en .brand-start {
+  filter: none;
+}
+
+/* Logo text row */
+.nav-logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-start;
+}
+
+/* The Arabic sub-label */
+.nav-logo-ar {
+  font-size: 9px;
+  letter-spacing: .4px;
+  font-weight: 600;
+  opacity: .6;
+  margin-top: 1px;
+  display: block;
+  direction: rtl; /* Arabic reads RTL normally */
+}
+
+html:not([data-theme="dark"]) .nav-logo-ar {
+  color: var(--muted);
+}
+
+
+/* ─────────────────────────────────────────────
+   6. RESPONSIVE — Mobile CTA buttons
+   ───────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .hbtn {
+    padding: 14px 24px;
+    font-size: 15px;
+    min-height: 52px;
+    border-radius: 14px;
+  }
+
+  .hbtn-primary,
+  .hbtn-white {
+    padding: 15px 28px;
+    font-size: 15.5px;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .hbtn-ghost,
+  .hbtn-ghost-white {
+    padding: 13px 22px;
+    font-size: 14.5px;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hbtn-arrow {
+    width: 16px; height: 16px;
+  }
+}
+
+
+/* ─────────────────────────────────────────────
+   7. SMOOTH TRANSITIONS — theme switching
+   ───────────────────────────────────────────── */
+nav,
+nav *,
+.nav-logo-en .brand-start,
+.nav-logo-en .brand-line {
+  transition-property: background, color, border-color, box-shadow, filter, opacity;
+  transition-duration: .28s;
+  transition-timing-function: ease;
+}
+
+/* But don't override hover transforms */
+.hbtn, .nav-link, .icon-btn, .nav-cta, .nav-user {
+  transition: all .22s cubic-bezier(.25,.46,.45,.94);
+}
+
+
+/* ─────────────────────────────────────────────
+   8. MOBILE FIX — hero-actions vs hero-btns
+   ───────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .hero-actions .hbtn,
+  .cta-actions .hbtn {
+    width: 100%;
+    max-width: 340px;
+    justify-content: center;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   9. CAREERS CTA button centering
+   ───────────────────────────────────────────── */
+.careers-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ─────────────────────────────────────────────
+   10. TRUST CARD CTA button centering
+   ───────────────────────────────────────────── */
+.trust-card-highlight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* =============================================
+   EVOLVED — Homepage Intelligence Banner
+   ============================================= */
+.homepage-intel-wrap {
+  max-width: 920px;
+  margin: -8px auto 0;
+  padding: 0 20px 20px;
+}
+
+.intel-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  box-shadow: 0 4px 24px rgba(0,0,0,.08);
+  animation: intelSlideIn .4s cubic-bezier(.22,1,.36,1);
+}
+@keyframes intelSlideIn {
+  from { opacity:0; transform:translateY(-10px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.intel-continue  { border-color: var(--intel-color, var(--p400))20; }
+.intel-quiz      { background: linear-gradient(135deg, var(--p50), var(--t50)); border-color: var(--p200); }
+.intel-recommend { flex-direction: column; align-items: stretch; }
+
+.intel-icon { font-size: 32px; flex-shrink: 0; }
+.intel-body { flex: 1; min-width: 0; }
+.intel-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
+.intel-title { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.intel-meta  { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+
+.intel-bar { height: 5px; background: var(--border); border-radius: 99px; overflow: hidden; margin-bottom: 3px; }
+.intel-bar-fill { height: 100%; border-radius: 99px; transition: width .8s cubic-bezier(.22,1,.36,1); }
+.intel-pct { font-size: 11px; font-weight: 700; }
+
+.intel-btn {
+  flex-shrink: 0;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity .2s, transform .15s;
+}
+.intel-btn:hover { opacity: .9; transform: scale(1.03); }
+.intel-btn-quiz { background: var(--p600); }
+
+.intel-rec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.intel-rec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+
+.intel-rec-card {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  transition: border-color .2s, transform .15s;
+  background: var(--surface);
+}
+.intel-rec-card:hover { border-color: var(--rc, var(--p400)); transform: translateY(-2px); }
+.irc-icon { font-size: 22px; flex-shrink:0; }
+.irc-body { flex: 1; min-width: 0; }
+.irc-title { font-size: 13px; font-weight: 700; color: var(--text); }
+.irc-meta  { font-size: 11px; color: var(--muted); }
+.irc-arrow { font-size: 16px; flex-shrink: 0; }
+
+/* =============================================
+   EVOLVED — Active Tracks Widget (Dashboard)
+   ============================================= */
+.dash-section { margin-top: 20px; }
+.dash-section h3 { font-size: 15px; font-weight: 800; margin-bottom: 12px; color: var(--text); }
+
+.atw-track {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  margin-bottom: 10px;
+  transition: border-color .2s, transform .15s;
+}
+.atw-track:hover { border-color: var(--tc, var(--p300)); transform: translateY(-1px); }
+.atw-done { opacity: .75; }
+
+.atw-icon { font-size: 26px; flex-shrink: 0; }
+.atw-body { flex: 1; min-width: 0; }
+.atw-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.atw-bar { height: 5px; background: var(--border); border-radius: 99px; overflow: hidden; margin-bottom: 4px; }
+.atw-fill { height: 100%; border-radius: 99px; }
+.atw-meta { display: flex; justify-content: space-between; align-items: center; font-size: 11px; gap: 6px; }
+.atw-next { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; }
+.atw-done-badge { font-size: 20px; flex-shrink: 0; }
+
+.atw-btn {
+  flex-shrink: 0;
+  padding: 7px 14px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  background: transparent;
+  cursor: pointer;
+  border: 1.5px solid;
+  transition: background .2s;
+}
+.atw-btn:hover { background: var(--tc, var(--p100))15; }
+
+.atw-empty {
+  text-align: center;
+  padding: 24px;
+  color: var(--muted);
+  font-size: 14px;
+}

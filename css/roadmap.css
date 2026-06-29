@@ -1,0 +1,374 @@
+/* ============================================================
+   css/roadmap.css — واجهة Roadmaps الجديدة (المرحلة 2)
+   ------------------------------------------------------------
+   ملف جديد بالكامل — لا يُعدّل أي كلاس موجود. كل الكلاسات بـ
+   prefix "rm-" لمنع أي تعارض مع pages.css / platform.css.
+   يستخدم نفس Design Tokens الموجودة في tokens.css.
+   ============================================================ */
+
+/* ── Layout: Sidebar + Timeline ── */
+.rm-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 28px;
+  align-items: start;
+  margin-top: 20px;
+}
+@media (max-width: 880px) {
+  .rm-layout { grid-template-columns: 1fr; }
+  .rm-sidebar { position: static !important; order: -1; }
+}
+
+/* ── Sticky Progress Sidebar ── */
+.rm-sidebar {
+  position: sticky;
+  top: 88px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+}
+.rm-sidebar-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+.rm-sidebar-overall {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px; margin-bottom: 14px;
+  background: var(--bg2); border-radius: var(--r);
+}
+.rm-sidebar-overall-pct { font-family: var(--font-display); font-weight: 800; font-size: 20px; }
+.rm-phase-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 10px; border-radius: var(--r);
+  cursor: pointer; font-size: 13px; color: var(--text);
+  transition: background .15s ease;
+}
+.rm-phase-link:hover { background: var(--bg2); }
+.rm-phase-link.rm-active { background: var(--p50); color: var(--p700); font-weight: 700; }
+.rm-phase-dot {
+  width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800; color: white;
+  background: var(--g300);
+}
+.rm-phase-dot.rm-done { background: var(--t400); }
+.rm-phase-dot.rm-partial { background: var(--a400); }
+.rm-phase-link-title { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rm-phase-link-pct { font-size: 11px; color: var(--muted); flex-shrink: 0; }
+
+/* ── Vertical Timeline ── */
+.rm-timeline { position: relative; }
+.rm-section {
+  position: relative;
+  margin-bottom: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  background: var(--card);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.rm-section.rm-expanded { box-shadow: var(--shadow-md); }
+
+.rm-section-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 18px; cursor: pointer; user-select: none;
+}
+.rm-section-num {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 800; font-size: 15px;
+  background: var(--p50); color: var(--p700);
+}
+.rm-section-num.rm-done { background: var(--t50); color: var(--t600); }
+.rm-section-body-info { flex: 1; min-width: 0; }
+.rm-section-title { font-family: var(--font-display); font-weight: 700; font-size: 16px; }
+.rm-section-meta { font-size: 12.5px; color: var(--muted); margin-top: 3px; display: flex; gap: 10px; flex-wrap: wrap; }
+.rm-section-progress-bar {
+  width: 100%; height: 5px; background: var(--bg2); border-radius: 4px; margin-top: 8px; overflow: hidden;
+}
+.rm-section-progress-fill { height: 100%; background: var(--p600); transition: width .4s ease; }
+.rm-section-chevron { color: var(--muted); transition: transform .25s ease; flex-shrink: 0; }
+.rm-section.rm-expanded .rm-section-chevron { transform: rotate(180deg); }
+
+.rm-section-content {
+  max-height: 0; overflow: hidden; transition: max-height .3s ease;
+  border-top: 1px solid transparent;
+}
+.rm-section.rm-expanded .rm-section-content {
+  max-height: none; border-top-color: var(--border);
+}
+
+.rm-empty-section {
+  padding: 16px 18px; color: var(--a600); background: var(--a50);
+  font-size: 13px; line-height: 1.7; border-radius: var(--r); margin: 0 18px 16px;
+}
+
+/* ── Steps inside a section ── */
+.rm-step {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 18px; cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  transition: background .15s ease;
+}
+.rm-step:last-child { border-bottom: none; }
+.rm-step:hover { background: var(--bg2); }
+.rm-step.rm-highlight { background: var(--p50); }
+
+.rm-step-status {
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800; color: var(--muted);
+  background: var(--bg2); border: 1.5px solid var(--border);
+}
+.rm-step-status.rm-done { background: var(--t400); border-color: var(--t400); color: white; }
+
+/* ── حالة "مقفل" — الدرس غير قابل للفتح حتى تكتمل الخطوة/المرحلة السابقة ── */
+.rm-step.rm-step-locked {
+  cursor: default; opacity: .55;
+}
+.rm-step.rm-step-locked:hover { background: transparent; }
+.rm-step-status.rm-locked {
+  background: var(--bg2); border-color: var(--border); color: var(--muted); font-size: 13px;
+}
+.rm-locked-tag {
+  color: var(--muted); font-weight: 700;
+}
+
+/* ── حالة "متاح" (غير مكتمل وغير مقفل) — الحالة الافتراضية البصرية أعلاه كافية،
+   لكن نُبرز الدرس الحالي القابل للبدء بحدود أوضح قليلاً ── */
+.rm-step-status.rm-available {
+  border-color: var(--p400, var(--p600));
+}
+
+.rm-step-chevron { color: var(--muted); flex-shrink: 0; transition: transform .2s ease; font-size: 13px; }
+.rm-step.rm-open .rm-step-chevron { transform: rotate(180deg); }
+
+.rm-step-body { flex: 1; min-width: 0; }
+.rm-step-title { font-size: 14px; font-weight: 600; }
+.rm-step-meta { font-size: 11.5px; color: var(--muted); margin-top: 2px; display: flex; gap: 8px; }
+.rm-step-type-tag {
+  display: inline-flex; align-items: center; gap: 3px;
+  padding: 1px 7px; border-radius: 20px; font-size: 10.5px; font-weight: 700;
+  background: var(--p50); color: var(--p700);
+}
+.rm-step-type-tag.rm-type-project { background: var(--c50); color: var(--c600); }
+.rm-step-type-tag.rm-type-quiz     { background: var(--a50); color: var(--a600); }
+.rm-step-type-tag.rm-type-exercise { background: var(--t50); color: var(--t600); }
+
+/* ── Step detail panel (resources) ── */
+.rm-step-detail {
+  display: none;
+  padding: 4px 18px 16px 56px;
+  border-bottom: 1px solid var(--border);
+}
+.rm-step.rm-open + .rm-step-detail { display: block; }
+
+.rm-resource {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: var(--r);
+  margin-bottom: 8px; font-size: 13px;
+}
+.rm-resource-internal { background: var(--t50); border: 1px solid color-mix(in srgb, var(--t400) 30%, transparent); }
+.rm-resource-external { background: var(--a50); border: 1px solid color-mix(in srgb, var(--a400) 30%, transparent); }
+
+.rm-badge-internal, .rm-badge-external {
+  font-size: 10.5px; font-weight: 800; padding: 2px 8px; border-radius: 20px; flex-shrink: 0;
+}
+.rm-badge-internal { background: var(--t400); color: white; }
+.rm-badge-external { background: var(--a400); color: white; }
+
+.rm-resource-title { flex: 1; font-weight: 600; }
+.rm-resource-warning { font-size: 11px; color: var(--a600); display: flex; align-items: center; gap: 4px; }
+.rm-external-link { color: var(--a600); font-weight: 700; text-decoration: none; flex-shrink: 0; }
+.rm-external-link:hover { text-decoration: underline; }
+
+.rm-internal-viewer {
+  margin-top: 8px; padding: 14px; background: var(--card);
+  border: 1px solid var(--border); border-radius: var(--r);
+  font-size: 13.5px; line-height: 1.9; color: var(--text); white-space: pre-wrap;
+}
+
+/* ── بطاقات الموارد المخصصة (GitHub / Article) — kind === 'github_repo' | 'external_article' ── */
+.rm-resource-card {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px; border-radius: var(--r);
+  margin-bottom: 8px; text-decoration: none; color: inherit;
+  border: 1px solid var(--border); background: var(--card);
+  transition: border-color .15s ease, transform .15s ease;
+}
+.rm-resource-card:hover { transform: translateY(-1px); }
+
+.rm-resource-card-icon {
+  flex-shrink: 0; width: 38px; height: 38px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+}
+.rm-resource-card-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.rm-resource-card-title { font-size: 13.5px; font-weight: 700; color: var(--text); }
+.rm-resource-card-sub {
+  font-size: 11.5px; color: var(--muted); direction: ltr; text-align: right;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.rm-resource-card-action {
+  flex-shrink: 0; font-size: 12px; font-weight: 700; white-space: nowrap;
+}
+
+/* GitHub: لون رمادي داكن مميز */
+.rm-resource-github { border-color: color-mix(in srgb, #24292f 25%, var(--border)); }
+.rm-resource-github .rm-resource-card-icon { background: #24292f1a; color: #24292f; }
+.rm-resource-github .rm-resource-card-action { color: #24292f; }
+:root.dark .rm-resource-github .rm-resource-card-icon,
+[data-theme="dark"] .rm-resource-github .rm-resource-card-icon { background: #ffffff1a; color: #fff; }
+:root.dark .rm-resource-github .rm-resource-card-action,
+[data-theme="dark"] .rm-resource-github .rm-resource-card-action { color: #e6edf3; }
+
+/* Article: لون العلامة الثانوية (a) المستخدم أصلاً للموارد الخارجية */
+.rm-resource-article { border-color: color-mix(in srgb, var(--a400) 30%, var(--border)); }
+.rm-resource-article .rm-resource-card-icon { background: var(--a50); color: var(--a600); }
+.rm-resource-article .rm-resource-card-action { color: var(--a600); }
+
+/* PDF: بنّي/كهرماني مميَّز — تمييز بصري واضح عن المقال والفيديو */
+.rm-resource-pdf { border-color: color-mix(in srgb, #b45309 30%, var(--border)); }
+.rm-resource-pdf .rm-resource-card-icon { background: #b4530920; color: #b45309; }
+.rm-resource-pdf .rm-resource-card-action { color: #b45309; }
+:root.dark .rm-resource-pdf .rm-resource-card-icon,
+[data-theme="dark"] .rm-resource-pdf .rm-resource-card-icon { background: #f59e0b26; color: #fbbf24; }
+:root.dark .rm-resource-pdf .rm-resource-card-action,
+[data-theme="dark"] .rm-resource-pdf .rm-resource-card-action { color: #fbbf24; }
+
+/* تحدّي (🏆): ذهبي مميَّز — منفصل بصرياً عن التطبيق العملي (practice) */
+.rm-resource-challenge { border-color: color-mix(in srgb, #ca8a04 35%, var(--border)); }
+.rm-resource-challenge .rm-resource-card-icon { background: #ca8a0420; color: #ca8a04; }
+.rm-resource-challenge .rm-resource-card-action { color: #ca8a04; }
+:root.dark .rm-resource-challenge .rm-resource-card-icon,
+[data-theme="dark"] .rm-resource-challenge .rm-resource-card-icon { background: #facc1526; color: #facc15; }
+:root.dark .rm-resource-challenge .rm-resource-card-action,
+[data-theme="dark"] .rm-resource-challenge .rm-resource-card-action { color: #facc15; }
+
+/* ── Roadmap Shell: بطاقة مركزية مميَّزة بصرياً، لا خط زمني — لمسارات بلا
+   تفصيل داخلي في المرجع (Notion/Drive خارجي فقط) ── */
+.rm-shell-card {
+  max-width: 720px; margin: 28px auto; padding: 32px 28px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+  text-align: center;
+}
+.rm-shell-badge {
+  display: inline-block; padding: 8px 16px; border-radius: 999px;
+  background: var(--a50); color: var(--a600); font-weight: 700; font-size: 13.5px;
+  margin-bottom: 18px;
+}
+.rm-shell-desc { color: var(--muted); font-size: 14.5px; line-height: 1.8; margin-bottom: 22px; }
+.rm-shell-section-title { font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
+.rm-shell-step-title { font-size: 17px; font-weight: 800; color: var(--text); margin-bottom: 18px; }
+.rm-shell-resources { display: flex; flex-direction: column; gap: 10px; text-align: right; }
+.rm-shell-resources .rm-resource-card,
+.rm-shell-resources .rm-resource { width: 100%; }
+
+/* ── فيديو يوتيوب تعذّر تحميله (لا VIDEO_ID ولا PLAYLIST_ID صالحَين) ── */
+.rm-resource-video-unavailable .rm-internal-viewer { margin-top: 0; }
+
+/* ── رسالة "لا توجد موارد متاحة" — تحل محل البطاقات الفارغة بالكامل ── */
+.rm-internal-viewer.rm-empty-note {
+  text-align: center; color: var(--muted); font-style: italic;
+  background: var(--bg2); border-style: dashed;
+}
+
+/* ── فيديو مُضمَّن داخل الصفحة (Lazy embed) — بدون أي تحويل خارجي ── */
+.rm-resource-video { margin-bottom: 10px; }
+.rm-video-frame {
+  position: relative; width: 100%; aspect-ratio: 16/9;
+  border-radius: var(--r); overflow: hidden; cursor: pointer;
+  background: #000;
+}
+.rm-video-thumb { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .85; }
+.rm-video-play-btn {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(220,38,38,.92); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; box-shadow: 0 4px 14px rgba(0,0,0,.35);
+  transition: transform .15s ease;
+}
+.rm-video-frame:hover .rm-video-play-btn { transform: translate(-50%, -50%) scale(1.08); }
+
+/* ── بطاقة قائمة تشغيل (playlist) كاملة — لا توجد صورة مصغّرة لفيديو واحد محدد ── */
+.rm-video-frame.rm-video-frame-playlist {
+  background: linear-gradient(135deg, var(--p700, #1e293b), var(--p900, #0f172a));
+  display: flex; align-items: center; justify-content: center;
+}
+.rm-video-frame.rm-video-frame-playlist::before {
+  content: '📋'; position: absolute; font-size: 34px; opacity: .35;
+}
+.rm-video-title { font-size: 12.5px; color: var(--muted); margin-top: 6px; font-weight: 600; }
+.rm-video-iframe-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: var(--r); overflow: hidden; }
+.rm-video-iframe-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+.rm-mark-done-btn {
+  margin-top: 6px; padding: 8px 16px; border-radius: 20px;
+  background: var(--p600); color: white; border: none; font-weight: 700; font-size: 13px;
+  cursor: pointer; transition: opacity .15s ease;
+}
+.rm-mark-done-btn:hover { opacity: .88; }
+.rm-mark-done-btn[disabled] { background: var(--t400); cursor: default; opacity: .8; }
+
+/* ── زر "أنهيت الدرس" قبل بلوغ شرط الفيديو (90%) أو أثناء القفل ── */
+.rm-mark-done-btn.rm-btn-disabled {
+  background: var(--bg2); color: var(--muted); border: 1px dashed var(--border);
+  cursor: not-allowed; opacity: 1;
+}
+.rm-mark-done-btn.rm-btn-disabled:hover { opacity: 1; }
+
+
+/* ── شريط "تم التحميل من بيانات محلية" (تشخيصي، خفيف جداً، اختياري) ── */
+.rm-source-tag {
+  font-size: 10px; color: var(--muted); opacity: .55; margin-top: 4px;
+}
+
+/* ── المحتوى التمهيدي قبل دخول المسار (الأدوات/الحسابات/الخطة) ── */
+.rm-intro { margin: 20px 0 28px; display: flex; flex-direction: column; gap: 18px; }
+.rm-intro-block {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--rl);
+  padding: 18px 20px; box-shadow: var(--shadow);
+}
+.rm-intro-heading {
+  font-family: var(--font-display); font-weight: 700; font-size: 15px;
+  margin-bottom: 14px;
+}
+.rm-intro-tools-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px;
+}
+.rm-intro-tool, .rm-intro-account {
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 10px 12px; background: var(--bg2); border-radius: var(--r);
+}
+.rm-intro-tool-name, .rm-intro-account-name {
+  font-weight: 700; font-size: 13.5px; color: var(--p700); text-decoration: none;
+}
+.rm-intro-tool-name:hover, .rm-intro-account-name:hover { text-decoration: underline; }
+.rm-intro-tool-purpose, .rm-intro-account-why { font-size: 12px; color: var(--muted); }
+
+.rm-intro-plan-list { display: flex; flex-direction: column; gap: 10px; }
+.rm-intro-plan-step { display: flex; gap: 12px; align-items: flex-start; }
+.rm-intro-plan-num {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  background: var(--p50); color: var(--p700); font-weight: 800; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+}
+.rm-intro-plan-title { font-weight: 700; font-size: 14px; }
+.rm-intro-plan-meta { font-size: 11.5px; color: var(--muted); margin: 2px 0; }
+.rm-intro-plan-goal { font-size: 13px; color: var(--text); }
+
+.rm-intro-challenge-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.rm-intro-challenge {
+  padding: 7px 14px; border-radius: 20px; background: var(--a50); color: var(--a600);
+  font-size: 12.5px; font-weight: 700; text-decoration: none;
+}
+.rm-intro-challenge:hover { opacity: .85; }

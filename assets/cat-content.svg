@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#130008"/>
+      <stop offset="55%" style="stop-color:#220010"/>
+      <stop offset="100%" style="stop-color:#1a0018"/>
+    </linearGradient>
+    <radialGradient id="orb1" cx="70%" cy="25%" r="55%">
+      <stop offset="0%" style="stop-color:#b91c6d;stop-opacity:0.45"/>
+      <stop offset="100%" style="stop-color:#b91c6d;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="orb2" cx="15%" cy="80%" r="40%">
+      <stop offset="0%" style="stop-color:#e84393;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#e84393;stop-opacity:0"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#b91c6d"/>
+      <stop offset="100%" style="stop-color:#e84393"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#orb1)"/>
+  <rect width="800" height="500" fill="url(#orb2)"/>
+
+  <!-- Background waves -->
+  <g opacity="0.06" stroke="#e84393" fill="none" stroke-width="1.5">
+    <path d="M0,100 Q200,60 400,100 Q600,140 800,100"/>
+    <path d="M0,180 Q200,140 400,180 Q600,220 800,180"/>
+    <path d="M0,260 Q200,220 400,260 Q600,300 800,260"/>
+    <path d="M0,340 Q200,300 400,340 Q600,380 800,340"/>
+    <path d="M0,420 Q200,380 400,420 Q600,460 800,420"/>
+  </g>
+
+  <!-- Phone mockup - main element -->
+  <rect x="65" y="55" width="200" height="360" rx="28" fill="rgba(19,0,8,0.92)" stroke="rgba(185,28,109,0.55)" stroke-width="2"/>
+  <!-- Phone notch -->
+  <rect x="120" y="55" width="90" height="24" rx="12" fill="rgba(0,0,0,0.9)"/>
+  <circle cx="165" cy="67" r="5" fill="rgba(30,30,30,1)"/>
+  <!-- Screen -->
+  <rect x="72" y="90" width="186" height="310" rx="8" fill="rgba(10,0,5,0.7)"/>
+
+  <!-- Social media feed in phone -->
+  <!-- Post 1 -->
+  <rect x="80" y="98" width="170" height="80" rx="8" fill="rgba(185,28,109,0.15)" stroke="rgba(232,67,147,0.3)" stroke-width="1"/>
+  <circle cx="98" cy="113" r="9" fill="rgba(232,67,147,0.5)"/>
+  <text x="98" y="118" font-family="sans-serif" font-size="10" fill="white" text-anchor="middle">م</text>
+  <rect x="112" y="108" width="70" height="6" rx="3" fill="rgba(255,255,255,0.35)"/>
+  <rect x="112" y="118" width="45" height="5" rx="2" fill="rgba(255,255,255,0.18)"/>
+  <rect x="80" y="130" width="170" height="40" rx="4" fill="rgba(185,28,109,0.1)"/>
+  <text x="165" y="157" font-family="sans-serif" font-size="28" text-anchor="middle">🎨</text>
+  <g font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.4)">
+    <text x="88" y="186">❤️ 1.2k</text><text x="138" y="186">💬 48</text><text x="183" y="186">🔁 234</text>
+  </g>
+
+  <!-- Post 2 -->
+  <rect x="80" y="192" width="170" height="70" rx="8" fill="rgba(56,189,248,0.08)" stroke="rgba(56,189,248,0.2)" stroke-width="1"/>
+  <circle cx="98" cy="206" r="9" fill="rgba(56,189,248,0.4)"/>
+  <text x="98" y="211" font-family="sans-serif" font-size="10" fill="white" text-anchor="middle">ي</text>
+  <rect x="112" y="201" width="65" height="6" rx="3" fill="rgba(255,255,255,0.3)"/>
+  <rect x="112" y="211" width="40" height="5" rx="2" fill="rgba(255,255,255,0.15)"/>
+  <rect x="88" y="222" width="152" height="30" rx="4" fill="rgba(0,0,0,0.3)"/>
+  <text x="165" y="242" font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.55)" text-anchor="middle">نصائح للمحتوى الناجح ✨</text>
+  <g font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.35)">
+    <text x="88" y="270">❤️ 852</text><text x="138" y="270">💬 31</text><text x="183" y="270">🔁 127</text>
+  </g>
+
+  <!-- Story bubbles at top -->
+  <g filter="url(#glow)">
+    <circle cx="92" cy="305" r="22" fill="none" stroke="url(#accent)" stroke-width="2.5"/>
+    <circle cx="92" cy="305" r="18" fill="rgba(185,28,109,0.3)"/>
+    <text x="92" y="311" font-family="sans-serif" font-size="14" text-anchor="middle">📸</text>
+
+    <circle cx="142" cy="305" r="22" fill="none" stroke="#ffd93d" stroke-width="2.5" opacity="0.7"/>
+    <circle cx="142" cy="305" r="18" fill="rgba(255,217,61,0.15)"/>
+    <text x="142" y="311" font-family="sans-serif" font-size="14" text-anchor="middle">🎥</text>
+
+    <circle cx="192" cy="305" r="22" fill="none" stroke="#38bdf8" stroke-width="2.5" opacity="0.6"/>
+    <circle cx="192" cy="305" r="18" fill="rgba(56,189,248,0.15)"/>
+    <text x="192" y="311" font-family="sans-serif" font-size="14" text-anchor="middle">🎙</text>
+
+    <circle cx="238" cy="305" r="14" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+    <text x="238" y="311" font-family="sans-serif" font-size="12" text-anchor="middle" fill="rgba(255,255,255,0.3)">+5</text>
+  </g>
+
+  <!-- Nav bar -->
+  <rect x="80" y="350" width="170" height="40" rx="6" fill="rgba(0,0,0,0.5)"/>
+  <text x="113" y="376" font-family="sans-serif" font-size="16" text-anchor="middle">🏠</text>
+  <text x="143" y="376" font-family="sans-serif" font-size="16" text-anchor="middle">🔍</text>
+  <text x="175" y="376" font-family="sans-serif" font-size="16" text-anchor="middle">➕</text>
+  <text x="205" y="376" font-family="sans-serif" font-size="16" text-anchor="middle">💬</text>
+  <text x="237" y="376" font-family="sans-serif" font-size="16" text-anchor="middle">👤</text>
+
+  <!-- Blog/writing window -->
+  <rect x="290" y="55" width="300" height="250" rx="14" fill="rgba(13,0,7,0.88)" stroke="rgba(185,28,109,0.4)" stroke-width="1.5"/>
+  <rect x="290" y="55" width="300" height="34" rx="14" fill="rgba(185,28,109,0.15)"/>
+  <rect x="290" y="72" width="300" height="17" fill="rgba(185,28,109,0.08)"/>
+  <circle cx="314" cy="72" r="5" fill="#ff5f57" opacity="0.8"/>
+  <circle cx="330" cy="72" r="5" fill="#febc2e" opacity="0.8"/>
+  <circle cx="346" cy="72" r="5" fill="#28c840" opacity="0.8"/>
+  <text x="440" y="76" font-family="sans-serif" font-size="9" fill="rgba(255,100,200,0.5)" text-anchor="middle">✍️ Blog Editor</text>
+
+  <g font-family="sans-serif">
+    <text x="308" y="106" font-size="14" font-weight="800" fill="rgba(232,67,147,0.9)">كيف تبني جمهوراً</text>
+    <text x="308" y="124" font-size="14" font-weight="800" fill="rgba(232,67,147,0.9)">من الصفر في 2025</text>
+    <line x1="308" y1="132" x2="575" y2="132" stroke="rgba(185,28,109,0.3)" stroke-width="1"/>
+    <text x="308" y="149" font-size="10" fill="rgba(255,255,255,0.4)">الخطوة الأولى: ابدأ قبل أن تكون جاهزاً</text>
+    <rect x="308" y="156" width="230" height="7" rx="3" fill="rgba(255,255,255,0.1)"/>
+    <rect x="308" y="169" width="200" height="7" rx="3" fill="rgba(255,255,255,0.08)"/>
+    <rect x="308" y="182" width="220" height="7" rx="3" fill="rgba(255,255,255,0.07)"/>
+    <rect x="308" y="195" width="180" height="7" rx="3" fill="rgba(255,255,255,0.06)"/>
+    <text x="308" y="222" font-size="10" fill="rgba(255,255,255,0.35)">الخطوة الثانية: الاتساق فوق الكمال</text>
+    <rect x="308" y="229" width="220" height="7" rx="3" fill="rgba(255,255,255,0.09)"/>
+    <rect x="308" y="242" width="190" height="7" rx="3" fill="rgba(255,255,255,0.07)"/>
+    <rect x="308" y="255" width="7" height="14" fill="rgba(232,67,147,0.9)">
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="1s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- Podcast visualizer -->
+  <rect x="290" y="322" width="300" height="110" rx="14" fill="rgba(13,0,7,0.88)" stroke="rgba(185,28,109,0.35)" stroke-width="1.5"/>
+  <text x="305" y="344" font-family="sans-serif" font-size="9" fill="rgba(255,100,200,0.5)">🎙 PODCAST — حلقة 47</text>
+  <text x="305" y="362" font-family="sans-serif" font-size="11" font-weight="700" fill="rgba(255,255,255,0.65)">كيف تحول شغفك لدخل</text>
+  <g filter="url(#glow)">
+    <!-- Audio waveform -->
+    <g transform="translate(305,385)" fill="#e84393">
+      <rect x="0" y="-8" width="5" height="16" rx="2" opacity="0.7"/>
+      <rect x="9" y="-15" width="5" height="30" rx="2" opacity="0.8"/>
+      <rect x="18" y="-6" width="5" height="12" rx="2" opacity="0.65"/>
+      <rect x="27" y="-20" width="5" height="40" rx="2" opacity="0.9"/>
+      <rect x="36" y="-10" width="5" height="20" rx="2" opacity="0.75"/>
+      <rect x="45" y="-25" width="5" height="50" rx="2" opacity="0.95"/>
+      <rect x="54" y="-8" width="5" height="16" rx="2" opacity="0.7"/>
+      <rect x="63" y="-18" width="5" height="36" rx="2" opacity="0.85"/>
+      <rect x="72" y="-12" width="5" height="24" rx="2" opacity="0.75"/>
+      <rect x="81" y="-22" width="5" height="44" rx="2" opacity="0.88"/>
+      <rect x="90" y="-5" width="5" height="10" rx="2" opacity="0.6"/>
+      <rect x="99" y="-28" width="5" height="56" rx="2"/>
+      <rect x="108" y="-15" width="5" height="30" rx="2" opacity="0.8"/>
+      <rect x="117" y="-10" width="5" height="20" rx="2" opacity="0.7"/>
+      <rect x="126" y="-20" width="5" height="40" rx="2" opacity="0.85"/>
+      <rect x="135" y="-6" width="5" height="12" rx="2" opacity="0.65"/>
+      <rect x="144" y="-16" width="5" height="32" rx="2" opacity="0.78"/>
+      <rect x="153" y="-24" width="5" height="48" rx="2" opacity="0.9"/>
+      <rect x="162" y="-8" width="5" height="16" rx="2" opacity="0.68"/>
+      <rect x="171" y="-14" width="5" height="28" rx="2" opacity="0.75"/>
+    </g>
+  </g>
+  <text x="540" y="400" font-family="sans-serif" font-size="10" fill="rgba(255,100,200,0.55)">12:45 / 38:20</text>
+
+  <!-- Platform icons - right -->
+  <g filter="url(#glow)" opacity="0.8">
+    <rect x="608" y="70" width="140" height="45" rx="10" fill="rgba(29,161,242,0.15)" stroke="rgba(29,161,242,0.4)" stroke-width="1.5"/>
+    <text x="635" y="100" font-family="sans-serif" font-size="28">𝕏</text>
+    <text x="660" y="97" font-family="sans-serif" font-size="11" font-weight="700" fill="rgba(29,161,242,0.9)">Twitter/X</text>
+    <text x="660" y="108" font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.4)">48K متابع</text>
+
+    <rect x="618" y="130" width="120" height="45" rx="10" fill="rgba(232,67,147,0.15)" stroke="rgba(232,67,147,0.4)" stroke-width="1.5"/>
+    <text x="640" y="160" font-family="sans-serif" font-size="28">📸</text>
+    <text x="666" y="157" font-family="sans-serif" font-size="11" font-weight="700" fill="rgba(232,67,147,0.9)">Instagram</text>
+    <text x="666" y="168" font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.4)">125K متابع</text>
+
+    <rect x="612" y="190" width="128" height="45" rx="10" fill="rgba(255,0,0,0.12)" stroke="rgba(255,0,0,0.35)" stroke-width="1.5"/>
+    <text x="633" y="220" font-family="sans-serif" font-size="28">▶</text>
+    <text x="657" y="217" font-family="sans-serif" font-size="11" font-weight="700" fill="rgba(255,80,80,0.9)">YouTube</text>
+    <text x="657" y="228" font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.4)">52K مشترك</text>
+
+    <rect x="620" y="250" width="118" height="45" rx="10" fill="rgba(0,119,181,0.12)" stroke="rgba(0,119,181,0.35)" stroke-width="1.5"/>
+    <text x="641" y="280" font-family="sans-serif" font-size="28">in</text>
+    <text x="660" y="277" font-family="sans-serif" font-size="11" font-weight="700" fill="rgba(56,169,255,0.9)">LinkedIn</text>
+    <text x="660" y="288" font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.4)">18K متابع</text>
+  </g>
+
+  <!-- Analytics cards - bottom right -->
+  <g font-family="sans-serif">
+    <rect x="608" y="320" width="150" height="70" rx="10" fill="rgba(13,0,7,0.85)" stroke="rgba(185,28,109,0.3)" stroke-width="1.5"/>
+    <text x="620" y="340" font-size="9" fill="rgba(255,100,200,0.5)">TOTAL REACH</text>
+    <text x="620" y="362" font-size="24" font-weight="800" fill="#e84393">2.4M</text>
+    <text x="620" y="378" font-size="9" fill="#1fbb85">↑ +34% هذا الشهر</text>
+
+    <rect x="608" y="400" width="150" height="55" rx="10" fill="rgba(13,0,7,0.85)" stroke="rgba(185,28,109,0.25)" stroke-width="1.5"/>
+    <text x="620" y="420" font-size="9" fill="rgba(255,100,200,0.5)">ENGAGEMENT RATE</text>
+    <text x="620" y="443" font-size="22" font-weight="800" fill="#ffd93d">8.7%</text>
+  </g>
+
+  <!-- Bottom accent -->
+  <rect x="65" y="437" width="695" height="3" rx="1.5" fill="url(#accent)" opacity="0.55"/>
+</svg>

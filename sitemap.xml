@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  sitemap.xml — START LINE SPA
+  ملاحظة: هذه SPA تعتمد على hash routes (#page) وليس URL منفصلة.
+  نضيف الـ hash routes كـ <loc> مستقلة لمساعدة محركات البحث على اكتشافها.
+  تحديث lastmod يدوياً عند كل إصدار رئيسي جديد.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- الصفحة الرئيسية -->
+  <url>
+    <loc>https://start-line.vercel.app/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- اختبار الميول المهني -->
+  <url>
+    <loc>https://start-line.vercel.app/#quiz</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- المسارات المهنية -->
+  <url>
+    <loc>https://start-line.vercel.app/#categories</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- المجتمع -->
+  <url>
+    <loc>https://start-line.vercel.app/#community</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- المدربون -->
+  <url>
+    <loc>https://start-line.vercel.app/#mentors</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- من نحن -->
+  <url>
+    <loc>https://start-line.vercel.app/#about</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- سياسة الخصوصية -->
+  <url>
+    <loc>https://start-line.vercel.app/#privacy</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- شروط الاستخدام -->
+  <url>
+    <loc>https://start-line.vercel.app/#terms</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

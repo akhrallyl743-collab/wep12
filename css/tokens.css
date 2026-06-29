@@ -1,0 +1,178 @@
+/* ============================================
+   🎨 متغيرات التصميم — Design Tokens
+   النمط: مستقبلي - Futuristic Dark UI
+   مستوحى من: Glassmorphism + Neon Glow
+   ============================================ */
+:root {
+  /* ===== لوحة الألوان الأساسية ===== */
+  --p50:#f2f0ff; --p100:#e0daff; --p200:#c3baff; --p400:#7c6dff;
+  --p600:#4f35e8; --p700:#4028d4; --p800:#311db5; --p900:#1c107a;
+
+  /* الفيروزي / الزمردي */
+  --t50:#e0faf3; --t100:#a7f0d6; --t400:#1fbb85; --t600:#0d8a5f; --t800:#085c3f;
+
+  /* الذهبي */
+  --a50:#fff8e6; --a100:#ffe4a0; --a400:#e8a81a; --a600:#c07a08;
+
+  /* المرجاني */
+  --c50:#fff0ee; --c100:#ffcfc8; --c400:#e8502a; --c600:#b83018;
+
+  /* الأزرق */
+  --b50:#e8f3ff; --b400:#3d8ef5; --b800:#1045a8;
+
+  /* الحياديات */
+  --g50:#f6f5f0; --g100:#e6e4d9; --g300:#c5c2b4; --g400:#8e8d85; --g600:#5e5d57; --g800:#3a3934;
+
+  /* ألوان Neon مستوحاة من التصميم */
+  --neon-purple: rgba(124, 109, 255, 1);
+  --neon-teal: rgba(31, 187, 133, 1);
+  --neon-pink: rgba(236, 72, 153, 1);
+  --neon-blue: rgba(56, 189, 248, 1);
+  --glow-purple: rgba(124, 109, 255, 0.35);
+  --glow-teal: rgba(31, 187, 133, 0.35);
+  --glow-pink: rgba(236, 72, 153, 0.25);
+
+  /* ===== الخلفيات والأسطح ===== */
+  --bg:#f7f6f1;
+  --bg2:#eeecd5;
+  --card:#ffffff;
+  --text:#16150d;
+  --muted:#6b6a62;
+  --border:#e4e2d6;
+  --border-strong:#c9c7b8;
+
+  /* ===== زوايا الحواف ===== */
+  --r:10px; --rl:16px; --rxl:22px; --rxl2:28px;
+
+  /* ===== الظلال ===== */
+  --shadow:0 2px 10px rgba(0,0,0,.055);
+  --shadow-md:0 4px 22px rgba(0,0,0,.09);
+  --shadow-lg:0 12px 48px rgba(0,0,0,.13);
+  --shadow-xl:0 24px 72px rgba(0,0,0,.17);
+
+  /* ظلال Neon */
+  --shadow-neon-purple: 0 0 24px rgba(124,109,255,0.45), 0 4px 20px rgba(79,53,232,0.35);
+  --shadow-neon-teal: 0 0 24px rgba(31,187,133,0.45), 0 4px 20px rgba(13,138,95,0.35);
+  --shadow-neon-pink: 0 0 24px rgba(236,72,153,0.45);
+
+  /* ===== الخطوط ===== */
+  --font:'Cairo',system-ui,sans-serif;
+  --font-display:'Syne','Cairo',sans-serif;
+
+  /* ===== التخطيط ===== */
+  --nav-h:64px;
+  --max-w:1120px;
+}
+
+/* ============================================
+   🌙 الوضع الداكن المستقبلي — Futuristic Dark
+   ============================================ */
+[data-theme="dark"] {
+  --bg:#07060f;
+  --bg2:#0d0b1a;
+  --card:#0f0d1e;
+  --text:#e8e6f5;
+  --muted:#7a7a9a;
+  --border:rgba(255,255,255,0.07);
+  --border-strong:rgba(255,255,255,0.13);
+  --g50:#0f0d1e; --g100:#16142a; --g300:#22203a;
+  --p50:rgba(124,109,255,0.1); --p100:rgba(124,109,255,0.18);
+  --t50:rgba(31,187,133,0.1); --t100:rgba(31,187,133,0.18);
+  --a50:rgba(232,168,26,0.1); --a100:rgba(232,168,26,0.18);
+  --c50:rgba(232,80,42,0.1); --c100:rgba(232,80,42,0.18);
+  --b50:rgba(61,142,245,0.1);
+
+  /* ظلال معززة في الداكن */
+  --shadow:0 2px 16px rgba(0,0,0,0.35);
+  --shadow-md:0 4px 28px rgba(0,0,0,0.5);
+  --shadow-lg:0 12px 52px rgba(0,0,0,0.6);
+  --shadow-xl:0 24px 80px rgba(0,0,0,0.7);
+}
+
+/* ============================================
+   🔄 Reset + Base Styles
+   ============================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  direction: rtl;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+button { cursor: pointer; font-family: var(--font); }
+a { text-decoration: none; color: inherit; }
+
+/* ============================================
+   📄 نظام الصفحات — Page System
+   ============================================ */
+.page { display: none; }
+.page.active {
+  display: block;
+  animation: fadeUp .35s cubic-bezier(.25,.46,.45,.94) both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ============================================
+   ⚡ Performance Layer — CSS Containment
+   ============================================ */
+.page { contain: layout style; }
+.modal-overlay { contain: layout style; }
+.bottom-nav { contain: layout style; }
+
+/* ============================================
+   🎯 Touch Target Minimums (WCAG 2.5.5)
+   ============================================ */
+@media (pointer: coarse) {
+  .bottom-nav-item {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  .icon-btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .nav-link {
+    padding: 10px 14px;
+    min-height: 44px;
+  }
+  .post-tag-btn,
+  .plan-tab,
+  .auth-tab {
+    min-height: 44px;
+  }
+  .quiz-option {
+    min-height: 52px;
+  }
+  .faq-q {
+    min-height: 52px;
+  }
+}
+
+/* ============================================
+   🖋 Typography Refinements
+   ============================================ */
+/* Improved body reading rhythm */
+body { line-height: 1.7; }
+
+/* Consistent heading rhythm */
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+p, .section-desc, .hero p {
+  text-wrap: pretty;
+}
+
+/* Prevent orphan words in cards */
+.step-title, .why-card h3, .bento-card h3,
+.career-card-name, .feature-title {
+  text-wrap: balance;
+}

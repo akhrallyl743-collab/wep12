@@ -1,0 +1,281 @@
+/* ============================================
+   ✨ تأثيرات بصرية متقدمة — Futuristic Effects
+   مستوحاة من: Neon Glow + Glassmorphism
+   ============================================ */
+
+/* --- خلفية Hero متحركة بـ Gradient --- */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* --- تحريك كرات الـ Orb --- */
+@keyframes floatOrb {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.04); }
+}
+.hero-orb-1 { animation: floatOrb 8s ease-in-out infinite; }
+.hero-orb-2 { animation: floatOrb 10s ease-in-out infinite reverse; }
+
+/* --- نبضة التوهج الخضراء (eyebrow badge) --- */
+@keyframes eyebrow-ping {
+  0%   { box-shadow: 0 0 0 0 rgba(31,187,133,.7); }
+  70%  { box-shadow: 0 0 0 10px rgba(31,187,133,0); }
+  100% { box-shadow: 0 0 0 0 rgba(31,187,133,0); }
+}
+
+/* --- نبضة التوهج الزرقاء --- */
+@keyframes pulsBlue {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(56,189,248,0.6); }
+  50% { box-shadow: 0 0 0 10px rgba(56,189,248,0); }
+}
+
+/* --- نظام Scroll Reveal --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .65s cubic-bezier(.25,.46,.45,.94),
+              transform .65s cubic-bezier(.25,.46,.45,.94);
+  will-change: opacity, transform;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+.reveal-delay-4 { transition-delay: .4s; }
+.reveal-delay-5 { transition-delay: .5s; }
+
+.reveal-left {
+  opacity: 0; transform: translateX(-24px);
+  transition: opacity .65s cubic-bezier(.25,.46,.45,.94),
+              transform .65s cubic-bezier(.25,.46,.45,.94);
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+.reveal-scale {
+  opacity: 0; transform: scale(.94);
+  transition: opacity .55s cubic-bezier(.25,.46,.45,.94),
+              transform .55s cubic-bezier(.34,1.2,.64,1);
+}
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+/* --- أزرار متوهجة Glowing Buttons --- */
+.btn-primary {
+  position: relative; overflow: hidden;
+  box-shadow: 0 4px 18px rgba(79,53,232,.3);
+  transition: all .22s cubic-bezier(.25,.46,.45,.94);
+}
+.btn-primary::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.14) 0%, transparent 60%);
+  pointer-events: none;
+}
+.btn-primary:hover {
+  box-shadow: 0 8px 36px rgba(79,53,232,.55), 0 0 0 2px rgba(79,53,232,.18),
+              0 0 60px rgba(124,109,255,.2);
+  transform: translateY(-3px);
+}
+.btn-primary:active { transform: translateY(-1px); transition-duration: .08s; }
+
+/* نبضة CTA الرئيسية */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 4px 18px rgba(79,53,232,.28); }
+  50% { box-shadow: 0 4px 32px rgba(79,53,232,.6), 0 0 0 6px rgba(79,53,232,.1),
+                    0 0 60px rgba(124,109,255,.2); }
+}
+.btn-glow { animation: glowPulse 2.8s ease-in-out infinite; }
+
+/* --- كروت ترتفع عند Hover --- */
+.card-hover, .journey-card, .career-card, .mentor-card,
+.psych-card, .match-card, .post-card, .metric-card {
+  transition: border-color .25s, transform .25s cubic-bezier(.25,.46,.45,.94),
+              box-shadow .25s;
+  will-change: transform;
+}
+.journey-card:hover, .career-card:hover, .mentor-card:hover,
+.psych-card:hover, .match-card:hover {
+  transform: translateY(-8px) scale(1.015);
+  box-shadow: 0 24px 52px rgba(0,0,0,.15), 0 4px 14px rgba(79,53,232,.12),
+              0 0 0 1px rgba(124,109,255,.15);
+}
+.metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md); border-color: var(--p100);
+}
+.post-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+/* --- عناصر التحدي --- */
+.challenge-item {
+  transition: border-color .2s, background .2s,
+              transform .2s cubic-bezier(.25,.46,.45,.94), box-shadow .2s;
+}
+.challenge-item:hover {
+  transform: translateX(-4px); border-color: var(--p200);
+  background: var(--p50);
+  box-shadow: 4px 0 18px rgba(79,53,232,.1);
+}
+
+/* --- Career chip hover --- */
+.career-chip {
+  transition: all .22s cubic-bezier(.25,.46,.45,.94);
+}
+.career-chip:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 8px 26px rgba(79,53,232,.35),
+              0 0 20px rgba(124,109,255,.2);
+}
+
+/* --- شعار Nav متوهج --- */
+@keyframes logoGlow {
+  0%, 100% { box-shadow: 0 4px 14px rgba(79,53,232,.4); }
+  50% { box-shadow: 0 4px 26px rgba(79,53,232,.65),
+                    0 0 0 4px rgba(79,53,232,.1),
+                    0 0 40px rgba(124,109,255,.15); }
+}
+.nav-logo-mark { animation: logoGlow 4s ease-in-out infinite; }
+
+/* --- Skeleton Loading Shimmer --- */
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--border) 25%, var(--g100) 50%, var(--border) 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+.skeleton-text { height: 16px; margin-bottom: 10px; }
+.skeleton-text.lg { height: 28px; width: 60%; }
+.skeleton-text.sm { height: 12px; width: 80%; }
+.skeleton-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--rl); padding: 22px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.skeleton-avatar { width: 48px; height: 48px; border-radius: 50%; }
+
+/* ============================================
+   🌟 تأثيرات Glassmorphism الجديدة
+   ============================================ */
+
+/* بطاقة زجاجية */
+.glass-card {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--rxl);
+  transition: all .3s cubic-bezier(.25,.46,.45,.94);
+}
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(124, 109, 255, 0.3);
+  box-shadow: 0 20px 60px rgba(0,0,0,.3), 0 0 0 1px rgba(124,109,255,.15),
+              inset 0 1px 0 rgba(255,255,255,.1);
+  transform: translateY(-6px);
+}
+
+/* خط توهج علوي للكروت */
+.glow-border-top::before {
+  content: '';
+  position: absolute; top: 0; left: 20%; right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124,109,255,.6), transparent);
+  border-radius: 50%;
+}
+
+/* توهج الزاوية */
+.corner-glow::after {
+  content: '';
+  position: absolute; top: -40px; right: -40px;
+  width: 120px; height: 120px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(124,109,255,.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ============================================
+   🔆 تأثيرات Neon الجديدة
+   ============================================ */
+
+/* توهج النص */
+.text-glow-purple {
+  text-shadow: 0 0 20px rgba(124,109,255,.6), 0 0 40px rgba(124,109,255,.3);
+}
+.text-glow-teal {
+  text-shadow: 0 0 20px rgba(31,187,133,.6), 0 0 40px rgba(31,187,133,.3);
+}
+
+/* خطوط الإضاءة الشعاعية (beams) */
+@keyframes beam-fall {
+  0%,100% { transform: scaleY(0) translateY(-100%); opacity: 0; }
+  20%,80% { transform: scaleY(1) translateY(0); opacity: 1; }
+}
+.beam {
+  position: absolute; top: 0;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(124,109,255,.7) 0%, transparent 70%);
+  animation: beam-fall 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ============================================
+   🎬 Particle / Grid العناصر التزيينية
+   ============================================ */
+
+/* نقاط الشبكة في الخلفية */
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 50%, black, transparent);
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 50%, black, transparent);
+}
+
+/* جسيمات متحركة */
+@keyframes particleFloat {
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: .6; }
+  33% { transform: translateY(-15px) translateX(8px) scale(1.1); opacity: 1; }
+  66% { transform: translateY(8px) translateX(-6px) scale(.9); opacity: .5; }
+}
+.particle {
+  position: absolute; border-radius: 50%;
+  pointer-events: none; animation: particleFloat linear infinite;
+}
+
+/* ============================================
+   💫 Hover Ripple Effect
+   ============================================ */
+.ripple-effect {
+  position: relative; overflow: hidden;
+}
+.ripple-effect::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at var(--x,50%) var(--y,50%),
+    rgba(124,109,255,.12) 0%, transparent 60%);
+  opacity: 0; transition: opacity .3s;
+}
+.ripple-effect:hover::after { opacity: 1; }
+
+/* ============================================
+   🌈 Animated Gradient Border
+   ============================================ */
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(124,109,255,.3); }
+  50% { border-color: rgba(31,187,133,.4); }
+}
+.animated-border { animation: borderGlow 3s ease-in-out infinite; }
+
+/* ============================================
+   📊 عداد الأرقام (Counter Animation)
+   ============================================ */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.counter-animated { animation: countUp .6s cubic-bezier(.25,.46,.45,.94) both; }

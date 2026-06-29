@@ -1,0 +1,103 @@
+<!-- ============ لوحة التحكم ============ -->
+<div id="page-dashboard" class="page" role="main">
+  <div class="dash-wrap">
+    <h1 class="dash-greeting" id="dash-greeting">أهلاً بك! 👋</h1>
+    <p class="dash-sub">تابع تقدمك، أتمم تحدياتك اليومية، واجمع النقاط!</p>
+
+    <div class="dash-grid">
+      <!-- Left Column -->
+      <div class="dash-left">
+        <div class="level-bar" role="status" aria-label="مستواك الحالي">
+          <div class="level-num" id="level-num">1</div>
+          <div class="level-info">
+            <div class="level-title" id="level-title">المستوى 1 — مستكشف مبتدئ</div>
+            <div class="level-sub" id="level-sub">0 / 200 نقطة</div>
+            <div class="level-xp-track"><div class="level-xp-fill" id="level-xp" style="width:0%"></div></div>
+          </div>
+        </div>
+
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-val" id="total-pts">0</div>
+            <div class="metric-label">نقطة مكتسبة</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val" id="challenges-done">0</div>
+            <div class="metric-label">تحدي مكتمل</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val" id="confidence">10%</div>
+            <div class="metric-label">ثقة بالنفس</div>
+          </div>
+        </div>
+
+        <div class="streak-box">
+          <div class="streak-flame">🔥</div>
+          <div>
+            <div class="streak-num" id="streak-num">0</div>
+            <div class="streak-label">أيام متواصلة</div>
+          </div>
+        </div>
+
+        <div class="badge-section">
+          <h3>🏅 شاراتك</h3>
+          <div class="badge-grid" id="badge-list"></div>
+        </div>
+
+        <div class="card" style="margin-top:0;">
+          <h3 style="font-size:15px;font-weight:800;margin-bottom:14px;">🗺️ مساراتك المختارة</h3>
+          <div id="selected-tracks-val" style="font-size:13.5px;color:var(--muted);margin-bottom:8px;">لم تختر مسارات بعد</div>
+          <div style="font-size:12px;color:var(--p600);font-weight:700;" id="selected-tracks-count">0</div>
+          <span style="font-size:12px;color:var(--muted);"> مسار نشط</span>
+          <button class="btn btn-outline btn-sm" style="margin-top:14px;width:100%;justify-content:center;" data-action="showPage" data-page="library">+ إضافة مسار</button>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="dash-right">
+        <div class="challenges-section">
+          <h3>⚡ تحديات اليوم</h3>
+          <div id="daily-challenges"></div>
+        </div>
+
+        <div class="track-section">
+          <h3>📈 تقدم مساراتك</h3>
+          <div id="track-progress-list"></div>
+        </div>
+
+        <!-- [C] Continue Learning — auto-resume last lesson -->
+        <div class="dash-section" id="dash-continue-section">
+          <h3>▶ متابعة التعلم</h3>
+          <div id="continue-learning-section"></div>
+        </div>
+
+        <!-- [TASK 2] NEXT ACTION ENGINE — dashboard slot -->
+        <div class="dash-section" style="margin-top:20px">
+          <h3>👉 ماذا تفعل الآن؟</h3>
+          <div id="dash-next-action" style="display:none" aria-live="polite"></div>
+        </div>
+
+        <!-- [TASK 1] SMART RECOMMENDATIONS — dashboard slot -->
+        <div class="dash-section" style="margin-top:20px">
+          <h3>🎯 مسارات موصى بها لك</h3>
+          <div id="dash-recommendations" style="display:none" aria-live="polite"></div>
+        </div>
+
+        <!-- [TASK 3] LEARNING PATH ROADMAP — dashboard slot -->
+        <div class="dash-section" style="margin-top:20px" id="dash-path-section">
+          <h3>🗺️ خارطة تعلمك</h3>
+          <div id="dash-learning-path" aria-live="polite"></div>
+        </div>
+
+        <!-- [D] Active Tracks Widget — progress bars + next action -->
+        <div class="dash-section" style="margin-top:20px">
+          <h3>🗺️ مساراتك النشطة</h3>
+          <div id="active-tracks-widget"></div>
+        </div>
+
+        <!-- Platform progress (existing) -->
+        <div id="platform-progress-section"></div>
+      </div>
+    </div>
+  </div>
+</div>

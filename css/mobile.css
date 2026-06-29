@@ -1,0 +1,377 @@
+/* ============================================
+   📱 التنقل السفلي — Bottom Navigation
+   نمط: Futuristic Glass
+   ============================================ */
+.bottom-nav {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(7, 6, 20, 0.88);
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+  z-index: 200; gap: 2px;
+  backdrop-filter: blur(28px) saturate(1.8);
+  -webkit-backdrop-filter: blur(28px) saturate(1.8);
+  box-shadow: 0 -1px 0 rgba(255,255,255,.05), 0 -20px 40px rgba(0,0,0,.3);
+}
+/* خط توهج علوي للنافيجيشن */
+.bottom-nav::before {
+  content: '';
+  position: absolute; top: 0; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124,109,255,.3), rgba(31,187,133,.3), transparent);
+}
+html:not([data-theme="dark"]) .bottom-nav {
+  background: rgba(255,255,255,.92);
+  border-top-color: var(--border);
+  box-shadow: 0 -8px 24px rgba(0,0,0,.08);
+}
+
+.bottom-nav-item {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  gap: 4px; padding: 7px 4px; border-radius: 12px;
+  border: none; background: none; font-family: var(--font);
+  color: rgba(255,255,255,.35); transition: all .2s; font-size: 10px; font-weight: 800;
+  cursor: pointer;
+}
+.bottom-nav-item .bn-icon { font-size: 20px; line-height: 1; transition: transform .2s; }
+.bottom-nav-item.active {
+  color: #a78bfa;
+  background: rgba(124,109,255,.12);
+}
+.bottom-nav-item.active .bn-icon { transform: translateY(-2px); }
+.bottom-nav-item:hover { color: rgba(255,255,255,.7); }
+html:not([data-theme="dark"]) .bottom-nav-item { color: var(--muted); }
+html:not([data-theme="dark"]) .bottom-nav-item.active { color: var(--p600); background: var(--p50); }
+html:not([data-theme="dark"]) .bottom-nav-item:hover { color: var(--p600); }
+
+/* ============================================
+   📐 Responsive — الاستجابة للشاشات
+   ============================================ */
+@media (max-width: 1024px) {
+  .dash-grid { grid-template-columns: 1fr; }
+  .journey-steps { grid-template-columns: repeat(2,1fr); }
+  .bento-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  /* إخفاء روابط التنقل الرئيسية */
+  .nav-links { display: none !important; }
+  .menu-btn { display: flex !important; }
+  
+
+  /* إظهار التنقل السفلي */
+  .bottom-nav { display: flex; }
+  body { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
+
+  /* قسم الهيرو */
+  .hero { min-height: 92svh; padding: calc(var(--nav-h) + 32px) 16px 52px; }
+  .hero h1 { font-size: clamp(26px, 9vw, 42px); }
+  .hero-brand { font-size: clamp(48px, 15vw, 78px); }
+  .hero-stats { gap: 0; }
+  .hero-btns { flex-direction: column; align-items: center; }
+  .hero-btns .btn { width: 100%; max-width: 320px; justify-content: center; }
+  .stat { padding: 0 14px; }
+  .stat-num { font-size: 22px; }
+  .stat-div { height: 30px; }
+
+  /* أقسام */
+  .journey-section, .careers-preview, .features-section, .cta-banner { padding: 64px 0; }
+  .section-inner { padding: 0 16px; }
+  .journey-steps { grid-template-columns: 1fr; gap: 10px; }
+  .bento-grid { grid-template-columns: 1fr; }
+  .bento-large, .bento-wide { grid-column: span 1; }
+  .career-chips { max-width: 100%; }
+
+  /* الصفحات الداخلية */
+  .quiz-wrap { padding: 24px 14px 80px; }
+  .quiz-card { padding: 24px 18px; }
+  .quiz-q { font-size: 17px; }
+  .results-wrap, .career-detail, .psych-wrap,
+  .dash-wrap, .library-wrap, .community-wrap,
+  .mentor-wrap, .plan-wrap, .profile-wrap { padding: 22px 14px 80px; }
+
+  /* شبكات */
+  .metrics-row { grid-template-columns: repeat(3,1fr); }
+  .careers-grid { grid-template-columns: 1fr; }
+  .mentor-grid { grid-template-columns: 1fr; }
+  .psych-cats { grid-template-columns: 1fr 1fr; }
+  .match-cards { grid-template-columns: 1fr 1fr; }
+  .badge-grid { grid-template-columns: repeat(4,1fr); }
+
+  /* بطاقات */
+  .career-hero-card { padding: 30px 20px; }
+  .career-hero-meta { gap: 18px; }
+  .level-bar { padding: 20px; gap: 14px; }
+  .level-num { font-size: 38px; }
+
+  /* مودال */
+  .modal { padding: 28px 18px; }
+  .trait-label { min-width: 100px; font-size: 12px; }
+
+  /* تفاصيل المسار */
+  .breadcrumb { display: none; }
+  .career-cta { flex-direction: column; }
+  .cta-btn { min-width: 0; }
+
+  /* خطة التعلم */
+  .plan-tabs { flex-wrap: wrap; }
+  .plan-tab { min-width: calc(50% - 4px); }
+
+  /* نافبار */
+  nav { padding: 0 14px; }
+  .nav-logo-ar { display: none; }
+  .nav-cta { display: none; }
+
+  /* نتائج */
+  .results-actions { flex-direction: column; }
+  .results-actions .btn { min-width: 0; }
+
+  /* فوتر */
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .footer-brand { grid-column: span 2; }
+}
+
+@media (max-width: 480px) {
+  /* Hero */
+  .hero { padding: calc(var(--nav-h) + 20px) 14px 44px; }
+  .hero-badge { font-size: 11px; padding: 6px 14px; margin-bottom: 28px; }
+  .stat-div { display: none; }
+  .hero-stats { gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .stat { padding: 0; min-width: 70px; }
+
+  /* شبكات صغيرة */
+  .psych-cats { grid-template-columns: 1fr; }
+  .match-cards { grid-template-columns: 1fr; }
+  .metrics-row { grid-template-columns: 1fr 1fr 1fr; }
+  .badge-grid { grid-template-columns: repeat(4,1fr); }
+
+  /* اختبار */
+  .quiz-card { padding: 20px 14px; }
+  .quiz-q { font-size: 16px; }
+
+  /* بطاقات */
+  .career-hero-card { padding: 24px 16px; }
+  .level-bar { flex-direction: column; text-align: center; }
+  .level-num { font-size: 52px; }
+  .streak-box { flex-direction: row; }
+
+  /* فوتر موبايل */
+  .footer-inner { grid-template-columns: 1fr; }
+  .footer-brand { grid-column: span 1; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 8px; }
+}
+
+/* ============================================
+   🔒 Safe Areas لـ iPhone الشاشات الكبيرة
+   ============================================ */
+@supports (padding: max(0px)) {
+  .bottom-nav {
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+  }
+  nav {
+    padding-top: max(0px, env(safe-area-inset-top));
+  }
+}
+
+/* ============================================
+   📱 شاشات صغيرة جداً — 320px و 360px
+   ============================================ */
+@media (max-width: 360px) {
+  /* التنقل السفلي */
+  .bottom-nav-item { font-size: 9px; padding: 6px 2px; }
+  .bottom-nav-item .bn-icon { font-size: 18px; }
+
+  /* الهيرو */
+  .hero h1 { font-size: clamp(22px, 8vw, 30px); }
+  .hero-brand { font-size: clamp(40px, 14vw, 58px); }
+  .hero-sub { font-size: 13px; }
+  .hero-btns .btn { font-size: 14px; padding: 14px 18px; }
+
+  /* المودال */
+  .modal-overlay { padding: 12px 8px; }
+  .auth-modal-box { padding: 22px 14px 18px; }
+
+  /* الإدخالات */
+  .form-input { font-size: 15px; padding: 12px 14px; }
+  .btn-primary { font-size: 14px; }
+
+  /* البطاقات */
+  .career-hero-card { padding: 20px 14px; }
+  .quiz-card { padding: 18px 12px; }
+  .quiz-q { font-size: 15px; }
+
+  /* الشبكات */
+  .metrics-row { grid-template-columns: 1fr 1fr; }
+  .badge-grid { grid-template-columns: repeat(3, 1fr); }
+
+  /* الـ onboarding */
+  .onb-step { padding: 20px 14px; }
+  .onb-reg-row { grid-template-columns: 1fr !important; }
+}
+
+/* ============================================
+   🔄 منع تجاوز العناصر للحواف
+   ============================================ */
+* { box-sizing: border-box; }
+img, video, iframe { max-width: 100%; }
+.career-chips, .onb-reg-row, .mentor-skills,
+.hero-stats, .auth-tabs { overflow-x: hidden; }
+
+/* ============================================
+   ✨ تحسين تجربة اللمس
+   ============================================ */
+button, [role="button"], a, .nav-link,
+.bottom-nav-item, .auth-tab {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+@media (hover: none) {
+  /* إزالة hover effects على الأجهزة التي لا تدعمها */
+  .career-card:hover,
+  .mentor-card:hover,
+  .psych-card:hover { transform: none; }
+}
+
+
+/* ============================================
+   📱 Mobile Polish v2 — Senior Refinements
+   ============================================ */
+
+/* ── Prevent text size inflation on rotate ── */
+@media (max-width: 768px) {
+  /* Better hero flow on small screens */
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Hero CTA buttons: full-width stacked */
+  .hero-btns {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-btns .btn,
+  .hero-btns .hbtn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* More breathing room on step cards */
+  .step-item {
+    padding: 24px 20px;
+  }
+
+  /* Bottom nav: prevent text truncation */
+  .bottom-nav-item span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    max-width: 100%;
+  }
+
+  /* Career cards: prevent awkward short lines */
+  .career-card-name { font-size: 15px; }
+  .career-card-desc { font-size: 13px; }
+
+  /* FAQ: larger tap area */
+  .faq-q {
+    padding: 16px 18px;
+    font-size: 14px;
+  }
+  .faq-a {
+    padding: 0 18px 16px;
+    font-size: 14px;
+  }
+
+  /* Modals: better mobile presentation */
+  .modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+  .auth-modal-box {
+    border-radius: 24px 24px 0 0;
+    max-height: 92svh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Improve form input spacing */
+  .form-group + .form-group {
+    margin-top: 14px;
+  }
+  .form-input {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+
+  /* Post tags: wrap properly */
+  .post-tags { flex-wrap: wrap; }
+
+  /* Section titles: tighter on mobile */
+  .section-title {
+    font-size: clamp(20px, 6vw, 30px);
+    margin-bottom: 10px;
+  }
+  .section-header { margin-bottom: 40px; }
+}
+
+@media (max-width: 480px) {
+  /* Tighten section padding */
+  .journey-section,
+  .careers-preview,
+  .features-section,
+  .cta-banner,
+  .how-section,
+  .why-section,
+  .trust-section,
+  .faq-section {
+    padding: 56px 0;
+  }
+
+  /* Section inner padding */
+  .section-inner { padding: 0 14px; }
+
+  /* Bento cards: correct min-height */
+  .bento-card { min-height: auto; }
+  .bento-big-icon { font-size: 40px; }
+
+  /* Career chips: hide on smallest screens */
+  .career-chips .chip { font-size: 12px; padding: 6px 12px; }
+
+  /* CTA banner text */
+  .cta-title { font-size: clamp(20px, 7vw, 28px); }
+  .cta-sub { font-size: 14px; }
+}
+
+/* ── iOS-specific: prevent bounce on modals ── */
+@supports (-webkit-overflow-scrolling: touch) {
+  .auth-modal-box,
+  .coach-modal-box {
+    overscroll-behavior: contain;
+  }
+}
+
+/* ── Landscape phone: fix hero height ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    padding: calc(var(--nav-h) + 24px) 20px 48px;
+  }
+  .hero h1 { font-size: clamp(22px, 5vw, 32px); }
+  .hero p  { font-size: 14px; margin-bottom: 24px; }
+  .hero-btns { flex-direction: row; }
+  .hero-stats { display: none; }
+}
+
+/* ── Scrollbar: thin on desktop, none on mobile ── */
+@media (pointer: fine) {
+  ::-webkit-scrollbar       { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+}
+@media (pointer: coarse) {
+  ::-webkit-scrollbar { display: none; }
+}

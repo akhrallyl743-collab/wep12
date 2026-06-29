@@ -1,0 +1,9 @@
+# robots.txt — START LINE (start-line.vercel.app)
+# السماح لجميع الـ crawlers بفهرسة الموقع
+# حجب /pages/ لأنها صفحات HTML جزئية للـ SPA وليست للفهرسة المستقلة
+
+User-agent: *
+Disallow: /pages/
+
+# Sitemap
+Sitemap: https://start-line.vercel.app/sitemap.xml

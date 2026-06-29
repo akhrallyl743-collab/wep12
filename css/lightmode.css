@@ -1,0 +1,217 @@
+/* ============================================
+   ☀️ START LINE — Light Mode Overrides
+   يصلح: خلفية الهيرو، الألوان، وكل عناصر الـ dark-only
+   ============================================ */
+
+/* ===== HERO — Light Mode Background ===== */
+html:not([data-theme="dark"]) .hero {
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 0%, rgba(124,109,255,.14) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 40% at 0% 100%, rgba(31,187,133,.1) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 45% at 100% 80%, rgba(79,53,232,.08) 0%, transparent 50%),
+    linear-gradient(180deg, #0b0344 0%, #25053a 40%, #000000 100%);
+}
+
+/* شبكة الهيرو في الـ light mode */
+html:not([data-theme="dark"]) .hero-grid {
+  background-image: radial-gradient(rgba(100,80,220,.07) 1px, transparent 1px);
+}
+
+/* beams خفية في الـ light mode */
+html:not([data-theme="dark"]) .beam-1 {
+  background: linear-gradient(180deg, rgba(124,109,255,.3) 0%, transparent 70%);
+  opacity: .25;
+}
+html:not([data-theme="dark"]) .beam-2 {
+  background: linear-gradient(180deg, rgba(31,187,133,.35) 0%, transparent 70%);
+  opacity: .3;
+}
+html:not([data-theme="dark"]) .beam-3 {
+  background: linear-gradient(180deg, rgba(124,109,255,.25) 0%, transparent 70%);
+  opacity: .2;
+}
+
+/* orbs في الـ light mode */
+html:not([data-theme="dark"]) .hero-orb-1 {
+  background: radial-gradient(circle, rgba(124,109,255,.12) 0%, transparent 70%);
+}
+html:not([data-theme="dark"]) .hero-orb-2 {
+  background: radial-gradient(circle, rgba(31,187,133,.1) 0%, transparent 70%);
+}
+
+/* ===== HERO BADGE — Light Mode ===== */
+html:not([data-theme="dark"]) .hero-badge {
+  background: rgba(124,109,255,.08);
+  border-color: rgba(124,109,255,.2);
+  color: var(--p700);
+}
+
+/* ===== HERO TEXT — Light Mode ===== */
+html:not([data-theme="dark"]) .hero h1 {
+  color: var(--p900);
+}
+html:not([data-theme="dark"]) .hero-ar-headline {
+  color: var(--p900);
+}
+html:not([data-theme="dark"]) .hero p {
+  color: var(--muted);
+}
+
+/* ===== BRAND NAME ===== */
+html:not([data-theme="dark"]) .brand-dot {
+  color: rgba(79,53,232,.25) !important;
+  -webkit-text-fill-color: rgba(79,53,232,.25) !important;
+}
+html:not([data-theme="dark"]) .brand-line-word {
+  color: var(--p800) !important;
+  -webkit-text-fill-color: var(--p800) !important;
+}
+
+/* ===== PROB PILLS — Light Mode ===== */
+html:not([data-theme="dark"]) .prob-pill {
+  background: rgba(124,109,255,.07);
+  border-color: rgba(124,109,255,.18);
+  color: var(--p700);
+  backdrop-filter: none;
+}
+html:not([data-theme="dark"]) .prob-pill:hover {
+  background: rgba(124,109,255,.13);
+  border-color: rgba(124,109,255,.35);
+  color: var(--p600);
+}
+
+/* ===== HERO TRUST NOTE — Light Mode ===== */
+html:not([data-theme="dark"]) .hero-trust-note {
+  color: var(--muted);
+}
+
+/* ===== HERO STATS — Light Mode ===== */
+html:not([data-theme="dark"]) .hero-stats {
+  border-top-color: rgba(79,53,232,.12);
+}
+html:not([data-theme="dark"]) .hstat-num {
+  background: linear-gradient(135deg, var(--p800) 0%, var(--p600) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+html:not([data-theme="dark"]) .hstat-lbl {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .hstat-div {
+  background: rgba(79,53,232,.1);
+}
+html:not([data-theme="dark"]) .stat-div {
+  background: rgba(79,53,232,.1);
+}
+html:not([data-theme="dark"]) .stat-num {
+  background: linear-gradient(135deg, var(--p800) 0%, var(--p600) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+html:not([data-theme="dark"]) .stat-label {
+  color: var(--muted);
+}
+
+/* ===== SCROLL HINT — Light Mode ===== */
+html:not([data-theme="dark"]) .scroll-mouse {
+  border-color: rgba(79,53,232,.35);
+}
+html:not([data-theme="dark"]) .scroll-wheel {
+  background: rgba(79,53,232,.5);
+}
+
+/* ===== GHOST BUTTONS ON HERO (Light Mode) ===== */
+html:not([data-theme="dark"]) .hbtn-ghost {
+  background: rgba(79,53,232,.07);
+  color: var(--p700);
+  border-color: rgba(79,53,232,.2);
+}
+html:not([data-theme="dark"]) .hbtn-ghost:hover {
+  background: rgba(79,53,232,.13);
+  border-color: rgba(79,53,232,.35);
+  color: var(--p600);
+}
+html:not([data-theme="dark"]) .btn-ghost {
+  background: rgba(79,53,232,.07);
+  color: var(--p700);
+  border-color: rgba(79,53,232,.2);
+}
+html:not([data-theme="dark"]) .btn-ghost:hover {
+  background: rgba(79,53,232,.13);
+  border-color: rgba(79,53,232,.35);
+  color: var(--p600);
+}
+
+/* ===== CTA BANNER — يفضل داكن دايمًا لأنه intentional ===== */
+/* no override needed - it's meant to be dark */
+
+/* ===== NAV SCROLLED — Light Mode ===== */
+html:not([data-theme="dark"]) nav[role="navigation"].nav-scrolled {
+  background: rgba(255,255,255,.97);
+  box-shadow: 0 4px 28px rgba(0,0,0,.08);
+}
+
+/* ===== MARQUEE SECTION ===== */
+html:not([data-theme="dark"]) .marquee-section {
+  background: var(--card);
+  border-top-color: var(--border);
+  border-bottom-color: var(--border);
+}
+
+/* ===== SECTION KICKER — يرث من tokens لكن نضمن ===== */
+html:not([data-theme="dark"]) .section-kicker {
+  background: var(--p50);
+  color: var(--p600);
+}
+
+/* ===== BENTO GLOW — أخف في الـ light ===== */
+html:not([data-theme="dark"]) .bento-glow-purple {
+  background: radial-gradient(circle, rgba(79,53,232,.1), transparent 70%);
+  opacity: .4;
+}
+html:not([data-theme="dark"]) .bento-glow-teal {
+  background: radial-gradient(circle, rgba(31,187,133,.1), transparent 70%);
+  opacity: .4;
+}
+
+/* ===== HERO BADGE DOT ===== */
+html:not([data-theme="dark"]) .hero-badge-dot {
+  background: var(--t400);
+  box-shadow: 0 0 0 0 rgba(31,187,133,.5);
+}
+
+/* ===== TRANSITIONS — Theme Switch Smooth ===== */
+.hero,
+.hero *,
+.hstat-num,
+.hstat-lbl,
+.hstat-div,
+.prob-pill,
+.hero-trust-note,
+.hero-badge,
+.brand-dot,
+.brand-line-word {
+  transition-property: background, color, border-color, box-shadow, opacity;
+  transition-duration: .3s;
+  transition-timing-function: ease;
+}
+
+/* ===== CHIPS SECTION — Theme-aware background ===== */
+.chips-section {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 80px 24px;
+  text-align: center;
+}
+[data-theme="dark"] .chips-section {
+  background: #07060f;
+  border-top-color: rgba(255,255,255,.06);
+}
+
+/* careers-cta inside chips-section — remove standalone padding */
+.chips-section .careers-cta {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}

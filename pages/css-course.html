@@ -1,0 +1,207 @@
+<!-- ============ دورة CSS ============ -->
+<div id="page-css-course" class="page" role="main">
+  <div class="course-wrap">
+
+    <!-- Header -->
+    <div class="course-hero">
+      <div class="course-badge">🎨 مسار تعليمي</div>
+      <h1 class="course-title">دورة CSS</h1>
+      <p class="course-subtitle">من الصفر إلى تصميم واجهات احترافية — عبدالرحمن جمال • 52 درس</p>
+      <div class="course-stats">
+        <div class="stat-chip">📹 52 درس</div>
+        <div class="stat-chip">⏱ 11 ساعة</div>
+        <div class="stat-chip">🆓 مجاني تماماً</div>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="course-progress-card">
+      <div class="progress-header">
+        <span class="progress-label">تقدمك في الدورة</span>
+        <span class="progress-count" id="css-progress-count">0 / 52</span>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="css-progress-bar" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Lessons Grid -->
+    <div class="lessons-grid" id="css-lessons-grid"></div>
+
+  </div>
+
+  <!-- Video Modal -->
+  <div class="video-modal-overlay" id="css-video-modal" onclick="cssCloseModal(event)">
+    <div class="video-modal-box">
+      <button class="modal-close" onclick="cssCloseLesson()">✕</button>
+      <div class="video-modal-title" id="css-modal-title"></div>
+      <div class="video-container">
+        <iframe id="css-lesson-iframe" src="" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+      <button class="btn btn-teal modal-done-btn" onclick="cssMarkDoneFromModal()">
+        ✓ وضّع علامة "مكتمل" وانتقل للتالي
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var cssLessons = [
+    { title: "بداية كورس CSS — تعلم CSS بسهولة",             url: 'https://www.youtube.com/embed/_QO55W7KPmI?si=8Li-SmW_A5EbLAhk', dur: '04:57' },
+    { title: "#1 CSS Syntax — كيفية كتابة CSS",               url: 'https://www.youtube.com/embed/uH5loDWAwmk?si=8Li-SmW_A5EbLAhk', dur: '17:51' },
+    { title: "#2 Priority in CSS",                             url: 'https://www.youtube.com/embed/wk_UCoFdM3U?si=8Li-SmW_A5EbLAhk', dur: '07:20' },
+    { title: "#3 Selectors — class, id, tag",                 url: 'https://www.youtube.com/embed/G2I83J5D8ao?si=8Li-SmW_A5EbLAhk', dur: '11:45' },
+    { title: "#4 Descendant & Direct Child Selector",          url: 'https://www.youtube.com/embed/a8_gmyNuKTY?si=8Li-SmW_A5EbLAhk', dur: '11:02' },
+    { title: "#5 Box Model — border, margin, padding",         url: 'https://www.youtube.com/embed/2f3MEkllP9Q?si=8Li-SmW_A5EbLAhk', dur: '21:20' },
+    { title: "#6 Margin Auto",                                 url: 'https://www.youtube.com/embed/GtakjN6a8as?si=8Li-SmW_A5EbLAhk', dur: '06:38' },
+    { title: "#7 النسبة المئوية في CSS",                       url: 'https://www.youtube.com/embed/d76DdyNSG-A?si=8Li-SmW_A5EbLAhk', dur: '11:44' },
+    { title: "#8 fit-content / min-content / max-content",    url: 'https://www.youtube.com/embed/ajg74uySBdo?si=8Li-SmW_A5EbLAhk', dur: '05:20' },
+    { title: "#9 max/min width & max/min height",              url: 'https://www.youtube.com/embed/9SLYTWQvgWs?si=8Li-SmW_A5EbLAhk', dur: '12:22' },
+    { title: "#10 Border Radius",                              url: 'https://www.youtube.com/embed/w9aw763VwTA?si=8Li-SmW_A5EbLAhk', dur: '07:39' },
+    { title: "#11 الفرق بين Inline و Block",                  url: 'https://www.youtube.com/embed/teLgeqbUCaM?si=8Li-SmW_A5EbLAhk', dur: '08:34' },
+    { title: "#12 Text Align",                                 url: 'https://www.youtube.com/embed/PnaMwuPNxQc?si=8Li-SmW_A5EbLAhk', dur: '06:46' },
+    { title: "#13 Direction",                                  url: 'https://www.youtube.com/embed/zvFUjsKFS2U?si=8Li-SmW_A5EbLAhk', dur: '02:25' },
+    { title: "#14 Text Transform",                             url: 'https://www.youtube.com/embed/6cUQCu70chU?si=8Li-SmW_A5EbLAhk', dur: '02:34' },
+    { title: "#15 Text Spacing",                               url: 'https://www.youtube.com/embed/N2l2xzPh2mI?si=8Li-SmW_A5EbLAhk', dur: '03:06' },
+    { title: "#16 Text Decoration",                            url: 'https://www.youtube.com/embed/90yToLEdsug?si=8Li-SmW_A5EbLAhk', dur: '06:05' },
+    { title: "#17 Text Shadow & Box Shadow",                   url: 'https://www.youtube.com/embed/yADq3c57ncg?si=8Li-SmW_A5EbLAhk', dur: '12:52' },
+    { title: "#18 Wrapping & White Space",                     url: 'https://www.youtube.com/embed/IWOLikk2yqs?si=8Li-SmW_A5EbLAhk', dur: '12:11' },
+    { title: "#19 Font Family",                                url: 'https://www.youtube.com/embed/_2D_GPo97zg?si=8Li-SmW_A5EbLAhk', dur: '15:35' },
+    { title: "#20 Font Size",                                  url: 'https://www.youtube.com/embed/DP1tURdVjr8?si=8Li-SmW_A5EbLAhk', dur: '09:11' },
+    { title: "#21 Font Style",                                 url: 'https://www.youtube.com/embed/CXmVIVS7zwk?si=8Li-SmW_A5EbLAhk', dur: '01:46' },
+    { title: "#22 Font Variant",                               url: 'https://www.youtube.com/embed/mIW9oE3ae9g?si=8Li-SmW_A5EbLAhk', dur: '02:38' },
+    { title: "#23 Font Weight",                                url: 'https://www.youtube.com/embed/Kyh3B_jqZx8?si=8Li-SmW_A5EbLAhk', dur: '15:08' },
+    { title: "#24 Font Shorthand",                             url: 'https://www.youtube.com/embed/9Ry6Ocqk5Do?si=8Li-SmW_A5EbLAhk', dur: '09:29' },
+    { title: "#25 Background في CSS",                          url: 'https://www.youtube.com/embed/RGCitnwhD50?si=8Li-SmW_A5EbLAhk', dur: '25:15' },
+    { title: "#26 Linear Gradient",                            url: 'https://www.youtube.com/embed/FAKi56TrVP0?si=8Li-SmW_A5EbLAhk', dur: '12:59' },
+    { title: "#27 Radial Gradient",                            url: 'https://www.youtube.com/embed/oYZMLLR1wA0?si=8Li-SmW_A5EbLAhk', dur: '06:27' },
+    { title: "#28 Float",                                      url: 'https://www.youtube.com/embed/bUstMr15GCM?si=8Li-SmW_A5EbLAhk', dur: '11:49' },
+    { title: "#29 Overflow",                                   url: 'https://www.youtube.com/embed/FbKtf2RYGkE?si=8Li-SmW_A5EbLAhk', dur: '05:36' },
+    { title: "#30 Position",                                   url: 'https://www.youtube.com/embed/4xGFEM3Zr7I?si=8Li-SmW_A5EbLAhk', dur: '15:11' },
+    { title: "#31 Z-Index",                                    url: 'https://www.youtube.com/embed/OhJqMZ2gGAc?si=8Li-SmW_A5EbLAhk', dur: '03:39' },
+    { title: "#32 List Style",                                 url: 'https://www.youtube.com/embed/-DMQMqv8DEc?si=8Li-SmW_A5EbLAhk', dur: '04:28' },
+    { title: "#33 Table Style",                                url: 'https://www.youtube.com/embed/tRx5aIjnVq0?si=8Li-SmW_A5EbLAhk', dur: '07:18' },
+    { title: "#34 CSS Units — px, em, rem, %",                url: 'https://www.youtube.com/embed/-z0lL2EUJJY?si=8Li-SmW_A5EbLAhk', dur: '10:14' },
+    { title: "#35 Pseudo Classes",                             url: 'https://www.youtube.com/embed/yfAbvXR8v-s?si=8Li-SmW_A5EbLAhk', dur: '14:24' },
+    { title: "#36 Pseudo Elements",                            url: 'https://www.youtube.com/embed/nWo4Q0kjNvs?si=8Li-SmW_A5EbLAhk', dur: '10:48' },
+    { title: "#37 Sibling Selectors",                          url: 'https://www.youtube.com/embed/nVob0XHQ-5c?si=8Li-SmW_A5EbLAhk', dur: '07:27' },
+    { title: "#38 Attribute Selectors",                        url: 'https://www.youtube.com/embed/DD1nd-5PElQ?si=8Li-SmW_A5EbLAhk', dur: '14:03' },
+    { title: "#39 Transform",                                  url: 'https://www.youtube.com/embed/V1ZIuEylc_M?si=8Li-SmW_A5EbLAhk', dur: '15:01' },
+    { title: "#40 Translate, Scale, Rotate",                   url: 'https://www.youtube.com/embed/ZMjaLi6fZVA?si=8Li-SmW_A5EbLAhk', dur: '03:50' },
+    { title: "#41 Transition",                                 url: 'https://www.youtube.com/embed/OI4sFng8ATs?si=8Li-SmW_A5EbLAhk', dur: '14:35' },
+    { title: "#42 Animation في CSS",                           url: 'https://www.youtube.com/embed/_z_WUh-GuPM?si=8Li-SmW_A5EbLAhk', dur: '21:56' },
+    { title: "#43 Display — block, inline, inline-block",      url: 'https://www.youtube.com/embed/05ZWs5YSWSs?si=8Li-SmW_A5EbLAhk', dur: '12:43' },
+    { title: "#44 Display none, Opacity, Visibility",          url: 'https://www.youtube.com/embed/bO8O0kOQoNc?si=8Li-SmW_A5EbLAhk', dur: '04:22' },
+    { title: "#45 CSS Flexbox — شرح كامل",                    url: 'https://www.youtube.com/embed/BjWex7Pz8iY?si=8Li-SmW_A5EbLAhk', dur: '48:40', project: true },
+    { title: "#46 CSS Grid — شرح كامل",                       url: 'https://www.youtube.com/embed/zQyuMYFLD1s?si=8Li-SmW_A5EbLAhk', dur: '54:25', project: true },
+    { title: "#47 Responsive CSS — شرح كامل",                 url: 'https://www.youtube.com/embed/aRiqBoqTwHw?si=8Li-SmW_A5EbLAhk', dur: '22:26' },
+    { title: "مشروع: Responsive Form بـ HTML & CSS",          url: 'https://www.youtube.com/embed/PzT-pnTdNMc?si=8Li-SmW_A5EbLAhk', dur: '11:03', project: true },
+    { title: "مشروع: موقع افاتار بـ HTML & CSS",             url: 'https://www.youtube.com/embed/8uf6lp-TkL8?si=8Li-SmW_A5EbLAhk', dur: '20:26', project: true },
+    { title: "مشروع: Responsive Glass Website",               url: 'https://www.youtube.com/embed/v2jP362A86A?si=8Li-SmW_A5EbLAhk', dur: '31:04', project: true },
+    { title: "مشروع: Responsive Dashboard",                   url: 'https://www.youtube.com/embed/5HUC4UrOUCI?si=8Li-SmW_A5EbLAhk', dur: '37:35', project: true }
+  ];
+
+  var TOTAL = cssLessons.length;
+  var cssDone = JSON.parse(localStorage.getItem('cssCourse_done') || '[]');
+  var cssCurrentLesson = 0;
+
+  function saveCssDone() { localStorage.setItem('cssCourse_done', JSON.stringify(cssDone)); }
+
+  function updateCssProgress() {
+    var count = cssDone.length;
+    var bar = document.getElementById('css-progress-bar');
+    var cnt = document.getElementById('css-progress-count');
+    if (bar) bar.style.width = Math.round(count / TOTAL * 100) + '%';
+    if (cnt) cnt.textContent = count + ' / ' + TOTAL;
+  }
+
+  function renderLessons() {
+    var grid = document.getElementById('css-lessons-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    cssLessons.forEach(function(lesson, i) {
+      var isDone = cssDone.indexOf(i) > -1;
+      var isProj = !!lesson.project;
+      var card = document.createElement('div');
+      card.className = 'lesson-card' + (isDone ? ' done' : '') + (isProj ? ' featured' : '');
+      card.setAttribute('data-lesson', i);
+      card.innerHTML =
+        (isProj ? '<div class="lesson-badge">🔥 مشروع</div>' : '') +
+        '<div class="lesson-num">' + (i < 9 ? '0' : '') + (i + 1) + '</div>' +
+        '<div class="lesson-info">' +
+          '<h3 class="lesson-title">' + lesson.title + '</h3>' +
+          '<p class="lesson-desc">' + (isProj ? 'مشروع تطبيقي حقيقي' : lesson.dur + ' — عبدالرحمن جمال') + '</p>' +
+        '</div>' +
+        '<div class="lesson-actions">' +
+          '<button class="btn-watch" onclick="cssOpenLesson(' + i + ')">▶ شاهد</button>' +
+          '<button class="btn-done' + (isDone ? ' active' : '') + '" onclick="cssMarkDone(' + i + ')" id="css-done-' + i + '">✓</button>' +
+        '</div>';
+      grid.appendChild(card);
+    });
+    updateCssProgress();
+  }
+
+  window.cssOpenLesson = function(i) {
+    cssCurrentLesson = i;
+    var lesson = cssLessons[i];
+    var modal = document.getElementById('css-video-modal');
+    var iframe = document.getElementById('css-lesson-iframe');
+    var title = document.getElementById('css-modal-title');
+    if (!modal || !iframe || !title) return;
+    title.textContent = '📺 ' + lesson.title;
+    iframe.src = lesson.url + '&autoplay=1';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.cssCloseLesson = function() {
+    var modal = document.getElementById('css-video-modal');
+    var iframe = document.getElementById('css-lesson-iframe');
+    if (modal) modal.classList.remove('open');
+    if (iframe) iframe.src = '';
+    document.body.style.overflow = '';
+  };
+
+  window.cssCloseModal = function(e) {
+    if (e.target.id === 'css-video-modal') window.cssCloseLesson();
+  };
+
+  window.cssMarkDone = function(i) {
+    var idx = cssDone.indexOf(i);
+    if (idx === -1) cssDone.push(i);
+    else cssDone.splice(idx, 1);
+    saveCssDone();
+    renderLessons();
+  };
+
+  window.cssMarkDoneFromModal = function() {
+    if (cssDone.indexOf(cssCurrentLesson) === -1) {
+      cssDone.push(cssCurrentLesson);
+      saveCssDone();
+    }
+    var next = cssCurrentLesson + 1;
+    if (next < TOTAL) {
+      window.cssCloseLesson();
+      setTimeout(function() { window.cssOpenLesson(next); }, 300);
+    } else {
+      window.cssCloseLesson();
+    }
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderLessons);
+  } else {
+    renderLessons();
+  }
+
+  var observer = new MutationObserver(function() {
+    var page = document.getElementById('page-css-course');
+    if (page && page.classList.contains('active')) renderLessons();
+  });
+  var target = document.getElementById('page-css-course');
+  if (target) observer.observe(target, { attributes: true, attributeFilter: ['class'] });
+})();
+</script>

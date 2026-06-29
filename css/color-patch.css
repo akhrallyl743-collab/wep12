@@ -1,0 +1,740 @@
+/* ============================================================
+   🎨 COLOR HARMONY PATCH — إعادة تلوين الصفحة الرئيسية
+   نظام موحد: Deep Indigo + Teal + Soft Gold
+   ============================================================ */
+
+/* ===== HERO — خلفية موحدة ===== */
+[data-theme="dark"] .hero {
+  background:
+    radial-gradient(ellipse 75% 55% at 50% -5%, rgba(124,109,255,.55) 0%, transparent 68%),
+    radial-gradient(ellipse 55% 45% at 8% 95%, rgba(13,138,95,.35) 0%, transparent 58%),
+    radial-gradient(ellipse 45% 40% at 95% 75%, rgba(124,109,255,.18) 0%, transparent 52%),
+    linear-gradient(175deg, #040310 0%, #080520 38%, var(--bg) 100%) !important;
+}
+
+/* شعاع الضوء — ألوان موحدة */
+[data-theme="dark"] .beam-1 { background: linear-gradient(180deg, rgba(124,109,255,.75) 0%, transparent 70%) !important; }
+[data-theme="dark"] .beam-2 { background: linear-gradient(180deg, rgba(31,187,133,.8) 0%, transparent 70%) !important; }
+[data-theme="dark"] .beam-3 { background: linear-gradient(180deg, rgba(124,109,255,.65) 0%, transparent 70%) !important; }
+
+/* كرات التوهج */
+[data-theme="dark"] .hero-orb-1 { background: radial-gradient(circle, rgba(124,109,255,.2) 0%, transparent 70%) !important; }
+[data-theme="dark"] .hero-orb-2 { background: radial-gradient(circle, rgba(31,187,133,.15) 0%, transparent 70%) !important; }
+
+/* العنوان الرئيسي gradient — dark mode only */
+[data-theme="dark"] .hero h1 em, [data-theme="dark"] .hero-em {
+  background: linear-gradient(115deg, #b8f0e0 0%, #c8bbff 45%, #8b70ff 100%) !important;
+  -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  filter: drop-shadow(0 0 22px rgba(124,109,255,.38)) !important;
+}
+[data-theme="dark"] .brand-start, [data-theme="dark"] .hero-brand-start {
+  background: linear-gradient(130deg, #c0b4ff 0%, #8b70ff 45%, #b8f0e0 100%) !important;
+  -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  filter: drop-shadow(0 0 28px rgba(124,109,255,.48)) !important;
+}
+
+/* شارة الهيرو */
+[data-theme="dark"] .hero-badge {
+  border-color: rgba(124,109,255,.22) !important;
+  background: rgba(124,109,255,.08) !important;
+}
+[data-theme="dark"] .hero-badge-dot { background: #1fbb85 !important; box-shadow: 0 0 0 0 rgba(31,187,133,.55) !important; }
+
+/* إحصائيات الهيرو */
+[data-theme="dark"] .hero-stats { border-top-color: rgba(255,255,255,.09) !important; }
+
+/* ===== NAV — شريط التنقل ===== */
+[data-theme="dark"] #main-nav,
+[data-theme="dark"] nav[role="navigation"]:not(.mobile-nav):not(.breadcrumb) {
+  background: rgba(4,3,18,.82) !important;
+  border-bottom-color: rgba(124,109,255,.12) !important;
+}
+[data-theme="dark"] nav[role="navigation"].nav-scrolled {
+  background: rgba(4,3,18,.97) !important;
+  box-shadow: 0 8px 48px rgba(0,0,0,.55), 0 0 60px rgba(124,109,255,.05) !important;
+}
+
+/* ===== MARQUEE STRIP ===== */
+[data-theme="dark"] .marquee-section {
+  background: rgba(124,109,255,.03) !important;
+  border-color: rgba(124,109,255,.08) !important;
+}
+[data-theme="dark"] .marquee-inner .msep { color: #8b70ff !important; }
+
+/* ===== SECTION KICKER / LABEL ===== */
+[data-theme="dark"] .section-kicker {
+  background: rgba(124,109,255,.1) !important;
+  color: #b8a8ff !important;
+  border-color: rgba(124,109,255,.18) !important;
+}
+[data-theme="dark"] .section-label { color: #b8a8ff !important; }
+
+/* ===== WHY SECTION ===== */
+[data-theme="dark"] .why-section {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg) 100%) !important;
+}
+[data-theme="dark"] .why-card {
+  background: rgba(124,109,255,.025) !important;
+  border-color: rgba(124,109,255,.1) !important;
+}
+[data-theme="dark"] .why-card:hover {
+  background: rgba(124,109,255,.07) !important;
+  border-color: rgba(124,109,255,.28) !important;
+  box-shadow: 0 20px 50px rgba(0,0,0,.45), 0 0 0 1px rgba(124,109,255,.22) !important;
+}
+[data-theme="dark"] .why-icon-wrap { background: rgba(124,109,255,.1) !important; }
+[data-theme="dark"] .why-card-featured {
+  background: linear-gradient(135deg, rgba(124,109,255,.1) 0%, rgba(255,255,255,.02) 60%) !important;
+  border-color: rgba(124,109,255,.22) !important;
+}
+.why-badge { background: linear-gradient(135deg, #6b46ff, #8b70ff) !important; }
+
+/* ===== HOW IT WORKS ===== */
+[data-theme="dark"] .how-section {
+  background-image: linear-gradient(rgba(25,15,80,.3), rgba(0,0,0,.1)) !important;
+}
+[data-theme="dark"] .step-item {
+  background: rgba(124,109,255,.025) !important;
+  border-color: rgba(124,109,255,.1) !important;
+}
+[data-theme="dark"] .step-item:hover {
+  background: rgba(124,109,255,.07) !important;
+  box-shadow: 0 24px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(124,109,255,.28) !important;
+}
+.step-purple { background: rgba(124,109,255,.14) !important; box-shadow: 0 0 0 1px rgba(124,109,255,.24), 0 0 28px rgba(124,109,255,.13) !important; }
+.step-teal   { background: rgba(31,187,133,.13) !important; box-shadow: 0 0 0 1px rgba(31,187,133,.24), 0 0 28px rgba(31,187,133,.13) !important; }
+.step-amber  { background: rgba(214,158,20,.13) !important; box-shadow: 0 0 0 1px rgba(214,158,20,.24), 0 0 28px rgba(214,158,20,.13) !important; }
+.step-num-badge { background: linear-gradient(135deg, #6b46ff, #8b70ff) !important; }
+[data-theme="dark"] .step-tag { background: rgba(124,109,255,.1) !important; color: #b8a8ff !important; }
+[data-theme="dark"] .step-connector { color: rgba(124,109,255,.55) !important; }
+
+/* ===== CAREERS PREVIEW ===== */
+[data-theme="dark"] .careers-preview { background: var(--bg) !important; }
+[data-theme="dark"] .career-chip {
+  background: rgba(124,109,255,.04) !important;
+  border-color: rgba(124,109,255,.12) !important;
+}
+[data-theme="dark"] .career-chip:hover {
+  background: linear-gradient(135deg, #5b38d8, #7a5af8) !important;
+  box-shadow: 0 10px 28px rgba(124,109,255,.5), 0 0 26px rgba(139,112,255,.28) !important;
+}
+[data-theme="dark"] .career-chip:hover {
+  background: linear-gradient(135deg, #5b38d8, #7a5af8) !important;
+  box-shadow: 0 10px 28px rgba(124,109,255,.42), 0 0 22px rgba(139,112,255,.22) !important;
+}
+
+/* ===== BENTO / FEATURES ===== */
+[data-theme="dark"] .features-section {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg) 100%) !important;
+}
+[data-theme="dark"] .bento-card {
+  background: rgba(124,109,255,.025) !important;
+  border-color: rgba(124,109,255,.1) !important;
+}
+[data-theme="dark"] .bento-card:hover {
+  background: rgba(124,109,255,.06) !important;
+  box-shadow: 0 28px 64px rgba(0,0,0,.5), 0 0 0 1px rgba(124,109,255,.28), 0 0 45px rgba(124,109,255,.07) !important;
+}
+[data-theme="dark"] .bento-glow-purple { background: radial-gradient(circle, rgba(124,109,255,.22), transparent 70%) !important; }
+[data-theme="dark"] .bento-glow-teal   { background: radial-gradient(circle, rgba(31,187,133,.22), transparent 70%) !important; }
+[data-theme="dark"] .bento-badge { background: rgba(31,187,133,.11) !important; color: #34d399 !important; }
+[data-theme="dark"] .bento-btn { background: linear-gradient(135deg, #5b38d8, #7a5af8) !important; box-shadow: 0 4px 14px rgba(124,109,255,.38) !important; }
+[data-theme="dark"] .bento-btn:hover { background: linear-gradient(135deg, #4a2dc0, #6b46ff) !important; box-shadow: 0 8px 24px rgba(124,109,255,.52), 0 0 18px rgba(139,112,255,.2) !important; }
+[data-theme="dark"] .bento-btn-teal { background: linear-gradient(135deg, #0d8a5f, #1fbb85) !important; box-shadow: 0 4px 14px rgba(31,187,133,.38) !important; }
+[data-theme="dark"] .bento-btn-teal:hover { background: linear-gradient(135deg, #0a7050, #18a575) !important; box-shadow: 0 8px 24px rgba(31,187,133,.5) !important; }
+
+/* ===== JOURNEY SECTION ===== */
+[data-theme="dark"] .journey-section {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg) 50%, var(--bg) 100%) !important;
+}
+[data-theme="dark"] .journey-card {
+  background: rgba(124,109,255,.025) !important;
+  border-color: rgba(124,109,255,.1) !important;
+}
+[data-theme="dark"] .journey-card:hover {
+  background: rgba(124,109,255,.07) !important;
+  box-shadow: 0 24px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(124,109,255,.28), 0 0 36px rgba(124,109,255,.08) !important;
+}
+
+/* ===== CTA BANNER ===== */
+[data-theme="dark"] .cta-banner {
+  background: linear-gradient(135deg, #220e8a 0%, #4a28d8 45%, #0c7855 100%) !important;
+}
+[data-theme="dark"] .cta-banner {
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg) 50%, var(--bg) 100%) !important;
+}
+[data-theme="dark"] .cta-glow {
+  background: radial-gradient(ellipse 65% 55% at 50% 50%, rgba(124,109,255,.28), transparent) !important;
+}
+[data-theme="dark"] .cta-kicker { background: rgba(184,168,255,.1) !important; color: #b8a8ff !important; border-color: rgba(184,168,255,.2) !important; }
+[data-theme="dark"] .cta-orb-1 { background: radial-gradient(circle, rgba(31,187,133,.13) 0%, transparent 70%) !important; }
+[data-theme="dark"] .cta-orb-2 { background: radial-gradient(circle, rgba(124,109,255,.13) 0%, transparent 70%) !important; }
+
+/* ===== TIMELINE / TRANSFORM ===== */
+[data-theme="dark"] .transform-section {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg) 100%) !important;
+}
+[data-theme="dark"] .tl-dot-purple { background: rgba(124,109,255,.12) !important; border-color: rgba(124,109,255,.28) !important; box-shadow: 0 0 18px rgba(124,109,255,.18) !important; }
+
+/* ===== TRUST SECTION ===== */
+[data-theme="dark"] .trust-section {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg) 100%) !important;
+}
+
+/* ===== OVERLAY على بطاقات الفئات ===== */
+[data-theme="dark"] .overlay {
+  background: linear-gradient(
+    to top,
+    rgba(12,4,50,.9) 0%,
+    rgba(60,35,180,.55) 42%,
+    rgba(124,109,255,.08) 72%,
+    transparent 100%
+  ) !important;
+}
+
+/* ===== BUTTONS عامة ===== */
+[data-theme="dark"] .btn-primary {
+  background: linear-gradient(135deg, #5b38d8 0%, #7a5af8 100%) !important;
+  box-shadow: 0 4px 20px rgba(124,109,255,.48), 0 0 0 1px rgba(139,112,255,.22) inset !important;
+}
+[data-theme="dark"] .btn-primary:hover {
+  box-shadow: 0 10px 36px rgba(124,109,255,.6), 0 0 36px rgba(139,112,255,.2) !important;
+}
+
+/* ===== Career chips الـ disabled ===== */
+[data-theme="dark"] .career-chip.chip-disabled:hover {
+  background: rgba(124,109,255,.04) !important;
+  border-color: rgba(124,109,255,.12) !important;
+}
+
+/* ===== Cat count colors ===== */
+[data-theme="dark"] .cat-count,
+[data-theme="dark"] .cat-info-row .cat-count { color: #b8a8ff !important; }
+
+/* ============================================================
+   ☀️ LIGHT MODE FIX — ألوان الوضع النهاري المُصلحة
+   ============================================================ */
+
+/* Light mode hero - use proper light background */
+html:not([data-theme="dark"]) .hero {
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 0%, rgba(79,53,232,.12) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 40% at 0% 100%, rgba(31,187,133,.08) 0%, transparent 55%),
+    linear-gradient(180deg, #f0eeff 0%, #f7f6f1 60%, #ffffff 100%) !important;
+}
+html:not([data-theme="dark"]) .beam-1 {
+  background: linear-gradient(180deg, rgba(79,53,232,.18) 0%, transparent 70%) !important;
+  opacity: .4 !important;
+}
+html:not([data-theme="dark"]) .beam-2 {
+  background: linear-gradient(180deg, rgba(31,187,133,.22) 0%, transparent 70%) !important;
+  opacity: .35 !important;
+}
+html:not([data-theme="dark"]) .beam-3 {
+  background: linear-gradient(180deg, rgba(79,53,232,.15) 0%, transparent 70%) !important;
+  opacity: .3 !important;
+}
+html:not([data-theme="dark"]) .hero h1,
+html:not([data-theme="dark"]) .hero-ar-headline {
+  color: #1c107a !important;
+}
+html:not([data-theme="dark"]) .hero-sub {
+  color: #5e5d57 !important;
+}
+html:not([data-theme="dark"]) .hero em,
+html:not([data-theme="dark"]) .hero-em {
+  background: linear-gradient(115deg, #0d8a5f 0%, #4f35e8 45%, #7c6dff 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  filter: none !important;
+}
+html:not([data-theme="dark"]) .brand-start {
+  background: linear-gradient(130deg, #311db5 0%, #4f35e8 60%, #7c6dff 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  filter: none !important;
+}
+html:not([data-theme="dark"]) .hstat-num {
+  background: linear-gradient(135deg, #311db5 0%, #4f35e8 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* Nav in light mode */
+html:not([data-theme="dark"]) nav[role="navigation"]:not(.mobile-nav) {
+  background: rgba(247,246,241,.95) !important;
+  border-bottom: 1px solid rgba(79,53,232,.1) !important;
+  backdrop-filter: blur(12px) !important;
+}
+html:not([data-theme="dark"]) nav[role="navigation"].nav-scrolled {
+  background: rgba(255,255,255,.98) !important;
+  box-shadow: 0 4px 28px rgba(0,0,0,.08) !important;
+}
+html:not([data-theme="dark"]) .nav-link { color: #16150d !important; }
+html:not([data-theme="dark"]) .nav-link:hover { color: #4f35e8 !important; }
+html:not([data-theme="dark"]) .nav-link.active { color: #4f35e8 !important; }
+
+/* Why section light mode */
+html:not([data-theme="dark"]) .why-section { background: #f7f6f1 !important; }
+html:not([data-theme="dark"]) .why-card {
+  background: #ffffff !important;
+  border-color: #e4e2d6 !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,.05) !important;
+}
+html:not([data-theme="dark"]) .why-card h3 { color: #16150d !important; }
+html:not([data-theme="dark"]) .why-card p { color: #6b6a62 !important; }
+html:not([data-theme="dark"]) .why-card-featured {
+  background: linear-gradient(135deg, #f2f0ff 0%, #ffffff 100%) !important;
+  border-color: rgba(79,53,232,.2) !important;
+}
+
+/* Section headings light mode */
+html:not([data-theme="dark"]) .section-kicker {
+  background: #f2f0ff !important;
+  color: #4f35e8 !important;
+  border-color: rgba(79,53,232,.2) !important;
+}
+html:not([data-theme="dark"]) .section-heading { color: #16150d !important; }
+html:not([data-theme="dark"]) .section-desc { color: #6b6a62 !important; }
+
+/* How section light */
+html:not([data-theme="dark"]) .how-section { background: #ffffff !important; }
+html:not([data-theme="dark"]) .step-item {
+  background: #ffffff !important;
+  border-color: #e4e2d6 !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,.05) !important;
+}
+html:not([data-theme="dark"]) .step-body h3 { color: #16150d !important; }
+html:not([data-theme="dark"]) .step-body p { color: #6b6a62 !important; }
+
+/* Careers section light */
+html:not([data-theme="dark"]) .careers-preview { background: #f7f6f1 !important; }
+html:not([data-theme="dark"]) .career-cat-card {
+  background: #ffffff !important;
+  border-color: #e4e2d6 !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06) !important;
+}
+html:not([data-theme="dark"]) .career-cat-card:hover {
+  border-color: rgba(79,53,232,.3) !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,.1), 0 0 0 1px rgba(79,53,232,.15) !important;
+}
+html:not([data-theme="dark"]) .cat-name { color: #16150d !important; }
+html:not([data-theme="dark"]) .cat-count { color: #4f35e8 !important; }
+
+/* Marquee light mode */
+html:not([data-theme="dark"]) .marquee-section {
+  background: #f0eeff !important;
+  border-color: rgba(79,53,232,.12) !important;
+}
+html:not([data-theme="dark"]) .marquee-inner { color: #311db5 !important; }
+html:not([data-theme="dark"]) .marquee-inner .msep { color: #7c6dff !important; }
+html:not([data-theme="dark"]) .marquee-inner span { color: #4028d4 !important; }
+
+/* QS bar light mode */
+html:not([data-theme="dark"]) .qs-bar {
+  background: #ffffff !important;
+  border-color: rgba(79,53,232,.12) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,.06) !important;
+}
+html:not([data-theme="dark"]) .qs-step strong { color: #16150d !important; }
+html:not([data-theme="dark"]) .qs-step span { color: #6b6a62 !important; }
+html:not([data-theme="dark"]) .qs-divider { background: rgba(79,53,232,.1) !important; }
+
+/* Bento light mode */
+html:not([data-theme="dark"]) .features-section { background: #ffffff !important; }
+html:not([data-theme="dark"]) .bento-card {
+  background: #f7f6f1 !important;
+  border-color: #e4e2d6 !important;
+}
+html:not([data-theme="dark"]) .bento-card h3 { color: #16150d !important; }
+html:not([data-theme="dark"]) .bento-card p { color: #6b6a62 !important; }
+
+/* Journey light mode */
+html:not([data-theme="dark"]) .journey-section,
+html:not([data-theme="dark"]) .transform-section { background: #f7f6f1 !important; }
+html:not([data-theme="dark"]) .journey-card {
+  background: #ffffff !important;
+  border-color: #e4e2d6 !important;
+}
+
+/* Trust section light mode */
+html:not([data-theme="dark"]) .trust-section { background: #ffffff !important; }
+
+/* FAQ light mode */
+html:not([data-theme="dark"]) .faq-section { background: #f7f6f1 !important; }
+html:not([data-theme="dark"]) .faq-item {
+  background: #ffffff !important;
+  border-color: #e4e2d6 !important;
+}
+html:not([data-theme="dark"]) .faq-q { color: #16150d !important; }
+html:not([data-theme="dark"]) .faq-a { color: #6b6a62 !important; }
+
+/* Chips section light */
+html:not([data-theme="dark"]) .chips-section { background: #f7f6f1 !important; }
+html:not([data-theme="dark"]) .career-chip {
+  background: #ffffff !important;
+  border-color: rgba(79,53,232,.15) !important;
+  color: #4028d4 !important;
+}
+html:not([data-theme="dark"]) .career-chip:hover {
+  background: linear-gradient(135deg, #4f35e8, #7c6dff) !important;
+  color: #ffffff !important;
+}
+
+/* Prob pills light mode */
+html:not([data-theme="dark"]) .prob-pill {
+  background: rgba(79,53,232,.07) !important;
+  border-color: rgba(79,53,232,.18) !important;
+  color: #4028d4 !important;
+}
+
+/* ============================================================
+   🖼️ CATEGORY GRID — تحسين التخطيط
+   ============================================================ */
+
+/* Better category grid - Bento-style layout */
+.career-category-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  grid-template-rows: auto !important;
+  gap: 16px !important;
+  margin-bottom: 48px !important;
+}
+
+/* Tech - large featured card (col span 2, row span 2) */
+.career-cat-card:nth-child(1) {
+  grid-column: 1 / 3 !important;
+  grid-row: 1 / 3 !important;
+}
+.career-cat-card:nth-child(1) .cat-img-wrap { min-height: 360px !important; }
+
+/* Design - tall right column */
+.career-cat-card:nth-child(2) {
+  grid-column: 3 !important;
+  grid-row: 1 / 3 !important;
+}
+.career-cat-card:nth-child(2) .cat-img-wrap { min-height: 100% !important; flex: 1 !important; }
+
+/* Business - col 4 row 1 */
+.career-cat-card:nth-child(3) {
+  grid-column: 4 !important;
+  grid-row: 1 !important;
+}
+/* Content - col 4 row 2 */
+.career-cat-card:nth-child(4) {
+  grid-column: 4 !important;
+  grid-row: 2 !important;
+}
+
+/* Row 3 - 4 equal cards */
+.career-cat-card:nth-child(5) { grid-column: 1 !important; grid-row: 3 !important; }
+.career-cat-card:nth-child(6) { grid-column: 2 !important; grid-row: 3 !important; }
+.career-cat-card:nth-child(7) { grid-column: 3 !important; grid-row: 3 !important; }
+.career-cat-card:nth-child(8) { grid-column: 4 !important; grid-row: 3 !important; }
+
+/* Min heights for row 3 */
+.career-cat-card:nth-child(5),
+.career-cat-card:nth-child(6),
+.career-cat-card:nth-child(7),
+.career-cat-card:nth-child(8) {
+  min-height: 160px !important;
+}
+.career-cat-card:nth-child(5) .cat-img-wrap,
+.career-cat-card:nth-child(6) .cat-img-wrap { min-height: 160px !important; }
+
+/* Make smaller cat cards more compact */
+.career-cat-card:nth-child(7),
+.career-cat-card:nth-child(8) {
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  padding: 24px !important;
+  min-height: 160px !important;
+}
+
+/* image cards in row 3 should show image properly */
+.career-cat-card:nth-child(5).cat-img-card,
+.career-cat-card:nth-child(6).cat-img-card {
+  flex-direction: column !important;
+}
+
+/* cat-hero-img improvements */
+.cat-hero-img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  opacity: 0.85 !important;
+  transition: transform 0.5s ease, opacity 0.4s ease !important;
+}
+.career-cat-card:hover .cat-hero-img {
+  transform: scale(1.06) !important;
+  opacity: 0.92 !important;
+}
+
+/* cat-label text improvements */
+.cat-label-main {
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  position: absolute !important;
+  bottom: 18px !important;
+  right: 18px !important;
+  left: 18px !important;
+  z-index: 3 !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,.5) !important;
+  line-height: 1.3 !important;
+}
+.career-cat-card:nth-child(1) .cat-label-main { font-size: 22px !important; }
+.career-cat-card:nth-child(2) .cat-label-main { font-size: 20px !important; }
+
+/* cat info row improvements */
+.cat-info-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 12px 16px !important;
+  background: var(--card) !important;
+  min-height: 48px !important;
+}
+/* cat-info-row bg uses CSS var so it auto-adapts - no !important override needed */
+[data-theme="dark"] .cat-info-row { background: rgba(15,13,30,0.95) !important; }
+html:not([data-theme="dark"]) .cat-info-row { background: #ffffff !important; }
+
+/* Responsive grid */
+@media (max-width: 900px) {
+  .career-category-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .career-cat-card:nth-child(1) { grid-column: 1 / 3 !important; grid-row: 1 !important; }
+  .career-cat-card:nth-child(2) { grid-column: 1 !important; grid-row: 2 !important; }
+  .career-cat-card:nth-child(3) { grid-column: 2 !important; grid-row: 2 !important; }
+  .career-cat-card:nth-child(4) { grid-column: 1 !important; grid-row: 3 !important; }
+  .career-cat-card:nth-child(5) { grid-column: 2 !important; grid-row: 3 !important; }
+  .career-cat-card:nth-child(6) { grid-column: 1 !important; grid-row: 4 !important; }
+  .career-cat-card:nth-child(7) { grid-column: 2 !important; grid-row: 4 !important; }
+  .career-cat-card:nth-child(8) { grid-column: 1 / 3 !important; grid-row: 5 !important; }
+}
+@media (max-width: 600px) {
+  .career-category-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .career-cat-card:nth-child(n) {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+  .career-cat-card:nth-child(8) { grid-column: 1 !important; }
+}
+
+/* ============================================================
+   🌍 LANGUAGE SWITCH — English mode adjustments
+   ============================================================ */
+
+/* English font tweaks */
+[lang="en"] body, [lang="en"] .section-heading,
+[lang="en"] h1, [lang="en"] h2, [lang="en"] h3 {
+  font-family: 'DM Sans', 'Space Grotesk', system-ui, sans-serif !important;
+}
+[lang="en"] .hero-sub { font-family: 'DM Sans', system-ui, sans-serif !important; }
+[lang="en"] .hbtn, [lang="en"] .nav-link, [lang="en"] .nav-cta {
+  font-family: 'DM Sans', system-ui, sans-serif !important;
+}
+/* English layout tweaks for LTR */
+[lang="en"] .cat-info-row { direction: ltr !important; }
+[lang="en"] .cat-label-top { right: auto !important; left: 18px !important; }
+[lang="en"] .cat-label-main { right: auto !important; left: 18px !important; text-align: left !important; }
+[lang="en"] .qs-arrow { display: none !important; }
+[lang="en"] .why-card { text-align: left !important; }
+[lang="en"] .step-body { text-align: left !important; }
+
+/* ============================================================
+   🔧 FIXES — Override conflicting styles from redesign.css
+   ============================================================ */
+
+/* Remove fixed aspect-ratio on image cards so grid controls sizing */
+.career-cat-card.cat-img-card {
+  aspect-ratio: auto !important;
+}
+/* Keep aspect ratio only for non-image cards */
+.career-cat-card:not(.cat-img-card) {
+  aspect-ratio: auto !important;
+  min-height: 120px !important;
+}
+
+/* Fix img opacity - redesign.css sets it too low (0.45) */
+.cat-hero-img { opacity: 0.82 !important; }
+.career-cat-card:hover .cat-hero-img { opacity: 0.92 !important; }
+
+/* cat-label-top pill style from redesign */
+.cat-label-top {
+  position: absolute !important;
+  top: 12px !important;
+  right: 12px !important;
+  left: auto !important;
+  background: rgba(255,255,255,.12) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255,255,255,.2) !important;
+  padding: 4px 12px !important;
+  border-radius: 99px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: rgba(255,255,255,.9) !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  z-index: 4 !important;
+}
+[lang="en"] .cat-label-top { right: auto !important; left: 12px !important; }
+
+/* cat-label-main - clean positioning */
+.cat-label-main {
+  position: absolute !important;
+  bottom: 14px !important;
+  right: 14px !important;
+  left: 14px !important;
+  z-index: 3 !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  color: #fff !important;
+  text-shadow: 0 2px 10px rgba(0,0,0,.6) !important;
+  line-height: 1.35 !important;
+  text-align: right !important;
+}
+[lang="en"] .cat-label-main { text-align: left !important; }
+.career-cat-card:nth-child(1) .cat-label-main { font-size: 20px !important; bottom: 18px !important; right: 18px !important; left: 18px !important; }
+.career-cat-card:nth-child(2) .cat-label-main { font-size: 18px !important; }
+
+/* Cat img wrap fix */
+.cat-img-wrap {
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  padding: 0 !important;
+}
+
+
+/* ============================================================
+   🆕 NEW CATEGORIES — Languages & Life Skills
+   ============================================================ */
+
+.cat-bg-languages {
+  background: linear-gradient(145deg, #1a1066 0%, #2d1f8a 35%, #0f5f7a 70%, #0d4a5e 100%) !important;
+  min-height: 200px !important;
+  flex: 1 !important;
+}
+.cat-bg-languages::before {
+  content: '🌍';
+  position: absolute;
+  font-size: 64px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  opacity: 0.22;
+  z-index: 1;
+  pointer-events: none;
+  filter: grayscale(0.2);
+}
+
+.cat-bg-lifeskills {
+  background: linear-gradient(145deg, #3d0a5e 0%, #6b1fa8 35%, #1a5c3a 70%, #0f4a2e 100%) !important;
+  min-height: 200px !important;
+  flex: 1 !important;
+}
+.cat-bg-lifeskills::before {
+  content: '🧠';
+  position: absolute;
+  font-size: 64px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  opacity: 0.22;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Light mode colors for new cats */
+html:not([data-theme="dark"]) .cat-bg-languages {
+  background: linear-gradient(145deg, #2a1880 0%, #3d2aa8 40%, #1a7a9a 100%) !important;
+}
+html:not([data-theme="dark"]) .cat-bg-lifeskills {
+  background: linear-gradient(145deg, #5a0f8a 0%, #8b2ec9 40%, #1f7a50 100%) !important;
+}
+
+/* Update grid to handle 10 cards (8 cats + 2 utility) in bento layout */
+/* Row 1: Tech (col 1-2 row 1-2), Design (col 3 row 1-2), Business (col 4 row 1), Content (col 4 row 2) */
+/* Row 3: Practical, Academic, Languages, Life Skills */
+/* Row 4: All Categories, View All */
+.career-category-grid {
+  grid-template-rows: auto !important;
+}
+/* Fix: cards 7 & 8 are now the new image cards, 9 & 10 are the utility cards */
+.career-cat-card:nth-child(7) {
+  grid-column: 3 !important;
+  grid-row: 3 !important;
+  min-height: 160px !important;
+  aspect-ratio: auto !important;
+}
+.career-cat-card:nth-child(8) {
+  grid-column: 4 !important;
+  grid-row: 3 !important;
+  min-height: 160px !important;
+  aspect-ratio: auto !important;
+}
+/* Utility cards go to row 4 */
+.career-cat-card:nth-child(9) {
+  grid-column: 1 / 3 !important;
+  grid-row: 4 !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  padding: 18px 24px !important;
+  min-height: 72px !important;
+}
+.career-cat-card:nth-child(10) {
+  grid-column: 3 / 5 !important;
+  grid-row: 4 !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  padding: 18px 24px !important;
+  min-height: 72px !important;
+}
+
+/* Img cards in row 3 need proper structure */
+.career-cat-card:nth-child(7).cat-img-card,
+.career-cat-card:nth-child(8).cat-img-card {
+  flex-direction: column !important;
+}
+.career-cat-card:nth-child(7) .cat-img-wrap,
+.career-cat-card:nth-child(8) .cat-img-wrap {
+  min-height: 115px !important;
+  flex: 1 !important;
+}
+
+/* Responsive adjustments for new cards */
+@media (max-width: 900px) {
+  .career-cat-card:nth-child(7) { grid-column: 1 !important; grid-row: 4 !important; }
+  .career-cat-card:nth-child(8) { grid-column: 2 !important; grid-row: 4 !important; }
+  .career-cat-card:nth-child(9) { grid-column: 1 !important; grid-row: 5 !important; }
+  .career-cat-card:nth-child(10) { grid-column: 2 !important; grid-row: 5 !important; }
+}
+@media (max-width: 600px) {
+  .career-cat-card:nth-child(7),
+  .career-cat-card:nth-child(8),
+  .career-cat-card:nth-child(9),
+  .career-cat-card:nth-child(10) {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+}

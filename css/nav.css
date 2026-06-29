@@ -1,0 +1,339 @@
+/* ============================================
+   🧭 شريط التنقل — Futuristic Glass Navbar
+   نمط: Glassmorphism + Neon Glow
+   ============================================ */
+
+/* --- الحاوية الرئيسية للـ Nav --- */
+nav {
+  background: rgba(7, 5, 18, 0.88);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 0 28px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  height: var(--nav-h);
+  position: sticky; top: 0; z-index: 300;
+  backdrop-filter: blur(32px) saturate(2) brightness(1.05);
+  -webkit-backdrop-filter: blur(32px) saturate(2) brightness(1.05);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.06),
+    0 4px 30px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+  transition: background .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+
+/* خط توهج علوي للنافبار */
+nav::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%, rgba(124,109,255,.25) 30%,
+    rgba(31,187,133,.25) 70%, transparent 100%);
+  pointer-events: none;
+}
+
+nav.scrolled, nav.nav-scrolled {
+  background: rgba(7, 6, 20, 0.92);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.06),
+    0 8px 48px rgba(0,0,0,0.5),
+    0 0 80px rgba(79,53,232,0.06);
+}
+
+/* --- حاوية اللوجو --- */
+.nav-logo {
+  display: flex; align-items: center; gap: 11px;
+  cursor: pointer; flex-shrink: 0;
+  user-select: none;
+  transition: opacity .2s ease;
+}
+.nav-logo:hover { opacity: .88; }
+
+/* --- صورة اللوجو --- */
+.nav-logo-img {
+  width: 38px; height: 38px; border-radius: 10px;
+  object-fit: contain; flex-shrink: 0;
+  filter: drop-shadow(0 0 12px rgba(124,109,255,.5))
+          drop-shadow(0 3px 10px rgba(79,53,232,.4));
+  transition: filter .25s ease, transform .25s ease;
+}
+.nav-logo:hover .nav-logo-img {
+  filter: drop-shadow(0 0 20px rgba(124,109,255,.7))
+          drop-shadow(0 5px 18px rgba(79,53,232,.55));
+  transform: translateY(-1px);
+}
+
+/* --- علامة اللوجو الاحتياطية --- */
+.nav-logo-mark {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--p600) 0%, var(--t400) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900; color: #fff;
+  font-family: var(--font-display); flex-shrink: 0;
+  box-shadow: 0 0 20px rgba(79,53,232,.5), 0 4px 16px rgba(79,53,232,.4);
+  letter-spacing: -.5px;
+  transition: box-shadow .25s ease, transform .25s ease;
+}
+.nav-logo:hover .nav-logo-mark {
+  box-shadow: 0 0 32px rgba(79,53,232,.7), 0 8px 28px rgba(79,53,232,.5);
+  transform: translateY(-1px);
+}
+
+/* --- نص العلامة التجارية --- */
+.nav-logo-text {
+  line-height: 1;
+  display: flex; flex-direction: column; gap: 1px;
+}
+.nav-logo-en {
+  font-family: var(--font-display);
+  font-size: 18px;
+  display: flex; align-items: baseline; gap: 0;
+  line-height: 1;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+.brand-start {
+  font-family: 'Bebas Neue', var(--font-display), sans-serif;
+  font-size: 100px; font-weight: 400;
+  background: linear-gradient(135deg, #c4b5fd 0%, #7c6dff 50%, #a5f3da 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: .08em;
+  display: inline-block;
+  transition: filter .25s ease;
+  filter: drop-shadow(0 0 8px rgba(124,109,255,.4));
+}
+.brand-sep {
+  font-family: var(--font-display);
+  font-size: 12px; font-weight: 400;
+  color: rgba(255,255,255,.25);
+  margin: 0 2px;
+  display: inline-block;
+  -webkit-text-fill-color: rgba(255,255,255,.25);
+  opacity: .6;
+}
+.brand-line {
+  font-family: 'Bebas Neue', var(--font-display), sans-serif;
+  font-size: 18px; font-weight: 400;
+  color: rgba(255,255,255,.88);
+  letter-spacing: .12em;
+  display: inline-block;
+  transition: color .25s ease;
+}
+.nav-logo:hover .brand-start { filter: brightness(1.2) drop-shadow(0 0 12px rgba(124,109,255,.6)); }
+.nav-logo:hover .brand-line { color: #a5f3da; }
+.nav-logo-ar {
+  font-size: 9.5px; color: rgba(255,255,255,.35); font-weight: 600;
+  display: block; letter-spacing: .4px;
+  margin-top: 2px; opacity: .75;
+}
+
+/* --- روابط التنقل --- */
+.nav-links {
+  display: flex; gap: 2px; overflow-x: auto;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch; flex: 1;
+  justify-content: center;
+}
+.nav-links::-webkit-scrollbar { display: none; }
+
+.nav-link {
+  padding: 7px 14px; border-radius: 9px; font-size: 13.5px;
+  color: rgba(255,255,255,.5); cursor: pointer;
+  transition: all .2s cubic-bezier(.25,.46,.45,.94);
+  border: none; background: none;
+  font-weight: 600; white-space: nowrap;
+  position: relative;
+}
+.nav-link:hover {
+  background: rgba(124,109,255,.12);
+  color: rgba(255,255,255,.9);
+}
+.nav-link.active {
+  background: rgba(124,109,255,.18);
+  color: #c4b5fd;
+  font-weight: 700;
+}
+/* خط تحت الرابط النشط */
+.nav-link.active::after {
+  content: '';
+  position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%);
+  width: 20px; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, #7c6dff, #1fbb85);
+}
+
+/* --- الجانب الأيمن --- */
+.nav-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+/* أزرار الأيقونات */
+.icon-btn {
+  padding: 8px; border-radius: 9px; font-size: 14px;
+  border: 1px solid rgba(255,255,255,.1);
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.75);
+  transition: all .2s cubic-bezier(.25,.46,.45,.94); line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  min-width: 36px; min-height: 36px;
+  backdrop-filter: blur(8px);
+}
+.icon-btn:hover {
+  background: rgba(124,109,255,.2);
+  border-color: rgba(124,109,255,.4);
+  color: #c4b5fd;
+  box-shadow: 0 0 16px rgba(124,109,255,.2);
+}
+
+/* زر الدخول */
+.nav-cta {
+  background: linear-gradient(135deg, var(--p600) 0%, #6b46ff 100%);
+  color: #fff;
+  padding: 8px 18px; border-radius: 10px;
+  font-size: 13.5px; font-weight: 700;
+  border: none; transition: all .2s cubic-bezier(.25,.46,.45,.94);
+  box-shadow: 0 4px 16px rgba(79,53,232,.4), 0 0 0 1px rgba(124,109,255,.2) inset;
+}
+.nav-cta:hover {
+  background: linear-gradient(135deg, #5a3df0 0%, #7c4dff 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 28px rgba(79,53,232,.55), 0 0 24px rgba(124,109,255,.2);
+}
+
+/* منطقة المستخدم */
+.nav-user {
+  display: flex; align-items: center; gap: 8px; cursor: pointer;
+  padding: 5px 12px 5px 8px; border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.1);
+  background: rgba(255,255,255,.05);
+  transition: all .2s; font-size: 13px; font-weight: 700;
+  color: rgba(255,255,255,.8);
+}
+.nav-user:hover {
+  background: rgba(124,109,255,.15);
+  border-color: rgba(124,109,255,.3);
+  color: #c4b5fd;
+}
+.nav-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--p600), var(--t400));
+  color: #fff; display: flex; align-items: center;
+  justify-content: center; font-size: 12px; font-weight: 800;
+  box-shadow: 0 0 10px rgba(124,109,255,.4);
+}
+
+/* --- زر الهامبرجر (موبايل) --- */
+.menu-btn {
+  display: none; padding: 8px; border-radius: 9px;
+  border: 1px solid rgba(255,255,255,.1);
+  background: rgba(255,255,255,.06);
+  flex-direction: column; gap: 5px;
+  width: 38px; height: 38px; align-items: center; justify-content: center;
+}
+.menu-btn span {
+  display: block; width: 18px; height: 2px;
+  background: rgba(255,255,255,.8); border-radius: 2px; transition: all .25s;
+}
+.menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* --- قائمة الموبايل --- */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: var(--nav-h);
+  bottom: 0;
+  /* RTL (عربي): تطلع من اليمين */
+  right: 0;
+  left: auto;
+  width: min(82vw, 320px);
+  height: 100%;
+  background: rgba(7, 6, 20, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 200;
+  padding: 12px 14px;
+  flex-direction: column;
+  gap: 4px;
+  border-inline-start: 1px solid rgba(255,255,255,.1);
+  border-top: 1px solid rgba(255,255,255,.07);
+  overflow-y: auto;
+  /* الأنيميشن الافتراضي: من اليمين */
+  animation: slideFromRight .25s cubic-bezier(.25,.46,.45,.94);
+}
+.mobile-nav.open { display: flex; }
+
+/* LTR (إنجليزي): تطلع من الشمال */
+[dir="ltr"] .mobile-nav {
+  right: auto;
+  left: 0;
+  animation: slideFromLeft .25s cubic-bezier(.25,.46,.45,.94);
+}
+
+@keyframes slideFromRight {
+  from { opacity: 0; transform: translateX(100%); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideFromLeft {
+  from { opacity: 0; transform: translateX(-100%); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Overlay خلف القائمة */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  top: var(--nav-h);
+  background: rgba(0,0,0,0.5);
+  z-index: 199;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  animation: fadeIn .25s ease;
+}
+.mobile-nav-overlay.open { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.mobile-nav-link {
+  padding: 13px 16px; border-radius: 12px; font-size: 15px;
+  font-weight: 700; color: rgba(255,255,255,.55); cursor: pointer;
+  border: none; background: none;
+  text-align: right; transition: all .18s; width: 100%;
+}
+.mobile-nav-link:hover, .mobile-nav-link.active {
+  background: rgba(124,109,255,.15);
+  color: #c4b5fd;
+}
+.mobile-nav-divider { height: 1px; background: rgba(255,255,255,.07); margin: 4px 0; }
+
+/* في الوضع الفاتح — النافبار يصبح أبيض نظيف */
+html:not([data-theme="dark"]) nav {
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid rgba(0,0,0,.09);
+  box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 4px 24px rgba(0,0,0,.07);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+}
+html:not([data-theme="dark"]) .nav-link { color: var(--muted); }
+html:not([data-theme="dark"]) .nav-link:hover { background: var(--p50); color: var(--p600); }
+html:not([data-theme="dark"]) .nav-link.active { background: var(--p50); color: var(--p600); }
+html:not([data-theme="dark"]) .nav-link.active::after { background: linear-gradient(90deg, var(--p600), var(--t400)); }
+html:not([data-theme="dark"]) .icon-btn { border-color: var(--border); background: var(--card); color: var(--text); }
+html:not([data-theme="dark"]) .icon-btn:hover { background: var(--p50); border-color: var(--p400); color: var(--p600); box-shadow: none; }
+html:not([data-theme="dark"]) .nav-user { border-color: var(--border); background: var(--card); color: var(--text); }
+html:not([data-theme="dark"]) .nav-user:hover { background: var(--p50); border-color: var(--p400); }
+html:not([data-theme="dark"]) .brand-line { color: var(--text); }
+html:not([data-theme="dark"]) .nav-logo-ar { color: var(--muted); }
+html:not([data-theme="dark"]) .menu-btn { border-color: var(--border); background: var(--card); }
+html:not([data-theme="dark"]) .menu-btn span { background: var(--text); }
+html:not([data-theme="dark"]) nav::after { opacity: 0; }
+html:not([data-theme="dark"]) .mobile-nav { background: var(--card); border-top-color: var(--border); border-inline-start-color: var(--border); }
+html:not([data-theme="dark"]) .mobile-nav-overlay { background: rgba(0,0,0,0.25); }
+html:not([data-theme="dark"]) .mobile-nav-link { color: var(--muted); }
+html:not([data-theme="dark"]) .mobile-nav-link:hover, html:not([data-theme="dark"]) .mobile-nav-link.active { background: var(--p50); color: var(--p600); }
+html:not([data-theme="dark"]) .mobile-nav-divider { background: var(--border); }
+html[data-theme="dark"] nav {
+  background: rgba(7, 5, 18, 0.88);
+}
