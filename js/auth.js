@@ -105,7 +105,16 @@ async function doLogin() {
     }
     return;
   }
-  if (data?.user) await onSupaLogin(data.user);
+  if (data?.user) {
+    try {
+      await onSupaLogin(data.user);
+    } catch (err) {
+      console.error('[doLogin] onSupaLogin رمى خطأ غير متوقع:', err);
+    }
+  } else {
+    console.warn('[doLogin] تسجيل الدخول نجح لكن data.user غير موجود:', data);
+    authShowError('login', 'حصل خطأ غير متوقع — حاول تحدّث الصفحة وجرّب تاني');
+  }
 }
 
 /* =============================================
@@ -212,55 +221,70 @@ async function onSupaLogin(supaUser, fallbackName) {
   const email = supaUser.email || '';
   const user  = { id: supaUser.id, name, email, createdAt: supaUser.created_at };
 
-  const guestStreak = STATE.streak || parseInt(_lsRaw('noor_streak') || '0');
-  const profile = await ProfileService.loadOrCreate(supaUser, guestStreak);
-
-  if (profile) {
-    STATE.points = Math.max(STATE.points, profile.points || 0);
-    STATE.streak = Math.max(guestStreak, profile.streak || 0);
-    STATE.level  = getLevelFromPoints(STATE.points);
-    _savePointsSecure(STATE.points);
-    _lsRawSet('noor_streak', STATE.streak);
-    _lsRawSet('noor_level', STATE.level);
-    STATE.isAdmin = profile.is_admin === true;
-    if (typeof _updateAdminNavVisibility === 'function') _updateAdminNavVisibility();
-  }
-
+  // ✅ أهم خطوة: نثبّت حالة الدخول فوراً — حتى لو أي حاجة تانية بعد كده فشلت،
+  // المستخدم يبقى Logged-in فعلياً في الواجهة ومايفضلش عالق.
   _lsSet('noor_user', user);
   STATE.user = user;
-  updateStreak();
   closeModal();
   updateNavUser(user);
 
+  const guestStreak = STATE.streak || parseInt(_lsRaw('noor_streak') || '0');
+
+  try {
+    const profile = await ProfileService.loadOrCreate(supaUser, guestStreak);
+    if (profile) {
+      STATE.points = Math.max(STATE.points, profile.points || 0);
+      STATE.streak = Math.max(guestStreak, profile.streak || 0);
+      STATE.level  = getLevelFromPoints(STATE.points);
+      _savePointsSecure(STATE.points);
+      _lsRawSet('noor_streak', STATE.streak);
+      _lsRawSet('noor_level', STATE.level);
+      STATE.isAdmin = profile.is_admin === true;
+      if (typeof _updateAdminNavVisibility === 'function') _updateAdminNavVisibility();
+    }
+  } catch (err) {
+    console.error('[onSupaLogin] فشل تحميل بيانات البروفايل:', err);
+  }
+
+  updateStreak();
+
   // ☁️ Cloud Sync — سحب بيانات المستخدم من الـ cloud ودمجها مع الـ local
-  if (window.ProgressSyncService) {
-    ProgressSyncService.pullAndApply(supaUser.id, STATE, saveProgress).then(pulled => {
-      if (pulled) {
-        renderDashboard();
-        if (typeof window._renderAllEngagement === 'function') window._renderAllEngagement();
-        if (typeof window._renderHomepageIntelligence === 'function') window._renderHomepageIntelligence();
-        toast(`مرحباً ${name}! ☁️ تم استعادة تقدمك`);
-      } else {
-        // أول مرة يدخل — ارفع الـ local data للـ cloud
-        ProgressSyncService.pushAll(supaUser.id, STATE);
-        toast(`مرحباً ${name}! 🎉`);
-      }
-    });
-  } else {
-    toast(`مرحباً ${name}! 🎉`);
+  try {
+    if (window.ProgressSyncService) {
+      ProgressSyncService.pullAndApply(supaUser.id, STATE, saveProgress).then(pulled => {
+        if (pulled) {
+          renderDashboard();
+          if (typeof window._renderAllEngagement === 'function') window._renderAllEngagement();
+          if (typeof window._renderHomepageIntelligence === 'function') window._renderHomepageIntelligence();
+          toast(`مرحباً ${name}! ☁️ تم استعادة تقدمك`);
+        } else {
+          // أول مرة يدخل — ارفع الـ local data للـ cloud
+          ProgressSyncService.pushAll(supaUser.id, STATE);
+          toast(`مرحباً ${name}! 🎉`);
+        }
+      }).catch(err => console.warn('[onSupaLogin] Cloud sync (pull) فشل:', err));
+    } else {
+      toast(`مرحباً ${name}! 🎉`);
+    }
+  } catch (err) {
+    console.warn('[onSupaLogin] Cloud sync غير متاح:', err);
   }
 
   // ☁️ مزامنة المسار النشط الجديد + التقدم الإجباري (نظام المسارات الجديد) — صامتة، لا تحجب الواجهة
-  if (window.PathSelector && typeof PathSelector.syncOnLogin === 'function') {
-    PathSelector.syncOnLogin().then(active => {
-      if (active && window.LockEngine && typeof LockEngine.syncCompletedStepsFromCloud === 'function') {
-        LockEngine.syncCompletedStepsFromCloud(active.roadmapSlug);
-      }
-    });
+  try {
+    if (window.PathSelector && typeof PathSelector.syncOnLogin === 'function') {
+      PathSelector.syncOnLogin().then(active => {
+        if (active && window.LockEngine && typeof LockEngine.syncCompletedStepsFromCloud === 'function') {
+          LockEngine.syncCompletedStepsFromCloud(active.roadmapSlug);
+        }
+      }).catch(err => console.warn('[onSupaLogin] PathSelector.syncOnLogin فشل:', err));
+    }
+  } catch (err) {
+    console.warn('[onSupaLogin] PathSelector غير متاح:', err);
   }
 
-  renderDashboard();
-  saveAchievement('badge', 'first_step');
+  try { renderDashboard(); } catch (err) { console.warn('[onSupaLogin] renderDashboard فشل:', err); }
+  try { saveAchievement('badge', 'first_step'); } catch (err) { console.warn('[onSupaLogin] saveAchievement فشل:', err); }
 
   // 🔔 تحميل الإشعارات الخاصة بالمستخدم
   if (typeof refreshNotifCenter === 'function') refreshNotifCenter();
