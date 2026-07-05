@@ -61,24 +61,20 @@
       .then(function (roadmap) {
         if (!roadmap || roadmap.source !== 'supabase') {
           // البيانات جاية من Fallback (لا UUIDs حقيقية) — مفيش جداول نقدر نكتب فيها بأمان
-          console.log('[SL6_DEBUG][Supabase] تخطّي تحديث قاعدة البيانات — المسار يعمل من بيانات fallback (لا UUIDs حقيقية):', roadmapSlug);
           return false;
         }
         var found = findStep(roadmap, sectionSlug, legacyLessonId);
         if (!found || !isRealUuid(found.step.id) || !isRealUuid(roadmap.id)) {
-          console.log('[SL6_DEBUG][Supabase] تخطّي تحديث قاعدة البيانات — لم يتم العثور على step_id/roadmap_id حقيقي لدرس:', legacyLessonId);
           return false;
         }
 
         var stepId = found.step.id;
         var roadmapId = roadmap.id;
-        console.log('[SL6_DEBUG][Supabase] بدء تحديث user_completed_steps لدرس [' + legacyLessonId + '] step_id=' + stepId);
 
         return supa.from('user_completed_steps')
           .upsert({ user_id: userId, step_id: stepId, roadmap_id: roadmapId }, { onConflict: 'user_id,step_id' })
           .then(function (res) {
             if (res.error) throw res.error;
-            console.log('[SL6_DEBUG][Supabase] ✅ تم تحديث user_completed_steps بنجاح لدرس:', legacyLessonId);
             return supa.from('user_completed_steps').select('step_id', { count: 'exact', head: true })
               .eq('user_id', userId).eq('roadmap_id', roadmapId);
           })
@@ -92,14 +88,22 @@
               last_visited_step_id: stepId, last_activity_at: new Date().toISOString()
             };
             if (percent !== null) progressRow.percent_complete = percent;
-            if (percent === 100) progressRow.completed_at = new Date().toISOString();
+            var justCompleted = (percent === 100);
+            if (justCompleted) progressRow.completed_at = new Date().toISOString();
 
-            console.log('[SL6_DEBUG][Supabase] بدء تحديث roadmap_progress — تقدّم المسار:', percent, '% (' + done + '/' + total + ')');
-            return supa.from('roadmap_progress').upsert(progressRow, { onConflict: 'user_id,roadmap_id' });
+            return supa.from('roadmap_progress').upsert(progressRow, { onConflict: 'user_id,roadmap_id' })
+              .then(function (res) {
+                if (justCompleted) {
+                  // 🏆 إصدار شهادة تلقائياً بعد تأكيد اكتمال المسار (يتجاهل الخطأ لو الشهادة موجودة بالفعل)
+                  supa.from('certificates').insert({
+                    user_id: userId, roadmap_id: roadmapId, roadmap_slug: roadmap.slug, roadmap_title: roadmap.title
+                  }).then(function () {}).catch(function () {});
+                }
+                return res;
+              });
           })
           .then(function (res) {
             if (res && res.error) throw res.error;
-            console.log('[SL6_DEBUG][Supabase] ✅ تم تحديث roadmap_progress بنجاح للمسار:', roadmapSlug);
             return true;
           });
       })

@@ -62,7 +62,7 @@ function toggleLang() {
 /* =============================================
    Navigation — SINGLE showPage definition
    ============================================= */
-const PROTECTED_PAGES = new Set(['dashboard', 'profile', 'community']);
+const PROTECTED_PAGES = new Set(['dashboard', 'profile', 'community', 'admin']);
 
 function showPage(pageId) {
   if (PROTECTED_PAGES.has(pageId) && !STATE.user) {
@@ -128,6 +128,9 @@ function showPage(pageId) {
   }
   if (pageId === 'library') {
     if (typeof renderLibrary === 'function') renderLibrary();
+  }
+  if (pageId === 'admin') {
+    if (typeof initAdminPage === 'function') initAdminPage();
   }
 }
 

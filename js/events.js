@@ -121,6 +121,71 @@
       const i = parseInt(el.dataset.faqIndex);
       if (!isNaN(i) && typeof toggleFAQ === 'function') toggleFAQ(i);
     },
+
+    // ── لوحة تحكم الأدمن ──
+    setAdminTab(el) { if (typeof setAdminTab === 'function') setAdminTab(el.dataset.adminTab); },
+    refreshAdminTrainers()  { if (typeof refreshAdminTrainers === 'function') refreshAdminTrainers(); },
+    refreshAdminUsers()     { if (typeof refreshAdminUsers === 'function') refreshAdminUsers(); },
+    refreshAdminCommunity() { if (typeof refreshAdminCommunity === 'function') refreshAdminCommunity(); },
+    adminToggleTrainerActive(el) {
+      if (typeof adminToggleTrainerActive === 'function') adminToggleTrainerActive(el.dataset.id, el.dataset.value === 'true');
+    },
+    adminToggleTrainerBlocked(el) {
+      if (typeof adminToggleTrainerBlocked === 'function') adminToggleTrainerBlocked(el.dataset.id, el.dataset.value === 'true');
+    },
+    adminDeleteTrainer(el) { if (typeof adminDeleteTrainer === 'function') adminDeleteTrainer(el.dataset.id); },
+    adminAdjustPoints(el)  { if (typeof adminAdjustPoints === 'function') adminAdjustPoints(el.dataset.id, parseInt(el.dataset.delta, 10)); },
+    adminDeletePost(el)    { if (typeof adminDeletePost === 'function') adminDeletePost(el.dataset.id); },
+
+    // ── مراجعة طلبات المدربين ──
+    adminSetTrainerFilter(el) { if (typeof adminSetTrainerFilter === 'function') adminSetTrainerFilter(el.dataset.value); },
+    adminSetTrainerStatus(el) { if (typeof adminSetTrainerStatus === 'function') adminSetTrainerStatus(el.dataset.id, el.dataset.value); },
+    adminGoToAdminsTab()      { if (typeof adminGoToAdminsTab === 'function') adminGoToAdminsTab(); },
+    adminQuickNotifyUser(el)  { if (typeof adminQuickNotifyUser === 'function') adminQuickNotifyUser(el.dataset.id, el.dataset.name); },
+
+    // ── إدارة المسارات التعليمية ──
+    refreshAdminRoadmaps()  { if (typeof refreshAdminRoadmaps === 'function') refreshAdminRoadmaps(); },
+    adminNewRoadmap()       { if (typeof adminNewRoadmap === 'function') adminNewRoadmap(); },
+    adminEditRoadmap(el)    { if (typeof adminEditRoadmap === 'function') adminEditRoadmap(el.dataset.id); },
+    adminBackToRoadmapList(){ if (typeof adminBackToRoadmapList === 'function') adminBackToRoadmapList(); },
+    adminDeleteRoadmap(el)  { if (typeof adminDeleteRoadmap === 'function') adminDeleteRoadmap(el.dataset.id); },
+    adminSaveRoadmapMeta(el){ if (typeof adminSaveRoadmapMeta === 'function') adminSaveRoadmapMeta(el.dataset.id); },
+    adminAddSection(el)     { if (typeof adminAddSection === 'function') adminAddSection(el.dataset.roadmapId); },
+    adminSaveSection(el)    { if (typeof adminSaveSection === 'function') adminSaveSection(el.dataset.id); },
+    adminDeleteSection(el)  { if (typeof adminDeleteSection === 'function') adminDeleteSection(el.dataset.id); },
+    adminAddStep(el)        { if (typeof adminAddStep === 'function') adminAddStep(el.dataset.sectionId); },
+    adminSaveStep(el)       { if (typeof adminSaveStep === 'function') adminSaveStep(el.dataset.id); },
+    adminDeleteStep(el)     { if (typeof adminDeleteStep === 'function') adminDeleteStep(el.dataset.id); },
+    adminAddResource(el)    { if (typeof adminAddResource === 'function') adminAddResource(el.dataset.stepId); },
+    adminSaveResource(el)   { if (typeof adminSaveResource === 'function') adminSaveResource(el.dataset.id); },
+    adminDeleteResource(el) { if (typeof adminDeleteResource === 'function') adminDeleteResource(el.dataset.id); },
+
+    // ── إدارة أسئلة الاختبار ──
+    refreshAdminQuizzes()     { if (typeof refreshAdminQuizzes === 'function') refreshAdminQuizzes(); },
+    adminAddQuizQuestion()    { if (typeof adminAddQuizQuestion === 'function') adminAddQuizQuestion(); },
+    adminSaveQuizQuestion(el) { if (typeof adminSaveQuizQuestion === 'function') adminSaveQuizQuestion(el.dataset.id); },
+    adminDeleteQuizQuestion(el) { if (typeof adminDeleteQuizQuestion === 'function') adminDeleteQuizQuestion(el.dataset.id); },
+
+    // ── إدارة الشهادات ──
+    refreshAdminCertificates() { if (typeof refreshAdminCertificates === 'function') refreshAdminCertificates(); },
+    adminSearchCertUser()      { if (typeof adminSearchCertUser === 'function') adminSearchCertUser(); },
+    adminIssueCertificate()    { if (typeof adminIssueCertificate === 'function') adminIssueCertificate(); },
+    adminToggleCertRevoked(el) { if (typeof adminToggleCertRevoked === 'function') adminToggleCertRevoked(el.dataset.id, el.dataset.value === 'true'); },
+    adminDeleteCertificate(el) { if (typeof adminDeleteCertificate === 'function') adminDeleteCertificate(el.dataset.id); },
+
+    // ── إدارة الإشعارات ──
+    refreshAdminNotifications() { if (typeof refreshAdminNotifications === 'function') refreshAdminNotifications(); },
+    adminSendNotification()     { if (typeof adminSendNotification === 'function') adminSendNotification(); },
+    adminDeleteNotification(el) { if (typeof adminDeleteNotification === 'function') adminDeleteNotification(el.dataset.id); },
+
+    // ── إدارة صلاحيات المشرفين ──
+    adminSearchForPromotion() { if (typeof adminSearchForPromotion === 'function') adminSearchForPromotion(); },
+    adminPromoteFound()       { if (typeof adminPromoteFound === 'function') adminPromoteFound(); },
+    adminDemoteUser(el)       { if (typeof adminDemoteUser === 'function') adminDemoteUser(el.dataset.id, el.dataset.name); },
+
+    // ── مركز الإشعارات (للمستخدم العادي) ──
+    toggleNotifCenter()  { if (typeof toggleNotifCenter === 'function') toggleNotifCenter(); },
+    markAllNotifsRead()  { if (typeof markAllNotifsRead === 'function') markAllNotifsRead(); },
   };
 
   /* ── معالج النقر الموحّد ── */

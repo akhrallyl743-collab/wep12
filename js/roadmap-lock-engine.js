@@ -132,7 +132,6 @@
     var milestones = [25, 50, 75, 90, 100];
     var crossed = milestones.filter(function (m) { return percent >= m && previous < m; });
     if (crossed.length) {
-      if (typeof console !== 'undefined') console.log('[SL6_DEBUG] عبور عتبة مشاهدة جديدة لدرس [' + legacyLessonId + ']:', crossed, '— سيتم تحديث Supabase الآن (نسبة=' + percent + '%)');
       _syncVideoProgressToCloud(legacyLessonId, stepId, percent, resourceId);
     }
 
@@ -143,7 +142,6 @@
   function _syncVideoProgressToCloud(legacyLessonId, stepId, percent, resourceId) {
     var supa = getSupa(), uid = getUserId();
     if (!supa || !uid || !stepId) {
-      console.log('[SL6_DEBUG] تخطّي تحديث user_video_progress في Supabase (مستخدم غير مسجّل أو stepId غير متاح) لدرس:', legacyLessonId);
       return;
     }
     supa.from('user_video_progress').upsert({
@@ -156,7 +154,6 @@
       if (res && res.error) {
         console.warn('[LockEngine] video progress sync failed (silent):', res.error.message);
       } else {
-        console.log('[SL6_DEBUG] ✅ تم تحديث user_video_progress في Supabase بنجاح — درس:', legacyLessonId, 'نسبة:', percent + '%');
       }
     }).catch(function (e) {
       console.warn('[LockEngine] video progress sync failed (silent):', e && e.message);
@@ -167,7 +164,6 @@
   function markComplete(legacyLessonId, roadmap, trackId) {
     // تحقق نهائي قبل التسجيل
     var status = getStepStatus(roadmap, legacyLessonId, trackId);
-    console.log('[SL6_DEBUG] markComplete — حالة الدرس [' + legacyLessonId + '] قبل التحقق:', status);
     if (status === 'locked') {
       console.warn('[LockEngine] محاولة إنهاء خطوة مقفلة:', legacyLessonId);
       return false;
@@ -176,7 +172,6 @@
     // ابحث عن الخطوة لفحص شرط الفيديو
     var step = _findStep(roadmap, legacyLessonId);
     if (step && !canComplete(step)) {
-      console.log('[SL6_DEBUG] markComplete — رُفض الإكمال: نسبة المشاهدة الحالية =', getVideoPercent(legacyLessonId) + '%', '(المطلوب: ' + VIDEO_THRESHOLD + '%)');
       _emit('videoThresholdNotMet', { legacyLessonId: legacyLessonId, required: VIDEO_THRESHOLD });
       return false;
     }
@@ -185,7 +180,6 @@
     var done = _getDoneSet();
     done.add(legacyLessonId);
     _saveDoneSet(done);
-    console.log('[SL6_DEBUG] ✅ تم تسجيل اكتمال الدرس محلياً (localStorage):', legacyLessonId);
 
     // حدّث "آخر درس" (AppState.currentTrack/currentCourse/currentLesson) — هذا
     // بالضبط ما تفعله platform_completeLesson القديمة في js/platform.js، وهو

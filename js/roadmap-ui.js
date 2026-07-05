@@ -101,7 +101,7 @@
 
   /* ── [تشخيص مؤقت] سجلّات Console لتتبّع مشكلة "الدرس التالي لا يُفتح" ──
      يمكن حذف هذا الـ flag وكل أسطر console المرتبطة به بعد التأكد من الحل. */
-  var SL6_DEBUG_PROGRESS = true;
+  var SL6_DEBUG_PROGRESS = false;
   function _dbg() { if (SL6_DEBUG_PROGRESS && typeof console !== 'undefined') console.log.apply(console, ['[SL6_DEBUG]'].concat(Array.prototype.slice.call(arguments))); }
 
   /* ── تتبّع نسبة مشاهدة فيديو YouTube عبر IFrame Player API الرسمي ──

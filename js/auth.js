@@ -222,6 +222,8 @@ async function onSupaLogin(supaUser, fallbackName) {
     _savePointsSecure(STATE.points);
     _lsRawSet('noor_streak', STATE.streak);
     _lsRawSet('noor_level', STATE.level);
+    STATE.isAdmin = profile.is_admin === true;
+    if (typeof _updateAdminNavVisibility === 'function') _updateAdminNavVisibility();
   }
 
   _lsSet('noor_user', user);
@@ -260,6 +262,9 @@ async function onSupaLogin(supaUser, fallbackName) {
   renderDashboard();
   saveAchievement('badge', 'first_step');
 
+  // 🔔 تحميل الإشعارات الخاصة بالمستخدم
+  if (typeof refreshNotifCenter === 'function') refreshNotifCenter();
+
   // Update community post avatar
   const postAvatar = $('post-avatar');
   if (postAvatar) {
@@ -284,6 +289,8 @@ AuthService.onAuthStateChange(async (event, session) => {
   }
   if (event === 'SIGNED_OUT') {
     STATE.user = null;
+    STATE.isAdmin = false;
+    if (typeof _updateAdminNavVisibility === 'function') _updateAdminNavVisibility();
     _lsDel('noor_user');
     const area = $('nav-auth-area');
     if (area) area.innerHTML = '<button class="nav-cta" data-action="openModal" data-tab="login">دخول</button>';
@@ -297,6 +304,8 @@ AuthService.onAuthStateChange(async (event, session) => {
 async function doLogout() {
   await AuthService.logout();
   STATE.user = null;
+  STATE.isAdmin = false;
+  if (typeof _updateAdminNavVisibility === 'function') _updateAdminNavVisibility();
   _lsDel('noor_user');
   toast('👋 تم تسجيل خروجك');
   showPage('home');

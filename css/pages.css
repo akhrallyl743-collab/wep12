@@ -1577,3 +1577,132 @@ html:not([data-theme="dark"]) .profile-hero {
   .mentor-pricing-divider { width: 100%; height: 1px; }
   .mentor-pricing-item { min-width: unset; }
 }
+
+/* =============================================
+   لوحة تحكم الأدمن — Admin Dashboard
+   ============================================= */
+.admin-tab-btn {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--muted);
+  font-size: 13.5px;
+  font-weight: 700;
+  transition: all .2s ease;
+}
+.admin-tab-btn:hover { border-color: var(--p400); color: var(--text); }
+.admin-tab-btn.active {
+  background: var(--p600);
+  color: #fff;
+  border-color: var(--p600);
+}
+
+.admin-panel { animation: fadeUp .3s ease both; }
+
+.admin-toolbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.admin-toolbar .form-input { flex: 1; min-width: 180px; margin-bottom: 0; }
+
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+  margin-bottom: 8px;
+}
+.admin-stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  padding: 18px;
+  text-align: center;
+}
+.admin-stat-card .num { font-size: 26px; font-weight: 800; color: var(--p600); display:block; margin-bottom: 4px; }
+.admin-stat-card .lbl { font-size: 12.5px; color: var(--muted); }
+
+.admin-row {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.admin-row-main { flex: 1; min-width: 200px; }
+.admin-row-main strong { display: block; font-size: 14.5px; margin-bottom: 2px; }
+.admin-row-main span { font-size: 12.5px; color: var(--muted); display: block; }
+.admin-row-actions { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+
+.admin-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  margin-left: 4px;
+}
+.admin-badge.on   { background: color-mix(in srgb, #0e8a5f 15%, transparent); color: #0e8a5f; }
+.admin-badge.off  { background: color-mix(in srgb, var(--g400) 15%, transparent); color: var(--muted); }
+.admin-badge.blocked { background: color-mix(in srgb, #e8502a 15%, transparent); color: #e8502a; }
+
+.admin-btn-xs {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-weight: 700;
+}
+.admin-btn-xs:hover { border-color: var(--p400); }
+.admin-btn-xs.danger { color: #e8502a; border-color: color-mix(in srgb, #e8502a 30%, var(--border)); }
+.admin-btn-xs.success { color: #0e8a5f; border-color: color-mix(in srgb, #0e8a5f 30%, var(--border)); }
+
+/* ── محرر المسارات/الأقسام/الخطوات/المصادر ── */
+.admin-editor-card, .admin-section-card, .admin-step-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.admin-section-card { border-inline-start: 3px solid var(--p400); }
+.admin-step-card { background: color-mix(in srgb, var(--card) 96%, var(--p400) 4%); margin: 12px 0; border-inline-start: 3px solid var(--g400); }
+.admin-resource-row {
+  background: var(--bg2, var(--card));
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin: 8px 0;
+}
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px 14px;
+}
+.admin-form-grid label { display: block; font-size: 12.5px; color: var(--muted); }
+.admin-form-grid .form-input, .admin-editor-card .form-input, .admin-section-card .form-input, .admin-step-card .form-input {
+  margin-top: 4px;
+}
+
+/* ── مركز الإشعارات ── */
+.notif-item {
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.notif-item:last-child { border-bottom: none; }
+.notif-item strong { display: block; margin-bottom: 3px; font-size: 13.5px; }
+.notif-item p { color: var(--muted); margin: 0 0 4px; line-height: 1.5; }
+.notif-item .notif-time { font-size: 11px; color: var(--muted); opacity: .8; }
+.notif-item.unread { background: color-mix(in srgb, var(--p400) 8%, transparent); border-radius: 8px; }
+

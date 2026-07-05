@@ -230,20 +230,63 @@ function completePsychChallenge(btn) {
 /* =============================================
    Mentors
    ============================================= */
-function renderMentors() {
-  setHTML('mentor-grid', MENTORS_DATA.map((m, i) => `
+const MENTOR_MODE_LABEL = { online: '🌐 أونلاين', offline: '🏠 حضوري', both: '🌐 أونلاين + 🏠 حضوري' };
+const MENTOR_AVATAR_COLORS = ['#5040e8', '#0e8a5f', '#e8a81a', '#e8502a', '#3d8ef5', '#c07a08'];
+
+async function renderMentors() {
+  const grid = $('mentor-grid');
+  if (!grid) return;
+
+  // حالة تحميل بسيطة
+  grid.innerHTML = `<p style="text-align:center;color:var(--muted);padding:24px 0;grid-column:1/-1;">جاري تحميل قائمة المدربين...</p>`;
+
+  let mentors = [];
+  try {
+    mentors = (typeof MentorService !== 'undefined') ? await MentorService.loadApproved() : [];
+  } catch (e) {
+    mentors = [];
+  }
+
+  // fallback: نسخة محلية فاضية في حالة تعطل الاتصال (لا مدربين وهميين)
+  if (!mentors.length && MENTORS_DATA.length) mentors = MENTORS_DATA;
+
+  STATE.mentorsCache = mentors;
+
+  if (!mentors.length) {
+    grid.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;padding:32px 16px;background:var(--surface);border:1px dashed var(--border);border-radius:16px;">
+        <div style="font-size:36px;margin-bottom:8px;">🧑‍🏫</div>
+        <p style="color:var(--muted);font-size:14px;margin-bottom:14px;">لسه معندناش مدربين مسجّلين — كن أول مدرّب في START LINE!</p>
+        <button class="btn btn-primary btn-sm" data-action="openTrainerModal">🤝 سجّل كمدرّب</button>
+      </div>`;
+    return;
+  }
+
+  setHTML('mentor-grid', mentors.map((m, i) => {
+    const name  = m.full_name || m.name || 'مدرّب';
+    const color = m.color || MENTOR_AVATAR_COLORS[i % MENTOR_AVATAR_COLORS.length];
+    const skills = Array.isArray(m.skills) ? m.skills : (m.skills ? String(m.skills).split(',') : []);
+    const modeLabel = MENTOR_MODE_LABEL[m.mode] || '';
+    const availNow = m.avail_now !== false; // افتراضي متاح لو غير محدد
+    return `
     <div class="mentor-card">
       <div class="mentor-header">
-        <div class="mentor-avatar" style="background:${m.color};">${sanitizeHTML(m.name[0])}</div>
-        <div class="mentor-info"><h3>${sanitizeHTML(m.name)}</h3><p>${sanitizeHTML(m.role)}</p></div>
+        <div class="mentor-avatar" style="background:${color};">${sanitizeHTML(name[0] || 'م')}</div>
+        <div class="mentor-info"><h3>${sanitizeHTML(name)}</h3><p>${sanitizeHTML(m.profession || m.role || '')}</p></div>
       </div>
-      <div class="mentor-skills">${m.skills.map(s => `<span class="skill-badge">${sanitizeHTML(s)}</span>`).join('')}</div>
-      <div class="mentor-rating">${m.rating} · ${m.sessions} جلسة مكتملة</div>
-      <div style="margin-bottom:8px;"><span class="mentor-avail">🟢 ${sanitizeHTML(m.avail)}</span></div>
+      ${skills.length ? `<div class="mentor-skills">${skills.map(s => `<span class="skill-badge">${sanitizeHTML(s.trim())}</span>`).join('')}</div>` : ''}
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;">
+        ${modeLabel ? `<span class="skill-badge" style="background:var(--p50);color:var(--p600);">${modeLabel}</span>` : ''}
+      </div>
+      <div style="margin-bottom:8px;">
+        <span class="mentor-avail">${availNow ? '🟢 متاح الآن' : '⚪ غير متاح حالياً'}</span>
+        ${m.availability ? `<div style="color:var(--muted);font-size:12.5px;margin-top:4px;">🕒 ${sanitizeHTML(m.availability)}</div>` : ''}
+      </div>
       <button class="request-btn ${STATE.sentRequests.has(i) ? 'sent' : ''}" data-action="requestMentor" data-mentor-index="${i}" ${STATE.sentRequests.has(i) ? 'disabled' : ''}>
         ${STATE.sentRequests.has(i) ? '✓ تم إرسال الطلب' : 'طلب جلسة 🤝'}
       </button>
-    </div>`).join(''));
+    </div>`;
+  }).join(''));
 }
 
 function requestMentor(i, btn) {
@@ -303,17 +346,49 @@ function submitCoachRequest() {
 /* =============================================
    Trainer Application Modal
    ============================================= */
-function openTrainerModal() {
+async function openTrainerModal() {
+  // لازم تسجّل دخول عشان يكون ليك بروفايل ثابت تقدر تعدّله بعدين
+  if (!STATE.user) { toast('🔒 سجّل دخولك الأول عشان تقدر تسجّل كمدرّب'); openModal('login'); return; }
+
   const formArea = $('trainer-form-area');
   const successArea = $('trainer-success');
   if (formArea) formArea.style.display = 'block';
   if (successArea) successArea.style.display = 'none';
 
-  // لو المستخدم مسجّل دخول، نسبق الفورم باسمه وإيميله
   const u = STATE.user;
-  if (u) {
-    if ($('tr-name'))  $('tr-name').value  = u.name  || '';
-    if ($('tr-email')) $('tr-email').value = u.email || '';
+  if ($('tr-name'))  $('tr-name').value  = u.name  || '';
+  if ($('tr-email')) $('tr-email').value = u.email || '';
+
+  // هل عنده بروفايل مدرّب مسجّل بالفعل؟ لو نعم نفتح فورم "تعديل" مسبق التعبئة
+  STATE.trainerEditMode = false;
+  const mine = (typeof MentorService !== 'undefined') ? await MentorService.getMine(u.id) : null;
+  const titleEl = $('trainer-modal-title');
+  const submitBtn = $('trainer-submit-btn');
+
+  if (mine) {
+    STATE.trainerEditMode = true;
+    if ($('tr-name'))         $('tr-name').value = mine.full_name || u.name || '';
+    if ($('tr-age'))          $('tr-age').value = mine.age || '';
+    if ($('tr-email'))        $('tr-email').value = mine.email || u.email || '';
+    if ($('tr-phone'))        $('tr-phone').value = mine.phone || '';
+    if ($('tr-role'))         $('tr-role').value = mine.profession || '';
+    if ($('tr-experience'))   $('tr-experience').value = mine.years_experience || '';
+    if ($('tr-skills'))       $('tr-skills').value = Array.isArray(mine.skills) ? mine.skills.join('، ') : (mine.skills || '');
+    if ($('tr-bio'))          $('tr-bio').value = mine.bio || '';
+    if ($('tr-portfolio'))    $('tr-portfolio').value = mine.portfolio_url || '';
+    if ($('tr-availability')) $('tr-availability').value = mine.availability || '';
+    if ($('tr-why'))          $('tr-why').value = mine.motivation || '';
+    if ($('tr-mode'))         $('tr-mode').value = mine.mode || 'online';
+    if ($('tr-avail-now'))    $('tr-avail-now').checked = mine.avail_now !== false;
+    if ($('tr-is-active'))    $('tr-is-active').checked = mine.is_active !== false;
+    if (titleEl) titleEl.textContent = 'بروفايلك كمدرّب';
+    if (submitBtn) submitBtn.textContent = 'حفظ التعديلات ✏️';
+  } else {
+    if ($('tr-mode'))      $('tr-mode').value = 'online';
+    if ($('tr-avail-now')) $('tr-avail-now').checked = true;
+    if ($('tr-is-active')) $('tr-is-active').checked = true;
+    if (titleEl) titleEl.textContent = 'سجّل كمدرّب في START LINE';
+    if (submitBtn) submitBtn.textContent = 'إرسال 🚀';
   }
 
   const modal = $('trainer-modal');
@@ -326,6 +401,8 @@ function closeTrainerModal() {
 }
 
 async function submitTrainerApplication() {
+  if (!STATE.user) { openModal('login'); return; }
+
   const name        = ($('tr-name')?.value || '').trim();
   const age         = ($('tr-age')?.value || '').trim();
   const email       = ($('tr-email')?.value || '').trim();
@@ -337,6 +414,9 @@ async function submitTrainerApplication() {
   const portfolio   = ($('tr-portfolio')?.value || '').trim();
   const availability= ($('tr-availability')?.value || '').trim();
   const why         = ($('tr-why')?.value || '').trim();
+  const mode        = ($('tr-mode')?.value || 'online');
+  const availNow    = !!$('tr-avail-now')?.checked;
+  const isActive    = !!$('tr-is-active')?.checked;
 
   if (!name) { toast('⚠️ أدخل اسمك الكامل'); return; }
   if (!phone) { toast('⚠️ أدخل رقم التواصل'); return; }
@@ -347,7 +427,6 @@ async function submitTrainerApplication() {
   const skills = skillsRaw ? skillsRaw.split(/[,،]/).map(s => s.trim()).filter(Boolean) : [];
 
   const payload = {
-    user_id: STATE.user?.id || null,
     full_name: name,
     age: age ? parseInt(age, 10) : null,
     email,
@@ -359,27 +438,35 @@ async function submitTrainerApplication() {
     portfolio_url: portfolio || null,
     availability: availability || null,
     motivation: why || null,
-    status: 'pending',
-    submitted_at: new Date().toISOString()
+    mode,
+    avail_now: availNow,
+    is_active: isActive
   };
 
-  // إرسال لـ Supabase (fire-and-forget بصورة آمنة — لا يمنع ظهور رسالة النجاح حتى لو فشل الاتصال)
-  try {
-    if (typeof supa !== 'undefined' && supa) {
-      const { error } = await supa.from('trainer_applications').insert(payload);
-      if (error) console.warn('[TrainerApplication] فشل الحفظ في Supabase:', error.message);
-    }
-  } catch (e) {
-    console.warn('[TrainerApplication] خطأ غير متوقع:', e);
+  const wasEdit = !!STATE.trainerEditMode;
+  const { error } = await MentorService.upsert(STATE.user.id, payload);
+
+  if (error) {
+    toast('⚠️ حصل خطأ أثناء الحفظ، حاول مرة تانية');
+    return;
   }
 
-  if (typeof addPoints === 'function') addPoints(15, 'تقديم طلب التسجيل كمدرّب');
+  if (!wasEdit && typeof addPoints === 'function') addPoints(15, 'التسجيل كمدرّب');
+
+  const successArea = $('trainer-success');
+  const successTitle = successArea?.querySelector('h3');
+  const successText  = successArea?.querySelector('p');
+  if (successTitle) successTitle.textContent = wasEdit ? 'تم حفظ تعديلاتك بنجاح!' : 'تم استلام طلبك بنجاح! 🎉';
+  if (successText)  successText.textContent  = wasEdit
+    ? 'تم تحديث بياناتك، وستظهر بعد مراجعة الإدارة إن كانت هناك تغييرات جوهرية.'
+    : 'طلبك الآن قيد المراجعة من فريق الإدارة، وسيظهر في قائمة المدربين فور قبوله. شكراً لصبرك! 🙏';
 
   const formArea = $('trainer-form-area');
-  const successArea = $('trainer-success');
   if (formArea) formArea.style.display = 'none';
   if (successArea) successArea.style.display = 'block';
   setTimeout(() => closeTrainerModal(), 4000);
+
+  renderMentors(); // تحديث القائمة فوراً بالبيانات الجديدة
 }
 
 /* =============================================
@@ -810,40 +897,3 @@ function renderActiveTracksWidget() {
 /* Hook renderHomepageIntelligence + active tracks into init cycle */
 window._renderHomepageIntelligence = renderHomepageIntelligence;
 window._renderActiveTracksWidget   = renderActiveTracksWidget;
-
-/* =============================================
-   Mentor Payment Interest Registration
-   ============================================= */
-async function mentorNotifyInterest() {
-  const user = STATE.user;
-  const email = user?.email;
-
-  if (!email) {
-    openModal('login');
-    toast('سجّل دخولك أولاً لتلقّي الإشعار 📬');
-    return;
-  }
-
-  // Save interest to Supabase
-  try {
-    await supa.from('payment_interest').upsert({
-      user_id: user.id,
-      email,
-      feature: 'mentor_sessions',
-      registered_at: new Date().toISOString()
-    }, { onConflict: 'user_id,feature' });
-  } catch(e) { /* fail silently — still show success */ }
-
-  // Update button
-  const banner = document.getElementById('mentor-pricing-banner');
-  if (banner) {
-    const btn = banner.querySelector('button');
-    if (btn) {
-      btn.textContent = '✅ سيتم إعلامك فور الإطلاق!';
-      btn.disabled = true;
-      btn.style.background = 'var(--t400)';
-    }
-  }
-  toast(`✅ ممتاز ${user.name?.split(' ')[0] || ''}! سنُعلمك فور إطلاق نظام الدفع 🚀`);
-}
-window.mentorNotifyInterest = mentorNotifyInterest;

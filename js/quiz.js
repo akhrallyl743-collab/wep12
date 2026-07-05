@@ -7,12 +7,24 @@ function initQuiz() {
   STATE.currentQ = 0;
   STATE.quizAnswers = [];
   STATE.selectedOpt = null;
+  STATE.activeQuizQuestions = QUIZ_QUESTIONS; // عرض فوري بالبيانات المحلية أثناء التحميل
   renderQuestion();
+
+  if (typeof QuizService !== 'undefined') {
+    QuizService.getQuestions().then(list => {
+      if (list && list.length) {
+        STATE.activeQuizQuestions = list;
+        if (STATE.currentPage === 'quiz') renderQuestion();
+      }
+    });
+  }
 }
 
+function _quizQuestions() { return STATE.activeQuizQuestions || QUIZ_QUESTIONS; }
+
 function renderQuestion() {
-  const total = QUIZ_QUESTIONS.length;
-  const q = QUIZ_QUESTIONS[STATE.currentQ];
+  const total = _quizQuestions().length;
+  const q = _quizQuestions()[STATE.currentQ];
   if (!q) return;
   const pct = Math.round(((STATE.currentQ + 1) / total) * 100);
 
@@ -64,7 +76,7 @@ function prevQuestion() {
 function nextQuestion() {
   if (STATE.selectedOpt === null) return;
   STATE.quizAnswers.push(STATE.selectedOpt);
-  if (STATE.currentQ < QUIZ_QUESTIONS.length - 1) {
+  if (STATE.currentQ < _quizQuestions().length - 1) {
     STATE.currentQ++;
     STATE.selectedOpt = null;
     renderQuestion();
@@ -80,7 +92,7 @@ function calcSkillScores(answers) {
   const scores = { creative: 0, technical: 0, social: 0, analytical: 0, entrepreneurial: 0 };
   const keys = ['creative', 'technical', 'social', 'analytical', 'entrepreneurial'];
 
-  QUIZ_QUESTIONS.forEach((q, qIdx) => {
+  _quizQuestions().forEach((q, qIdx) => {
     if (answers[qIdx] === undefined || !q.weights) return;
     const optWeights = q.weights[answers[qIdx]];
     if (!optWeights) return;

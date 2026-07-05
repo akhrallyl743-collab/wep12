@@ -2972,14 +2972,11 @@ const PSYCH_DATA = [
 ];
 
 
-const MENTORS_DATA = [
-  { name:"سارة أحمد", role:"مصممة UX/UI | Figma Expert", skills:["UI Design","Figma","User Research"], rating:"⭐ 4.9", sessions:"142", avail:"متاحة هذا الأسبوع", color:"#5040e8" },
-  { name:"محمد الخالدي", role:"مطور Full Stack | 8 سنوات خبرة", skills:["React","Node.js","MongoDB"], rating:"⭐ 4.8", sessions:"98", avail:"متاح غداً", color:"#0e8a5f" },
-  { name:"ليلى منصور", role:"متخصصة تسويق رقمي | Meta & Google", skills:["Facebook Ads","SEO","Analytics"], rating:"⭐ 4.9", sessions:"211", avail:"متاحة اليوم", color:"#e8a81a" },
-  { name:"كريم حسن", role:"مبتكر محتوى | 500K+ متابع", skills:["YouTube","TikTok","Branding"], rating:"⭐ 4.7", sessions:"76", avail:"متاح هذا الأسبوع", color:"#e8502a" },
-  { name:"نور الدين سلامة", role:"مهندس AI و Data Science", skills:["Python","ML","Data Analysis"], rating:"⭐ 4.9", sessions:"63", avail:"متاح في ٣ أيام", color:"#3d8ef5" },
-  { name:"هنا الشمري", role:"فريلانسر محترفة | 5 سنوات", skills:["Freelance","Upwork","Client Mgmt"], rating:"⭐ 4.8", sessions:"130", avail:"متاحة اليوم", color:"#c07a08" },
-];
+// [تحديث] تم إزالة المدربين الوهميين نهائياً.
+// قائمة المدربين الآن حيّة 100% من جدول trainer_applications في Supabase.
+// أي مستخدم مسجّل دخول يقدر يضيف نفسه كمدرب من صفحة "المدربون" وتفاصيله تظهر تلقائياً هنا.
+// هذا المتغير باقٍ فاضي فقط كـ fallback أمان لو فشل الاتصال بالسيرفر — لا تحط فيه بيانات وهمية.
+const MENTORS_DATA = [];
 
 
 const PLAN_7 = [

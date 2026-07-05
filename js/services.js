@@ -361,6 +361,66 @@ const CommunityService = {
   }
 };
 
+/* =============================================
+   Mentor Services — تسجيل ذاتي كمدرّب + قائمة حيّة
+   الجدول: trainer_applications
+   is_active   : المدرب نفسه بيتحكم فيه (يظهر/يختفي من القائمة)
+   is_blocked  : أنت فقط بتتحكم فيه من Supabase Dashboard (حماية إضافية)
+   ============================================= */
+const MentorService = {
+  // تحميل قائمة المدربين المعروضة للجميع
+  async loadApproved() {
+    try {
+      const { data, error } = await supa
+        .from('trainer_applications')
+        .select('*')
+        .eq('is_active', true)
+        .eq('is_blocked', false)
+        .order('created_at', { ascending: false });
+      if (error) throw error;
+      return data || [];
+    } catch (e) {
+      console.warn('[Mentor] loadApproved error:', e);
+      return [];
+    }
+  },
+
+  // هل عندي بروفايل مدرّب مسجّل بالفعل؟ (لو نعم — نعرض فورم التعديل بدل التسجيل من الصفر)
+  async getMine(userId) {
+    if (!userId) return null;
+    try {
+      const { data, error } = await supa
+        .from('trainer_applications')
+        .select('*')
+        .eq('user_id', userId)
+        .maybeSingle();
+      if (error) throw error;
+      return data || null;
+    } catch (e) {
+      console.warn('[Mentor] getMine error:', e);
+      return null;
+    }
+  },
+
+  // إنشاء أو تحديث بروفايل المدرّب (upsert بمفتاح user_id)
+  async upsert(userId, fields) {
+    try {
+      const payload = { ...fields, user_id: userId, updated_at: new Date().toISOString() };
+      const { data, error } = await supa
+        .from('trainer_applications')
+        .upsert(payload, { onConflict: 'user_id' })
+        .select()
+        .single();
+      if (error) throw error;
+      return { data };
+    } catch (e) {
+      console.warn('[Mentor] upsert error:', e);
+      return { error: e.message || 'حدث خطأ أثناء الحفظ' };
+    }
+  }
+};
+window.MentorService = MentorService;
+
 // expose supa لـ AuthService فقط — app.js لا يستخدمه مباشرة
 window.supa = supa;
 
@@ -507,3 +567,24 @@ const ProgressSyncService = {
 };
 
 window.ProgressSyncService = ProgressSyncService;
+
+/* =============================================
+   NotificationService — إشعارات الأدمن للمستخدمين
+   ============================================= */
+const NotificationService = {
+  async loadForCurrentUser() {
+    try {
+      const { data, error } = await supa
+        .from('notifications')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(50);
+      if (error) throw error;
+      return data || [];
+    } catch (e) {
+      console.warn('[NotificationService] load error:', e);
+      return [];
+    }
+  }
+};
+window.NotificationService = NotificationService;

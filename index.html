@@ -11,12 +11,9 @@
 <meta property="og:description" content="اكتشف المهنة التي تناسب شخصيتك. خارطة طريق مخصصة، دعم نفسي، ومدربون خبراء — مجاناً تماماً.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://start-line.vercel.app/">
-<!-- ⚠️ OG IMAGE: المسار يشير إلى og.png لكن الملف الموجود هو assets/og.svg
-     تحويل يدوي مطلوب: افتح assets/og.svg في Figma/Inkscape وصدّره كـ PNG 1200×630px
-     ثم ضعه في root directory باسم og.png (وليس داخل assets/) -->
-<meta property="og:image" content="https://start-line.vercel.app/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image" content="https://start-line.vercel.app/assets/logo.png">
+<meta property="og:image:width" content="1254">
+<meta property="og:image:height" content="1254">
 <meta property="og:image:alt" content="START LINE — منصة التوجيه المهني للشباب العربي">
 <meta property="og:locale" content="ar_AR">
 <meta property="og:site_name" content="START LINE — خط البداية">
@@ -24,8 +21,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="START LINE — خط البداية">
 <meta name="twitter:description" content="منصة التوجيه المهني الأولى للشباب العربي — مجاناً">
-<!-- ⚠️ نفس ملاحظة og:image — يحتاج og.png في root directory -->
-<meta name="twitter:image" content="https://start-line.vercel.app/og.png">
+<meta name="twitter:image" content="https://start-line.vercel.app/assets/logo.png">
 <!-- Additional SEO -->
 <meta name="keywords" content="توجيه مهني، مسار وظيفي، شباب عربي، اختبار مهني، مهارات، تطوير ذاتي، start line، خط البداية">
 <meta name="author" content="START LINE">
@@ -59,18 +55,13 @@
 <link rel="stylesheet" href="css/lightmode.css">
 <link rel="stylesheet" href="css/roadmap.css">
 
-<!-- ============================================================
-     Google Analytics 4
-     استبدل YOUR_GA4_ID بـ Measurement ID الحقيقي من:
-     Google Analytics → Admin → Data Streams → Measurement ID
-     مثال: G-ABCDE12345
-     ============================================================ -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA4_ID"></script>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MZ3PE6L5JL"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'YOUR_GA4_ID');
+  gtag('config', 'G-MZ3PE6L5JL');
 </script>
 
 <!-- ⚡ Early Theme Injection — يمنع وميض الوضع الفاتح قبل تحميل JS -->
@@ -149,6 +140,7 @@
     <button class="nav-link" data-action="showPage" data-page="psychology" data-en="Support" role="menuitem">الدعم النفسي</button>
     <button class="nav-link" data-action="showPage" data-page="community" data-en="Community" role="menuitem">المجتمع</button>
     <button class="nav-link" data-action="showPage" data-page="mentors" data-en="Mentors" role="menuitem">المدربون</button>
+    <button class="nav-link admin-nav-link" style="display:none;" data-action="showPage" data-page="admin" data-en="Admin" role="menuitem">⚙️ الإدارة</button>
     <button class="nav-link" data-action="showPage" data-page="plan" data-en="My Plan" role="menuitem">خطتي</button>
     <button class="nav-link" data-action="showPage" data-page="dashboard" data-en="Dashboard" role="menuitem">لوحتي</button>
   </div>
@@ -156,6 +148,19 @@
   <div class="nav-right">
     <button class="icon-btn" data-action="toggleTheme" id="theme-btn" aria-label="تبديل المظهر">🌙</button>
     <button class="icon-btn" data-action="toggleLang" id="lang-btn" aria-label="تغيير اللغة">EN</button>
+    <div style="position:relative;" id="nav-auth-area-wrap">
+      <button class="icon-btn" id="notif-bell-btn" data-action="toggleNotifCenter" aria-label="الإشعارات" style="position:relative;">
+        🔔
+        <span id="notif-bell-badge" style="display:none;position:absolute;top:-2px;left:-2px;background:#e0524a;color:#fff;border-radius:10px;font-size:10px;line-height:1;padding:3px 5px;font-weight:700;">0</span>
+      </button>
+      <div id="notif-center-panel" style="display:none;position:absolute;top:calc(100% + 8px);left:0;width:300px;max-height:380px;overflow-y:auto;background:var(--card-bg,#fff);border:1px solid var(--border,#eee);border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.15);z-index:200;padding:8px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;">
+          <strong style="font-size:14px;">🔔 الإشعارات</strong>
+          <button class="admin-btn-xs" data-action="markAllNotifsRead">تعليم الكل كمقروء</button>
+        </div>
+        <div id="notif-center-list"></div>
+      </div>
+    </div>
     <div id="nav-auth-area">
       <button class="nav-cta" data-action="openModal" data-tab="login" data-en="Sign In">دخول</button>
     </div>
@@ -175,6 +180,7 @@
   <button class="mobile-nav-link" data-action="showPage" data-page="plan" data-en="📅 My Plan">📅 خطتي</button>
   <button class="mobile-nav-link" data-action="showPage" data-page="community" data-en="🌍 Community">🌍 المجتمع</button>
   <button class="mobile-nav-link" data-action="showPage" data-page="mentors" data-en="🤝 Mentors">🤝 المدربون</button>
+  <button class="mobile-nav-link admin-nav-link" style="display:none;" data-action="showPage" data-page="admin" data-en="⚙️ Admin">⚙️ الإدارة</button>
   <button class="mobile-nav-link" data-action="showPage" data-page="dashboard" data-en="📊 Dashboard">📊 لوحتي</button>
   <div class="mobile-nav-divider" role="separator"></div>
   <div style="padding:10px 8px;display:flex;gap:10px;">
@@ -1960,6 +1966,106 @@
 </div>
 
 
+<!-- ============ لوحة تحكم الأدمن ============ -->
+<div id="page-admin" class="page" role="main">
+  <div class="mentor-wrap">
+    <button class="back-btn" data-action="showPage" data-page="home" data-en="→ Back">← رجوع</button>
+
+    <div id="admin-guard" style="display:none;text-align:center;padding:60px 16px;">
+      <div style="font-size:44px;margin-bottom:12px;">🔒</div>
+      <h2 style="margin-bottom:8px;">غير مصرّح لك بالدخول هنا</h2>
+      <p style="color:var(--muted);">هذه الصفحة مخصصة لإدارة المنصة فقط.</p>
+    </div>
+
+    <div id="admin-content" style="display:none;">
+      <div style="text-align:center;padding:32px 0 20px;">
+        <span class="section-kicker" style="margin-bottom:12px;display:inline-block;">لوحة الإدارة</span>
+        <h1 class="section-title" style="margin-bottom:4px;font-size:clamp(24px,3vw,34px);">⚙️ إدارة المنصة</h1>
+        <p style="color:var(--muted);font-size:14px;">تحكّم في المدربين، المستخدمين، ومنشورات المجتمع من مكان واحد</p>
+      </div>
+
+      <!-- تابات -->
+      <div class="admin-tabs" role="tablist" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:24px;">
+        <button class="admin-tab-btn active" data-action="setAdminTab" data-admin-tab="overview" role="tab">📊 نظرة عامة</button>
+        <button class="admin-tab-btn" data-action="setAdminTab" data-admin-tab="roadmaps" role="tab">📚 المسارات والفيديوهات</button>
+        <button class="admin-tab-btn" data-action="setAdminTab" data-admin-tab="quizzes" role="tab">📝 الاختبارات</button>
+        <button class="admin-tab-btn" data-action="setAdminTab" data-admin-tab="certificates" role="tab">🏆 الشهادات</button>
+        <button class="admin-tab-btn" data-action="setAdminTab" data-admin-tab="notifications" role="tab">📢 الإشعارات</button>
+        <button class="admin-tab-btn" data-action="setAdminTab" data-admin-tab="trainers" role="tab">🤝 المدربون <span id="admin-pending-badge" style="display:none;background:#e0524a;color:#fff;border-radius:10px;font-size:11px;padding:1px 6px;margin-inline-start:4px;">0</span></button>
+        <button class="admin-tab-btn" data-action="setAdminTab" data-admin-tab="users" role="tab">👥 المستخدمون</button>
+        <button class="admin-tab-btn" data-action="setAdminTab" data-admin-tab="stats" role="tab">📈 إحصائيات تفصيلية</button>
+        <button class="admin-tab-btn" data-action="setAdminTab" data-admin-tab="admins" role="tab">⚙️ صلاحيات المشرفين</button>
+        <button class="admin-tab-btn" data-action="setAdminTab" data-admin-tab="community" role="tab">💬 المجتمع</button>
+      </div>
+
+      <!-- نظرة عامة -->
+      <div id="admin-panel-overview" class="admin-panel active">
+        <div id="admin-overview-stats" class="admin-stats-grid">
+          <p style="text-align:center;color:var(--muted);grid-column:1/-1;">جاري تحميل الإحصائيات...</p>
+        </div>
+      </div>
+
+      <!-- المسارات التعليمية والفيديوهات والمصادر -->
+      <div id="admin-panel-roadmaps" class="admin-panel" style="display:none;">
+        <div id="admin-roadmaps-container"><p style="text-align:center;color:var(--muted);padding:24px;">جاري التحميل...</p></div>
+      </div>
+
+      <!-- أسئلة الاختبارات -->
+      <div id="admin-panel-quizzes" class="admin-panel" style="display:none;">
+        <div id="admin-quizzes-list"><p style="text-align:center;color:var(--muted);padding:24px;">جاري التحميل...</p></div>
+      </div>
+
+      <!-- الشهادات والإنجازات -->
+      <div id="admin-panel-certificates" class="admin-panel" style="display:none;">
+        <div id="admin-certificates-list"><p style="text-align:center;color:var(--muted);padding:24px;">جاري التحميل...</p></div>
+      </div>
+
+      <!-- الإشعارات -->
+      <div id="admin-panel-notifications" class="admin-panel" style="display:none;">
+        <div id="admin-notifications-list"><p style="text-align:center;color:var(--muted);padding:24px;">جاري التحميل...</p></div>
+      </div>
+
+      <!-- المدربون -->
+      <div id="admin-panel-trainers" class="admin-panel" style="display:none;">
+        <div class="admin-toolbar">
+          <input type="text" class="form-input" id="admin-trainers-search" placeholder="🔍 بحث بالاسم أو المهنة..." oninput="renderAdminTrainers()">
+          <button class="btn btn-secondary btn-sm" data-action="refreshAdminTrainers">🔄 تحديث</button>
+        </div>
+        <div id="admin-trainers-filterbar" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;"></div>
+        <div id="admin-trainers-list"><p style="text-align:center;color:var(--muted);padding:24px;">جاري التحميل...</p></div>
+      </div>
+
+      <!-- المستخدمون -->
+      <div id="admin-panel-users" class="admin-panel" style="display:none;">
+        <div class="admin-toolbar">
+          <input type="text" class="form-input" id="admin-users-search" placeholder="🔍 بحث باسم المستخدم..." oninput="renderAdminUsers()">
+          <button class="btn btn-secondary btn-sm" data-action="refreshAdminUsers">🔄 تحديث</button>
+        </div>
+        <div id="admin-users-list"><p style="text-align:center;color:var(--muted);padding:24px;">جاري التحميل...</p></div>
+      </div>
+
+      <!-- إحصائيات تفصيلية -->
+      <div id="admin-panel-stats" class="admin-panel" style="display:none;">
+        <div id="admin-stats-container"><p style="text-align:center;color:var(--muted);padding:24px;">جاري التحميل...</p></div>
+      </div>
+
+      <!-- صلاحيات المشرفين -->
+      <div id="admin-panel-admins" class="admin-panel" style="display:none;">
+        <div id="admin-admins-list"><p style="text-align:center;color:var(--muted);padding:24px;">جاري التحميل...</p></div>
+      </div>
+
+      <!-- المجتمع -->
+      <div id="admin-panel-community" class="admin-panel" style="display:none;">
+        <div class="admin-toolbar">
+          <button class="btn btn-secondary btn-sm" data-action="refreshAdminCommunity">🔄 تحديث</button>
+        </div>
+        <div id="admin-community-list"><p style="text-align:center;color:var(--muted);padding:24px;">جاري التحميل...</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <!-- ============ خطة الأيام ============ -->
 <div id="page-plan" class="page" role="main">
   <div class="plan-wrap">
@@ -2189,7 +2295,7 @@
         <ul>
           <li><strong>حق الوصول:</strong> يمكنك طلب نسخة من بياناتك في أي وقت.</li>
           <li><strong>حق التصحيح:</strong> يمكنك تحديث بياناتك من صفحة الملف الشخصي.</li>
-          <li><strong>حق الحذف:</strong> يمكنك طلب حذف حسابك وكل بياناتك عبر البريد: <!-- TODO: استبدل YOUR_EMAIL_HERE بإيميلك الحقيقي في كل مكان --><a href="mailto:YOUR_EMAIL_HERE">YOUR_EMAIL_HERE</a></li>
+          <li><strong>حق الحذف:</strong> يمكنك طلب حذف حسابك وكل بياناتك عبر البريد: <a href="mailto:startline764@gmail.com">startline764@gmail.com</a></li>
           <li><strong>حق الاعتراض:</strong> يمكنك إلغاء الاشتراك في أي اتصالات تسويقية.</li>
         </ul>
       </section>
@@ -2207,7 +2313,7 @@
       </section>
       <section class="legal-section">
         <h2>٩. تواصل معنا</h2>
-        <p>لأي استفسارات تخص الخصوصية: <a href="mailto:YOUR_EMAIL_HERE">YOUR_EMAIL_HERE</a></p>
+        <p>لأي استفسارات تخص الخصوصية: <a href="mailto:startline764@gmail.com">startline764@gmail.com</a></p>
       </section>
     </div>
   </div>
@@ -2269,7 +2375,7 @@
       </section>
       <section class="legal-section">
         <h2>٨. القانون الواجب التطبيق</h2>
-        <p>تخضع هذه الشروط لقوانين المملكة العربية السعودية ومصر (الأسواق الرئيسية). لأي نزاعات يُفضَّل حلها وديّاً عبر: <a href="mailto:YOUR_EMAIL_HERE">YOUR_EMAIL_HERE</a></p>
+        <p>تخضع هذه الشروط لقوانين المملكة العربية السعودية ومصر (الأسواق الرئيسية). لأي نزاعات يُفضَّل حلها وديّاً عبر: <a href="mailto:startline764@gmail.com">startline764@gmail.com</a></p>
       </section>
       <section class="legal-section">
         <h2>٩. التعديلات</h2>
@@ -2308,12 +2414,8 @@
         <h2>تواصل معنا</h2>
         <p>نسعد بسماع رأيك أو اقتراحاتك أو أي تعاون مثمر:</p>
         <ul>
-          <!-- TODO: استبدل YOUR_EMAIL_HERE بالإيميل الحقيقي -->
-          <li><strong>البريد الإلكتروني:</strong> <a href="mailto:YOUR_EMAIL_HERE">YOUR_EMAIL_HERE</a></li>
-          <!-- TODO: استبدل YOUR_TWITTER_URL بـ رابط حساب تويتر/X الحقيقي -->
-          <li><strong>تويتر / X:</strong> <a href="YOUR_TWITTER_URL" target="_blank" rel="noopener">YOUR_TWITTER_URL</a></li>
-          <!-- TODO: استبدل YOUR_INSTAGRAM_URL بـ رابط انستجرام الحقيقي -->
-          <li><strong>انستجرام:</strong> <a href="YOUR_INSTAGRAM_URL" target="_blank" rel="noopener">YOUR_INSTAGRAM_URL</a></li>
+          <li><strong>البريد الإلكتروني:</strong> <a href="mailto:startline764@gmail.com">startline764@gmail.com</a></li>
+          <li><strong>انستجرام:</strong> <a href="https://www.instagram.com/start_line_2026" target="_blank" rel="noopener">start_line_2026</a></li>
         </ul>
         <p style="margin-top:16px;opacity:0.7;font-size:0.9em;">نردّ على جميع الرسائل خلال ٤٨ ساعة عمل.</p>
       </section>
@@ -2336,16 +2438,9 @@
         <p class="footer-tagline" data-en="The leading career guidance platform for Arab youth. Discover your path, build your future, and launch from the Start Line.">منصة التوجيه المهني الأولى للشباب العربي. اكتشف مسارك، ابنِ مستقبلك، وانطلق من خط البداية.</p>
         <div class="footer-social">
           <a href="https://www.facebook.com/profile.php?id=61590658237683&locale=ar_AR" class="footer-social-btn" aria-label="فيسبوك" target="_blank" rel="noopener">f</a>
-          <a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2Fstart_line_2026%3Figsh%3Damp3ZWk0ODY4Zzl5%26fbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExdnNDUW1QeG5zY1h1WlV2WnNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR4nzL73kY7qpnT-inq36N7pOmvz4Jd87SJSvorHpQkSSsR7JkYecgV9yGQE6g_aem_wcPDKdxczsfdX3XchNge4w&h=AUDJnGFbK4RkXJV1A8gKaSvEgH_t3geuv4U9wCWoOE4WYZTDY3c1Db_RQNOEP4ypGjyMN-V_l5XDgnC-vd4yKAhuw_1oCMlbXPS8awI_w-53OYolxV01e1R9oHTlHFSnegfC" class="footer-social-btn" aria-label="انستجرام" target="_blank" rel="noopener">📷</a>
+          <a href="https://www.instagram.com/start_line_2026" class="footer-social-btn" aria-label="انستجرام" target="_blank" rel="noopener">📷</a>
           <a href="https://chat.whatsapp.com/JlTc1dppuJQIRuY8BlGvpp?s=cl&p=a&ilr=2&amv=1" class="footer-social-btn" aria-label="واتساب" target="_blank" rel="noopener">W</a>
-          <!-- TODO: استبدل YOUR_TWITTER_URL بـ رابط حساب تويتر/X مثال: https://x.com/startline_ar -->
-          <a href="YOUR_TWITTER_URL" class="footer-social-btn" aria-label="تويتر">𝕏</a>
-          <!-- TODO: استبدل YOUR_LINKEDIN_URL بـ رابط صفحة لينكدإن مثال: https://linkedin.com/company/startline-ar -->
-          <a href="YOUR_LINKEDIN_URL" class="footer-social-btn" aria-label="لينكدإن">in</a>
-          <!-- TODO: استبدل YOUR_YOUTUBE_URL بـ رابط قناة يوتيوب مثال: https://youtube.com/@startline_ar -->
-          <a href="YOUR_YOUTUBE_URL" class="footer-social-btn" aria-label="يوتيوب">▶</a>
-          <!-- TODO: استبدل YOUR_TELEGRAM_URL بـ رابط قناة تيليجرام مثال: https://t.me/startline_ar -->
-          <a href="YOUR_TELEGRAM_URL" class="footer-social-btn" aria-label="تيليجرام">✈</a>
+          <!-- لينكدإن/يوتيوب/تيليجرام: هتترجع تاني لما الروابط الحقيقية تتوفر -->
         </div>
       </div>
       <!-- Explore col -->
@@ -2375,7 +2470,7 @@
         <h3 class="footer-col-title">الدعم</h3>
         <ul class="footer-links">
           <li><a href="#" data-en="Frequently Asked Questions">الأسئلة الشائعة</a></li>
-          <li><a href="mailto:YOUR_EMAIL_HERE" data-en="Contact Us">تواصل معنا</a></li>
+          <li><a href="mailto:startline764@gmail.com" data-en="Contact Us">تواصل معنا</a></li>
           <li><button data-action="showPage" data-page="privacy" data-en="Privacy Policy">سياسة الخصوصية</button></li>
           <li><button data-action="showPage" data-page="terms" data-en="Terms of Use">شروط الاستخدام</button></li>
           <li><button data-action="showPage" data-page="about" data-en="About the Platform">عن المنصة</button></li>
@@ -2488,14 +2583,30 @@
         <input class="form-input" type="url" id="tr-portfolio" placeholder="https://linkedin.com/in/..." autocomplete="off" dir="ltr">
       </div>
       <div class="form-group">
-        <label class="form-label" for="tr-availability" data-en="Availability">مدى توفّرك للجلسات</label>
+        <label class="form-label" for="tr-mode" data-en="Training Type">نوع التدريب</label>
+        <select class="form-input" id="tr-mode">
+          <option value="online" data-en="Online">🌐 أونلاين</option>
+          <option value="offline" data-en="In-person">🏠 حضوري (أوفلاين)</option>
+          <option value="both" data-en="Both">🌐 + 🏠 كلاهما</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="tr-availability" data-en="Availability">مدى توفّرك للجلسات (مثال: مساءً أيام الأسبوع)</label>
         <input class="form-input" type="text" id="tr-availability" placeholder="مثال: مساءً أيام الأسبوع، عطلة نهاية الأسبوع..." autocomplete="off">
+      </div>
+      <div class="form-group" style="display:flex;align-items:center;gap:8px;">
+        <input type="checkbox" id="tr-avail-now" style="width:18px;height:18px;">
+        <label class="form-label" for="tr-avail-now" style="margin:0;" data-en="I'm available to accept trainees right now">متاح حالياً لاستقبال متدربين</label>
       </div>
       <div class="form-group">
         <label class="form-label" for="tr-why" data-en="Why do you want to join as a trainer?">لماذا تريد الانضمام كمدرّب؟</label>
         <textarea class="form-input form-textarea" id="tr-why" placeholder="شاركنا دافعك ورؤيتك في مساعدة المتعلمين..."></textarea>
       </div>
-      <button class="btn btn-primary btn-full" data-action="submitTrainerApplication" style="margin-top:8px;" data-en="Submit Application 🚀">إرسال الطلب 🚀</button>
+      <div class="form-group" style="display:flex;align-items:center;gap:8px;border-top:1px solid var(--border);padding-top:14px;">
+        <input type="checkbox" id="tr-is-active" style="width:18px;height:18px;">
+        <label class="form-label" for="tr-is-active" style="margin:0;" data-en="Show me in the public trainers list">أظهر بياناتي في قائمة المدربين العامة</label>
+      </div>
+      <button class="btn btn-primary btn-full" id="trainer-submit-btn" data-action="submitTrainerApplication" style="margin-top:8px;" data-en="Submit 🚀">إرسال 🚀</button>
     </div>
     <div class="coach-success" id="trainer-success" style="display:none;">
       <div class="big-icon">✅</div>
@@ -2910,11 +3021,14 @@
 <script src="js/data.js" defer></script>
 <script src="js/core.js" defer></script>
 <script src="js/ui.js" defer></script>
+<script src="js/quiz-service.js" defer></script>
 <script src="js/quiz.js" defer></script>
 <script src="js/careers.js" defer></script>
 <script src="js/category-router.js" defer></script>
 <script src="js/features.js" defer></script>
 <script src="js/community.js" defer></script>
+<script src="js/admin.js" defer></script>
+<script src="js/notif-center.js" defer></script>
 <script src="js/auth.js" defer></script>
 <script src="js/profile.js" defer></script>
 <script src="js/onboarding.js" defer></script>

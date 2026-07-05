@@ -134,7 +134,13 @@
         return null;
       })
       .then(function (roadmap) {
-        if (roadmap) _roadmapCache[slug] = roadmap;
+        if (roadmap) {
+          _roadmapCache[slug] = roadmap;
+          // 📈 عدّاد المشاهدات (صامت — لا يؤثر على الواجهة لو فشل)
+          if (roadmap.source === 'supabase' && getSupa()) {
+            getSupa().rpc('increment_roadmap_view', { p_slug: slug }).then(function () {}).catch(function () {});
+          }
+        }
         return roadmap;
       });
   }

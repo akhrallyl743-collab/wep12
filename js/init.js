@@ -178,6 +178,26 @@ if (_savedUser?.name) {
   updateNavUser(_savedUser);
 }
 
+// 3b. تحديث صلاحية الأدمن (ومعلومات البروفايل) من قاعدة البيانات مباشرة —
+// لازم لأن STATE.isAdmin مش محفوظة في localStorage، وبتتصفر مع كل تحميل صفحة جديد
+// إلا لو حصل حدث تسجيل دخول فعلي، فبنجيبها هنا صراحة من الجلسة المحفوظة في Supabase.
+if (_savedUser?.id && typeof supa !== 'undefined') {
+  supa.auth.getSession().then(({ data }) => {
+    const sessionUser = data?.session?.user;
+    if (sessionUser && typeof ProfileService !== 'undefined') {
+      ProfileService.loadOrCreate(sessionUser, STATE.streak).then(profile => {
+        if (profile) {
+          STATE.isAdmin = profile.is_admin === true;
+          STATE.points  = Math.max(STATE.points, profile.points || 0);
+          STATE.streak  = Math.max(STATE.streak, profile.streak || 0);
+          if (typeof _updateAdminNavVisibility === 'function') _updateAdminNavVisibility();
+          if (STATE.currentPage === 'admin' && typeof initAdminPage === 'function') initAdminPage();
+        }
+      });
+    }
+  });
+}
+
 // 4. Initial renders
 renderHomeChips();
 renderLibrary();
@@ -244,3 +264,8 @@ if (typeof window._platformRestoreFromURL === 'function') {
   /* re-observe when page switches */
   document.addEventListener('click', function() { setTimeout(observeReveal, 200); });
 })();
+
+/* ── مركز الإشعارات: تحميل أوّلي عند فتح الموقع ── */
+if (typeof refreshNotifCenter === 'function') {
+  setTimeout(refreshNotifCenter, 1500);
+}
