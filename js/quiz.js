@@ -10,13 +10,17 @@ function initQuiz() {
   STATE.activeQuizQuestions = QUIZ_QUESTIONS; // عرض فوري بالبيانات المحلية أثناء التحميل
   renderQuestion();
 
-  if (typeof QuizService !== 'undefined') {
-    QuizService.getQuestions().then(list => {
-      if (list && list.length) {
-        STATE.activeQuizQuestions = list;
-        if (STATE.currentPage === 'quiz') renderQuestion();
-      }
-    });
+  try {
+    if (typeof QuizService !== 'undefined' && typeof QuizService.getQuestions === 'function') {
+      QuizService.getQuestions().then(list => {
+        if (list && list.length) {
+          STATE.activeQuizQuestions = list;
+          if (STATE.currentPage === 'quiz') renderQuestion();
+        }
+      }).catch(err => console.warn('[Quiz] QuizService.getQuestions failed:', err));
+    }
+  } catch (err) {
+    console.warn('[Quiz] QuizService unavailable, using local questions:', err);
   }
 }
 

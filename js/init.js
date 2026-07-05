@@ -206,7 +206,7 @@ renderMentors();
 renderPlan();
 renderDashboard();
 renderFAQ();
-initQuiz();
+try { initQuiz(); } catch (err) { console.warn('[init] initQuiz failed:', err); }
 checkDailyReset();
 
 // 4b. [H] Homepage Intelligence — show continue/recommend/quiz banner
