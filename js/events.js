@@ -32,6 +32,7 @@
 
     // ── قائمة الجوال ──
     toggleMobileMenu() { toggleMobileMenu(); },
+    toggleMobileShortcuts() { if (typeof toggleMobileShortcuts === 'function') toggleMobileShortcuts(); },
 
     // ── مودال المصادقة ──
     openModal(el)         { openModal(el.dataset.tab); },
@@ -186,6 +187,14 @@
     // ── مركز الإشعارات (للمستخدم العادي) ──
     toggleNotifCenter()  { if (typeof toggleNotifCenter === 'function') toggleNotifCenter(); },
     markAllNotifsRead()  { if (typeof markAllNotifsRead === 'function') markAllNotifsRead(); },
+
+    // ── المجتمع: صور/فيديو + تعليقات ──
+    triggerMediaPicker() { if (typeof triggerMediaPicker === 'function') triggerMediaPicker(); },
+    _likePostBtn(el)     { if (typeof _likePostBtn === 'function') _likePostBtn(el); },
+    deletePost(el)       { if (typeof deletePost === 'function') deletePost(el.dataset.id); },
+    toggleComments(el)   { if (typeof toggleComments === 'function') toggleComments(el); },
+    submitComment(el)    { if (typeof submitComment === 'function') submitComment(el); },
+    deleteComment(el)    { if (typeof deleteComment === 'function') deleteComment(el); },
   };
 
   /* ── معالج النقر الموحّد ── */

@@ -269,6 +269,10 @@ nav .nav-cta, .lesson-type-badge { font-family: var(--font-en); }
   .qs-bar-inner { flex-direction: column; }
   .qs-divider   { width: auto; height: 1px; margin: 0 16px; }
 }
+/* على الموبايل، الاختصارات دي بقت جوه القائمة العائمة (السهم) — نخفي الشريط الثابت */
+@media (max-width: 768px) {
+  .qs-bar { display: none; }
+}
 
 /* ── 7. WHY SECTION ─────────────────────────────────── */
 .why-section {

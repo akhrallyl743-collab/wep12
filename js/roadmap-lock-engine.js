@@ -112,7 +112,7 @@
 
   // ── تسجيل تقدم مشاهدة فيديو ────────────────────────────────────
   // يُستدعى من roadmap-ui.js عبر postMessage من iframe أو YouTube IFrame API
-  function recordVideoProgress(legacyLessonId, stepId, percent, resourceId) {
+  function recordVideoProgress(legacyLessonId, stepId, percent, resourceId, context) {
     percent = Math.max(0, Math.min(100, Math.round(percent)));
 
     // localStorage
@@ -133,10 +133,25 @@
     var crossed = milestones.filter(function (m) { return percent >= m && previous < m; });
     if (crossed.length) {
       _syncVideoProgressToCloud(legacyLessonId, stepId, percent, resourceId);
+      // 📜 سجل المشاهدة — تسجيل تاريخ/وقت كل عتبة جديدة تم الوصول لها
+      _logWatchHistory(stepId, percent, context);
     }
 
     // إطلاق حدث للـ UI لتحديث زر "أنهيت هذا الدرس"
     _emit('videoProgress', { legacyLessonId: legacyLessonId, percent: percent, thresholdMet: percent >= VIDEO_THRESHOLD });
+  }
+
+  function _logWatchHistory(stepId, percent, context) {
+    var supa = getSupa(), uid = getUserId();
+    if (!supa || !uid || typeof WatchHistoryService === 'undefined') return;
+    context = context || {};
+    WatchHistoryService.logWatch(uid, {
+      stepId: stepId || null,
+      roadmapSlug: context.roadmapSlug || null,
+      roadmapTitle: context.roadmapTitle || null,
+      stepTitle: context.stepTitle || null,
+      percent: percent
+    });
   }
 
   function _syncVideoProgressToCloud(legacyLessonId, stepId, percent, resourceId) {

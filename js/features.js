@@ -622,6 +622,7 @@ function renderDashboard() {
   if (typeof window.renderLearningPathRoadmap === 'function' && STATE.currentTrack) {
     window.renderLearningPathRoadmap('dash-learning-path', STATE.currentTrack);
   }
+  if (typeof renderWatchHistory === 'function') renderWatchHistory();
 }
 
 function completeChallenge(id, pts, el) {
@@ -631,6 +632,45 @@ function completeChallenge(id, pts, el) {
   addPoints(pts, 'تحدي يومي مكتمل');
   if (STATE.completedChallenges.size >= 5) saveAchievement('badge', 'ch_5');
   renderDashboard();
+}
+
+/* =============================================
+   📜 سجل مشاهدة الفيديوهات (Watch History)
+   ============================================= */
+function _watchHistoryTimeLabel(isoStr) {
+  if (!isoStr) return '';
+  const d = new Date(isoStr);
+  return d.toLocaleDateString('ar-EG', { day: 'numeric', month: 'short' }) + ' · ' +
+         d.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+}
+
+async function renderWatchHistory() {
+  const box = $('watch-history-section');
+  if (!box) return;
+
+  const user = STATE.user || _ls('noor_user', null);
+  if (!user?.id || typeof WatchHistoryService === 'undefined') return;
+
+  box.innerHTML = `<p style="color:var(--muted);font-size:13px;text-align:center;padding:12px 0">جاري تحميل السجل...</p>`;
+
+  const history = await WatchHistoryService.loadHistory(user.id, 20);
+  if (!history.length) {
+    box.innerHTML = `<p style="color:var(--muted);font-size:14px;text-align:center;padding:12px 0">لسه معملتش أي مشاهدة مسجّلة — ابدأ فيديو من أي مسار وهيتسجل هنا تلقائياً 🎬</p>`;
+    return;
+  }
+
+  box.innerHTML = `<div style="display:flex;flex-direction:column;gap:8px;max-height:260px;overflow-y:auto;">
+    ${history.map(h => `
+      <div style="display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;background:var(--bg);">
+        <span style="font-size:17px;">${h.percent >= 100 ? '✅' : '▶️'}</span>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:12.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${sanitizeHTML(h.step_title || 'فيديو')}</div>
+          <div style="font-size:11px;color:var(--muted);">${sanitizeHTML(h.roadmap_title || '')} · ${_watchHistoryTimeLabel(h.watched_at)}</div>
+        </div>
+        <span style="font-size:11px;font-weight:800;color:var(--p600);flex-shrink:0;">${h.percent}%</span>
+      </div>
+    `).join('')}
+  </div>`;
 }
 
 /* =============================================

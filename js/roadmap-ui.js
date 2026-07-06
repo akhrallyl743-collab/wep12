@@ -171,7 +171,22 @@
         _dbg('نسبة مشاهدة الفيديو لدرس [' + legacyLessonId + ']:', pct + '%');
         lastLoggedPct = pct;
       }
-      LockEngine.recordVideoProgress(legacyLessonId, stepId, pct);
+      var ctx = null;
+      if (_roadmapForLock) {
+        var stepObj = null;
+        for (var si = 0; si < (_roadmapForLock.sections || []).length && !stepObj; si++) {
+          var steps = _roadmapForLock.sections[si].steps || [];
+          for (var sti = 0; sti < steps.length; sti++) {
+            if (steps[sti].legacy_lesson_id === legacyLessonId) { stepObj = steps[sti]; break; }
+          }
+        }
+        ctx = {
+          roadmapSlug: _roadmapForLock.slug || null,
+          roadmapTitle: _roadmapForLock.title_ar || _roadmapForLock.title || null,
+          stepTitle: stepObj ? stepObj.title : null
+        };
+      }
+      LockEngine.recordVideoProgress(legacyLessonId, stepId, pct, null, ctx);
     }
 
     function startPolling() {

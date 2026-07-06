@@ -234,60 +234,51 @@ nav.scrolled, nav.nav-scrolled {
 .menu-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* --- قائمة الموبايل --- */
+/* --- قائمة الموبايل: بطاقة عائمة تحت البار (بدل الدرج الجانبي الكامل) --- */
 .mobile-nav {
   display: none;
   position: fixed;
-  top: var(--nav-h);
-  bottom: 0;
-  /* RTL (عربي): تطلع من اليمين */
-  right: 0;
+  top: calc(var(--nav-h) + 8px);
+  /* RTL (عربي): تطلع محاذية لليمين تحت زرار الهامبرجر */
+  right: 12px;
   left: auto;
-  width: min(82vw, 320px);
-  height: 100%;
-  background: rgba(7, 6, 20, 0.97);
+  width: min(86vw, 300px);
+  max-height: min(75vh, 560px);
+  background: rgba(7, 6, 20, 0.98);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   z-index: 200;
-  padding: 12px 14px;
+  padding: 10px;
   flex-direction: column;
   gap: 4px;
-  border-inline-start: 1px solid rgba(255,255,255,.1);
-  border-top: 1px solid rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 18px;
   overflow-y: auto;
-  /* الأنيميشن الافتراضي: من اليمين */
-  animation: slideFromRight .25s cubic-bezier(.25,.46,.45,.94);
+  box-shadow: 0 20px 50px rgba(0,0,0,.45);
+  animation: floatDropIn .22s cubic-bezier(.25,.46,.45,.94);
 }
 .mobile-nav.open { display: flex; }
 
-/* LTR (إنجليزي): تطلع من الشمال */
+/* LTR (إنجليزي): تطلع محاذية للشمال */
 [dir="ltr"] .mobile-nav {
   right: auto;
-  left: 0;
-  animation: slideFromLeft .25s cubic-bezier(.25,.46,.45,.94);
+  left: 12px;
 }
 
-@keyframes slideFromRight {
-  from { opacity: 0; transform: translateX(100%); }
-  to   { opacity: 1; transform: translateX(0); }
+@keyframes floatDropIn {
+  from { opacity: 0; transform: translateY(-10px) scale(.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-@keyframes slideFromLeft {
-  from { opacity: 0; transform: translateX(-100%); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-/* Overlay خلف القائمة */
+/* Overlay خلف القائمة (شفاف — لسهولة الإغلاق بالضغط في أي مكان) */
 .mobile-nav-overlay {
   display: none;
   position: fixed;
   inset: 0;
   top: var(--nav-h);
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.35);
   z-index: 199;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  animation: fadeIn .25s ease;
+  animation: fadeIn .2s ease;
 }
 .mobile-nav-overlay.open { display: block; }
 
@@ -307,6 +298,37 @@ nav.scrolled, nav.nav-scrolled {
   color: #c4b5fd;
 }
 .mobile-nav-divider { height: 1px; background: rgba(255,255,255,.07); margin: 4px 0; }
+
+/* --- اختصارات سريعة قابلة للطي داخل القائمة العائمة --- */
+.mobile-nav-shortcuts-toggle {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 12px 16px; border-radius: 12px;
+  border: none; background: rgba(124,109,255,.1); cursor: pointer;
+  font-size: 13.5px; font-weight: 700; color: #c4b5fd;
+  font-family: var(--font); margin-top: 2px;
+}
+.mobile-shortcuts-arrow { transition: transform .2s; font-size: 14px; }
+.mobile-nav-shortcuts-toggle[aria-expanded="true"] .mobile-shortcuts-arrow,
+.mobile-nav-shortcuts-toggle.open .mobile-shortcuts-arrow { transform: rotate(180deg); }
+
+.mobile-nav-shortcuts {
+  max-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 6px;
+  transition: max-height .25s ease, margin .25s ease;
+  margin-top: 0;
+}
+.mobile-nav-shortcuts.open { max-height: 400px; margin-top: 6px; }
+
+.mobile-shortcut-item {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 10px 12px; border-radius: 12px; border: none;
+  background: rgba(255,255,255,.04); cursor: pointer; text-align: right;
+  font-family: var(--font); transition: background .18s;
+}
+.mobile-shortcut-item:hover { background: rgba(124,109,255,.14); }
+.mobile-shortcut-item .qs-icon { font-size: 20px; flex-shrink: 0; }
+.mobile-shortcut-text { display: flex; flex-direction: column; gap: 1px; }
+.mobile-shortcut-text strong { font-size: 13px; font-weight: 800; color: #fff; }
+.mobile-shortcut-text span { font-size: 11px; color: rgba(255,255,255,.5); }
 
 /* في الوضع الفاتح — النافبار يصبح أبيض نظيف */
 html:not([data-theme="dark"]) nav {
