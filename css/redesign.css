@@ -269,6 +269,19 @@ nav .nav-cta, .lesson-type-badge { font-family: var(--font-en); }
   .qs-bar-inner { flex-direction: column; }
   .qs-divider   { width: auto; height: 1px; margin: 0 16px; }
 }
+/* الشريط ده لازم يفضل ظاهر تحت البار في كل المقاسات (موبايل وديسكتوب) */
+@media (max-width: 768px) {
+  .qs-bar-inner { flex-direction: row; }
+  .qs-step { padding: 12px 10px; gap: 8px; }
+  .qs-text strong { font-size: 11.5px; }
+  .qs-text span { font-size: 9.5px; }
+  .qs-icon { font-size: 16px; }
+  .qs-arrow { display: none; }
+}
+@media (max-width: 480px) {
+  .qs-bar-inner { flex-direction: column; }
+  .qs-divider { width: auto; height: 1px; margin: 0 16px; }
+}
 
 /* ── 7. WHY SECTION ─────────────────────────────────── */
 .why-section {

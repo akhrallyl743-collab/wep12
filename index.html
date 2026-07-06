@@ -171,6 +171,7 @@
 </nav>
 
 <!-- Mobile Nav -->
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
 <nav class="mobile-nav" id="mobile-nav" aria-label="القائمة المحمولة" role="navigation">
   <button class="mobile-nav-link active" data-action="showPage" data-page="home" data-en="🏠 Home">🏠 الرئيسية</button>
   <button class="mobile-nav-link" data-action="showPage" data-page="quiz" data-en="🧠 Know Yourself">🧠 اعرف نفسك</button>
@@ -183,6 +184,27 @@
   <button class="mobile-nav-link admin-nav-link" style="display:none;" data-action="showPage" data-page="admin" data-en="⚙️ Admin">⚙️ الإدارة</button>
   <button class="mobile-nav-link" data-action="showPage" data-page="dashboard" data-en="📊 Dashboard">📊 لوحتي</button>
   <div class="mobile-nav-divider" role="separator"></div>
+
+  <!-- اختصارات سريعة (اعرف نفسك / استعرض المسارات / كمل من حيث توقفت) — تظهر عند الضغط على السهم -->
+  <button class="mobile-nav-shortcuts-toggle" id="mobile-shortcuts-toggle" data-action="toggleMobileShortcuts" aria-expanded="false">
+    <span data-en="Quick Shortcuts">⚡ اختصارات سريعة</span>
+    <span class="mobile-shortcuts-arrow" aria-hidden="true">▾</span>
+  </button>
+  <div class="mobile-nav-shortcuts" id="mobile-nav-shortcuts">
+    <button class="mobile-shortcut-item" data-action="showPage" data-page="quiz">
+      <span class="qs-icon">🧭</span>
+      <span class="mobile-shortcut-text"><strong data-en="Know Yourself">اعرف نفسك</strong><span data-en="Discover your ideal path">اكتشف مسارك المناسب</span></span>
+    </button>
+    <button class="mobile-shortcut-item" data-action="showPage" data-page="categories">
+      <span class="qs-icon">🗺️</span>
+      <span class="mobile-shortcut-text"><strong data-en="Browse Careers">استعرض المسارات</strong><span data-en="All available career paths">كل المهن المتاحة</span></span>
+    </button>
+    <button class="mobile-shortcut-item" data-action="continueLearning">
+      <span class="qs-icon">▶️</span>
+      <span class="mobile-shortcut-text"><strong data-en="Continue Learning">كمل من حيث توقفت</strong><span data-en="Resume your progress now">استأنف تعلّمك الآن</span></span>
+    </button>
+  </div>
+
   <div style="padding:10px 8px;display:flex;gap:10px;">
     <button class="icon-btn" style="flex:1;justify-content:center;" data-action="toggleLang">EN / AR</button>
     <button class="icon-btn" style="flex:1;justify-content:center;" data-action="toggleTheme" id="theme-btn-mob">🌙</button>
@@ -218,7 +240,7 @@
       <div class="qs-step qs-step-highlight" data-action="continueLearning" tabindex="0" role="button">
         <span class="qs-icon">▶️</span>
         <div class="qs-text">
-          <strong data-en="Continue Learning">كمّل من حيث توقفت</strong>
+          <strong data-en="Continue Learning">كمل من حيث توقفت</strong>
           <span data-en="Resume your progress now">استأنف تعلّمك الآن</span>
         </div>
         <span class="qs-arrow">←</span>
@@ -1875,8 +1897,11 @@
         <div class="avatar" id="post-avatar" style="background:var(--g100);color:var(--g600);">👤</div>
         <textarea id="new-post-text" placeholder="شارك فكرة، سؤال، أو إنجاز...&#10;استخدم # للوسوم مثل: #تصميم #برمجة" rows="3" maxlength="1000" aria-label="محتوى المنشور"></textarea>
       </div>
+      <div id="post-media-preview" class="post-media-preview" style="display:none;"></div>
+      <input type="file" id="post-media-input" accept="image/*,video/*" style="display:none;" onchange="onPostMediaSelected(this)">
       <div class="post-actions">
         <div class="post-tags" role="group" aria-label="وسوم جاهزة">
+          <button class="post-tag-btn" data-action="triggerMediaPicker" aria-label="إرفاق صورة أو فيديو" title="إرفاق صورة/فيديو">📷 صورة/فيديو</button>
           <button class="post-tag-btn" data-action="addPostTag" data-tag="#سؤال" data-en="#Question">#سؤال</button>
           <button class="post-tag-btn" data-action="addPostTag" data-tag="#إنجاز" data-en="#Achievement">#إنجاز</button>
           <button class="post-tag-btn" data-action="addPostTag" data-tag="#نصيحة" data-en="#Tip">#نصيحة</button>
@@ -1944,7 +1969,7 @@
         </div>
         <div class="faq-item" data-action="toggleFaq">
           <div class="faq-q"><span data-en="How Does the Points and Levels System Work?">كيف يعمل نظام النقاط والمستويات؟</span><span class="faq-icon">+</span></div>
-          <div class="faq-a"><p>بتكسب نقاط لما تكمّل تحديات يومية، تستكشف مسارات، تحجز جلسات مع مدربين، وتشارك في المجتمع. كل نقاط بترفعك لمستوى أعلى وتفتح لك مميزات جديدة.</p></div>
+          <div class="faq-a"><p>بتكسب نقاط لما تكمل تحديات يومية، تستكشف مسارات، تحجز جلسات مع مدربين، وتشارك في المجتمع. كل نقاط بترفعك لمستوى أعلى وتفتح لك مميزات جديدة.</p></div>
         </div>
         <div class="faq-item" data-action="toggleFaq">
           <div class="faq-q"><span data-en="Can I Change My Career Path After the Quiz?">هل يمكنني تغيير مساري المهني بعد الاختبار؟</span><span class="faq-icon">+</span></div>
@@ -2163,6 +2188,12 @@
         <div class="card" style="margin-top:16px;">
           <h3 style="font-size:15px;font-weight:800;margin-bottom:14px;">📈 تقدمك في المنصة</h3>
           <div id="platform-progress-section"><p style="color:var(--muted);font-size:14px;text-align:center;padding:12px 0">لم تبدأ أي مسار بعد</p></div>
+        </div>
+
+        <!-- سجل مشاهدة الفيديوهات -->
+        <div class="card" style="margin-top:16px;">
+          <h3 style="font-size:15px;font-weight:800;margin-bottom:14px;">📜 سجل النشاط</h3>
+          <div id="watch-history-section"><p style="color:var(--muted);font-size:14px;text-align:center;padding:12px 0">سجّل دخولك وابدأ مشاهدة فيديو عشان يظهر سجلك هنا</p></div>
         </div>
       </div>
 

@@ -151,6 +151,23 @@ function toggleMobileMenu() {
   btn.classList.toggle('open', !isOpen);
   btn.setAttribute('aria-expanded', String(!isOpen));
   if (overlay) overlay.classList.toggle('open', !isOpen);
+
+  // نقفل قائمة الاختصارات السريعة كل مرة نفتح/نقفل القائمة، عشان تبدأ دايماً من حالة مطوية
+  const shortcuts = $('mobile-nav-shortcuts');
+  const toggleBtn = $('mobile-shortcuts-toggle');
+  if (shortcuts) shortcuts.classList.remove('open');
+  if (toggleBtn) { toggleBtn.classList.remove('open'); toggleBtn.setAttribute('aria-expanded', 'false'); }
+}
+
+/* فتح/قفل قائمة الاختصارات السريعة (اعرف نفسك / استعرض المسارات / كمّل من حيث توقفت) */
+function toggleMobileShortcuts() {
+  const shortcuts = $('mobile-nav-shortcuts');
+  const toggleBtn = $('mobile-shortcuts-toggle');
+  if (!shortcuts || !toggleBtn) return;
+  const isOpen = shortcuts.classList.contains('open');
+  shortcuts.classList.toggle('open', !isOpen);
+  toggleBtn.classList.toggle('open', !isOpen);
+  toggleBtn.setAttribute('aria-expanded', String(!isOpen));
 }
 
 /* إغلاق القائمة عند الضغط على الـ overlay */
@@ -163,6 +180,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (nav) nav.classList.remove('open');
       if (btn) { btn.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
       overlay.classList.remove('open');
+      const shortcuts = document.getElementById('mobile-nav-shortcuts');
+      const toggleBtn = document.getElementById('mobile-shortcuts-toggle');
+      if (shortcuts) shortcuts.classList.remove('open');
+      if (toggleBtn) { toggleBtn.classList.remove('open'); toggleBtn.setAttribute('aria-expanded', 'false'); }
     });
   }
 });

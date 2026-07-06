@@ -794,6 +794,51 @@ html:not([data-theme="dark"]) .scenario { background: var(--t50); }
 .reaction-btn.liked { color: var(--c600); background: var(--c50); border-color: var(--c100); }
 [data-theme="dark"] .reaction-btn:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.1); color: rgba(255,255,255,.8); }
 
+/* ── مرفقات المنشور (صورة/فيديو) ── */
+.post-header { position: relative; }
+.post-delete-btn {
+  margin-inline-start: auto; background: none; border: none; cursor: pointer;
+  font-size: 15px; opacity: .55; padding: 4px 8px; border-radius: 8px;
+}
+.post-delete-btn:hover { opacity: 1; background: color-mix(in srgb, #e8502a 10%, transparent); }
+.post-media { margin-bottom: 14px; border-radius: 14px; overflow: hidden; background: #000; }
+.post-media img, .post-media video { width: 100%; max-height: 420px; object-fit: contain; display: block; background: #000; }
+.post-media-preview {
+  display: flex; align-items: center; gap: 10px; margin: 10px 0; position: relative;
+  padding: 8px; background: var(--bg); border-radius: 12px; border: 1px dashed var(--border);
+}
+.post-media-preview img, .post-media-preview video { border-radius: 10px; max-height: 120px; }
+.post-media-remove {
+  position: absolute; top: 4px; left: 4px; background: rgba(0,0,0,.6); color: #fff;
+  border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-size: 13px;
+}
+
+/* ── التعليقات ── */
+.post-comments { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+.comments-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; max-height: 320px; overflow-y: auto; }
+.comment-item { display: flex; align-items: flex-start; gap: 8px; position: relative; }
+.comment-body {
+  background: var(--bg); border-radius: 12px; padding: 8px 12px; flex: 1;
+}
+.comment-body strong { font-size: 12.5px; display: block; margin-bottom: 2px; }
+.comment-body p { font-size: 13px; line-height: 1.6; margin: 0; }
+.comment-time { font-size: 10.5px; color: var(--muted); }
+.comment-delete-btn {
+  background: none; border: none; cursor: pointer; color: var(--muted); font-size: 12px;
+  opacity: .5; padding: 2px 6px; align-self: center;
+}
+.comment-delete-btn:hover { opacity: 1; color: #e8502a; }
+.comment-composer { display: flex; gap: 8px; }
+.comment-input {
+  flex: 1; border: 1px solid var(--border); border-radius: 20px; padding: 8px 14px;
+  background: var(--card); color: var(--text); font-size: 13px; font-family: var(--font);
+}
+.comment-send-btn {
+  background: var(--p600); color: #fff; border: none; border-radius: 20px;
+  padding: 8px 16px; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap;
+}
+.comment-send-btn:hover { background: var(--p700, var(--p600)); }
+
 /* ============================================
    👨‍🏫 المرشدون — Mentors
    ============================================ */

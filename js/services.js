@@ -299,7 +299,7 @@ const CommunityService = {
     try {
       const { data } = await supa
         .from('community_posts')
-        .select('*, profiles(username)')
+        .select('*, profiles(username, avatar_url)')
         .order('created_at', { ascending: false })
         .limit(50);
       return data || [];
@@ -308,8 +308,8 @@ const CommunityService = {
     }
   },
 
-  // نشر منشور مع rate limit
-  async publish(userId, content, tags) {
+  // نشر منشور مع rate limit (يدعم صورة/فيديو اختياري)
+  async publish(userId, content, tags, mediaUrl, mediaType) {
     // Rate limit check
     const now = Date.now();
     const remaining = Math.ceil((POST_RATE_LIMIT_MS - (now - _lastPostTime)) / 1000);
@@ -318,15 +318,18 @@ const CommunityService = {
     }
 
     // لا نرسل sanitizeHTML للـ DB — نحفظ النص الخام ونعرضه sanitized
-    const trimmed = content.trim();
-    if (!trimmed) return { error: 'لا يمكن نشر منشور فارغ' };
+    const trimmed = (content || '').trim();
+    if (!trimmed && !mediaUrl) return { error: 'لا يمكن نشر منشور فارغ' };
     if (trimmed.length > 1000) return { error: 'الحد الأقصى 1000 حرف' };
 
     try {
+      const payload = { user_id: userId, content: trimmed, tags, likes: 0 };
+      if (mediaUrl) { payload.media_url = mediaUrl; payload.media_type = mediaType || 'image'; }
+
       const { data, error } = await supa
         .from('community_posts')
-        .insert({ user_id: userId, content: trimmed, tags, likes: 0 })
-        .select('*, profiles(username)')
+        .insert(payload)
+        .select('*, profiles(username, avatar_url)')
         .single();
 
       if (error) return { error: error.message };
@@ -335,6 +338,75 @@ const CommunityService = {
     } catch(e) {
       return { error: 'خطأ في الاتصال' };
     }
+  },
+
+  // رفع صورة أو فيديو للمنشور
+  async uploadPostMedia(userId, file) {
+    try {
+      const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+      const path = `${userId}/${Date.now()}.${ext}`;
+      const { error: upErr } = await supa.storage
+        .from('community-media')
+        .upload(path, file, { upsert: false, cacheControl: '3600' });
+      if (upErr) throw upErr;
+
+      const { data: pub } = supa.storage.from('community-media').getPublicUrl(path);
+      const mediaType = file.type.startsWith('video/') ? 'video' : 'image';
+      return { url: pub.publicUrl, type: mediaType };
+    } catch (e) {
+      console.warn('[CommunityService] uploadPostMedia error:', e);
+      return { error: e.message || 'حصل خطأ أثناء رفع الملف' };
+    }
+  },
+
+  // حذف منشور (المالك أو الأدمن)
+  async deletePost(postId) {
+    try {
+      const { error } = await supa.from('community_posts').delete().eq('id', postId);
+      return !error;
+    } catch (e) { return false; }
+  },
+
+  // تحميل تعليقات منشور معيّن
+  async loadComments(postId) {
+    try {
+      const { data, error } = await supa
+        .from('post_comments')
+        .select('*, profiles(username, avatar_url)')
+        .eq('post_id', postId)
+        .order('created_at', { ascending: true });
+      if (error) throw error;
+      return data || [];
+    } catch (e) {
+      console.warn('[CommunityService] loadComments error:', e);
+      return [];
+    }
+  },
+
+  // إضافة تعليق
+  async addComment(postId, userId, content) {
+    const trimmed = (content || '').trim();
+    if (!trimmed) return { error: 'اكتب تعليقاً أولاً' };
+    if (trimmed.length > 500) return { error: 'الحد الأقصى 500 حرف' };
+    try {
+      const { data, error } = await supa
+        .from('post_comments')
+        .insert({ post_id: postId, user_id: userId, content: trimmed })
+        .select('*, profiles(username, avatar_url)')
+        .single();
+      if (error) throw error;
+      return { data };
+    } catch (e) {
+      return { error: e.message || 'حصل خطأ أثناء إضافة التعليق' };
+    }
+  },
+
+  // حذف تعليق (صاحبه أو الأدمن)
+  async deleteComment(commentId) {
+    try {
+      const { error } = await supa.from('post_comments').delete().eq('id', commentId);
+      return !error;
+    } catch (e) { return false; }
   },
 
   // إضافة لايك عبر DB function (تمنع التكرار)
@@ -588,3 +660,43 @@ const NotificationService = {
   }
 };
 window.NotificationService = NotificationService;
+
+/* =============================================
+   WatchHistoryService — سجل مشاهدة الفيديوهات
+   ============================================= */
+const WatchHistoryService = {
+  async logWatch(userId, entry) {
+    try {
+      if (!userId) return false;
+      const { error } = await supa.from('video_watch_log').insert({
+        user_id: userId,
+        step_id: entry.stepId || null,
+        roadmap_slug: entry.roadmapSlug || null,
+        roadmap_title: entry.roadmapTitle || null,
+        step_title: entry.stepTitle || null,
+        percent: entry.percent || 0
+      });
+      return !error;
+    } catch (e) {
+      console.warn('[WatchHistoryService] logWatch error:', e);
+      return false;
+    }
+  },
+
+  async loadHistory(userId, limit) {
+    try {
+      const { data, error } = await supa
+        .from('video_watch_log')
+        .select('*')
+        .eq('user_id', userId)
+        .order('watched_at', { ascending: false })
+        .limit(limit || 30);
+      if (error) throw error;
+      return data || [];
+    } catch (e) {
+      console.warn('[WatchHistoryService] loadHistory error:', e);
+      return [];
+    }
+  }
+};
+window.WatchHistoryService = WatchHistoryService;
