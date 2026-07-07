@@ -39,21 +39,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
 <!-- Stylesheets -->
-<link rel="stylesheet" href="css/tokens.css?v=20260707b">
-<link rel="stylesheet" href="css/nav.css?v=20260707b">
-<link rel="stylesheet" href="css/components.css?v=20260707b">
-<link rel="stylesheet" href="css/pages.css?v=20260707b">
-<link rel="stylesheet" href="css/platform.css?v=20260707b">
-<link rel="stylesheet" href="css/mobile.css?v=20260707b">
-<link rel="stylesheet" href="css/effects.css?v=20260707b">
-<link rel="stylesheet" href="css/homepage.css?v=20260707b">
-<link rel="stylesheet" href="css/color-patch.css?v=20260707b">
-<link rel="stylesheet" href="css/redesign.css?v=20260707b">
-<link rel="stylesheet" href="css/onboarding.css?v=20260707b">
-<link rel="stylesheet" href="css/polish.css?v=20260707b">
-<link rel="stylesheet" href="css/upgrade.css?v=20260707b">
-<link rel="stylesheet" href="css/lightmode.css?v=20260707b">
-<link rel="stylesheet" href="css/roadmap.css?v=20260707b">
+<link rel="stylesheet" href="css/tokens.css?v=20260707c">
+<link rel="stylesheet" href="css/nav.css?v=20260707c">
+<link rel="stylesheet" href="css/components.css?v=20260707c">
+<link rel="stylesheet" href="css/pages.css?v=20260707c">
+<link rel="stylesheet" href="css/platform.css?v=20260707c">
+<link rel="stylesheet" href="css/mobile.css?v=20260707c">
+<link rel="stylesheet" href="css/effects.css?v=20260707c">
+<link rel="stylesheet" href="css/homepage.css?v=20260707c">
+<link rel="stylesheet" href="css/color-patch.css?v=20260707c">
+<link rel="stylesheet" href="css/redesign.css?v=20260707c">
+<link rel="stylesheet" href="css/onboarding.css?v=20260707c">
+<link rel="stylesheet" href="css/polish.css?v=20260707c">
+<link rel="stylesheet" href="css/upgrade.css?v=20260707c">
+<link rel="stylesheet" href="css/lightmode.css?v=20260707c">
+<link rel="stylesheet" href="css/roadmap.css?v=20260707c">
 
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MZ3PE6L5JL"></script>
@@ -78,6 +78,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "START LINE — خط البداية",
+  "alternateName": ["خط البداية", "START LINE", "منصة خط البداية"],
   "url": "https://start-line-eosin.vercel.app/",
   "description": "منصة التوجيه المهني الأولى للشباب العربي. اكتشف مسارك، احصل على خارطة طريق مخصصة، ومدربين خبراء — مجاناً.",
   "applicationCategory": "EducationalApplication",
@@ -97,7 +98,7 @@
 
 <!-- Supabase + Services (must load before app scripts) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/services.js?v=20260707b"></script>
+<script src="js/services.js?v=20260707c"></script>
 </head>
 <body>
 
@@ -264,8 +265,9 @@
       </div>
       <h1 class="hero-h1">
         <span class="hero-brand-block">
-          <span class="brand-start">START</span><span class="brand-dot">·</span><span class="brand-line-word">LINE</span>
+          <span class="hero-brand-start">START</span><span class="brand-dot">·</span><span class="brand-line-word">LINE</span>
         </span>
+        <span class="hero-brand-ar-sub">خط البداية</span>
         <span class="hero-ar-headline">
           مش عارف تبدأ منين؟<br>
           <em class="hero-em" data-en="Start Here.">ابدأ من هنا.</em>
@@ -3074,31 +3076,31 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <!-- Application Scripts — order matters -->
-<script src="js/data.js?v=20260707b" defer></script>
-<script src="js/core.js?v=20260707b" defer></script>
-<script src="js/ui.js?v=20260707b" defer></script>
-<script src="js/quiz-service.js?v=20260707b" defer></script>
-<script src="js/quiz.js?v=20260707b" defer></script>
-<script src="js/careers.js?v=20260707b" defer></script>
-<script src="js/category-router.js?v=20260707b" defer></script>
-<script src="js/features.js?v=20260707b" defer></script>
-<script src="js/community.js?v=20260707b" defer></script>
-<script src="js/admin.js?v=20260707b" defer></script>
-<script src="js/notif-center.js?v=20260707b" defer></script>
-<script src="js/auth.js?v=20260707b" defer></script>
-<script src="js/profile.js?v=20260707b" defer></script>
-<script src="js/onboarding.js?v=20260707b" defer></script>
-<script src="js/roadmap-mapping.js?v=20260707b" defer></script>
-<script src="js/roadmap-service.js?v=20260707b" defer></script>
-<script src="js/roadmap-progress-service.js?v=20260707b" defer></script>
-<script src="js/roadmap-path-selector.js?v=20260707b" defer></script>
-<script src="js/roadmap-lock-engine.js?v=20260707b" defer></script>
-<script src="js/roadmap-ui.js?v=20260707b" defer></script>
-<script src="js/platform.js?v=20260707b" defer></script>
-<script src="js/engagement.js?v=20260707b" defer></script>
-<script src="js/intelligence.js?v=20260707b" defer></script>
-<script src="js/events.js?v=20260707b" defer></script>
-<script src="js/init.js?v=20260707b" defer></script>
+<script src="js/data.js?v=20260707c" defer></script>
+<script src="js/core.js?v=20260707c" defer></script>
+<script src="js/ui.js?v=20260707c" defer></script>
+<script src="js/quiz-service.js?v=20260707c" defer></script>
+<script src="js/quiz.js?v=20260707c" defer></script>
+<script src="js/careers.js?v=20260707c" defer></script>
+<script src="js/category-router.js?v=20260707c" defer></script>
+<script src="js/features.js?v=20260707c" defer></script>
+<script src="js/community.js?v=20260707c" defer></script>
+<script src="js/admin.js?v=20260707c" defer></script>
+<script src="js/notif-center.js?v=20260707c" defer></script>
+<script src="js/auth.js?v=20260707c" defer></script>
+<script src="js/profile.js?v=20260707c" defer></script>
+<script src="js/onboarding.js?v=20260707c" defer></script>
+<script src="js/roadmap-mapping.js?v=20260707c" defer></script>
+<script src="js/roadmap-service.js?v=20260707c" defer></script>
+<script src="js/roadmap-progress-service.js?v=20260707c" defer></script>
+<script src="js/roadmap-path-selector.js?v=20260707c" defer></script>
+<script src="js/roadmap-lock-engine.js?v=20260707c" defer></script>
+<script src="js/roadmap-ui.js?v=20260707c" defer></script>
+<script src="js/platform.js?v=20260707c" defer></script>
+<script src="js/engagement.js?v=20260707c" defer></script>
+<script src="js/intelligence.js?v=20260707c" defer></script>
+<script src="js/events.js?v=20260707c" defer></script>
+<script src="js/init.js?v=20260707c" defer></script>
 
 <script>
   // Register Service Worker for PWA
