@@ -117,9 +117,14 @@ html:not([data-theme="dark"]) .bottom-nav-item:hover { color: var(--p600); }
   .plan-tab { min-width: calc(50% - 4px); }
 
   /* نافبار */
-  nav { padding: 0 14px; }
+  nav { padding: 0 12px; }
   .nav-logo-ar { display: none; }
-  .nav-cta { display: none; }
+  .nav-cta { padding: 7px 12px; font-size: 12.5px; white-space: nowrap; }
+  .nav-right { gap: 6px; }
+  /* دول موجودين برضو جوه قائمة الهامبرجر، فمنخفيهم من البار الرئيسي عشان زرار☰ يفضل ظاهر دايماً وميتقصّش برّه الشاشة */
+  #theme-btn, #lang-btn { display: none !important; }
+  .nav-user span { display: none; }
+  .nav-user { padding: 5px 8px; }
 
   /* نتائج */
   .results-actions { flex-direction: column; }
@@ -176,6 +181,11 @@ html:not([data-theme="dark"]) .bottom-nav-item:hover { color: var(--p600); }
    📱 شاشات صغيرة جداً — 320px و 360px
    ============================================ */
 @media (max-width: 360px) {
+  /* نافبار — مساحة أضيق */
+  nav { padding: 0 8px; gap: 6px; }
+  .nav-right { gap: 4px; }
+  .nav-cta { padding: 6px 10px; font-size: 11.5px; }
+
   /* التنقل السفلي */
   .bottom-nav-item { font-size: 9px; padding: 6px 2px; }
   .bottom-nav-item .bn-icon { font-size: 18px; }

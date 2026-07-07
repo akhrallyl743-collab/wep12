@@ -194,6 +194,7 @@ if (_savedUser?.id && typeof supa !== 'undefined') {
           if (STATE.currentPage === 'admin' && typeof initAdminPage === 'function') initAdminPage();
         }
       });
+      if (typeof PresenceService !== 'undefined') PresenceService.start(sessionUser.id);
     }
   });
 }

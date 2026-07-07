@@ -246,6 +246,8 @@ async function onSupaLogin(supaUser, fallbackName) {
     console.error('[onSupaLogin] فشل تحميل بيانات البروفايل:', err);
   }
 
+  if (typeof PresenceService !== 'undefined') PresenceService.start(supaUser.id);
+
   updateStreak();
 
   // ☁️ Cloud Sync — سحب بيانات المستخدم من الـ cloud ودمجها مع الـ local
@@ -315,6 +317,7 @@ AuthService.onAuthStateChange(async (event, session) => {
     STATE.user = null;
     STATE.isAdmin = false;
     if (typeof _updateAdminNavVisibility === 'function') _updateAdminNavVisibility();
+    if (typeof PresenceService !== 'undefined') PresenceService.stop();
     _lsDel('noor_user');
     const area = $('nav-auth-area');
     if (area) area.innerHTML = '<button class="nav-cta" data-action="openModal" data-tab="login">دخول</button>';
@@ -330,6 +333,7 @@ async function doLogout() {
   STATE.user = null;
   STATE.isAdmin = false;
   if (typeof _updateAdminNavVisibility === 'function') _updateAdminNavVisibility();
+  if (typeof PresenceService !== 'undefined') PresenceService.stop();
   _lsDel('noor_user');
   toast('👋 تم تسجيل خروجك');
   showPage('home');

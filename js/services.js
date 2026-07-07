@@ -89,6 +89,41 @@ const AuthService = {
 };
 
 /* =============================================
+   Presence Service — تتبّع لحظي لدخول المستخدمين
+   يحدّث last_seen_at كل ٢٥ ثانية طالما الصفحة مفتوحة، فيقدر الأدمن
+   يشوف مين "أونلاين دلوقتي" ومين دخل الموقع لحظة بلحظة
+   (يعتمد على عمود last_seen_at في جدول profiles — راجع supabase_setup.sql)
+   ============================================= */
+const PresenceService = {
+  _timer: null,
+
+  async _ping(userId) {
+    try {
+      await supa.from('profiles').update({
+        last_seen_at: new Date().toISOString()
+      }).eq('id', userId);
+    } catch (e) { /* صامت — الحضور مش حرج لتجربة المستخدم */ }
+  },
+
+  start(userId) {
+    if (!userId) return;
+    this.stop();
+    this._ping(userId); // نبضة فورية عند الدخول
+    this._timer = setInterval(() => {
+      if (!document.hidden) this._ping(userId);
+    }, 25000);
+    // نبضة عند رجوع المستخدم للتبويب بعد غياب
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) this._ping(userId);
+    });
+  },
+
+  stop() {
+    if (this._timer) { clearInterval(this._timer); this._timer = null; }
+  }
+};
+
+/* =============================================
    Profile Services
    ============================================= */
 

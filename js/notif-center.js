@@ -22,6 +22,27 @@ async function refreshNotifCenter() {
   STATE.notifCenterItems = items;
   _renderNotifBadge();
   if (STATE.notifCenterOpen) _renderNotifList();
+  _subscribeNotifLive();
+}
+
+// اشتراك لحظي في جدول الإشعارات — أي إشعار جديد يوصل فوراً بدون Refresh
+let _notifLiveChannel = null;
+function _subscribeNotifLive() {
+  if (_notifLiveChannel || typeof supa === 'undefined' || !supa.channel) return;
+  _notifLiveChannel = supa
+    .channel('user-notif-live')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'notifications' }, (payload) => {
+      const n = payload.new;
+      // نتأكد إن الإشعار موجّه للجميع أو لهذا المستخدم تحديداً قبل عرضه
+      const targetsMe = n.target_type === 'all' ||
+        (n.target_type === 'users' && (n.target_user_ids || []).includes(STATE.user?.id));
+      if (!targetsMe) return;
+      STATE.notifCenterItems = [n, ...(STATE.notifCenterItems || [])];
+      _renderNotifBadge();
+      if (STATE.notifCenterOpen) _renderNotifList();
+      if (typeof toast === 'function') toast(`🔔 ${n.title}`);
+    })
+    .subscribe();
 }
 
 function _renderNotifBadge() {
