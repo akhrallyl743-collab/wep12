@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>START LINE — خط البداية | اكتشف مسارك المهني</title>
 <meta name="description" content="START LINE (خط البداية) — منصة التوجيه المهني الأولى للشباب العربي. اكتشف مسارك، احصل على خارطة طريق مخصصة، ومدربين خبراء — مجاناً.">
-<link rel="canonical" href="https://start-line.vercel.app/">
+<link rel="canonical" href="https://start-line-eosin.vercel.app/">
 <!-- Open Graph -->
 <meta property="og:title" content="START LINE — خط البداية | اكتشف مسارك المهني">
 <meta property="og:description" content="اكتشف المهنة التي تناسب شخصيتك. خارطة طريق مخصصة، دعم نفسي، ومدربون خبراء — مجاناً تماماً.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://start-line.vercel.app/">
-<meta property="og:image" content="https://start-line.vercel.app/assets/logo.png">
+<meta property="og:url" content="https://start-line-eosin.vercel.app/">
+<meta property="og:image" content="https://start-line-eosin.vercel.app/assets/logo.png">
 <meta property="og:image:width" content="1254">
 <meta property="og:image:height" content="1254">
 <meta property="og:image:alt" content="START LINE — منصة التوجيه المهني للشباب العربي">
@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="START LINE — خط البداية">
 <meta name="twitter:description" content="منصة التوجيه المهني الأولى للشباب العربي — مجاناً">
-<meta name="twitter:image" content="https://start-line.vercel.app/assets/logo.png">
+<meta name="twitter:image" content="https://start-line-eosin.vercel.app/assets/logo.png">
 <!-- Additional SEO -->
 <meta name="keywords" content="توجيه مهني، مسار وظيفي، شباب عربي، اختبار مهني، مهارات، تطوير ذاتي، start line، خط البداية">
 <meta name="author" content="START LINE">
@@ -39,21 +39,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
 <!-- Stylesheets -->
-<link rel="stylesheet" href="css/tokens.css">
-<link rel="stylesheet" href="css/nav.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/pages.css">
-<link rel="stylesheet" href="css/platform.css">
-<link rel="stylesheet" href="css/mobile.css">
-<link rel="stylesheet" href="css/effects.css">
-<link rel="stylesheet" href="css/homepage.css">
-<link rel="stylesheet" href="css/color-patch.css">
-<link rel="stylesheet" href="css/redesign.css">
-<link rel="stylesheet" href="css/onboarding.css">
-<link rel="stylesheet" href="css/polish.css">
-<link rel="stylesheet" href="css/upgrade.css">
-<link rel="stylesheet" href="css/lightmode.css">
-<link rel="stylesheet" href="css/roadmap.css">
+<link rel="stylesheet" href="css/tokens.css?v=20260707d">
+<link rel="stylesheet" href="css/nav.css?v=20260707d">
+<link rel="stylesheet" href="css/components.css?v=20260707d">
+<link rel="stylesheet" href="css/pages.css?v=20260707d">
+<link rel="stylesheet" href="css/platform.css?v=20260707d">
+<link rel="stylesheet" href="css/mobile.css?v=20260707d">
+<link rel="stylesheet" href="css/effects.css?v=20260707d">
+<link rel="stylesheet" href="css/homepage.css?v=20260707d">
+<link rel="stylesheet" href="css/color-patch.css?v=20260707d">
+<link rel="stylesheet" href="css/redesign.css?v=20260707d">
+<link rel="stylesheet" href="css/onboarding.css?v=20260707d">
+<link rel="stylesheet" href="css/polish.css?v=20260707d">
+<link rel="stylesheet" href="css/upgrade.css?v=20260707d">
+<link rel="stylesheet" href="css/lightmode.css?v=20260707d">
+<link rel="stylesheet" href="css/roadmap.css?v=20260707d">
 
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MZ3PE6L5JL"></script>
@@ -78,7 +78,8 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "START LINE — خط البداية",
-  "url": "https://start-line.vercel.app/",
+  "alternateName": ["خط البداية", "START LINE", "منصة خط البداية"],
+  "url": "https://start-line-eosin.vercel.app/",
   "description": "منصة التوجيه المهني الأولى للشباب العربي. اكتشف مسارك، احصل على خارطة طريق مخصصة، ومدربين خبراء — مجاناً.",
   "applicationCategory": "EducationalApplication",
   "operatingSystem": "Any",
@@ -97,7 +98,7 @@
 
 <!-- Supabase + Services (must load before app scripts) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/services.js"></script>
+<script src="js/services.js?v=20260707d"></script>
 </head>
 <body>
 
@@ -264,8 +265,9 @@
       </div>
       <h1 class="hero-h1">
         <span class="hero-brand-block">
-          <span class="brand-start">START</span><span class="brand-dot">·</span><span class="brand-line-word">LINE</span>
+          <span class="hero-brand-start">START</span><span class="brand-dot">·</span><span class="brand-line-word">LINE</span>
         </span>
+        <span class="hero-brand-ar-sub">خط البداية</span>
         <span class="hero-ar-headline">
           مش عارف تبدأ منين؟<br>
           <em class="hero-em" data-en="Start Here.">ابدأ من هنا.</em>
@@ -955,6 +957,7 @@
       <div style="font-size:16px;font-weight:800;margin-bottom:20px;">📊 تحليل شخصيتك</div>
       <div class="trait-bars" id="trait-bars"></div>
     </div>
+    <div id="quiz-clarify-box" style="margin:18px 0;"></div>
     <div id="career-matches"></div>
     <div class="results-actions" style="margin-top:20px;">
       <button class="btn btn-outline" data-action="copyResultsCard">📤 شارك نتيجتك</button>
@@ -2028,6 +2031,30 @@
         <div id="admin-overview-stats" class="admin-stats-grid">
           <p style="text-align:center;color:var(--muted);grid-column:1/-1;">جاري تحميل الإحصائيات...</p>
         </div>
+
+        <!-- 🔴 لوحة مباشرة: أونلاين الآن + آخر المنضمين -->
+        <div class="admin-live-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;">
+          <div class="admin-live-card" style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+              <span style="width:9px;height:9px;border-radius:50%;background:#1fbb85;box-shadow:0 0 8px #1fbb85;display:inline-block;animation:adminLivePulse 1.6s infinite;"></span>
+              <strong style="font-size:14px;">أونلاين الآن</strong>
+              <span id="admin-online-count" style="margin-inline-start:auto;font-weight:900;font-size:18px;color:#1fbb85;">0</span>
+            </div>
+            <div id="admin-online-list" style="display:flex;flex-direction:column;gap:6px;max-height:220px;overflow-y:auto;">
+              <p style="color:var(--muted);font-size:12.5px;">جاري التحميل...</p>
+            </div>
+          </div>
+          <div class="admin-live-card" style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+              <span>🆕</span>
+              <strong style="font-size:14px;">آخر المنضمين (لحظي)</strong>
+            </div>
+            <div id="admin-recent-signups" style="display:flex;flex-direction:column;gap:6px;max-height:220px;overflow-y:auto;">
+              <p style="color:var(--muted);font-size:12.5px;">جاري التحميل...</p>
+            </div>
+          </div>
+        </div>
+        <style>@keyframes adminLivePulse{0%,100%{opacity:1}50%{opacity:.35}}</style>
       </div>
 
       <!-- المسارات التعليمية والفيديوهات والمصادر -->
@@ -2295,7 +2322,7 @@
     <div class="legal-body">
       <section class="legal-section">
         <h2>١. مقدمة</h2>
-        <p>منصة START LINE — خط البداية ("المنصة"، "نحن") تلتزم بحماية خصوصيتك. تشرح هذه السياسة كيف نجمع بياناتك واستخدمها وحمايتها عند استخدامك لمنصتنا المتاحة على start-line.vercel.app وتطبيقات PWA المرتبطة بها.</p>
+        <p>منصة START LINE — خط البداية ("المنصة"، "نحن") تلتزم بحماية خصوصيتك. تشرح هذه السياسة كيف نجمع بياناتك واستخدمها وحمايتها عند استخدامك لمنصتنا المتاحة على start-line-eosin.vercel.app وتطبيقات PWA المرتبطة بها.</p>
       </section>
       <section class="legal-section">
         <h2>٢. البيانات التي نجمعها</h2>
@@ -3049,37 +3076,62 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <!-- Application Scripts — order matters -->
-<script src="js/data.js" defer></script>
-<script src="js/core.js" defer></script>
-<script src="js/ui.js" defer></script>
-<script src="js/quiz-service.js" defer></script>
-<script src="js/quiz.js" defer></script>
-<script src="js/careers.js" defer></script>
-<script src="js/category-router.js" defer></script>
-<script src="js/features.js" defer></script>
-<script src="js/community.js" defer></script>
-<script src="js/admin.js" defer></script>
-<script src="js/notif-center.js" defer></script>
-<script src="js/auth.js" defer></script>
-<script src="js/profile.js" defer></script>
-<script src="js/onboarding.js" defer></script>
-<script src="js/roadmap-mapping.js" defer></script>
-<script src="js/roadmap-service.js" defer></script>
-<script src="js/roadmap-progress-service.js" defer></script>
-<script src="js/roadmap-path-selector.js" defer></script>
-<script src="js/roadmap-lock-engine.js" defer></script>
-<script src="js/roadmap-ui.js" defer></script>
-<script src="js/platform.js" defer></script>
-<script src="js/engagement.js" defer></script>
-<script src="js/intelligence.js" defer></script>
-<script src="js/events.js" defer></script>
-<script src="js/init.js" defer></script>
+<script src="js/data.js?v=20260707d" defer></script>
+<script src="js/core.js?v=20260707d" defer></script>
+<script src="js/ui.js?v=20260707d" defer></script>
+<script src="js/quiz-service.js?v=20260707d" defer></script>
+<script src="js/quiz.js?v=20260707d" defer></script>
+<script src="js/careers.js?v=20260707d" defer></script>
+<script src="js/category-router.js?v=20260707d" defer></script>
+<script src="js/features.js?v=20260707d" defer></script>
+<script src="js/community.js?v=20260707d" defer></script>
+<script src="js/admin.js?v=20260707d" defer></script>
+<script src="js/notif-center.js?v=20260707d" defer></script>
+<script src="js/auth.js?v=20260707d" defer></script>
+<script src="js/profile.js?v=20260707d" defer></script>
+<script src="js/onboarding.js?v=20260707d" defer></script>
+<script src="js/roadmap-mapping.js?v=20260707d" defer></script>
+<script src="js/roadmap-service.js?v=20260707d" defer></script>
+<script src="js/roadmap-progress-service.js?v=20260707d" defer></script>
+<script src="js/roadmap-path-selector.js?v=20260707d" defer></script>
+<script src="js/roadmap-lock-engine.js?v=20260707d" defer></script>
+<script src="js/roadmap-ui.js?v=20260707d" defer></script>
+<script src="js/platform.js?v=20260707d" defer></script>
+<script src="js/engagement.js?v=20260707d" defer></script>
+<script src="js/intelligence.js?v=20260707d" defer></script>
+<script src="js/events.js?v=20260707d" defer></script>
+<script src="js/init.js?v=20260707d" defer></script>
 
 <script>
-  // Register Service Worker for PWA
+  // Register Service Worker for PWA — مع تحديث تلقائي بدون أي تدخل من المستخدم
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js').catch(() => {});
+      navigator.serviceWorker.register('/sw.js').then(reg => {
+        // لو في نسخة جديدة من الـ SW جاهزة ومستنية، خليها تشتغل فوراً بدل ما تستنى إغلاق كل التابات
+        if (reg.waiting) reg.waiting.postMessage('SKIP_WAITING');
+
+        reg.addEventListener('updatefound', () => {
+          const newWorker = reg.installing;
+          if (!newWorker) return;
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              newWorker.postMessage('SKIP_WAITING');
+            }
+          });
+        });
+
+        // تأكد من فحص وجود تحديث كل شوية (مفيد للتابات المفتوحة لمدة طويلة)
+        setInterval(() => reg.update().catch(() => {}), 60 * 60 * 1000);
+      }).catch(() => {});
+
+      // لما الـ SW الجديد ياخد السيطرة، اعمل ريفريش تلقائي مرة واحدة بس
+      // (guard بـ sessionStorage عشان منمنعش loop لو حصل خطأ)
+      let refreshedOnce = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (refreshedOnce) return;
+        refreshedOnce = true;
+        window.location.reload();
+      });
     });
   }
 

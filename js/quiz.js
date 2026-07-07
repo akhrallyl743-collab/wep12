@@ -176,6 +176,7 @@ function showResults() {
   saveAchievement('badge', 'first_quiz');
   if (typeof saveQuizTraits === 'function') saveQuizTraits(STATE.quizTraits); // [S] centralized
   saveQuizResult(a, normalized, STATE.quizTraits.topTracks);
+  _checkAmbiguityAndAskFollowUp(normalized);
 
   // AI Analysis
   const aiBox = $('ai-analysis-box');
@@ -227,43 +228,21 @@ async function requestAIAnalysis() {
   const maxIdx = allScores.indexOf(Math.max(...allScores));
   const dominantTrait = skillNames[maxIdx] || 'متعدد المواهب';
 
-  const prompt = `أنت مستشار مهني خبير تتحدث بالعربية.
-المستخدم أكمل اختبار الميول المهنية وهذه نتائجه الحقيقية:
-${skills_text}
-- الطابع المهيمن: ${dominantTrait}
-
-اكتب تحليلاً شخصياً مشجعاً (150-200 كلمة) يشمل:
-1. نقاط القوة الرئيسية لهذه الشخصية
-2. المسار المهني الأنسب ولماذا
-3. تحدٍّ واحد محتمل وكيف يتجاوزه
-4. رسالة تحفيزية شخصية
-
-اكتب بأسلوب دافئ وشخصي كأنك تتحدث مع صديق. لا تستخدم نقاطاً أو قوائم — اكتب فقرات متدفقة.`;
-
   try {
-    // ⚠️ ضع مفتاح Anthropic API هنا — احصل عليه من console.anthropic.com
-    // لا تنشر المفتاح في كود عام — استخدم متغيرات البيئة في الإنتاج
-    const ANTHROPIC_API_KEY = window.ANTHROPIC_API_KEY || '';
-    if (!ANTHROPIC_API_KEY) throw new Error('missing api key');
-
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+    const resp = await fetch('/api/quiz-advisor', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerously-allow-browser': 'true'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }]
+        mode: 'analysis',
+        scores: n,
+        dominantTrait,
+        topTracksText: (STATE.quizTraits?.topTracks || []).slice(0, 3)
+          .map(id => CAREERS_DATA.find(c => c.id === id)?.name).filter(Boolean).join('، ')
       })
     });
-    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     const data = await resp.json();
-    const analysis = data.content?.[0]?.text || '';
-    if (!analysis) throw new Error('no content');
+    if (!resp.ok || !data.analysis) throw new Error(data.message || `HTTP ${resp.status}`);
+    const analysis = data.analysis;
 
     _lastAIRequest = Date.now();
     window._lastAIAnalysis = analysis;
@@ -280,12 +259,12 @@ ${skills_text}
         </button>
       </div>`;
   } catch(e) {
-    const isKeyMissing = e.message === 'missing api key';
+    const isKeyMissing = e.message && e.message.includes('ANTHROPIC_API_KEY');
     box.innerHTML = `
       <div style="background:var(--p50);border-radius:14px;padding:20px;text-align:center;">
         <p style="color:var(--muted);font-size:14px;">
           ${isKeyMissing
-            ? '🔑 لتفعيل التحليل بالذكاء الاصطناعي أضف مفتاح Anthropic API في المشروع (window.ANTHROPIC_API_KEY)'
+            ? '🔑 لتفعيل التحليل بالذكاء الاصطناعي، أضف ANTHROPIC_API_KEY في إعدادات البيئة على Vercel'
             : '⚠️ تعذّر الاتصال بالذكاء الاصطناعي. جرّب مرة أخرى بعد قليل.'}
         </p>
         ${isKeyMissing ? '' : '<button data-action="requestAIAnalysis" class="btn btn-outline btn-sm" style="margin-top:12px;">🔄 إعادة المحاولة</button>'}
@@ -318,9 +297,98 @@ function copyResultsCard() {
       }).filter(Boolean).join('\n')
     : CAREERS_DATA.slice(0, 3).map((c, i) => `${i + 1}. ${c.icon} ${c.name}`).join('\n');
 
-  const text = `🌟 أكملت اختبار START LINE — خط البداية!\n\nشخصيتي: ${dominant}\n\nأقوى مساراتي:\n${tracksText}\n\nاكتشف مسارك أنت ← start-line.vercel.app`;
+  const text = `🌟 أكملت اختبار START LINE — خط البداية!\n\nشخصيتي: ${dominant}\n\nأقوى مساراتي:\n${tracksText}\n\nاكتشف مسارك أنت ← start-line-eosin.vercel.app`;
   navigator.clipboard.writeText(text)
     .then(() => toast('✅ تم نسخ بطاقة نتيجتك! شاركها على WhatsApp'))
     .catch(() => toast('⚠️ المتصفح لا يدعم النسخ التلقائي'));
 }
 
+
+/* =============================================
+   محرك التوضيح التكيّفي (Adaptive Clarification)
+   ------------------------------------------------------------
+   لو نتيجة السمتين الأعلى قريبة من بعض جداً (يعني الاختبار مش
+   قادر يحدد مسارك بثقة كافية)، بنسأل سؤال توضيحي واحد مركّز
+   على الفرق بين السمتين، وبعدين نبعت إجابته الحرة للذكاء
+   الاصطناعي (عبر /api/quiz-advisor) عشان يفسّرها ويدّقق التوصية.
+   ============================================= */
+const _CLARIFY_QUESTIONS = {
+  'creative|technical': 'لو طلبوا منك تعمل حاجة من الصفر بكرة الصبح، هتحب تصمم شكلها ومظهرها، ولا تبني الجزء اللي بيشغّلها من جوه؟',
+  'creative|social': 'لو هتشتغل في مشروع، تفضّل تركّز في تطوير الفكرة والتصميم لوحدك، ولا التفاعل مع ناس وإقناعهم بيها؟',
+  'creative|analytical': 'لما بتحل مشكلة، بتعتمد أكتر على حدسك وذوقك الفني، ولا على تحليل الأرقام والبيانات؟',
+  'creative|entrepreneurial': 'حلمك الأكبر إنك تبدع في شغلك الفني، ولا إنك تبني مشروع/بيزنس تملكه وتديره؟',
+  'technical|social': 'تفضّل تقضي يومك بتحل مشاكل تقنية لوحدك، ولا تتكلم مع ناس وتساعدهم وتبني علاقات؟',
+  'technical|analytical': 'بتحب أكتر إنك تبني وتنفّذ حلول تقنية عملية، ولا تحلل البيانات وتوصل لاستنتاجات دقيقة؟',
+  'technical|entrepreneurial': 'هدفك الأقرب إنك تبقى خبير تقني محترف، ولا تبني مشروعك التقني الخاص وتديره؟',
+  'social|analytical': 'في القرارات المهمة، بتسأل رأي الناس اللي حواليك وتحس بمشاعرهم، ولا بتحلل الموقف بمنطق بحت؟',
+  'social|entrepreneurial': 'بتحب أكتر إنك تساعد وتتواصل مع ناس كتير، ولا تقود مشروع وتدير فريق نحو هدف؟',
+  'analytical|entrepreneurial': 'تفضّل تبحث وتحلل المعلومات بعمق قبل أي خطوة، ولا تاخد قرارات سريعة وتخاطر عشان تحقق نمو؟'
+};
+
+function _pairKey(a, b) { return [a, b].sort().join('|'); }
+
+async function _checkAmbiguityAndAskFollowUp(normalized) {
+  const box = $('quiz-clarify-box');
+  if (!box) return;
+
+  const entries = Object.entries(normalized || {}).sort((a, b) => b[1] - a[1]);
+  if (entries.length < 2) return;
+  const [topKey, topScore] = entries[0];
+  const [secondKey, secondScore] = entries[1];
+
+  // الفارق صغير (أقل من ١٢ نقطة) = ملفّ شخصية غير واضح، محتاج سؤال إضافي
+  const gap = topScore - secondScore;
+  if (gap >= 12) { box.innerHTML = ''; return; }
+
+  const key = _pairKey(topKey, secondKey);
+  const question = _CLARIFY_QUESTIONS[key];
+  if (!question) { box.innerHTML = ''; return; }
+
+  STATE._quizClarify = { topKey, secondKey, question, normalized };
+
+  box.innerHTML = `
+    <div style="background:var(--p50);border:1.5px solid var(--p100);border-radius:16px;padding:22px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+        <span style="font-size:20px;">🤔</span>
+        <strong style="font-size:14.5px;">نتيجتك متقاربة بين مسارين — سؤال أخير عشان أدقّق توصيتك</strong>
+      </div>
+      <p style="font-size:14px;color:var(--text);margin-bottom:14px;">${sanitizeHTML(question)}</p>
+      <textarea id="quiz-clarify-input" class="form-input" rows="2"
+        placeholder="اكتب إجابتك بكلماتك الخاصة..." style="width:100%;resize:vertical;margin-bottom:10px;"></textarea>
+      <button class="btn btn-primary btn-sm" data-action="submitQuizClarify">إرسال ودقّق توصيتي ✨</button>
+      <div id="quiz-clarify-result" style="margin-top:14px;"></div>
+    </div>`;
+}
+
+async function submitQuizClarify() {
+  const input = $('quiz-clarify-input');
+  const resultEl = $('quiz-clarify-result');
+  const ctx = STATE._quizClarify;
+  if (!input || !ctx) return;
+  const answer = input.value.trim();
+  if (!answer) { toast('اكتب إجابتك الأول 🙏'); return; }
+
+  resultEl.innerHTML = `<div class="spinner" style="width:22px;height:22px;border-width:3px;margin:6px 0;"></div>`;
+
+  try {
+    const resp = await fetch('/api/quiz-advisor', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        mode: 'clarify_refine',
+        scores: ctx.normalized,
+        question: ctx.question,
+        answer
+      })
+    });
+    const data = await resp.json();
+    if (!resp.ok || !data.refinement) throw new Error(data.message || `HTTP ${resp.status}`);
+    resultEl.innerHTML = `
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;">
+        <strong style="font-size:13px;color:var(--p600);">🎯 توصيتنا المدقّقة:</strong>
+        <p style="font-size:14px;margin-top:6px;line-height:1.8;">${sanitizeHTML(data.refinement)}</p>
+      </div>`;
+  } catch (e) {
+    resultEl.innerHTML = `<p style="color:var(--muted);font-size:13px;">⚠️ تعذّر تدقيق التوصية الآن. توصياتك الأساسية بالأعلى تبقى صالحة.</p>`;
+  }
+}

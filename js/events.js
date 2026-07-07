@@ -104,6 +104,7 @@
     // ── الذكاء الاصطناعي ──
     requestAIAnalysis() { if (typeof requestAIAnalysis === 'function') requestAIAnalysis(); },
     copyAIAnalysis()    { if (typeof copyAIAnalysis === 'function') copyAIAnalysis(); },
+    submitQuizClarify() { if (typeof submitQuizClarify === 'function') submitQuizClarify(); },
 
     // ── onboarding ──
     onbTogglePassword(el) { onbTogglePassword(el.dataset.target, el); },

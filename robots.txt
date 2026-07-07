@@ -1,7 +1,7 @@
-# robots.txt — START LINE (start-line.vercel.app)
+# robots.txt — START LINE (start-line-eosin.vercel.app)
 # السماح لجميع الـ crawlers بفهرسة الموقع
 
 User-agent: *
 
 # Sitemap
-Sitemap: https://start-line.vercel.app/sitemap.xml
+Sitemap: https://start-line-eosin.vercel.app/sitemap.xml

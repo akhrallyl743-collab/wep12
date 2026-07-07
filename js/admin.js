@@ -53,17 +53,66 @@ const AdminService = {
   /* ===================== المستخدمون ===================== */
   async loadAllUsers() {
     try {
-      const { data, error } = await supa
+      const { data, error, count } = await supa
         .from('profiles')
-        .select('*')
+        .select('*', { count: 'exact' })
         .order('points', { ascending: false })
-        .limit(200);
+        .limit(1000);
       if (error) throw error;
+      STATE.adminUsersTotalCount = count ?? (data || []).length;
       return data || [];
     } catch (e) {
       console.warn('[Admin] loadAllUsers error:', e);
       return [];
     }
+  },
+
+  // مين "أونلاين" دلوقتي — أي حساب نبض (heartbeat) خلال آخر دقيقتين
+  async loadOnlineUsers() {
+    try {
+      const cutoff = new Date(Date.now() - 2 * 60 * 1000).toISOString();
+      const { data, error } = await supa
+        .from('profiles')
+        .select('id, username, avatar_url, last_seen_at')
+        .gte('last_seen_at', cutoff)
+        .order('last_seen_at', { ascending: false });
+      if (error) throw error;
+      return data || [];
+    } catch (e) { console.warn('[Admin] loadOnlineUsers error:', e); return []; }
+  },
+
+  // آخر المستخدمين اللي انضموا فعلياً (بالترتيب الزمني للتسجيل)
+  async loadRecentSignups(limitN = 8) {
+    try {
+      const { data, error } = await supa
+        .from('profiles')
+        .select('id, username, avatar_url, created_at')
+        .order('created_at', { ascending: false })
+        .limit(limitN);
+      if (error) throw error;
+      return data || [];
+    } catch (e) { console.warn('[Admin] loadRecentSignups error:', e); return []; }
+  },
+
+  // اشتراك لحظي — يشتغل طول ما لوحة الإدارة مفتوحة
+  // onNewUser: يتنفذ فور تسجيل مستخدم جديد | onPresence: يتنفذ عند أي تحديث نبضة حضور
+  _liveChannel: null,
+  subscribeLive(onNewUser, onPresence) {
+    if (typeof supa === 'undefined' || !supa.channel) return null;
+    this.unsubscribeLive();
+    this._liveChannel = supa
+      .channel('admin-live-profiles')
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'profiles' }, (payload) => {
+        if (typeof onNewUser === 'function') onNewUser(payload.new);
+      })
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'profiles' }, (payload) => {
+        if (typeof onPresence === 'function') onPresence(payload.new);
+      })
+      .subscribe();
+    return this._liveChannel;
+  },
+  unsubscribeLive() {
+    if (this._liveChannel) { supa.removeChannel(this._liveChannel); this._liveChannel = null; }
   },
 
   async searchUsers(q) {
@@ -117,6 +166,13 @@ const AdminService = {
     } catch (e) { return false; }
   },
 
+  /* ===================== إشعار تلقائي عند إضافة محتوى جديد ===================== */
+  // يُستدعى تلقائياً من دوال الإنشاء أدناه — مفيش تدخل يدوي مطلوب من الأدمن
+  async _autoNotifyNewContent(title, message) {
+    try { await this.sendNotification(title, message, 'all', []); }
+    catch (e) { console.warn('[Admin] auto-notify failed:', e); }
+  },
+
   /* ===================== المسارات التعليمية (Roadmaps) ===================== */
   async loadAllRoadmaps() {
     try {
@@ -130,6 +186,7 @@ const AdminService = {
     try {
       const { data, error } = await supa.from('roadmaps').insert(fields).select().single();
       if (error) throw error;
+      this._autoNotifyNewContent('📚 مسار جديد!', `أضفنا مسار "${fields.title || ''}" — جاهز تستكشفه دلوقتي؟`);
       return { data };
     } catch (e) { return { error: e.message || 'حصل خطأ' }; }
   },
@@ -179,6 +236,7 @@ const AdminService = {
     try {
       const { data, error } = await supa.from('roadmap_sections').insert({ ...fields, roadmap_id: roadmapId }).select().single();
       if (error) throw error;
+      this._autoNotifyNewContent('🆕 محتوى جديد', `أضفنا "${fields.title || 'قسم جديد'}" لأحد مساراتك التعليمية`);
       return { data };
     } catch (e) { return { error: e.message || 'حصل خطأ' }; }
   },
@@ -195,6 +253,7 @@ const AdminService = {
     try {
       const { data, error } = await supa.from('roadmap_steps').insert({ ...fields, section_id: sectionId }).select().single();
       if (error) throw error;
+      this._autoNotifyNewContent('🎬 درس جديد', `أضفنا "${fields.title || 'درس جديد'}" — كمّل تعلمك!`);
       return { data };
     } catch (e) { return { error: e.message || 'حصل خطأ' }; }
   },
@@ -420,7 +479,7 @@ async function renderAdminOverview() {
   const adminsCount = users.filter(u => u.is_admin).length;
 
   el.innerHTML = `
-    <div class="admin-stat-card"><span class="num">${users.length}</span><span class="lbl">👥 إجمالي المستخدمين</span></div>
+    <div class="admin-stat-card"><span class="num">${STATE.adminUsersTotalCount ?? users.length}</span><span class="lbl">👥 إجمالي المستخدمين</span></div>
     <div class="admin-stat-card"><span class="num">${roadmaps.length}</span><span class="lbl">📚 المسارات التعليمية</span></div>
     <div class="admin-stat-card"><span class="num">${trainers.length}</span><span class="lbl">🤝 إجمالي المدربين</span></div>
     <div class="admin-stat-card"><span class="num">${pendingTrainers}</span><span class="lbl">📩 طلبات مدربين قيد المراجعة</span></div>
@@ -434,6 +493,65 @@ async function renderAdminOverview() {
     const badge = $('admin-pending-badge');
     if (badge) { badge.style.display = 'inline-flex'; badge.textContent = pendingTrainers; }
   }
+
+  _renderAdminLivePanels();
+  AdminService.subscribeLive(
+    (newUser) => { toast(`🆕 مستخدم جديد انضم: ${newUser.username || 'مستخدم'}`); _renderAdminLivePanels(); },
+    () => { _renderAdminLivePanels(); }
+  );
+}
+
+/* لوحة "أونلاين الآن" و"آخر المنضمين" — تتحدّث لحظياً عبر Supabase Realtime
+   + تحديث احتياطي كل 20 ثانية لضمان الدقة حتى لو فاتت أي حدث */
+let _adminLiveInterval = null;
+async function _renderAdminLivePanels() {
+  const [online, recent] = await Promise.all([
+    AdminService.loadOnlineUsers(),
+    AdminService.loadRecentSignups(8)
+  ]);
+
+  const countEl = $('admin-online-count');
+  if (countEl) countEl.textContent = online.length;
+
+  const onlineList = $('admin-online-list');
+  if (onlineList) {
+    onlineList.innerHTML = online.length
+      ? online.map(u => `
+        <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+          <span style="width:7px;height:7px;border-radius:50%;background:#1fbb85;flex-shrink:0;"></span>
+          <span style="font-weight:700;">${_adminEsc(u.username || 'مستخدم')}</span>
+        </div>`).join('')
+      : `<p style="color:var(--muted);font-size:12.5px;">محدش أونلاين دلوقتي</p>`;
+  }
+
+  const recentEl = $('admin-recent-signups');
+  if (recentEl) {
+    recentEl.innerHTML = recent.length
+      ? recent.map(u => `
+        <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;">
+          <span style="font-weight:700;">${_adminEsc(u.username || 'مستخدم')}</span>
+          <span style="color:var(--muted);font-size:11px;">${_adminTimeAgo(u.created_at)}</span>
+        </div>`).join('')
+      : `<p style="color:var(--muted);font-size:12.5px;">لا يوجد تسجيلات بعد</p>`;
+  }
+
+  if (!_adminLiveInterval) {
+    _adminLiveInterval = setInterval(() => {
+      if (STATE.currentPage === 'admin' && STATE.adminTab === 'overview') _renderAdminLivePanels();
+      else { clearInterval(_adminLiveInterval); _adminLiveInterval = null; AdminService.unsubscribeLive(); }
+    }, 20000);
+  }
+}
+
+function _adminTimeAgo(iso) {
+  if (!iso) return '';
+  const diffMs = Date.now() - new Date(iso).getTime();
+  const mins = Math.round(diffMs / 60000);
+  if (mins < 1) return 'الآن';
+  if (mins < 60) return `منذ ${mins} د`;
+  const hrs = Math.round(mins / 60);
+  if (hrs < 24) return `منذ ${hrs} س`;
+  return `منذ ${Math.round(hrs / 24)} ي`;
 }
 
 /* =============================================
