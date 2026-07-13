@@ -11,7 +11,7 @@
  *  - "clarify_refine"   : تفسير إجابة نصية حرة لسؤال توضيحي وتحسين التوصية
  * ------------------------------------------------------------ */
 
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-flash-latest';
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
 const TRAIT_LABELS = {
