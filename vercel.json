@@ -1,4 +1,10 @@
 {
+  "rewrites": [
+    {
+      "source": "/((?!api/|assets/|js/|css/|sql/|manifest\\.json|robots\\.txt|sitemap\\.xml|sw\\.js|favicon|google[a-z0-9]+\\.html).*)",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/index.html",

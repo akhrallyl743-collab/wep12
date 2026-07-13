@@ -15,7 +15,7 @@
       الكاش بنفسه.
    ============================================= */
 
-const SW_VERSION   = 'v5.0';
+const SW_VERSION   = 'v5.1';
 const CACHE_STATIC = `startline-static-${SW_VERSION}`;
 const CACHE_FONTS  = `startline-fonts-${SW_VERSION}`;
 const ACTIVE_CACHES = [CACHE_STATIC, CACHE_FONTS];
@@ -25,7 +25,7 @@ const OFFLINE_FALLBACK_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/assets/logo.png',
+  '/assets/logo.webp',
   '/assets/icon-192.png',
   '/assets/icon-512.png',
 ];
