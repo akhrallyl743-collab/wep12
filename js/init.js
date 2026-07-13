@@ -145,7 +145,7 @@ _startMinuteTimer();
    ============================================= */
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    closeModal();
+    if (!(STATE.authRequired && !STATE.user)) closeModal();
     closeCoachModal();
   }
 });
@@ -164,6 +164,12 @@ if (coachModalEl) {
    Initial Boot Sequence
    ============================================= */
 
+// 0. Analytics — نبضة حضور لحظية + تسجيل الزيارة، لكل زائر (مسجل أو لأ)
+if (typeof AnalyticsService !== 'undefined') {
+  AnalyticsService.start();
+  AnalyticsService.trackVisit(STATE.currentPage || 'home');
+}
+
 // 1. Apply persisted theme
 _applyTheme(STATE.theme);
 
@@ -176,6 +182,9 @@ if (_savedUser?.name) {
   STATE.user = _savedUser;
   updateStreak();
   updateNavUser(_savedUser);
+} else if (typeof requireAuthModal === 'function') {
+  // مفيش مستخدم مسجّل — الموقع ممنوع يُستخدم قبل تسجيل الدخول
+  requireAuthModal();
 }
 
 // 3b. تحديث صلاحية الأدمن (ومعلومات البروفايل) من قاعدة البيانات مباشرة —

@@ -2032,12 +2032,20 @@
           <p style="text-align:center;color:var(--muted);grid-column:1/-1;">جاري تحميل الإحصائيات...</p>
         </div>
 
-        <!-- 🔴 لوحة مباشرة: أونلاين الآن + آخر المنضمين -->
-        <div class="admin-live-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;">
+        <!-- 🔴 لوحة مباشرة: زوار الموقع الآن + أونلاين الآن + آخر المنضمين -->
+        <div class="admin-live-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:20px;">
+          <div class="admin-live-card" style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+              <span style="width:9px;height:9px;border-radius:50%;background:#3a7bfd;box-shadow:0 0 8px #3a7bfd;display:inline-block;animation:adminLivePulse 1.6s infinite;"></span>
+              <strong style="font-size:14px;">🌐 زوار الموقع الآن</strong>
+            </div>
+            <div style="font-size:34px;font-weight:900;color:#3a7bfd;text-align:center;padding:10px 0;" id="admin-visitors-now">0</div>
+            <p style="color:var(--muted);font-size:11.5px;text-align:center;">يشمل الزوار المسجلين وغير المسجلين خلال آخر دقيقتين</p>
+          </div>
           <div class="admin-live-card" style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
               <span style="width:9px;height:9px;border-radius:50%;background:#1fbb85;box-shadow:0 0 8px #1fbb85;display:inline-block;animation:adminLivePulse 1.6s infinite;"></span>
-              <strong style="font-size:14px;">أونلاين الآن</strong>
+              <strong style="font-size:14px;">أعضاء أونلاين الآن</strong>
               <span id="admin-online-count" style="margin-inline-start:auto;font-weight:900;font-size:18px;color:#1fbb85;">0</span>
             </div>
             <div id="admin-online-list" style="display:flex;flex-direction:column;gap:6px;max-height:220px;overflow-y:auto;">
@@ -2944,6 +2952,10 @@
       </div>
     </div>
 
+    <p id="auth-required-note" style="display:none;text-align:center;font-size:13px;color:var(--muted);margin:-6px 0 14px;">
+      🔒 سجّل دخولك أو أنشئ حساباً جديداً للمتابعة واستخدام الموقع
+    </p>
+
     <div class="auth-tabs" id="auth-tabs" role="tablist">
       <button class="auth-tab active" id="tab-login" data-action="authShowScreen" data-screen="login" role="tab" aria-selected="true" data-en="Sign In">دخول</button>
       <button class="auth-tab" id="tab-register" data-action="authShowScreen" data-screen="register" role="tab" aria-selected="false">حساب جديد</button>
@@ -3078,6 +3090,7 @@
 <!-- Application Scripts — order matters -->
 <script src="js/data.js?v=20260707d" defer></script>
 <script src="js/core.js?v=20260707d" defer></script>
+<script src="js/analytics.js?v=20260713a" defer></script>
 <script src="js/ui.js?v=20260707d" defer></script>
 <script src="js/quiz-service.js?v=20260707d" defer></script>
 <script src="js/quiz.js?v=20260707d" defer></script>

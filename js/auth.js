@@ -59,12 +59,37 @@ function openModal(tab) {
   authShowScreen(tab || 'login');
 }
 
+// يفعّل وضع "الدخول إجباري" — بيمنع إغلاق نافذة تسجيل الدخول لحد ما المستخدم يسجّل دخول/حساب فعلاً
+function requireAuthModal() {
+  STATE.authRequired = true;
+  const modal = $('auth-modal');
+  if (modal) modal.classList.add('force-auth');
+  const closeBtn = document.querySelector('#auth-modal .modal-close');
+  if (closeBtn) closeBtn.style.display = 'none';
+  const note = $('auth-required-note');
+  if (note) note.style.display = 'block';
+  openModal('login');
+}
+
+// يُلغي وضع الإجبار بعد نجاح تسجيل الدخول/إنشاء الحساب
+function releaseAuthRequirement() {
+  STATE.authRequired = false;
+  const modal = $('auth-modal');
+  if (modal) modal.classList.remove('force-auth');
+  const closeBtn = document.querySelector('#auth-modal .modal-close');
+  if (closeBtn) closeBtn.style.display = '';
+  const note = $('auth-required-note');
+  if (note) note.style.display = 'none';
+}
+
 function closeModal() {
+  if (STATE.authRequired && !STATE.user) return; // ممنوع الإغلاق قبل تسجيل الدخول
   const modal = $('auth-modal');
   if (modal) modal.classList.remove('open');
 }
 
 function modalOverlayClick(e) {
+  if (STATE.authRequired && !STATE.user) return; // ممنوع الإغلاق بالضغط خارج النافذة قبل تسجيل الدخول
   if (e.target === $('auth-modal')) closeModal();
 }
 
@@ -157,11 +182,13 @@ async function doRegister() {
       await onSupaLogin(data.user, name);
     } else {
       // No email verification — log the user in directly as guest session
+      releaseAuthRequirement();
       closeModal();
       const user = { id: data.user.id || ('u_' + Date.now()), name, email, onboarded: false, createdAt: new Date().toISOString() };
       _lsSet('noor_user', user);
       STATE.user = user;
       updateNavUser(user);
+      if (typeof AnalyticsService !== 'undefined') AnalyticsService.trackSignup();
       toast(`مرحباً ${name}! 🎉 تم إنشاء حسابك بنجاح`);
     }
   }
@@ -225,8 +252,10 @@ async function onSupaLogin(supaUser, fallbackName) {
   // المستخدم يبقى Logged-in فعلياً في الواجهة ومايفضلش عالق.
   _lsSet('noor_user', user);
   STATE.user = user;
+  releaseAuthRequirement();
   closeModal();
   updateNavUser(user);
+  if (typeof AnalyticsService !== 'undefined') AnalyticsService.trackLogin();
 
   const guestStreak = STATE.streak || parseInt(_lsRaw('noor_streak') || '0');
 
@@ -321,6 +350,7 @@ AuthService.onAuthStateChange(async (event, session) => {
     _lsDel('noor_user');
     const area = $('nav-auth-area');
     if (area) area.innerHTML = '<button class="nav-cta" data-action="openModal" data-tab="login">دخول</button>';
+    requireAuthModal();
   }
   if (event === 'PASSWORD_RECOVERY') {
     openModal('login');
@@ -337,6 +367,7 @@ async function doLogout() {
   _lsDel('noor_user');
   toast('👋 تم تسجيل خروجك');
   showPage('home');
+  requireAuthModal();
 }
 
 /* =============================================
