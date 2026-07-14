@@ -114,10 +114,19 @@ async function doLogin() {
   if (!password)            return authShowError('login', 'أدخل كلمة المرور');
 
   authSetLoading('login-btn', 'جاري الدخول...');
-  const { data, error } = await AuthService.loginWithEmail(email, password);
+  let data, error;
+  try {
+    ({ data, error } = await AuthService.loginWithEmail(email, password));
+  } catch (err) {
+    authSetLoading('login-btn');
+    console.error('[doLogin] استثناء غير متوقع (شبكة/CORS غالباً):', err);
+    authShowError('login', 'تعذّر الاتصال بالخادم — تأكد من الإنترنت وحاول مرة أخرى');
+    return;
+  }
   authSetLoading('login-btn');
 
   if (error) {
+    console.error('[doLogin] فشل تسجيل الدخول:', error);
     const msg = error.message || '';
     if (msg.includes('Invalid login') || msg.includes('invalid') || msg.includes('credentials')) {
       authShowError('login', 'البريد الإلكتروني أو كلمة المرور غير صحيحة');
@@ -125,8 +134,10 @@ async function doLogin() {
       authShowError('login', 'البريد الإلكتروني لم يتم تأكيده — تحقق من بريدك');
     } else if (msg.includes('rate limit') || msg.includes('too many')) {
       authShowError('login', 'محاولات كثيرة — انتظر دقيقة ثم حاول مرة أخرى');
+    } else if (msg.includes('Failed to fetch') || msg.includes('NetworkError') || msg.includes('network')) {
+      authShowError('login', 'تعذّر الاتصال بالخادم — تأكد من الإنترنت وحاول مرة أخرى');
     } else {
-      authShowError('login', 'حدث خطأ — حاول مرة أخرى');
+      authShowError('login', msg ? `حدث خطأ: ${msg}` : 'حدث خطأ — حاول مرة أخرى');
     }
     return;
   }
@@ -159,10 +170,20 @@ async function doRegister() {
   if (password.length < 8)  return authShowError('register', 'كلمة المرور ٨ أحرف على الأقل');
 
   authSetLoading('register-btn', 'جاري إنشاء الحساب...');
-  const { data, error } = await AuthService.registerWithEmail(email, password, name);
+  let data, error;
+  try {
+    ({ data, error } = await AuthService.registerWithEmail(email, password, name));
+  } catch (err) {
+    authSetLoading('register-btn');
+    console.error('[doRegister] استثناء غير متوقع (شبكة/CORS غالباً):', err);
+    authShowError('register', 'تعذّر الاتصال بالخادم — تأكد من الإنترنت وحاول مرة أخرى');
+    return;
+  }
   authSetLoading('register-btn');
 
   if (error) {
+    // نطبع الخطأ الحقيقي في الـ console دايماً عشان نقدر نشخّص أي حالة مش متوقعة
+    console.error('[doRegister] فشل التسجيل:', error);
     const msg = error.message || '';
     if (msg.includes('already registered') || msg.includes('مسجّل بالفعل')) {
       authShowScreen('login');
@@ -171,8 +192,15 @@ async function doRegister() {
       if (inp) inp.value = email;
     } else if (msg.includes('Password') || msg.includes('weak')) {
       authShowError('register', 'كلمة المرور ضعيفة — أضف أرقاماً أو رموزاً');
+    } else if (msg.includes('rate limit') || msg.includes('too many') || msg.includes('after')) {
+      authShowError('register', 'محاولات كثيرة في وقت قصير — استنى دقيقة وحاول تاني');
+    } else if (msg.includes('Failed to fetch') || msg.includes('NetworkError') || msg.includes('network')) {
+      authShowError('register', 'تعذّر الاتصال بالخادم — تأكد من الإنترنت وحاول مرة أخرى');
+    } else if (msg.includes('invalid') && msg.includes('email')) {
+      authShowError('register', 'صيغة البريد الإلكتروني غير مقبولة');
     } else {
-      authShowError('register', 'حدث خطأ — حاول مرة أخرى');
+      // بنعرض رسالة الخطأ الحقيقية (بالإنجليزي) بدل رسالة عامة، عشان نقدر نعرف السبب الفعلي بسرعة
+      authShowError('register', msg ? `حدث خطأ: ${msg}` : 'حدث خطأ — حاول مرة أخرى');
     }
     return;
   }
