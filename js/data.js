@@ -493,7 +493,60 @@ const CAREERS_DATA = [
     tools:["Camera DSLR/Mirrorless","Adobe Lightroom","Photoshop","Instagram"],
     daily:["التصوير في مواقع مختلفة","تعديل وتحرير الصور","بناء portfolio على Instagram","التواصل مع العملاء"],
     roadmap:[{t:"أساسيات الكاميرا",d:"الثلاثية: فتحة العدسة، سرعة الغالق، ISO"},{t:"التأليف والإضاءة",d:"فن التقاط الصورة المثالية"},{t:"التعديل",d:"Lightroom لتحسين ألوانك"},{t:"Portfolio",d:"50 صورة احترافية على Instagram"},{t:"أول عميل",d:"صوّر حفلات أو بورتريه"}],
-    course:"https://www.youtube.com/c/PeterMcKinnon", example:"مصور حفلات يكسب 300-1000$ لليلة الواحدة." },
+    course:"https://www.youtube.com/c/PeterMcKinnon", example:"مصور حفلات يكسب 300-1000$ لليلة الواحدة.",
+    tracks:[{
+      id:"photography-videography-track", title:"التصوير الفوتوغرافي والفيديوغرافي", subtitle:"من الصفر لاحتراف الكاميرا والموبايل",
+      longDesc:"مسار CATRealoaded للتصوير الفوتوغرافي والفيديوغرافي بياخدك من التعرف على أنواع الكاميرات والعدسات، لأساسيات التصوير والفيديو بالكاميرا وبالموبايل، لحد قواعد التأليف البصري وأشهر الأخطاء اللي لازم تتجنبها، وينتهي بتعلم Lightroom لتحرير صورك بلمسة احترافية. المسار عملي ومباشر ومناسب سواء بتصور بكاميرا احترافية أو بموبايلك بس.",
+      level:"مبتدئ", duration:"5 مراحل (مرن حسب وقتك)", totalLessons:14, icon:"📸", color:"#e8502a", coverImage:"assets/cat-design.svg",
+      intro:{
+        tools:[
+          {name:"كاميرا (DSLR/Mirrorless) أو موبايل جيد", purpose:"أداة التصوير الأساسية", url:""},
+          {name:"Tripod + Lighting Kit", purpose:"ثبات اللقطة وإضاءة احترافية", url:""},
+          {name:"Adobe Lightroom", purpose:"تعديل الصور وتلوينها باحترافية", url:"https://www.adobe.com/products/photoshop-lightroom.html"}
+        ],
+        accounts:[
+          {name:"Instagram", why:"بناء portfolio بصري وعرض شغلك", url:"https://www.instagram.com/"},
+          {name:"YouTube", why:"متابعة قنوات تصوير احترافية والتعلم المستمر", url:"https://www.youtube.com/"}
+        ],
+        plan:[
+          {title:"التعرف على المعدات", duration:"مرحلة 1", goal:"أنواع الكاميرات والعدسات والإكسسوارات الأساسية"},
+          {title:"أساسيات التصوير الفوتوغرافي", duration:"مرحلة 2", goal:"إعدادات الكاميرا الأساسية والتصوير بالموبايل"},
+          {title:"أساسيات الفيديوغرافي", duration:"مرحلة 3", goal:"تصوير الفيديو بالموبايل والكاميرا وأفضل الإعدادات"},
+          {title:"فن الالتقاط", duration:"مرحلة 4", goal:"قواعد وتلميحات لأفضل اللقطات، والأخطاء الشائعة"},
+          {title:"اللمسة السحرية", duration:"مرحلة 5", goal:"احتراف Lightroom لتعديل الصور (ديسكتوب وموبايل)"}
+        ],
+        challenge:[
+          {name:"Instagram", url:"https://www.instagram.com/"},
+          {name:"Behance", url:"https://www.behance.net/"}
+        ]
+      },
+      courses:[
+        { id:"pv-equipment", title:"مرحلة 1: التعرف على المعدات (Equipment Familiarization)", duration:"", lessons:[
+          {id:"pv-eq-01", title:"إزاي تفرق بين أنواع الكاميرات الأساسية", duration:"", type:"فيديو", videoUrl:"https://youtu.be/wbBBKet0PFQ?si=QAY7jSi8iBq-ak8c"},
+          {id:"pv-eq-02", title:"وسّع معرفتك بعدسات الكاميرا", duration:"", type:"فيديو", videoUrl:"https://youtu.be/c74B2OHIJKc?si=-g0PYzpH2jzK4CcU"},
+          {id:"pv-eq-03", title:"إكسسوارات الكاميرا الأساسية (Tripod, Lighting Set)", duration:"", type:"فيديو", videoUrl:"https://youtu.be/-SOBDagFhEk?si=TC8Aag8xpF3eqr0P"}
+        ]},
+        { id:"pv-photo-fundamentals", title:"مرحلة 2: أساسيات التصوير الفوتوغرافي", duration:"", lessons:[
+          {id:"pv-ph-01", title:"كورس سريع لأهم أساسيات التصوير", duration:"", type:"فيديو", videoUrl:"https://youtu.be/V7z7BAZdt2M?si=6OAjdfOsoZLGS6EH"},
+          {id:"pv-ph-02", title:"الأساسيات والإعدادات الرئيسية للكاميرا", duration:"", type:"فيديو", videoUrl:"https://youtu.be/ixRKeQMa7Nc?si=pgJOWOhWEdSKeiLn"},
+          {id:"pv-ph-03", title:"أساسيات التصوير بالموبايل", duration:"", type:"فيديو", videoUrl:"https://youtu.be/FRLTOBBkm2I?si=5oMb7wBqteK8ZMpz"}
+        ]},
+        { id:"pv-video-fundamentals", title:"مرحلة 3: أساسيات الفيديوغرافي", duration:"", lessons:[
+          {id:"pv-vi-01", title:"أساسيات تصوير الفيديو بالموبايل", duration:"", type:"فيديو", videoUrl:"https://youtu.be/0nG7pAXRgvE?si=hoWgXjVuUid4q0A2"},
+          {id:"pv-vi-02", title:"أساسيات تصوير الفيديو بالكاميرا", duration:"", type:"فيديو", videoUrl:"https://youtu.be/kZWH6OBDdR0?si=nGiT2nY8SMxM2s9V"},
+          {id:"pv-vi-03", title:"إزاي تصور فيديو بأفضل الإعدادات", duration:"", type:"فيديو", videoUrl:"https://youtu.be/eINSy5Aguzo?si=VZuKm6J-uwIvdt38"},
+          {id:"pv-vi-04", title:"إزاي تظبط الكاميرا لتصوير الفيديوهات", duration:"", type:"فيديو", videoUrl:"https://youtu.be/rRSgCJGeKNo?si=uudfzyt_IgQIWd0o"}
+        ]},
+        { id:"pv-art-of-capturing", title:"مرحلة 4: فن الالتقاط", duration:"", lessons:[
+          {id:"pv-art-01", title:"قواعد ونصايح لأفضل اللقطات", duration:"", type:"فيديو", videoUrl:"https://youtu.be/nKM3jkEOpuE?si=CiXquc0hwq9v86US"},
+          {id:"pv-art-02", title:"أخطاء لازم تتجنبها", duration:"", type:"فيديو", videoUrl:"https://youtu.be/NAexy836ff8?si=5V-7EtnIgIkHWnaR"}
+        ]},
+        { id:"pv-magic-touch", title:"مرحلة 5: اللمسة السحرية (Lightroom)", duration:"", lessons:[
+          {id:"pv-lr-01", title:"Lightroom صاحبك طول ما بتحب تصور (كورس سريع)", duration:"", type:"فيديو", videoUrl:"https://youtu.be/VUCPznpejI8?si=LAcNnQlP9fslgZCz"},
+          {id:"pv-lr-02", title:"احتراف Lightroom Mobile (بلاي ليست كاملة)", duration:"", type:"فيديو", videoUrl:"https://youtube.com/playlist?list=PLW-zSkCnZ-gCDj0DhrC9DrsVtndLuntdj&si=ZJIqSPGGElrrC1nL"}
+        ]}
+      ]
+    }] },
 
   { id:"video", name:"مونتاج فيديو", cat:"إبداعي", icon:"🎬", desc:"تحويل اللقطات الخام إلى محتوى مؤثر يشاهده الملايين.",
     longDesc:"المونتاجيست بيحول اللقطات الخام إلى قصة مؤثرة ومتماسكة. بيشتغل مع يوتيوبرز وشركات ووكالات إعلانية. بيستخدم برامج زي Adobe Premiere أو DaVinci Resolve. الطلب عليه ارتفع بشكل كبير مع انتشار المحتوى الرقمي وصناع المحتوى.", difficulty:"متوسط", time:"2-5 أشهر", match:75, salary:"800-4000$",
@@ -2867,7 +2920,90 @@ const CAREERS_DATA = [
     tools:["Duolingo","Coursera","YouTube","iTalki","Grammarly","ChatGPT"],
     daily:["تعلم 10 كلمات جديدة","ممارسة المحادثة 20 دقيقة","مشاهدة محتوى إنجليزي","كتابة جمل تطبيقية"],
     roadmap:[{t:"الأساسيات",d:"الحروف، الأرقام، الجمل البسيطة"},{t:"A2 - مبتدئ",d:"تعريف النفس، طلب الأشياء، حياة يومية"},{t:"B1 - متوسط",d:"محادثات عمل، فهم المقالات"},{t:"B2 - فوق المتوسط",d:"عروض تقديمية، اجتماعات"},{t:"C1 - متقدم",d:"كتابة محترفة، تفاوض، قيادة"}],
-    course:"https://www.coursera.org/learn/learn-english-for-career-development", example:"موظف بإنجليزية جيدة يحصل على راتب أعلى بـ 40% في المتوسط." },
+    course:"https://www.coursera.org/learn/learn-english-for-career-development", example:"موظف بإنجليزية جيدة يحصل على راتب أعلى بـ 40% في المتوسط.",
+    tracks:[{
+      id:"english-professional-track", title:"مسار تعلم اللغة الإنجليزية", subtitle:"من A1 للـ C1 خطوة بخطوة",
+      longDesc:"مسار CAT لتعلم الإنجليزية بيوديك من مستوى المبتدئ (A1) لحد الاحتراف (C1) بترتيب تصاعدي واحد. كل مستوى فيه أسابيع بمحتوى متكامل: قاعدة نحوية، موضوع وكلمات جديدة، نص قراءة، تدريب استماع، ومهام تطبيقية (Grammar, Reading, Listening, Writing) باستخدام أدوات زي iStoria وELSA Speak وQuillBot. المسار بيركز على الممارسة العملية اليومية مش الحفظ بس.",
+      level:"مبتدئ", duration:"5 مستويات (A1 → C1)", totalLessons:26, icon:"🇬🇧", color:"#0f7a9a", coverImage:"assets/cat-academic.svg",
+      intro:{
+        tools:[
+          {name:"iStoria", purpose:"قصص تفاعلية لتحسين القراءة والفهم", url:"https://istoria.app/"},
+          {name:"ELSA Speak / Stimuler", purpose:"مدرّب نطق بالذكاء الاصطناعي", url:"https://elsaspeak.com/en"},
+          {name:"Quizlet", purpose:"بطاقات تعلم تفاعلية للمفردات", url:"https://quizlet.com/"},
+          {name:"QuillBot", purpose:"تصحيح وتحسين الكتابة", url:"https://quillbot.com/"},
+          {name:"Oxford / Cambridge Dictionary", purpose:"قواميس EN-EN موثوقة", url:"https://www.oxfordlearnersdictionaries.com/"},
+          {name:"iTalki / Cambly", purpose:"محادثة مباشرة مع متحدثين أصليين", url:"https://www.italki.com/ar"}
+        ],
+        accounts:[
+          {name:"Duolingo", why:"تدريب يومي قصير وممتع", url:"https://ar.duolingo.com/"},
+          {name:"YouGlish", why:"سماع نطق الكلمات في سياقات حقيقية", url:"https://youglish.com/"},
+          {name:"BBC Learning English", why:"محتوى مجاني منظم لكل المستويات", url:"https://www.bbc.co.uk/learningenglish/"}
+        ],
+        plan:[
+          {title:"A1 (Beginner)", duration:"3-4 أشهر (3-6 ساعات/أسبوع)", goal:"مفردات أساسية، قواعد بسيطة، عبارات يومية، فيديوهات تعليمية وقصص أطفال"},
+          {title:"A2 (Elementary)", duration:"3-6 أشهر (5-10 ساعات/أسبوع)", goal:"محادثات بسيطة، الأزمنة الحاضر والماضي، مواقف شائعة، مقاطع أفلام وكتب مبسطة"},
+          {title:"B1 (Intermediate)", duration:"6-9 أشهر (7-10 ساعات/أسبوع)", goal:"قواعد أعقد، محادثات طليقة، عروض تقديمية، أفلام ومسلسلات وكتب"},
+          {title:"B2 (Upper-Intermediate)", duration:"6-12 شهر (10-12 ساعة/أسبوع)", goal:"نقاشات متقدمة، لغة رسمية وغير رسمية، أخبار ومقالات"},
+          {title:"C1 (Advanced)", duration:"9-12 شهر (10-15 ساعة/أسبوع)", goal:"مواضيع معقدة، طلاقة قريبة من الناطقين الأصليين، إدارة المحادثات، أفلام وثائقية"}
+        ],
+        challenge:[
+          {name:"iTalki", url:"https://www.italki.com/ar"},
+          {name:"HelloTalk", url:"https://www.hellotalk.com/"}
+        ]
+      },
+      courses:[
+        { id:"eng-tools-library", title:"مكتبة الأدوات الموصى بها", duration:"مرجع دائم", lessons:[
+          {id:"eng-tools-speaking", title:"أدوات المحادثة والنطق بالذكاء الاصطناعي: iTalki, Cambly, ELSA Speak, Stimuler, Talkpal, Character AI, Tandem, HelloTalk, Hilokal, Pronounce", duration:"", type:"قراءة", videoUrl:"https://www.italki.com/ar"},
+          {id:"eng-tools-vocab", title:"أدوات المفردات والقواميس: Quizlet, Oxford Dictionary, Cambridge Dictionary, Urban Dictionary, U-Dictionary, Longman, Promova, Idiom Land", duration:"", type:"قراءة", videoUrl:"https://quizlet.com/"},
+          {id:"eng-tools-reading", title:"أدوات القراءة: ReadTheory, Project Gutenberg, Oxford Bookworms Library, Super Easy Reading, News in Levels, Breaking News English", duration:"", type:"قراءة", videoUrl:"https://readtheory.org/"},
+          {id:"eng-tools-listening", title:"البودكاست والاستماع: Voscreen, Castbox, ELLLO, BBC Learning English Podcasts, VOA Learning English, TED Talks, ESL Pod, Shadowing B", duration:"", type:"قراءة", videoUrl:"https://www.voscreen.com/"},
+          {id:"eng-tools-apps", title:"تطبيقات عامة للمستوى المبتدئ: Duolingo, Memrise, Busuu, LingoDeer, Falou", duration:"", type:"قراءة", videoUrl:"https://ar.duolingo.com/"},
+          {id:"eng-tools-community", title:"مجتمعات ودردشة: Discord (English Hub, English)، QuillBot للكتابة، Baamboozle وSkribbl كألعاب قواعد", duration:"", type:"قراءة", videoUrl:"https://discord.gg/english"}
+        ]},
+        { id:"eng-a1", title:"A1 (Beginner) - الأساسيات", duration:"3-4 أشهر", lessons:[
+          {id:"eng-a1-overview", title:"محاور المستوى: مفردات أساسية، قواعد بسيطة، عبارات يومية، فيديوهات تعليمية، قصص أطفال — 3-6 ساعات أسبوعياً", duration:"", type:"قراءة", videoUrl:"https://ar.duolingo.com/"}
+        ]},
+        { id:"eng-a2-week1", title:"A2 - الأسبوع 1: The History of Famous Landmarks", duration:"أسبوع", lessons:[
+          {id:"eng-a2-w1-grammar", title:"Grammar: Articles — 'the' or no article", duration:"", type:"فيديو", videoUrl:"https://www.youtube.com/watch?v=EZqG2Ag6yjg"},
+          {id:"eng-a2-w1-vocab", title:"Vocabulary (10 كلمات): Landmark, Engineer, Symbol, Protect, Construction, Tourist, Gift, Freedom, Culture, View", duration:"", type:"قراءة", videoUrl:""},
+          {id:"eng-a2-w1-reading", title:"Reading: The History of a Famous Landmark (Eiffel Tower, Great Wall, Statue of Liberty)", duration:"", type:"قراءة", videoUrl:""},
+          {id:"eng-a2-w1-listening", title:"Listening Practice", duration:"", type:"فيديو", videoUrl:"https://www.youtube.com/watch?v=ayO9N6s3qIY"},
+          {id:"eng-a2-w1-tasks", title:"مهام الأسبوع: Grammar Quiz + Reading (iStoria) + Listening (ELSA Speak/Stimuler/Character AI/Pronounce) + Writing (Promova/Idiom Land/Quizlet/QuillBot)", duration:"", type:"تدريب", videoUrl:"https://forms.gle/wqRG4WoRgH84DUF68"}
+        ]},
+        { id:"eng-a2-week2", title:"A2 - الأسبوع 2: How People Feel About Their Jobs", duration:"أسبوع", lessons:[
+          {id:"eng-a2-w2-grammar", title:"Grammar: Adjectives and prepositions", duration:"", type:"فيديو", videoUrl:"https://learnenglish.britishcouncil.org/grammar/a1-a2-grammar/adjectives-prepositions"},
+          {id:"eng-a2-w2-vocab", title:"Vocabulary (11 كلمة): unappreciated, stressful, underpaid, repetitive, satisfied, rewarding, colleagues, salary, depend, environment, motivate", duration:"", type:"قراءة", videoUrl:""},
+          {id:"eng-a2-w2-reading", title:"Reading: How People Feel About Their Jobs", duration:"", type:"قراءة", videoUrl:""},
+          {id:"eng-a2-w2-listening", title:"Listening: Work-Life Balance", duration:"", type:"فيديو", videoUrl:"https://learnenglish.britishcouncil.org/skills/listening/b1-listening/work-life-balance"},
+          {id:"eng-a2-w2-tasks", title:"مهام الأسبوع: Grammar + Reading + Listening + Writing forms", duration:"", type:"تدريب", videoUrl:"https://forms.gle/bQiUj3PrVGFXSWcu5"}
+        ]},
+        { id:"eng-b1-week1", title:"B1 - الأسبوع 1: Daily Life of a Modern Minimalist", duration:"أسبوع", lessons:[
+          {id:"eng-b1-w1-grammar", title:"Grammar: Present simple — 'have got'", duration:"", type:"فيديو", videoUrl:"https://youtu.be/T8anieZo4-I?si=3UcvAYGMAzTsnRmr"},
+          {id:"eng-b1-w1-vocab", title:"Vocabulary (13 كلمة): Essentials, Clutter, Mindset, Serene, Spacious, Fast-paced, Possessions, Wardrobe, Gadgets, Tidy, Distraction, Clutter-free, Stress-free", duration:"", type:"قراءة", videoUrl:""},
+          {id:"eng-b1-w1-reading", title:"Reading: Daily Life of a Modern Minimalist (Emma's story)", duration:"", type:"قراءة", videoUrl:""},
+          {id:"eng-b1-w1-listening", title:"Listening Practice", duration:"", type:"فيديو", videoUrl:"https://youtu.be/ELOKiH1UEe0?si=VvgsVpqmbfsk04jN"},
+          {id:"eng-b1-w1-tasks", title:"مهام الأسبوع: Grammar quiz + Reading (iStoria) + Listening (ELSA Speak/Stimuler) + Writing (Promova/Idiom Land/Quizlet/QuillBot)", duration:"", type:"تدريب", videoUrl:"https://docs.google.com/forms/d/e/1FAIpQLSc8xj6n_bzGihHQBWCHkplt2TtGkEZdi-RHTOB0VdyjRnK8XA/viewform"}
+        ]},
+        { id:"eng-b1-week2", title:"B1 - الأسبوع 2: استماع إضافي", duration:"أسبوع", lessons:[
+          {id:"eng-b1-w2-listening", title:"Listening Practice", duration:"", type:"فيديو", videoUrl:"https://www.youtube.com/watch?v=cCh0EDHKTcc"}
+        ]},
+        { id:"eng-b2-week1", title:"B2 - الأسبوع 1: The Importance of Proper Punctuation in Writing", duration:"أسبوع", lessons:[
+          {id:"eng-b2-w1-grammar", title:"Grammar: Capital letters and apostrophes", duration:"", type:"فيديو", videoUrl:"https://www.youtube.com/watch?v=yNK5GRXsLJM"},
+          {id:"eng-b2-w1-vocab", title:"Vocabulary (10 كلمات): Clarity, Precision, Contraction, Possession, Ambiguity, Consistency, Emphasis, Legibility, Syntax, Misinterpretation", duration:"", type:"قراءة", videoUrl:""},
+          {id:"eng-b2-w1-reading", title:"Reading: The Power of Punctuation in Writing", duration:"", type:"قراءة", videoUrl:""},
+          {id:"eng-b2-w1-listening", title:"Listening Practice", duration:"", type:"فيديو", videoUrl:"https://www.youtube.com/watch?v=KUKgJsvoDUk"},
+          {id:"eng-b2-w1-tasks", title:"مهام الأسبوع: Grammar + Reading (iStoria) + Listening (ELSA Speak/Stimuler) + Writing (يوميات، 10 جمل من المفردات، Phrasal verb + Idiom، Shadowing بالذكاء الاصطناعي)", duration:"", type:"تدريب", videoUrl:"https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/capital-letters-apostrophes"}
+        ]},
+        { id:"eng-c1-week1", title:"C1 - الأسبوع 1: How Social Media Impacts Us", duration:"أسبوع", lessons:[
+          {id:"eng-c1-w1-grammar", title:"Grammar: Advanced present simple and continuous", duration:"", type:"فيديو", videoUrl:"https://www.youtube.com/watch?v=W3HdjN3cLiM"},
+          {id:"eng-c1-w1-vocab", title:"Slang Vocabulary: tea, ghost, flex, fomo, pmo, rizz, no cap, cooked", duration:"", type:"قراءة", videoUrl:""},
+          {id:"eng-c1-w1-reading", title:"Reading: How Social Media Shapes Modern Society", duration:"", type:"قراءة", videoUrl:""},
+          {id:"eng-c1-w1-listening", title:"Listening Practice", duration:"", type:"فيديو", videoUrl:"https://youtu.be/xCP6uWvdIrw?si=UAit2MdyDd9ld275"},
+          {id:"eng-c1-w1-quiz", title:"اختبار قواعد: 20 سؤال اختيار من متعدد على الأزمنة (present/future forms)", duration:"", type:"quiz", videoUrl:"https://wordwall.net/resource/66978041/present-perfect-simple-or-continuous"},
+          {id:"eng-c1-w1-writing", title:"مهام الكتابة: فقرة عن تأثير السوشيال ميديا عليك + فقرة تستخدم 3 idioms (Hit the nail on the head, Burn the midnight oil, Spill the beans)", duration:"", type:"تدريب", videoUrl:""}
+        ]}
+      ]
+    }] },
 
   { id:"translation", name:"مترجم محترف", cat:"لغات", icon:"🌐", desc:"الترجمة المكتوبة والشفهية للوثائق، المحتوى، والمؤتمرات.", difficulty:"متوسط", time:"8-14 شهر", match:75, salary:"500-3000$",
     tools:["SDL Trados","Wordfast","DeepL","Proz.com","Upwork"],
