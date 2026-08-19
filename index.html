@@ -2963,6 +2963,21 @@
       </div>
       <div id="login-error" class="auth-error" style="display:none;" role="alert"></div>
       <button class="btn btn-primary btn-full auth-submit" id="login-btn" data-action="doLogin" data-en="Sign In">دخول</button>
+
+      <div id="auth-guest-wrap" style="display:none;margin:14px 0 0;">
+        <div style="display:flex;align-items:center;gap:10px;margin:14px 0;">
+          <span style="flex:1;height:1px;background:var(--border);"></span>
+          <span style="font-size:11px;color:var(--muted);" data-en="or">أو</span>
+          <span style="flex:1;height:1px;background:var(--border);"></span>
+        </div>
+        <button type="button" id="auth-guest-btn" class="btn btn-primary btn-full" data-en="Continue as Guest (view only)">
+           متابعة كضيف 
+        </button>
+        <p style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.6;" data-en="No account, no saved data, no dashboard — quick browsing only. You can register anytime.">
+          بدون حساب وبدون حفظ أي بيانات ولا لوحة تحكم — تصفح سريع بس. تقدر تسجّل حساب في أي وقت.
+        </p>
+      </div>
+
       <div class="auth-links">
         <span data-action="authShowScreen" data-screen="forgot" role="button" tabindex="0" data-en="Forgot your password?">نسيت كلمة المرور؟</span>
         <span data-action="authShowScreen" data-screen="register" role="button" tabindex="0" data-en="Don't have an account? Sign up">ليس لديك حساب؟ سجّل الآن</span>
@@ -3075,6 +3090,7 @@
 
 <!-- Application Scripts — order matters -->
 <script src="js/app.bundle.min.js?v=20260714a" defer></script>
+<script src="js/guest-mode.js?v=20260819a" defer></script>
 
 <script>
   // Register Service Worker for PWA — مع تحديث تلقائي بدون أي تدخل من المستخدم
