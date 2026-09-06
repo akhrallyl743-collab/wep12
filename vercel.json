@@ -1,4 +1,10 @@
 {
+  "rewrites": [
+    {
+      "source": "/((?!api/|assets/|js/|css/|sql/|manifest\\.json|robots\\.txt|sitemap\\.xml|sw\\.js|favicon|google[a-z0-9]+\\.html).*)",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/index.html",
@@ -21,13 +27,13 @@
     {
       "source": "/(.*).js",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=300, must-revalidate" }
+        { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
       ]
     },
     {
       "source": "/(.*).css",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=300, must-revalidate" }
+        { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
       ]
     }
   ]

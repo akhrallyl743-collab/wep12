@@ -487,6 +487,9 @@ async function renderAdminOverview() {
     <div class="admin-stat-card"><span class="num">${blockedTrainers}</span><span class="lbl">⛔ مدربون محظورون</span></div>
     <div class="admin-stat-card"><span class="num">${posts.length}</span><span class="lbl">💬 منشورات المجتمع</span></div>
     <div class="admin-stat-card"><span class="num">${adminsCount}</span><span class="lbl">⚙️ عدد المشرفين</span></div>
+    <div class="admin-stat-card"><span class="num" id="admin-visits-today">…</span><span class="lbl">📊 زيارات اليوم</span></div>
+    <div class="admin-stat-card"><span class="num" id="admin-visits-total">…</span><span class="lbl">📈 إجمالي الزيارات</span></div>
+    <div class="admin-stat-card"><span class="num" id="admin-unique-today">…</span><span class="lbl">🧭 زوار فريدون اليوم</span></div>
   `;
 
   if (pendingTrainers > 0) {
@@ -495,10 +498,33 @@ async function renderAdminOverview() {
   }
 
   _renderAdminLivePanels();
+  _renderAdminVisitStats();
   AdminService.subscribeLive(
     (newUser) => { toast(`🆕 مستخدم جديد انضم: ${newUser.username || 'مستخدم'}`); _renderAdminLivePanels(); },
     () => { _renderAdminLivePanels(); }
   );
+}
+
+// إحصائيات الزيارات (زوار الموقع الآن + اليوم + الإجمالي) — تُحدَّث دورياً طالما لوحة النظرة العامة مفتوحة
+let _adminVisitsInterval = null;
+async function _renderAdminVisitStats() {
+  if (typeof AnalyticsService === 'undefined') return;
+  const [onlineNow, overview] = await Promise.all([
+    AnalyticsService.getOnlineNowCount(),
+    AnalyticsService.getOverview()
+  ]);
+
+  setText('admin-visitors-now', onlineNow);
+  setText('admin-visits-today', overview.visitsToday);
+  setText('admin-visits-total', overview.visitsTotal);
+  setText('admin-unique-today', overview.uniqueVisitorsToday);
+
+  if (!_adminVisitsInterval) {
+    _adminVisitsInterval = setInterval(() => {
+      if (STATE.currentPage === 'admin' && STATE.adminTab === 'overview') _renderAdminVisitStats();
+      else { clearInterval(_adminVisitsInterval); _adminVisitsInterval = null; }
+    }, 20000);
+  }
 }
 
 /* لوحة "أونلاين الآن" و"آخر المنضمين" — تتحدّث لحظياً عبر Supabase Realtime
@@ -1384,12 +1410,49 @@ async function renderAdminStats() {
       `).join('')
     : '<p style="color:var(--muted);text-align:center;padding:12px;">لا توجد بيانات تقدّم بعد.</p>';
 
+  // إحصائيات الزيارات العامة (Google-Analytics-style) — من AnalyticsService
+  const visits = (typeof AnalyticsService !== 'undefined') ? await AnalyticsService.getOverview() : null;
+
+  const maxDay = visits ? Math.max(1, ...visits.dailySeries.map(d => d.count)) : 1;
+  const chartHtml = visits && visits.dailySeries.length
+    ? `<div style="display:flex;align-items:flex-end;gap:8px;height:140px;padding:10px 4px;">
+        ${visits.dailySeries.map(d => {
+          const h = Math.max(4, Math.round((d.count / maxDay) * 110));
+          const dayLabel = new Date(d.date).toLocaleDateString('ar-EG', { weekday: 'short' });
+          return `
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <span style="font-size:11px;color:var(--muted);">${d.count}</span>
+              <div style="width:100%;max-width:34px;height:${h}px;border-radius:8px 8px 4px 4px;background:linear-gradient(180deg,var(--p600),var(--t400));"></div>
+              <span style="font-size:11px;color:var(--muted);">${_adminEsc(dayLabel)}</span>
+            </div>`;
+        }).join('')}
+      </div>`
+    : '<p style="color:var(--muted);text-align:center;padding:12px;">لا توجد بيانات زيارات بعد.</p>';
+
+  const topPagesHtml = visits && visits.topPages.length
+    ? visits.topPages.map(p => `
+        <div class="admin-row">
+          <div class="admin-row-main"><strong>${_adminEsc(p.page || 'home')}</strong></div>
+          <div class="admin-row-actions"><span class="admin-badge on">👁 ${p.count} زيارة</span></div>
+        </div>`).join('')
+    : '<p style="color:var(--muted);text-align:center;padding:12px;">لا توجد بيانات بعد.</p>';
+
   el.innerHTML = `
     <div class="admin-stats-grid" style="margin-bottom:20px;">
       <div class="admin-stat-card"><span class="num">${stats.totalUsers}</span><span class="lbl">👥 إجمالي المستخدمين</span></div>
       <div class="admin-stat-card"><span class="num">${stats.activeUsers7d}</span><span class="lbl">🟢 نشطون آخر 7 أيام</span></div>
+      <div class="admin-stat-card"><span class="num">${visits ? visits.visitsToday : '…'}</span><span class="lbl">📊 زيارات اليوم</span></div>
+      <div class="admin-stat-card"><span class="num">${visits ? visits.visitsTotal : '…'}</span><span class="lbl">📈 إجمالي الزيارات</span></div>
+      <div class="admin-stat-card"><span class="num">${visits ? visits.uniqueVisitorsToday : '…'}</span><span class="lbl">🧭 زوار فريدون اليوم</span></div>
     </div>
-    <h4 style="margin:16px 0 8px;">📈 أكثر المسارات زيارة</h4>
+
+    <h4 style="margin:16px 0 8px;">📅 الزيارات آخر ٧ أيام</h4>
+    ${chartHtml}
+
+    <h4 style="margin:20px 0 8px;">🔝 أكثر الصفحات زيارة</h4>
+    ${topPagesHtml}
+
+    <h4 style="margin:20px 0 8px;">📈 أكثر المسارات زيارة</h4>
     ${topRoadmapsHtml}
     <h4 style="margin:20px 0 8px;">✅ نسب إكمال المسارات</h4>
     ${completionHtml}

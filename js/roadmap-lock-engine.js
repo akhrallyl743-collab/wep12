@@ -72,42 +72,16 @@
 
     if (!targetStep) return 'locked';
 
-    // أول خطوة في أول مرحلة: متاحة دائماً
-    if (sectionIdx === 0 && stepIdx === 0) return 'available';
-
-    // إذا لم تكن الأولى في قسمها: تحقق من الخطوة السابقة في نفس القسم
-    if (stepIdx > 0) {
-      var prevLegacyId = targetSection.steps[stepIdx - 1].legacy_lesson_id;
-      return done.has(prevLegacyId) ? 'available' : 'locked';
-    }
-
-    // أول خطوة في قسم غير أول: يجب أن ينتهي القسم السابق كله
-    if (stepIdx === 0 && sectionIdx > 0) {
-      var prevSection = roadmap.sections[sectionIdx - 1];
-      var allDone = prevSection.steps.every(function(st) {
-        return done.has(st.legacy_lesson_id);
-      });
-      return allDone ? 'available' : 'locked';
-    }
-
-    return 'locked';
+    // [نظام القفل مُعطَّل بالكامل] — كل خطوة متاحة دائماً بمجرد وجودها،
+    // بلا أي شرط ترتيب أو إتمام سابق. الحالة الوحيدة غير 'available' هي 'completed'
+    // (مُعالجة فوق قبل الوصول هنا).
+    return 'available';
   }
 
-  // ── هل يمكن إنهاء الخطوة؟ (شرط 90% للفيديو) ──────────────────
+  // ── هل يمكن إنهاء الخطوة؟ [نظام القفل مُعطَّل بالكامل] ──────────
+  // لا يوجد أي شرط لمشاهدة الفيديو أو غيره — أي خطوة قابلة للإنهاء دائماً.
   function canComplete(step) {
-    if (!step) return false;
-    // مبدأ القفل: 90% مشاهدة مطلوبة فقط لخطوة "فيديو تعليمي" حقيقية (step_type === 'video')،
-    // لا لأي مشروع/مرجع يصادف أن رابطه يوتيوب (انظر توضيح inferResourceKind في roadmap-mapping.js)
-    var hasVideo = step.step_type === 'video' && step.resources && step.resources.some(function(r) {
-      return r.kind === 'youtube' || r.kind === 'video';
-    });
-    // لو مفيش فيديو تعليمي في الخطوة: مسموح إنهاؤها مباشرة
-    if (!hasVideo) return true;
-
-    // لو فيها فيديو: يجب أن تكون النسبة >= 90%
-    var vp = _getVideoProgress();
-    var legacyId = step.legacy_lesson_id;
-    return (vp[legacyId] || 0) >= VIDEO_THRESHOLD;
+    return true;
   }
 
   // ── تسجيل تقدم مشاهدة فيديو ────────────────────────────────────
@@ -177,19 +151,9 @@
 
   // ── تسجيل إتمام خطوة ───────────────────────────────────────────
   function markComplete(legacyLessonId, roadmap, trackId) {
-    // تحقق نهائي قبل التسجيل
-    var status = getStepStatus(roadmap, legacyLessonId, trackId);
-    if (status === 'locked') {
-      console.warn('[LockEngine] محاولة إنهاء خطوة مقفلة:', legacyLessonId);
-      return false;
-    }
-
-    // ابحث عن الخطوة لفحص شرط الفيديو
+    // [نظام القفل مُعطَّل بالكامل] — لا تحقق من الترتيب ولا من نسبة مشاهدة الفيديو،
+    // أي خطوة يمكن تسجيلها كمكتملة مباشرة.
     var step = _findStep(roadmap, legacyLessonId);
-    if (step && !canComplete(step)) {
-      _emit('videoThresholdNotMet', { legacyLessonId: legacyLessonId, required: VIDEO_THRESHOLD });
-      return false;
-    }
 
     // سجّل الإتمام محلياً
     var done = _getDoneSet();

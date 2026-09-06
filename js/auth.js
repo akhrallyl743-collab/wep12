@@ -59,12 +59,37 @@ function openModal(tab) {
   authShowScreen(tab || 'login');
 }
 
+// يفعّل وضع "الدخول إجباري" — بيمنع إغلاق نافذة تسجيل الدخول لحد ما المستخدم يسجّل دخول/حساب فعلاً
+function requireAuthModal() {
+  STATE.authRequired = true;
+  const modal = $('auth-modal');
+  if (modal) modal.classList.add('force-auth');
+  const closeBtn = document.querySelector('#auth-modal .modal-close');
+  if (closeBtn) closeBtn.style.display = 'none';
+  const note = $('auth-required-note');
+  if (note) note.style.display = 'block';
+  openModal('login');
+}
+
+// يُلغي وضع الإجبار بعد نجاح تسجيل الدخول/إنشاء الحساب
+function releaseAuthRequirement() {
+  STATE.authRequired = false;
+  const modal = $('auth-modal');
+  if (modal) modal.classList.remove('force-auth');
+  const closeBtn = document.querySelector('#auth-modal .modal-close');
+  if (closeBtn) closeBtn.style.display = '';
+  const note = $('auth-required-note');
+  if (note) note.style.display = 'none';
+}
+
 function closeModal() {
+  if (STATE.authRequired && !STATE.user) return; // ممنوع الإغلاق قبل تسجيل الدخول
   const modal = $('auth-modal');
   if (modal) modal.classList.remove('open');
 }
 
 function modalOverlayClick(e) {
+  if (STATE.authRequired && !STATE.user) return; // ممنوع الإغلاق بالضغط خارج النافذة قبل تسجيل الدخول
   if (e.target === $('auth-modal')) closeModal();
 }
 
@@ -89,10 +114,19 @@ async function doLogin() {
   if (!password)            return authShowError('login', 'أدخل كلمة المرور');
 
   authSetLoading('login-btn', 'جاري الدخول...');
-  const { data, error } = await AuthService.loginWithEmail(email, password);
+  let data, error;
+  try {
+    ({ data, error } = await AuthService.loginWithEmail(email, password));
+  } catch (err) {
+    authSetLoading('login-btn');
+    console.error('[doLogin] استثناء غير متوقع (شبكة/CORS غالباً):', err);
+    authShowError('login', 'تعذّر الاتصال بالخادم — تأكد من الإنترنت وحاول مرة أخرى');
+    return;
+  }
   authSetLoading('login-btn');
 
   if (error) {
+    console.error('[doLogin] فشل تسجيل الدخول:', error);
     const msg = error.message || '';
     if (msg.includes('Invalid login') || msg.includes('invalid') || msg.includes('credentials')) {
       authShowError('login', 'البريد الإلكتروني أو كلمة المرور غير صحيحة');
@@ -100,8 +134,10 @@ async function doLogin() {
       authShowError('login', 'البريد الإلكتروني لم يتم تأكيده — تحقق من بريدك');
     } else if (msg.includes('rate limit') || msg.includes('too many')) {
       authShowError('login', 'محاولات كثيرة — انتظر دقيقة ثم حاول مرة أخرى');
+    } else if (msg.includes('Failed to fetch') || msg.includes('NetworkError') || msg.includes('network')) {
+      authShowError('login', 'تعذّر الاتصال بالخادم — تأكد من الإنترنت وحاول مرة أخرى');
     } else {
-      authShowError('login', 'حدث خطأ — حاول مرة أخرى');
+      authShowError('login', msg ? `حدث خطأ: ${msg}` : 'حدث خطأ — حاول مرة أخرى');
     }
     return;
   }
@@ -134,10 +170,20 @@ async function doRegister() {
   if (password.length < 8)  return authShowError('register', 'كلمة المرور ٨ أحرف على الأقل');
 
   authSetLoading('register-btn', 'جاري إنشاء الحساب...');
-  const { data, error } = await AuthService.registerWithEmail(email, password, name);
+  let data, error;
+  try {
+    ({ data, error } = await AuthService.registerWithEmail(email, password, name));
+  } catch (err) {
+    authSetLoading('register-btn');
+    console.error('[doRegister] استثناء غير متوقع (شبكة/CORS غالباً):', err);
+    authShowError('register', 'تعذّر الاتصال بالخادم — تأكد من الإنترنت وحاول مرة أخرى');
+    return;
+  }
   authSetLoading('register-btn');
 
   if (error) {
+    // نطبع الخطأ الحقيقي في الـ console دايماً عشان نقدر نشخّص أي حالة مش متوقعة
+    console.error('[doRegister] فشل التسجيل:', error);
     const msg = error.message || '';
     if (msg.includes('already registered') || msg.includes('مسجّل بالفعل')) {
       authShowScreen('login');
@@ -146,8 +192,15 @@ async function doRegister() {
       if (inp) inp.value = email;
     } else if (msg.includes('Password') || msg.includes('weak')) {
       authShowError('register', 'كلمة المرور ضعيفة — أضف أرقاماً أو رموزاً');
+    } else if (msg.includes('rate limit') || msg.includes('too many') || msg.includes('after')) {
+      authShowError('register', 'محاولات كثيرة في وقت قصير — استنى دقيقة وحاول تاني');
+    } else if (msg.includes('Failed to fetch') || msg.includes('NetworkError') || msg.includes('network')) {
+      authShowError('register', 'تعذّر الاتصال بالخادم — تأكد من الإنترنت وحاول مرة أخرى');
+    } else if (msg.includes('invalid') && msg.includes('email')) {
+      authShowError('register', 'صيغة البريد الإلكتروني غير مقبولة');
     } else {
-      authShowError('register', 'حدث خطأ — حاول مرة أخرى');
+      // بنعرض رسالة الخطأ الحقيقية (بالإنجليزي) بدل رسالة عامة، عشان نقدر نعرف السبب الفعلي بسرعة
+      authShowError('register', msg ? `حدث خطأ: ${msg}` : 'حدث خطأ — حاول مرة أخرى');
     }
     return;
   }
@@ -157,11 +210,13 @@ async function doRegister() {
       await onSupaLogin(data.user, name);
     } else {
       // No email verification — log the user in directly as guest session
+      releaseAuthRequirement();
       closeModal();
       const user = { id: data.user.id || ('u_' + Date.now()), name, email, onboarded: false, createdAt: new Date().toISOString() };
       _lsSet('noor_user', user);
       STATE.user = user;
       updateNavUser(user);
+      if (typeof AnalyticsService !== 'undefined') AnalyticsService.trackSignup();
       toast(`مرحباً ${name}! 🎉 تم إنشاء حسابك بنجاح`);
     }
   }
@@ -225,8 +280,10 @@ async function onSupaLogin(supaUser, fallbackName) {
   // المستخدم يبقى Logged-in فعلياً في الواجهة ومايفضلش عالق.
   _lsSet('noor_user', user);
   STATE.user = user;
+  releaseAuthRequirement();
   closeModal();
   updateNavUser(user);
+  if (typeof AnalyticsService !== 'undefined') AnalyticsService.trackLogin();
 
   const guestStreak = STATE.streak || parseInt(_lsRaw('noor_streak') || '0');
 
@@ -321,6 +378,7 @@ AuthService.onAuthStateChange(async (event, session) => {
     _lsDel('noor_user');
     const area = $('nav-auth-area');
     if (area) area.innerHTML = '<button class="nav-cta" data-action="openModal" data-tab="login">دخول</button>';
+    requireAuthModal();
   }
   if (event === 'PASSWORD_RECOVERY') {
     openModal('login');
@@ -337,6 +395,7 @@ async function doLogout() {
   _lsDel('noor_user');
   toast('👋 تم تسجيل خروجك');
   showPage('home');
+  requireAuthModal();
 }
 
 /* =============================================

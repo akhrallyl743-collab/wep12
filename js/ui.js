@@ -95,6 +95,7 @@ function showPage(pageId) {
 
   STATE.currentPage = pageId;
   history.pushState({ page: pageId }, '', '#' + pageId);
+  if (typeof AnalyticsService !== 'undefined') AnalyticsService.trackVisit(pageId);
 
   // Show footer & back-to-top only on homepage
   document.body.classList.toggle('show-global-footer', pageId === 'home');

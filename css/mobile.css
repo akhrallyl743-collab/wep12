@@ -56,6 +56,7 @@ html:not([data-theme="dark"]) .bottom-nav-item:hover { color: var(--p600); }
   /* إخفاء روابط التنقل الرئيسية */
   .nav-links { display: none !important; }
   .menu-btn { display: flex !important; }
+  .admin-live-grid { grid-template-columns: 1fr !important; }
   
 
   /* إظهار التنقل السفلي */
